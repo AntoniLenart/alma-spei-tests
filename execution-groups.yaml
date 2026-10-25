@@ -1,0 +1,56 @@
+# Execution groups for the Alma Spei test suite.
+#
+# Each group selects tests by pytest marker expression and declares whether the
+# group runs in parallel. Run a group with:
+#
+#     pytest --group <name>
+#
+# The --group plugin (see conftest.py + src/alma_spei_tests/plugin) translates the
+# entry below into a marker expression (-m) and an xdist setting (-n). This keeps
+# the split between groups data-driven, so new groups are a YAML edit, not code.
+#
+# Fields per group:
+#   markers      pytest marker expression passed to -m (required)
+#   parallel     true  -> run with xdist (-n auto, --dist loadgroup)
+#                false -> run serially (-n0)
+#   disruptive   true  -> implicitly enable --run-disruptive for this group
+#
+# Marker expressions compose with any -m you pass on the command line (ANDed).
+
+groups:
+  # Fast liveness/readiness checks across layers. Safe to parallelise.
+  smoke:
+    markers: "smoke"
+    parallel: true
+
+  # Pure HTTP/API tests, excluding anything disruptive.
+  api:
+    markers: "api and not disruptive"
+    parallel: true
+
+  # Schema/contract tests.
+  contract:
+    markers: "contract and not disruptive"
+    parallel: true
+
+  # Direct database assertions.
+  db:
+    markers: "db and not disruptive"
+    parallel: true
+
+  # Playwright browser tests, excluding disruptive scenarios.
+  e2e:
+    markers: "e2e and not disruptive"
+    parallel: true
+
+  # Everything that does NOT disrupt the shared stack. The default CI-style run.
+  regression:
+    markers: "not disruptive"
+    parallel: true
+
+  # Disruptive tests (app restarts, etc.). Opt-in and serial so they cannot
+  # interfere with other tests sharing the same running stack.
+  disruptive:
+    markers: "disruptive"
+    parallel: false
+    disruptive: true
