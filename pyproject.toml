@@ -1,0 +1,79 @@
+[project]
+name = "alma-spei-tests"
+version = "0.1.0"
+description = "SQA test suite (pytest + Playwright) for the Alma Spei donor management system"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+authors = [{ name = "Antoni Lenart", email = "antek@lenart.org.pl" }]
+
+dependencies = [
+    "pytest>=8.3.4",
+    "pytest-playwright>=0.7.0",
+    "pytest-xdist>=3.6.1",
+    "pytest-html>=4.1.1",
+    "allure-pytest>=2.14.2",
+    "assertpy>=1.1",
+    "httpx>=0.28.1",
+    "psycopg[binary]>=3.2.3",
+    "pyyaml>=6.0.2",
+    "faker>=33.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/alma_spei_tests"]
+
+# ---------------------------------------------------------------------------
+# pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+# src layout: make the support package importable even before `uv sync` installs it.
+pythonpath = ["src"]
+# importlib import mode lets us keep identical conftest/file names across layers
+# without needing __init__.py files under tests/.
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+    # Allure results (render with: allure serve reports/allure-results)
+    "--alluredir=reports/allure-results",
+    # Self-contained HTML report
+    "--html=reports/report.html",
+    "--self-contained-html",
+    # Playwright debugging artifacts, kept only when a test fails
+    "--tracing=retain-on-failure",
+    "--video=retain-on-failure",
+    "--screenshot=only-on-failure",
+    "--output=reports/playwright-artifacts",
+]
+markers = [
+    "api: HTTP/API layer tests (httpx against /api)",
+    "contract: response-vs-schema contract tests",
+    "db: direct PostgreSQL assertions (psycopg)",
+    "e2e: Playwright browser tests of the Polish UI",
+    "smoke: minimal fast checks that the stack is alive",
+    "slow: tests that take noticeably longer",
+    "disruptive: restarts/disrupts the running stack; opt-in via --run-disruptive",
+]
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

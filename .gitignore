@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv (keep uv.lock tracked for reproducible installs)
+.uv/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+
+# Playwright browser downloads live in the uv cache, but keep local overrides out
+.playwright/
+
+# Test reports and artifacts (keep the directory, ignore its contents)
+/reports/*
+!/reports/.gitkeep
+
+# Environment / local configuration
+.env
+.env.*
+!.env.example
+
+# Secrets must never be committed (orchestration reads them from the app repo)
+.secrets/
+*.secret
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
