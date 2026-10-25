@@ -63,7 +63,10 @@ def pytest_configure(config: pytest.Config):
     if not name:
         return
 
-    spec = resolve_group(name)
+    try:
+        spec = resolve_group(name)
+    except (KeyError, ValueError, FileNotFoundError) as exc:
+        raise pytest.UsageError(f"--group: {exc}") from exc
 
     # Marker expression: AND with anything the user already passed via -m.
     existing = config.option.markexpr
