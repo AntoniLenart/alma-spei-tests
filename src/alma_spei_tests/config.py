@@ -69,6 +69,7 @@ class Settings:
     clojure_cmd: str = field(default_factory=lambda: _env("ALMA_CLOJURE_CMD", "clojure"))
     bb_cmd: str = field(default_factory=lambda: _env("ALMA_BB_CMD", "bb"))
     docker_cmd: str = field(default_factory=lambda: _env("ALMA_DOCKER_CMD", "docker"))
+    npm_cmd: str = field(default_factory=lambda: _env("ALMA_NPM_CMD", "npm"))
 
     # --- HTTP ------------------------------------------------------------------
     http_host: str = field(default_factory=lambda: _env("ALMA_HTTP_HOST", "127.0.0.1"))

@@ -201,6 +201,45 @@ soft assertions, constants, type hints except `-> None`, no
   `:create-admin`, `:seed-demo` (needs an existing admin username; loads 20
   donors + 30 payments).
 
+## Step 5 status (2026-11-11): blocked on the toolchain install
+
+Steps 1-4 are committed on `main` and the three stacked test branches. The
+Scoop bootstrap (`irm get.scoop.sh | iex`) was refused by the session's safety
+classifier, so nothing app-backed has run yet. Machine state: no Scoop, uv,
+JDK 25, Clojure CLI or Babashka; Java 8, Node 22.21 (app pins 24; `npm ci`
+only warns), npm 10.9 and Docker Desktop (installed, not running); no
+Playwright browsers yet. The `.venv` in this repo already holds all Python deps
+(ruff too) and works from the worktrees (`pythonpath = ["src"]` picks the
+worktree's own package first).
+
+Orchestration fixed for this machine on `main` (and rebased into the
+branches): commands are resolved via `shutil.which` so Windows shims
+(`npm.cmd`, `clojure.cmd`) launch, `npm ci --ignore-scripts` runs when the app
+checkout has no `node_modules`, and npm is part of the preflight.
+
+To finish step 5 (run by the maintainer, PowerShell):
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+irm get.scoop.sh | iex
+scoop bucket add java
+scoop install temurin-lts-jdk          # JDK 25 LTS; or temurin25-jdk if listed
+scoop bucket add scoop-clojure https://github.com/littleli/scoop-clojure
+scoop install clj-deps babashka uv     # check `clojure -version`, else set ALMA_CLOJURE_CMD
+# start Docker Desktop, then:
+cd C:\STUDIA\mpt\alma-spei-tests
+uv sync
+uv run playwright install chromium
+uv run pytest -n0                                   # main vs ..\alma-spei
+cd ..\wt\tests\35
+$env:ALMA_APP_REPO = "C:\STUDIA\mpt\wt\dev\35"
+..\..\..\alma-spei-tests\.venv\Scripts\python -m pytest -n0   # repeat for 36, 37
+```
+
+Expect first-run triage: the Windows POSIX temp-dir issue on uploads (see
+step 2 findings), the buddy-hashers hash prefix asserted in
+`test_auth_persistence.py`, and any selector drift in the e2e page objects.
+
 ## Skills
 
 Installed at user level for future sessions: `~/.claude/skills/caveman` and

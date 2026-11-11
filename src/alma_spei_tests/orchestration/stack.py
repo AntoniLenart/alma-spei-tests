@@ -3,7 +3,9 @@
 Lifecycle (``up``):
 
   1. preflight the toolchain;
-  2. ``bb init`` in the app repo so the ``.secrets`` files exist;
+  2. ``bb init`` in the app repo so the ``.secrets`` files exist, and
+     ``npm ci --ignore-scripts`` when ``node_modules`` is missing (the
+     frontend build needs the locked React packages);
   3. ``docker compose down -v`` then ``up -d --wait db`` under a dedicated
      compose project + host port, giving a clean DB volume each session
      (the role-bootstrap init script only runs on a fresh volume);
@@ -22,6 +24,7 @@ stdout/stderr is captured to ``reports/stack/backend.log`` for debugging.
 """
 
 import os
+import shutil
 import subprocess
 import time
 import urllib.error
@@ -76,7 +79,7 @@ class Stack:
     ) -> subprocess.CompletedProcess[str]:
         log.info("stack: %s -> %s", step, " ".join(args))
         result = subprocess.run(
-            args,
+            _resolved(args),
             cwd=self.settings.app_repo,
             env=env,
             capture_output=True,
@@ -116,6 +119,12 @@ class Stack:
 
         # 2. secrets
         self._run([self.settings.bb_cmd, "init"], self._base_env(), "bb init (secrets)")
+        if not (self.settings.app_repo / "node_modules").is_dir():
+            self._run(
+                [self.settings.npm_cmd, "ci", "--ignore-scripts"],
+                self._base_env(),
+                "npm ci (frontend dependencies)",
+            )
 
         # 3. fresh database
         self._run(
@@ -180,7 +189,7 @@ class Stack:
         log.info("stack: starting backend -> %s", self._backend_log)
         handle = self._backend_log.open("w", encoding="utf-8")
         self._backend = subprocess.Popen(
-            [self.settings.clojure_cmd, "-Srepro", "-M:run"],
+            _resolved([self.settings.clojure_cmd, "-Srepro", "-M:run"]),
             cwd=self.settings.app_repo,
             env=self._base_env(),
             stdout=handle,
@@ -247,6 +256,11 @@ class Stack:
             )
         except StackError as exc:  # teardown must not mask test results
             log.warning("stack: teardown issue (ignored): %s", exc)
+
+
+def _resolved(args: list[str]) -> list[str]:
+    """Resolve the executable via PATH/PATHEXT so Windows shims (``npm.cmd``) launch."""
+    return [shutil.which(args[0]) or args[0], *args[1:]]
 
 
 def _repo_reports_dir() -> Path:

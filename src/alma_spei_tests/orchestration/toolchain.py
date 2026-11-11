@@ -31,9 +31,10 @@ def _resolvable(command: str) -> bool:
 def check(settings: Settings):
     """Verify required tools exist and the app repo is present. Raise otherwise."""
     tools = [
-        Tool("Docker", settings.docker_cmd, "Install Docker Desktop/Engine with Compose v2 and start it."),
-        Tool("Clojure CLI", settings.clojure_cmd, "Install the Clojure CLI, or set ALMA_CLOJURE_CMD."),
+        Tool("Docker", settings.docker_cmd, "Install Docker with Compose v2 and start it."),
+        Tool("Clojure CLI", settings.clojure_cmd, "Install it, or set ALMA_CLOJURE_CMD."),
         Tool("Babashka", settings.bb_cmd, "Install Babashka (bb), or set ALMA_BB_CMD."),
+        Tool("npm", settings.npm_cmd, "Install Node 24 with npm, or set ALMA_NPM_CMD."),
     ]
     missing = [t for t in tools if not _resolvable(t.command)]
     problems = [f"  - {t.name} (`{t.command}`): {t.hint}" for t in missing]
@@ -48,7 +49,9 @@ def check(settings: Settings):
                 timeout=30,
             )
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError):
-            problems.append("  - Docker daemon does not appear to be running. Start Docker and retry.")
+            problems.append(
+                "  - Docker daemon does not appear to be running. Start Docker and retry."
+            )
 
     if not settings.compose_file.exists():
         problems.append(
