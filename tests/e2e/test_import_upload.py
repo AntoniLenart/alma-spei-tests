@@ -99,7 +99,7 @@ class TestUploadReport(BaseE2ETest):
                     f"report row {number} should show the parsed values"
                 ).is_equal_to(
                     [
-                        row.date.isoformat(),
+                        row.date_text,
                         row.sender,
                         row.description,
                         row.amount,  # Polish comma decimal, as uploaded
