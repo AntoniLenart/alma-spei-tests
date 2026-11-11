@@ -54,16 +54,18 @@ def _counts_valid(batch: object) -> bool:
         return False
     counts = [batch.get(key) for key in _COUNTS]
     unknown = all(c is None for c in counts)
-    known = all(isinstance(c, int) and not isinstance(c, bool) for c in counts)
-    total, valid, invalid, reviewed = counts
+    ints = [c for c in counts if isinstance(c, int) and not isinstance(c, bool)]
+    known = len(ints) == len(_COUNTS)
+    consistent = settled = False
+    if known:
+        total, valid, invalid, reviewed = ints
+        consistent = total == valid + invalid and reviewed <= valid
+        settled = invalid == 0 and valid == reviewed
     state = batch.get("state")
     return (
-        (unknown or (known and total == valid + invalid and reviewed <= valid))
+        (unknown or consistent)
         and (state not in {"review", "approved", "committed", "undone"} or known)
-        and (
-            state not in {"approved", "committed", "undone"}
-            or (known and invalid == 0 and valid == reviewed)
-        )
+        and (state not in {"approved", "committed", "undone"} or settled)
     )
 
 

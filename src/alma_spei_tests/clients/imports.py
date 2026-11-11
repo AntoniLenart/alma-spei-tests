@@ -44,11 +44,20 @@ class ImportsClient(BaseClient):
         )
 
     def retry(
-        self, batch_id: str, version: int, filename: str, content: bytes, **kwargs: object
+        self,
+        batch_id: str,
+        version: int,
+        filename: str,
+        content: bytes,
+        *,
+        separator: CsvSeparator | None = CsvSeparator.SEMICOLON,
+        headers: HeaderOverrides | None = None,
     ) -> httpx.Response:
         """Re-upload the original bytes as the next attempt of a failed batch."""
         retry_fields = {"retry-batch-id": batch_id, "version": str(version), "confirmed": "true"}
-        return self.upload(filename, content, fields=retry_fields, **kwargs)
+        return self.upload(
+            filename, content, separator=separator, fields=retry_fields, headers=headers
+        )
 
     def rows(self, batch_id: str, **page: int | str) -> httpx.Response:
         """A page of the batch's staged rows (``limit``/``offset``)."""

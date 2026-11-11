@@ -75,7 +75,7 @@ class TestCsvUpload(BaseApiTest):
             )
             assert_that(body["batch"]["created-by"]).described_as(
                 "the batch should be authored by the uploading user"
-            ).is_equal_to(api.current_user()["id"])
+            ).is_equal_to(api.signed_in_user()["id"])
             assert_that(body["skipped-empty-rows"]).described_as(
                 "no blank lines should be skipped"
             ).is_equal_to(0)
