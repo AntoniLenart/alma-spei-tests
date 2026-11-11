@@ -1,6 +1,6 @@
 """Import endpoints (task 35): bank file upload and the staged-row report."""
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 
 import httpx
 
@@ -68,7 +68,7 @@ class ImportsClient(BaseClient):
         """Bank batches awaiting review, newest first (``limit``/``offset``)."""
         return self.review_queue_with(list(page.items()))
 
-    def review_queue_with(self, params: list[tuple[str, str | int]]) -> httpx.Response:
+    def review_queue_with(self, params: Sequence[tuple[str, str | int]]) -> httpx.Response:
         return self._session.get(ApiPath.IMPORT_REVIEW, params=params)
 
     def batch(self, batch_id: str, params: list[tuple[str, str]] | None = None) -> httpx.Response:

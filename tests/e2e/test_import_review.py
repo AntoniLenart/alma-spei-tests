@@ -106,7 +106,7 @@ class TestManualComparisonUi(BaseE2ETest):
                 "the source card should show the row as written in the file"
             ).is_equal_to(
                 {
-                    ReviewMessages.SOURCE_DATE: source.date.isoformat(),
+                    ReviewMessages.SOURCE_DATE: source.date_text,
                     ReviewMessages.SOURCE_SENDER: source.sender,
                     ReviewMessages.SOURCE_DESCRIPTION: source.description,
                     ReviewMessages.SOURCE_AMOUNT: source.amount,
