@@ -24,6 +24,7 @@ class ImportMessages:
     RETRY_CONFIRMATION = "Potwierdzam ponowną analizę tego samego pliku."
     CHOOSE_ANOTHER = "Wybierz inny plik"
     NEXT_ROWS = "Następne wiersze"
+    OPEN_REVIEW = "Przejdź do weryfikacji"
     REPORT_REGION = "Raport wierszy importu"
     INVALID_ROWS_NOTICE = (
         "Wiersze z błędami pozostają w raporcie. Wymagają wyjaśnienia przed zatwierdzeniem importu."
@@ -148,6 +149,11 @@ class ImportsPage(BasePage):
     @property
     def rows_summary(self) -> Locator:
         return self.page.locator('nav.import-pagination [role="status"]')
+
+    @property
+    def review_link(self) -> Locator:
+        """ "Przejdź do weryfikacji" - shown for a batch awaiting review (task 37)."""
+        return self.page.get_by_role("link", name=ImportMessages.OPEN_REVIEW)
 
     @property
     def next_rows_button(self) -> Locator:

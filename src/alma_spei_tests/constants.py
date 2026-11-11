@@ -55,6 +55,7 @@ class ApiPath(StrEnum):
     DONORS = "/api/donors"
     IMPORTS = "/api/imports"
     IMPORT_UPLOAD = "/api/imports/upload"
+    IMPORT_REVIEW = "/api/imports/review"
     UNKNOWN = "/api/does-not-exist"
 
 
@@ -97,6 +98,7 @@ class ErrorCode(StrEnum):
     INELIGIBLE_RETRY = "ineligible-retry"
     STALE_IMPORT = "stale-import"
     EMPTY_FILE = "empty-file"
+    REVIEW_UNAVAILABLE = "review-unavailable"
 
 
 class ApiErrorPayload:
@@ -182,6 +184,11 @@ class ImportErrorPayload:
     }
     EMPTY_FILE = {"code": ErrorCode.EMPTY_FILE, "message": "Plik jest pusty."}
     NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono importu."}
+    ROW_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono wiersza importu."}
+    REVIEW_UNAVAILABLE = {
+        "code": ErrorCode.REVIEW_UNAVAILABLE,
+        "message": "Ten import nie oczekuje na weryfikację. Odśwież kolejkę.",
+    }
     VALIDATION = {"code": ErrorCode.VALIDATION, "message": "Sprawdź dane importu."}
 
 

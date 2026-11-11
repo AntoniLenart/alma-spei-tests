@@ -201,6 +201,17 @@ soft assertions, constants, type hints except `-> None`, no
   rows with Polish reasons, paging past 25 rows, duplicate alert and the
   confirmed retry flow. Verified offline only.
 
+- [x] Step 4 (`trello/37-review-queue`): review client methods (queue, batch,
+  comparison), `BATCH_RESPONSE`/`QUEUE_RESPONSE`/`COMPARISON_RESPONSE`
+  contracts, `ReviewPage` page object and review UI steps; API tests (queue
+  order/paging/validation/authz, batch reads, comparison incl. invalid and
+  archived rows, locator/query validation, 409 for non-review batches),
+  contract tests, a DB test that reviewing writes nothing, and e2e tests (queue
+  progress, open by entry / upload link / deep link, no preselected donor,
+  side-by-side comparison, invalid-row notice). Verified offline only.
+  Note: the review UI's row `<select>` starts with no matching value, so tests
+  pick row 2 (picking the displayed first option may not fire React's change).
+
 ## Next steps (in order)
 
 1. On tests-`main`: build the client layer + extend config/constants/data/db,

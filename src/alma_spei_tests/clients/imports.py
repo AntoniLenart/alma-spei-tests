@@ -63,6 +63,32 @@ class ImportsClient(BaseClient):
         """A page of the batch's staged rows (``limit``/``offset``)."""
         return self._session.get(f"{self.batch_path(batch_id)}/rows", params=page)
 
+    # --- review (task 37) ------------------------------------------------------
+    def review_queue(self, **page: int | str) -> httpx.Response:
+        """Bank batches awaiting review, newest first (``limit``/``offset``)."""
+        return self.review_queue_with(list(page.items()))
+
+    def review_queue_with(self, params: list[tuple[str, str | int]]) -> httpx.Response:
+        return self._session.get(ApiPath.IMPORT_REVIEW, params=params)
+
+    def batch(self, batch_id: str, params: list[tuple[str, str]] | None = None) -> httpx.Response:
+        """One bank batch's metadata (the endpoint accepts no query parameters)."""
+        return self._session.get(self.batch_path(batch_id), params=params or [])
+
+    def comparison(
+        self,
+        batch_id: str,
+        worksheet: int | str,
+        row: int | str,
+        donor_id: str | None = None,
+        *,
+        params: list[tuple[str, str]] | None = None,
+    ) -> httpx.Response:
+        """A staged row next to one chosen donor; ``params`` replaces ``donor-id``."""
+        query = params if params is not None else [("donor-id", donor_id or "")]
+        path = f"{self.batch_path(batch_id)}/rows/{worksheet}/{row}/comparison"
+        return self._session.get(path, params=query)
+
     def rows_with(self, batch_id: str, params: list[tuple[str, str]]) -> httpx.Response:
         """Rows with raw query params (for invalid/duplicate parameter tests)."""
         return self._session.get(f"{self.batch_path(batch_id)}/rows", params=params)
