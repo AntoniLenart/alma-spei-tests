@@ -76,6 +76,18 @@ repo), point the suite at it. An administrator with the `ALMA_QA_ADMIN_USERNAME`
 ALMA_NO_ORCHESTRATION=1 BASE_URL=http://127.0.0.1:3000 uv run pytest --group smoke
 ```
 
+## Static checks
+
+These need no app, Docker or browsers, and CI runs them on every pull request
+(`.github/workflows/checks.yml`):
+
+```sh
+uv run ruff check .
+uv run ruff format --check .
+uv run mypy                          # config in pyproject.toml
+uv run pytest --collect-only -q      # every test imports and collects
+```
+
 ## Reports and artifacts
 
 All under `reports/`:
@@ -93,8 +105,9 @@ All under `reports/`:
 alma-spei-tests/
 ├── conftest.py                 # CLI options, --group wiring, session fixtures
 ├── execution-groups.yaml       # named, data-driven test groups
-├── pyproject.toml              # uv deps + pytest/ruff config
+├── pyproject.toml              # uv deps + pytest/ruff/mypy config
 ├── AGENTS.md                   # conventions for coding agents
+├── .github/                    # PR checks workflow + pull request template
 ├── .claude/agents/             # test-author, triage, page-object, coverage
 ├── src/alma_spei_tests/        # support package (no tests here)
 │   ├── config.py               # env-derived Settings

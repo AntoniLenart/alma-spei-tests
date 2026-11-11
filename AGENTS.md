@@ -47,6 +47,8 @@ strings - keep those strings as named constants, never scatter literals.
 - **Type hints everywhere, except `-> None`.** Annotate parameters and non-None
   return types. Do not write `-> None`. Do not add
   `from __future__ import annotations`.
+- **Static checks must pass.** `uv run ruff check .`, `uv run ruff format --check .`
+  and `uv run mypy` (config in `pyproject.toml`); CI runs them on every pull request.
 - **Utilities outside test files.** Clients, page objects, steps, factories,
   constants, assertions and contracts live in the `alma_spei_tests` package.
   Extract shared code; stay DRY.
