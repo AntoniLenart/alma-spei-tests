@@ -22,6 +22,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff>=0.9.0",
+    "mypy>=2.4",
+    "types-PyYAML>=6.0",
 ]
 
 [build-system]
@@ -77,3 +79,24 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
+
+# ---------------------------------------------------------------------------
+# mypy (run with: uv run mypy)
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+files = ["src", "tests", "conftest.py"]
+mypy_path = "src"
+# tests/ has no __init__.py files (importlib import mode); name modules by path.
+explicit_package_bases = true
+# Test methods carry no return annotation by convention (no "-> None"), so
+# check their bodies anyway instead of skipping them as untyped.
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+# No type information is published for assertpy.
+module = ["assertpy", "assertpy.*"]
+ignore_missing_imports = true
