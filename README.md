@@ -28,9 +28,19 @@ uv run playwright install   # download the Playwright browsers (first time only)
 ## Running the tests
 
 The session `stack` fixture brings the app up **fresh** (Docker Postgres →
-migrations → frontend release build → backend on loopback) and tears it down
-afterwards. It isolates itself from any dev stack with a dedicated Docker Compose
-project and its own ports, so it won't clobber your development database.
+migrations → QA admin provisioning → frontend release build → backend on
+loopback) and tears it down afterwards. It isolates itself from any dev stack
+with a dedicated Docker Compose project and its own ports, so it won't clobber
+your development database.
+
+The QA administrator (`qa.admin`) is provisioned without a console and its
+one-time temporary password is rotated by the session `api` fixture to a known
+synthetic password (`ALMA_QA_ADMIN_*` overrides; see `config.py`).
+
+Orchestrated runs are **serial**: one stack owns fixed ports and one database,
+so `-n` is refused unless `ALMA_NO_ORCHESTRATION=1`. Logins are throttled per
+client address (30 per 15 min), so e2e tests borrow an API session instead of
+logging in through the form wherever login itself is not under test.
 
 ```sh
 # Everything except disruptive tests (the default regression run)
@@ -52,13 +62,15 @@ uv run pytest -m "api and smoke" -k health
 
 Execution groups live in [`execution-groups.yaml`](execution-groups.yaml); each
 group is a marker expression plus a parallel/serial flag. Adding a group is a
-YAML edit, not code. Parallel groups run under pytest-xdist (`-n auto`,
-`--dist loadgroup`); the disruptive group runs serially.
+YAML edit, not code. All groups are currently serial (see above); `parallel:
+true` runs a group under pytest-xdist (`-n auto`, `--dist loadgroup`) and is only
+valid against an already-running app.
 
 ### Testing an already-running app
 
 To skip orchestration (e.g. you started the app yourself with `bb` in the app
-repo), point the suite at it:
+repo), point the suite at it. An administrator with the `ALMA_QA_ADMIN_USERNAME`
+/ `ALMA_QA_ADMIN_PASSWORD` credentials (password already rotated) must exist:
 
 ```sh
 ALMA_NO_ORCHESTRATION=1 BASE_URL=http://127.0.0.1:3000 uv run pytest --group smoke
@@ -87,20 +99,22 @@ alma-spei-tests/
 ├── src/alma_spei_tests/        # support package (no tests here)
 │   ├── config.py               # env-derived Settings
 │   ├── orchestration/          # toolchain preflight + Stack (up/down/restart)
-│   ├── api/                    # httpx client
-│   ├── db/                     # psycopg client
-│   ├── contracts/              # Python mirrors of the app's Malli contracts
+│   │                           #   + provision_admin.clj (non-interactive admin)
+│   ├── http/                   # AuthSession: cookie jar, Origin, CSRF headers
+│   ├── clients/                # Health/Auth/Accounts/Donors clients + AlmaSpeiApi facade
+│   ├── db/                     # psycopg client + DbQueries (named queries)
+│   ├── contracts/              # Python mirrors of the app's Malli contracts (mini schema DSL)
 │   ├── pages/                  # Playwright page objects (locators, no asserts)
 │   ├── steps/                  # @step-decorated reusable steps
 │   ├── data/                   # synthetic (Faker pl_PL) factories
 │   ├── testbase/               # OOP base test classes
 │   └── plugin/                 # execution-group loader
 └── tests/
-    ├── conftest.py             # app_page + example resource fixtures
-    ├── api/                    # health, error handling
-    ├── contract/               # health response vs schema
-    ├── db/                     # foundation migration
-    └── e2e/                    # app shell, backend-restart (disruptive)
+    ├── conftest.py             # donor/account resource fixtures, staff_api, signed_in_page
+    ├── api/                    # health, errors, sessions/CSRF, passwords, accounts, donors
+    ├── contract/               # health, auth and donor responses vs schema
+    ├── db/                     # migration, credential/session/audit, donor persistence
+    └── e2e/                    # shell, login, donor list + card, backend-restart (disruptive)
 ```
 
 ## Conventions (summary)

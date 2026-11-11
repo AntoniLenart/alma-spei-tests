@@ -13,40 +13,43 @@
 #   markers      pytest marker expression passed to -m (required)
 #   parallel     true  -> run with xdist (-n auto, --dist loadgroup)
 #                false -> run serially (-n0)
+#                Orchestrated runs (the default) own one stack on fixed ports, so
+#                they refuse xdist workers; every group is therefore serial. Flip a
+#                group to true only for ALMA_NO_ORCHESTRATION=1 runs.
 #   disruptive   true  -> implicitly enable --run-disruptive for this group
 #
 # Marker expressions compose with any -m you pass on the command line (ANDed).
 
 groups:
-  # Fast liveness/readiness checks across layers. Safe to parallelise.
+  # Fast liveness/readiness checks across layers.
   smoke:
     markers: "smoke"
-    parallel: true
+    parallel: false
 
   # Pure HTTP/API tests, excluding anything disruptive.
   api:
     markers: "api and not disruptive"
-    parallel: true
+    parallel: false
 
   # Schema/contract tests.
   contract:
     markers: "contract and not disruptive"
-    parallel: true
+    parallel: false
 
   # Direct database assertions.
   db:
     markers: "db and not disruptive"
-    parallel: true
+    parallel: false
 
   # Playwright browser tests, excluding disruptive scenarios.
   e2e:
     markers: "e2e and not disruptive"
-    parallel: true
+    parallel: false
 
   # Everything that does NOT disrupt the shared stack. The default CI-style run.
   regression:
     markers: "not disruptive"
-    parallel: true
+    parallel: false
 
   # Disruptive tests (app restarts, etc.). Opt-in and serial so they cannot
   # interfere with other tests sharing the same running stack.

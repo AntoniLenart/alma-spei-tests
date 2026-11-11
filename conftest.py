@@ -7,9 +7,14 @@ What this provides
 * ``--run-disruptive``   also run tests marked ``@disruptive`` (opt-in).
 * auto layer markers     tests under tests/<layer>/ get the matching marker
                          (api/contract/db/e2e) automatically - no per-test tags.
-* session fixtures       ``settings``, ``stack`` (brings the app up fresh),
-                         ``api``, ``db``; plus ``app_page`` (function scope) and
-                         Playwright context defaults for the Polish UI.
+* serial guard           an orchestrated run owns fixed ports and one database,
+                         so it refuses xdist workers (``-n``); parallel runs
+                         need ALMA_NO_ORCHESTRATION=1.
+* session fixtures       ``settings``, ``stack`` (brings the app up fresh and
+                         provisions the QA admin), ``api`` (the admin's signed-in
+                         ``AlmaSpeiApi``) and ``db`` (``DbQueries``); plus
+                         ``anonymous_api`` (function scope) and Playwright
+                         context defaults for the Polish UI.
 
 Resource fixtures that create domain entities use ``yield`` + teardown so they
 always clean up, independent of the test outcome. See tests/conftest.py and the
@@ -20,9 +25,9 @@ from collections.abc import Iterator
 
 import pytest
 
-from alma_spei_tests.api import ApiClient
+from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.config import Settings, load_settings
-from alma_spei_tests.db import DbClient
+from alma_spei_tests.db import DbClient, DbQueries
 from alma_spei_tests.orchestration import Stack
 from alma_spei_tests.plugin import resolve_group
 
@@ -60,31 +65,36 @@ def pytest_configure(config: pytest.Config):
     config._alma_run_disruptive = bool(config.getoption("run_disruptive"))  # type: ignore[attr-defined]
 
     name = config.getoption("alma_group")
-    if not name:
-        return
+    if name:
+        try:
+            spec = resolve_group(name)
+        except (KeyError, ValueError, FileNotFoundError) as exc:
+            raise pytest.UsageError(f"--group: {exc}") from exc
 
-    try:
-        spec = resolve_group(name)
-    except (KeyError, ValueError, FileNotFoundError) as exc:
-        raise pytest.UsageError(f"--group: {exc}") from exc
+        # Marker expression: AND with anything the user already passed via -m.
+        existing = config.option.markexpr
+        config.option.markexpr = f"({existing}) and ({spec.markers})" if existing else spec.markers
 
-    # Marker expression: AND with anything the user already passed via -m.
-    existing = config.option.markexpr
-    config.option.markexpr = f"({existing}) and ({spec.markers})" if existing else spec.markers
+        # Groups that target disruptive tests enable the opt-in automatically.
+        if spec.run_disruptive:
+            config._alma_run_disruptive = True  # type: ignore[attr-defined]
 
-    # Groups that target disruptive tests enable the opt-in automatically.
-    if spec.run_disruptive:
-        config._alma_run_disruptive = True  # type: ignore[attr-defined]
-
-    # Parallelism via xdist. Only set when the user did not pass -n explicitly.
-    if hasattr(config.option, "numprocesses"):
-        if config.option.numprocesses in (None, 0):
+        # Parallelism via xdist. Only set when the user did not pass -n explicitly.
+        if hasattr(config.option, "numprocesses") and config.option.numprocesses in (None, 0):
             if spec.parallel:
                 config.option.numprocesses = "auto"
                 config.option.dist = "loadgroup"
             else:
                 config.option.numprocesses = 0
                 config.option.dist = "no"
+
+    # Every worker would bring up its own stack on the same ports and database.
+    workers = getattr(config.option, "numprocesses", None)
+    if workers not in (None, 0) and load_settings().orchestrate:
+        raise pytest.UsageError(
+            "Orchestrated runs must be serial: pass -n0 (or set ALMA_NO_ORCHESTRATION=1 "
+            "to run in parallel against an already-running app)."
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -135,8 +145,32 @@ def base_url(settings: Settings, stack: Stack) -> str:  # noqa: ARG001 - stack e
 
 
 @pytest.fixture(scope="session")
-def api(base_url: str, settings: Settings) -> Iterator[ApiClient]:
-    client = ApiClient(base_url, timeout=settings.http_timeout_s)
+def api(settings: Settings, stack: Stack, base_url: str) -> Iterator[AlmaSpeiApi]:
+    """The QA administrator's signed-in API session, shared by the whole run.
+
+    On an orchestrated stack the admin still has its temporary password, so the
+    first sign-in rotates it to ``settings.admin_password``. Tests must not log
+    this session out or change its password - use ``staff_api`` for that.
+    """
+    client = AlmaSpeiApi.connect(base_url, timeout=settings.http_timeout_s)
+    try:
+        if stack.admin_temporary_password is not None:
+            client.sign_in(
+                settings.admin_username,
+                stack.admin_temporary_password,
+                new_password=settings.admin_password,
+            )
+        else:
+            client.sign_in(settings.admin_username, settings.admin_password)
+        yield client
+    finally:
+        client.close()
+
+
+@pytest.fixture
+def anonymous_api(settings: Settings, base_url: str) -> Iterator[AlmaSpeiApi]:
+    """A fresh, signed-out session with its CSRF cookie issued."""
+    client = AlmaSpeiApi.connect(base_url, timeout=settings.http_timeout_s)
     try:
         yield client
     finally:
@@ -144,11 +178,11 @@ def api(base_url: str, settings: Settings) -> Iterator[ApiClient]:
 
 
 @pytest.fixture(scope="session")
-def db(settings: Settings, stack: Stack) -> Iterator[DbClient]:  # noqa: ARG001 - stack ensures DB is up
+def db(settings: Settings, stack: Stack) -> Iterator[DbQueries]:  # noqa: ARG001 - stack ensures DB is up
     client = DbClient(settings)
     client.connect()
     try:
-        yield client
+        yield DbQueries(client)
     finally:
         client.close()
 

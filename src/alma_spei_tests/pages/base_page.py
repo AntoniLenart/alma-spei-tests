@@ -5,6 +5,8 @@ values/locators from page objects and do the assertions (with assertpy). This
 keeps selectors in one place (DRY) and assertions in the tests (readable).
 """
 
+from typing import Self
+
 from playwright.sync_api import Page
 
 
@@ -15,7 +17,7 @@ class BasePage:
     def __init__(self, page: Page):
         self.page = page
 
-    def open(self) -> "BasePage":
+    def open(self) -> Self:
         """Navigate to this page's path and return self for chaining."""
         self.page.goto(self.path)
         return self

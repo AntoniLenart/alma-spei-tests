@@ -68,8 +68,13 @@ strings - keep those strings as named constants, never scatter literals.
   backend on loopback, then tears it all down. It isolates itself from a dev
   stack via a dedicated compose project and its own ports. Set
   `ALMA_NO_ORCHESTRATION=1` to test an already-running app at `BASE_URL`.
-- **Parallel execution** via pytest-xdist. **Execution groups** are declared in
+- **Serial by default.** An orchestrated run owns one stack on fixed ports, so
+  it refuses xdist workers; pytest-xdist parallelism is only for runs against an
+  already-running app. **Execution groups** are declared in
   `execution-groups.yaml` and run with `pytest --group <name>`.
+- **Mind the login throttle** (30 attempts per client address per 15 minutes):
+  e2e tests that are not about logging in use `signed_in_page` (a borrowed API
+  session) rather than the login form.
 - **Disruptive tests** (`@disruptive`) are opt-in (`--run-disruptive` or
   `--group disruptive`) and run serially/isolated.
 

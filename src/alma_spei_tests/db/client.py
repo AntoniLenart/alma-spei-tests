@@ -6,7 +6,7 @@ rights, which is exactly what we want for read-only verification of migrations,
 constraints and seeded metadata.
 
 The password is read from the app repo's ``.secrets/app-password`` at connect
-time and never logged.
+time and never logged. Named queries live in ``db/queries.py``.
 """
 
 from collections.abc import Sequence
@@ -57,3 +57,8 @@ class DbClient:
         if not rows:
             return None
         return rows[0][0]
+
+    def execute(self, sql: str, params: Sequence[Any] | None = None):
+        """Run a statement that returns no rows (fixture-only writes)."""
+        with self._require_conn().cursor() as cur:
+            cur.execute(sql, params)

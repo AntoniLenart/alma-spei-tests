@@ -14,6 +14,8 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from alma_spei_tests.constants import KNOWN_PASSWORD
+
 # Repo root = two levels up from src/alma_spei_tests/config.py
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -55,8 +57,12 @@ class Settings:
     # When False, fixtures assume the app is already running at base_url and do
     # not touch Docker / the backend (handy for fast local debugging).
     orchestrate: bool = field(default_factory=lambda: not _env_bool("ALMA_NO_ORCHESTRATION", False))
-    compose_project: str = field(default_factory=lambda: _env("ALMA_COMPOSE_PROJECT", "alma-spei-tests"))
-    readiness_timeout_s: int = field(default_factory=lambda: _env_int("ALMA_READINESS_TIMEOUT", 180))
+    compose_project: str = field(
+        default_factory=lambda: _env("ALMA_COMPOSE_PROJECT", "alma-spei-tests")
+    )
+    readiness_timeout_s: int = field(
+        default_factory=lambda: _env_int("ALMA_READINESS_TIMEOUT", 180)
+    )
 
     # External command names, overridable where the CLI is not plainly on PATH
     # (common for the Clojure CLI / Babashka on Windows).
@@ -73,10 +79,24 @@ class Settings:
     db_port: int = field(default_factory=lambda: _env_int("ALMA_TEST_DB_PORT", 55432))
     db_name: str = field(default_factory=lambda: _env("ALMA_DB_NAME", "alma_spei_dev"))
     db_app_user: str = field(default_factory=lambda: _env("ALMA_DB_USER", "alma_spei_app"))
-    migration_user: str = field(default_factory=lambda: _env("ALMA_MIGRATION_USER", "alma_spei_migrator"))
+    migration_user: str = field(
+        default_factory=lambda: _env("ALMA_MIGRATION_USER", "alma_spei_migrator")
+    )
 
     # --- Timeouts (seconds) ----------------------------------------------------
     http_timeout_s: float = field(default_factory=lambda: float(_env("ALMA_HTTP_TIMEOUT", "10")))
+
+    # --- QA administrator ------------------------------------------------------
+    # Orchestrated runs provision this admin and rotate its temporary password to
+    # admin_password. With ALMA_NO_ORCHESTRATION, an admin with these credentials
+    # (password already rotated) must exist in the running app.
+    admin_username: str = field(default_factory=lambda: _env("ALMA_QA_ADMIN_USERNAME", "qa.admin"))
+    admin_display_name: str = field(
+        default_factory=lambda: _env("ALMA_QA_ADMIN_DISPLAY_NAME", "QA Admin")
+    )
+    admin_password: str = field(
+        default_factory=lambda: _env("ALMA_QA_ADMIN_PASSWORD", KNOWN_PASSWORD)
+    )
 
     @property
     def base_url(self) -> str:

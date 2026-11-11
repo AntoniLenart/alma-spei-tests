@@ -8,9 +8,11 @@ Lifecycle (``up``):
      compose project + host port, giving a clean DB volume each session
      (the role-bootstrap init script only runs on a fresh volume);
   4. ``clojure -M:migrate up`` with migration credentials;
-  5. ``clojure -M:ui ... release app`` to compile the frontend assets;
-  6. start the backend (``clojure -M:run``) serving API + assets on loopback;
-  7. poll ``/api/health/ready`` until it reports 200.
+  5. provision the QA administrator (``provision_admin.clj``) and keep its
+     one-time temporary password in memory - the ``api`` fixture rotates it;
+  6. ``clojure -M:ui ... release app`` to compile the frontend assets;
+  7. start the backend (``clojure -M:run``) serving API + assets on loopback;
+  8. poll ``/api/health/ready`` until it reports 200.
 
 Teardown (``down``) stops the backend process and removes the DB volume.
 
@@ -27,10 +29,13 @@ import urllib.request
 from pathlib import Path
 
 from alma_spei_tests.config import Settings
+from alma_spei_tests.constants import TEMPORARY_PASSWORD_MIN_LENGTH
 from alma_spei_tests.logging_setup import get_logger
 from alma_spei_tests.orchestration import toolchain
 
 log = get_logger("orchestration")
+
+PROVISION_SCRIPT = Path(__file__).with_name("provision_admin.clj")
 
 
 class StackError(RuntimeError):
@@ -42,6 +47,8 @@ class Stack:
         self.settings = settings
         self._backend: subprocess.Popen | None = None
         self._backend_log: Path | None = None
+        #: Set by up() when it provisioned the admin; None with ALMA_NO_ORCHESTRATION.
+        self.admin_temporary_password: str | None = None
 
     # --- environment ----------------------------------------------------------
     def _base_env(self) -> dict[str, str]:
@@ -64,7 +71,9 @@ class Stack:
         return env
 
     # --- process helpers ------------------------------------------------------
-    def _run(self, args: list[str], env: dict[str, str], step: str):
+    def _run(
+        self, args: list[str], env: dict[str, str], step: str
+    ) -> subprocess.CompletedProcess[str]:
         log.info("stack: %s -> %s", step, " ".join(args))
         result = subprocess.run(
             args,
@@ -80,13 +89,17 @@ class Stack:
                 f"exit code: {result.returncode}\n"
                 f"stderr (tail):\n{result.stderr[-2000:]}"
             )
+        return result
 
     def _compose(self, *args: str) -> list[str]:
         s = self.settings
         return [
-            s.docker_cmd, "compose",
-            "-p", s.compose_project,
-            "-f", str(s.compose_file),
+            s.docker_cmd,
+            "compose",
+            "-p",
+            s.compose_project,
+            "-f",
+            str(s.compose_file),
             *args,
         ]
 
@@ -105,7 +118,9 @@ class Stack:
         self._run([self.settings.bb_cmd, "init"], self._base_env(), "bb init (secrets)")
 
         # 3. fresh database
-        self._run(self._compose("down", "-v", "--remove-orphans"), self._base_env(), "compose down -v")
+        self._run(
+            self._compose("down", "-v", "--remove-orphans"), self._base_env(), "compose down -v"
+        )
         self._run(self._compose("up", "-d", "--wait", "db"), self._base_env(), "compose up db")
 
         # 4. migrations
@@ -115,20 +130,45 @@ class Stack:
             "migrate up",
         )
 
-        # 5. compiled frontend assets
+        # 5. QA administrator
+        self.admin_temporary_password = self._provision_admin()
+
+        # 6. compiled frontend assets
         self._run(
-            [self.settings.clojure_cmd, "-Srepro", "-M:ui",
-             "-m", "shadow.cljs.devtools.cli", "release", "app"],
+            [
+                self.settings.clojure_cmd,
+                "-Srepro",
+                "-M:ui",
+                "-m",
+                "shadow.cljs.devtools.cli",
+                "release",
+                "app",
+            ],
             self._base_env(),
             "frontend release build",
         )
 
-        # 6. backend
+        # 7. backend
         self._start_backend()
 
-        # 7. readiness
+        # 8. readiness
         self._wait_ready()
         log.info("stack: ready at %s", self.settings.base_url)
+
+    def _provision_admin(self) -> str:
+        env = self._base_env()
+        env["ALMA_QA_ADMIN_USERNAME"] = self.settings.admin_username
+        env["ALMA_QA_ADMIN_DISPLAY_NAME"] = self.settings.admin_display_name
+        result = self._run(
+            [self.settings.clojure_cmd, "-Srepro", "-M", str(PROVISION_SCRIPT)],
+            env,
+            "provision QA admin",
+        )
+        lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+        password = lines[-1] if lines else ""
+        if len(password) < TEMPORARY_PASSWORD_MIN_LENGTH:  # never log the value itself
+            raise StackError("QA admin provisioning printed no temporary password.")
+        return password
 
     def _prepare_log_file(self) -> Path:
         stack_dir = _repo_reports_dir() / "stack"
@@ -177,7 +217,9 @@ class Stack:
         (there is no process we own to restart).
         """
         if not self.settings.orchestrate:
-            raise StackError("Cannot restart backend: orchestration is disabled (ALMA_NO_ORCHESTRATION).")
+            raise StackError(
+                "Cannot restart backend: orchestration is disabled (ALMA_NO_ORCHESTRATION)."
+            )
         log.info("stack: restarting backend")
         self._stop_backend()
         self._start_backend()
@@ -200,7 +242,9 @@ class Stack:
         log.info("stack: tearing down")
         self._stop_backend()
         try:
-            self._run(self._compose("down", "-v", "--remove-orphans"), self._base_env(), "compose down -v")
+            self._run(
+                self._compose("down", "-v", "--remove-orphans"), self._base_env(), "compose down -v"
+            )
         except StackError as exc:  # teardown must not mask test results
             log.warning("stack: teardown issue (ignored): %s", exc)
 

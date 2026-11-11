@@ -148,6 +148,33 @@ at top, assertion helpers (assertpy `.described_as(...).is_equal_to(...)`),
 soft assertions, constants, type hints except `-> None`, no
 `from __future__ import annotations`.
 
+## Progress
+
+- [x] Step 1 (tests-`main`): client layer (`http/session.py` AuthSession,
+  `clients/*` + `AlmaSpeiApi` facade with `sign_in`), config/constants/data/db
+  extensions, `DbQueries`, contract mini-DSL (`contracts/schema.py`), page
+  objects (shell, auth panel, donor list + card), steps, conftests, admin
+  provisioning in `Stack.up()`, and health/errors/auth/password/accounts/donor
+  API + contract + DB + e2e tests. Verified offline only (collection, ruff,
+  fake-backend check of CSRF/cookie mechanics) - not yet run against the app.
+
+### Findings while building step 1 (keep in mind)
+
+- Logins are throttled **per peer address too: 30 per 15 min**, counted on
+  every attempt (success included) and never cleared on success. Everything
+  shares 127.0.0.1, so tests borrow sessions (`signed_in_page`,
+  `share_session_with_browser`) and the throttle test's fixture clears
+  `auth_throttle_buckets` afterwards. Budget is ~22 logins for the main suite.
+- No donor delete/archive endpoint: `donor_factory` archives via DB
+  (`UPDATE donors SET is_active=false`, granted to the app role) on teardown;
+  tests isolate by a per-test `tag` in donor names and search by it.
+- `POST /api/auth/logout` and `/api/accounts/:id/reset-password` need a JSON
+  `{}` body (closed empty map), not an empty body.
+- Donor endpoints don't refresh the `alma-csrf` cookie; auth endpoints do.
+- assertpy's dynamic `has_<key>()` can't address hyphenated JSON keys.
+- `role="status"` appears several times on the root page; the shell's own one
+  is `main > p[role="status"]`.
+
 ## Next steps (in order)
 
 1. On tests-`main`: build the client layer + extend config/constants/data/db,

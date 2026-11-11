@@ -1,7 +1,9 @@
 """Shared constants and enums.
 
 Literal values that tests or helpers would otherwise hard-code live here, so a
-value is defined once and referenced by name everywhere.
+value is defined once and referenced by name everywhere. Polish strings are the
+exact user-facing messages the backend returns; Polish UI strings live on the
+page objects.
 """
 
 from enum import StrEnum
@@ -13,25 +15,32 @@ class ContentType(StrEnum):
     JSON = "application/json"
 
 
-class HealthStatus(StrEnum):
-    """Allowed values of the health response ``status`` field."""
+class Header(StrEnum):
+    """HTTP header names the client sets or the tests inspect."""
 
-    OK = "ok"
-    UNAVAILABLE = "unavailable"
-
-
-#: The two allowed health status strings, as a tuple for membership checks.
-HEALTH_STATUS_VALUES: tuple[str, ...] = tuple(status.value for status in HealthStatus)
+    ORIGIN = "Origin"
+    CSRF_TOKEN = "X-CSRF-Token"
 
 
-class ApiErrorPayload:
-    """Exact JSON error payloads the backend returns."""
+class Cookie(StrEnum):
+    """Cookie names the backend issues."""
 
-    NOT_FOUND = {"code": "not-found", "message": "Nie znaleziono zasobu."}
+    SESSION = "alma-session"
+    CSRF = "alma-csrf"
 
 
-#: Foundation migration (202610250001) seeds this version into application_metadata.
-FOUNDATION_VERSION = 1
+class ApiPath(StrEnum):
+    """Fixed API routes. Parameterised routes are built by the clients."""
 
-#: application_metadata is a singleton table (exactly one row).
-SINGLETON_ROW_COUNT = 1
+    AUTH_SESSION = "/api/auth/session"
+    AUTH_LOGIN = "/api/auth/login"
+    AUTH_PASSWORD = "/api/auth/password"
+
+
+#: A temporary password issued by bootstrap/create/reset is at least this long.
+TEMPORARY_PASSWORD_MIN_LENGTH = 20
+
+
+#: A password that satisfies the policy (8-128 chars, upper, digit, symbol, no
+#: spaces). Accounts created by tests are rotated to it; it is synthetic.
+KNOWN_PASSWORD = "QaAdmin!2026xyz"
