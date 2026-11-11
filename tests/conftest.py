@@ -28,17 +28,19 @@ from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.config import Settings
 from alma_spei_tests.constants import KNOWN_PASSWORD
 from alma_spei_tests.data import (
+    BankStatement,
     DonorFactory,
     DonorProfile,
     ProvisionedAccount,
     SyntheticAccount,
     new_account,
+    new_bank_statement,
     new_donor_profile,
     unique_tag,
 )
 from alma_spei_tests.db import DbQueries
 from alma_spei_tests.pages import AppPage
-from alma_spei_tests.steps import auth_steps, db_steps, donors_steps, ui_steps
+from alma_spei_tests.steps import auth_steps, db_steps, donors_steps, imports_steps, ui_steps
 
 
 # --- data ---------------------------------------------------------------------
@@ -71,6 +73,24 @@ def donor_profile(tag: str) -> DonorProfile:
 def donor(donor_factory: DonorFactory, donor_profile: DonorProfile) -> dict[str, Any]:
     """One active individual donor (as returned by the API), tagged for this test."""
     return donor_factory(donor_profile)
+
+
+# --- imports (task 35) ----------------------------------------------------------
+@pytest.fixture
+def bank_statement(tag: str) -> BankStatement:
+    """Two valid synthetic statement lines, unique to this test (by tag)."""
+    return new_bank_statement(tag)
+
+
+@pytest.fixture
+def staged_upload(api: AlmaSpeiApi, bank_statement: BankStatement, tag: str) -> dict[str, Any]:
+    """The upload report of ``bank_statement`` staged as a CSV import.
+
+    No teardown: staged imports have no cancel/delete endpoint yet and the app
+    role cannot delete them. Unique file bytes per test keep runs independent
+    (the backend refuses a byte-identical file twice).
+    """
+    return imports_steps.upload_staged(api, f"{tag}.csv", bank_statement.to_csv())
 
 
 # --- accounts -----------------------------------------------------------------
