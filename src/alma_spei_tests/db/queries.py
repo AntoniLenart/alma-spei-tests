@@ -12,6 +12,7 @@ granted and the API does not expose:
                            deliberately exhausts them.
 """
 
+import secrets
 import uuid
 from collections.abc import Mapping, Sequence
 from typing import Any
@@ -31,6 +32,16 @@ PROBE_DONATION: dict[str, object] = {
     "amount": "10.0000",
     "currency": "PLN",
     "received_on": "2026-01-15",
+}
+
+#: A valid first attempt of an import batch, for constraint probes.
+PROBE_BATCH: dict[str, object] = {
+    "attempt_number": 1,
+    "retry_of": None,
+    "source_type": "bank",
+    "original_filename": "qa-probe.csv",
+    "state": "reserved",
+    "failure_code": None,
 }
 
 
@@ -77,6 +88,41 @@ class DbQueries:
                 ),
             ]
         )
+
+    def column_privileges(self, table: str, columns: Sequence[str], kind: str) -> dict[str, bool]:
+        """Whether the app role holds the column privilege ``kind`` on each column."""
+        return {
+            column: self.client.scalar(
+                "SELECT has_column_privilege(current_user, %s::text, %s::text, %s::text)",
+                (table, column, kind),
+            )
+            for column in columns
+        }
+
+    def import_files_violation(self, *files: Mapping[str, object]) -> str | None:
+        """The constraint violated when import files are recorded; each changes a valid row."""
+        return self.client.constraint_violated_by(
+            [_import_file_insert(_new_id(), changes) for changes in files]
+        )
+
+    def import_attempts_violation(
+        self, actor_id: str, *attempts: Mapping[str, object]
+    ) -> str | None:
+        """The constraint violated when one new file gets these batch ``attempts``.
+
+        Each attempt changes a valid first attempt; an integer ``retry_of`` names
+        the index of an earlier attempt in the same call.
+        """
+        file_id = _new_id()
+        batch_ids = [_new_id() for _ in attempts]
+        statements = [_import_file_insert(file_id, {})]
+        for batch_id, attempt in zip(batch_ids, attempts, strict=True):
+            changes = dict(attempt)
+            retry_of = changes.get("retry_of")
+            if isinstance(retry_of, int):
+                changes["retry_of"] = batch_ids[retry_of]
+            statements.append(_import_batch_insert(batch_id, file_id, actor_id, changes))
+        return self.client.constraint_violated_by(statements)
 
     # --- foundation -----------------------------------------------------------
     def foundation_version(self) -> int | None:
@@ -225,4 +271,32 @@ def _donation_insert(donor_id: str, actor_id: str, changes: Mapping[str, object]
         "INSERT INTO donations (id, donor_id, amount, currency, received_on, created_by)"
         " VALUES (%s, %s, %s::numeric, %s, %s::date, %s)",
         (_new_id(), donor_id, row["amount"], row["currency"], row["received_on"], actor_id),
+    )
+
+
+def _import_file_insert(file_id: str, changes: Mapping[str, object]) -> Statement:
+    row = {"file_hash_sha256": secrets.token_hex(32), "byte_count": 1, **changes}
+    return (
+        "INSERT INTO import_files (id, file_hash_sha256, byte_count) VALUES (%s, %s, %s)",
+        (file_id, row["file_hash_sha256"], row["byte_count"]),
+    )
+
+
+def _import_batch_insert(
+    batch_id: str, file_id: str, actor_id: str, changes: Mapping[str, object]
+) -> Statement:
+    row = {**PROBE_BATCH, **changes}
+    columns = (
+        "attempt_number",
+        "retry_of",
+        "source_type",
+        "original_filename",
+        "state",
+        "failure_code",
+    )
+    return (
+        "INSERT INTO import_batches (id, file_id, created_by, attempt_number, retry_of,"
+        " source_type, original_filename, state, failure_code)"
+        " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        (batch_id, file_id, actor_id, *(row[column] for column in columns)),
     )

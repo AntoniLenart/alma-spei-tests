@@ -1,6 +1,6 @@
 """Reusable steps for direct database checks."""
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from typing import Any
 
 from alma_spei_tests.db import DbQueries
@@ -82,6 +82,25 @@ def probe_donation(db: DbQueries, actor_id: str, **changes: object) -> str | Non
 @step("Probe a donor audit '{action}' event changing '{field_name}' (rolled back)")
 def probe_donor_audit(db: DbQueries, actor_id: str, action: str, field_name: str) -> str | None:
     return db.donor_audit_violation(actor_id, action=action, field_name=field_name)
+
+
+@step("Read the app role's {kind} privilege on columns {columns} of {table}")
+def read_column_privileges(
+    db: DbQueries, table: str, columns: Sequence[str], kind: str
+) -> dict[str, bool]:
+    return db.column_privileges(table, columns, kind)
+
+
+@step("Probe import files {files} (rolled back)")
+def probe_import_files(db: DbQueries, *files: Mapping[str, object]) -> str | None:
+    return db.import_files_violation(*files)
+
+
+@step("Probe import attempts {attempts} of one file (rolled back)")
+def probe_import_attempts(
+    db: DbQueries, actor_id: str, *attempts: Mapping[str, object]
+) -> str | None:
+    return db.import_attempts_violation(actor_id, *attempts)
 
 
 @step("Read the donors named '{prefix}…'")
