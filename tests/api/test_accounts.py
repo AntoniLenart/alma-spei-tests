@@ -10,9 +10,9 @@ from assertpy import assert_that, soft_assertions
 from alma_spei_tests.assertions import assert_error, assert_status
 from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.config import Settings
-from alma_spei_tests.constants import ApiErrorPayload
+from alma_spei_tests.constants import KNOWN_PASSWORD, ApiErrorPayload
 from alma_spei_tests.data import ProvisionedAccount, SyntheticAccount, new_account
-from alma_spei_tests.steps import auth_steps
+from alma_spei_tests.steps import auth_steps, donors_steps
 from alma_spei_tests.testbase import BaseApiTest
 
 #: Display name used when an edit only flips flags.
@@ -110,6 +110,42 @@ class TestAccountAdministration(BaseApiTest):
             api, str(uuid.uuid4()), EDITED_DISPLAY_NAME, active=True, administrator=False
         )
         assert_error(response, HTTPStatus.NOT_FOUND, ApiErrorPayload.ACCOUNT_NOT_FOUND)
+
+    def test_password_reset_ends_sessions_and_issues_a_temporary_password(
+        self, api: AlmaSpeiApi, staff: ProvisionedAccount, staff_api: AlmaSpeiApi
+    ):
+        # 1. Reset the password of a signed-in staff account
+        # 2. Use the staff session again
+        # 3. Verification: a new temporary password, the flag set, and the old session answers 401
+        response = auth_steps.reset_password(api, staff.id)
+        donors = donors_steps.list_donors(staff_api)
+        body = response.json()
+        with soft_assertions():
+            assert_status(response, HTTPStatus.OK, "resetting a password")
+            assert_that(body["temporary-password"]).described_as(
+                "reset should issue a new temporary password"
+            ).is_not_equal_to(staff.temporary_password)
+            assert_that(body["user"]["password-change-required"]).described_as(
+                "reset should require a password change"
+            ).is_true()
+            assert_error(donors, HTTPStatus.UNAUTHORIZED, ApiErrorPayload.UNAUTHENTICATED)
+
+    def test_deactivation_ends_sessions_and_blocks_login(
+        self,
+        api: AlmaSpeiApi,
+        anonymous_api: AlmaSpeiApi,
+        staff: ProvisionedAccount,
+        staff_api: AlmaSpeiApi,
+    ):
+        # 1. Deactivate a signed-in staff account
+        # 2. Use the staff session again, then try to log in afresh
+        # 3. Verification: the session answers 401 and the login is refused as invalid credentials
+        auth_steps.deactivate_account(api, staff.id, staff.display_name)
+        donors = donors_steps.list_donors(staff_api)
+        login = auth_steps.login(anonymous_api, staff.username, KNOWN_PASSWORD)
+        with soft_assertions():
+            assert_error(donors, HTTPStatus.UNAUTHORIZED, ApiErrorPayload.UNAUTHENTICATED)
+            assert_error(login, HTTPStatus.UNAUTHORIZED, ApiErrorPayload.INVALID_CREDENTIALS)
 
 
 @allure.feature("Accounts")
