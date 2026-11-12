@@ -82,3 +82,18 @@ def probe_donation(db: DbQueries, actor_id: str, **changes: object) -> str | Non
 @step("Probe a donor audit '{action}' event changing '{field_name}' (rolled back)")
 def probe_donor_audit(db: DbQueries, actor_id: str, action: str, field_name: str) -> str | None:
     return db.donor_audit_violation(actor_id, action=action, field_name=field_name)
+
+
+@step("Read the donors named '{prefix}…'")
+def read_donors_named(db: DbQueries, prefix: str) -> list[dict[str, Any]]:
+    return db.donors_named(prefix)
+
+
+@step("Read the donations of the donors named '{prefix}…'")
+def read_donations_of_donors_named(db: DbQueries, prefix: str) -> list[dict[str, Any]]:
+    return db.donations_of_donors_named(prefix)
+
+
+@step("Read the audit actions of the donors named '{prefix}…'")
+def read_audit_actions_of_donors_named(db: DbQueries, prefix: str) -> list[str]:
+    return db.audit_actions_of_donors_named(prefix)

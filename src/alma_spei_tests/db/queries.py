@@ -164,6 +164,45 @@ class DbQueries:
     def archive_donor(self, donor_id: str):
         self.client.execute("UPDATE donors SET is_active = false WHERE id = %s", (donor_id,))
 
+    # --- synthetic demo data ---------------------------------------------------
+    def donors_named(self, prefix: str) -> list[dict[str, Any]]:
+        """Donors whose name starts with ``prefix``, by name then id."""
+        rows = self.client.query(
+            "SELECT id::text, name, entity_type, is_active, version, street, postal_code, city"
+            " FROM donors WHERE starts_with(name, %s) ORDER BY name, id",
+            (prefix,),
+        )
+        keys = (
+            "id",
+            "name",
+            "entity_type",
+            "is_active",
+            "version",
+            "street",
+            "postal_code",
+            "city",
+        )
+        return [dict(zip(keys, row, strict=True)) for row in rows]
+
+    def donations_of_donors_named(self, prefix: str) -> list[dict[str, Any]]:
+        """Donations of the donors whose name starts with ``prefix``."""
+        rows = self.client.query(
+            "SELECT d.amount, d.currency, d.received_on, d.version FROM donations d"
+            " JOIN donors p ON p.id = d.donor_id WHERE starts_with(p.name, %s)",
+            (prefix,),
+        )
+        keys = ("amount", "currency", "received_on", "version")
+        return [dict(zip(keys, row, strict=True)) for row in rows]
+
+    def audit_actions_of_donors_named(self, prefix: str) -> list[str]:
+        """Audit actions recorded for the donors whose name starts with ``prefix``."""
+        rows = self.client.query(
+            "SELECT e.action FROM donor_audit_events e JOIN donors p ON p.id = e.donor_id"
+            " WHERE starts_with(p.name, %s)",
+            (prefix,),
+        )
+        return [row[0] for row in rows]
+
 
 # --- probe statements ---------------------------------------------------------
 def _new_id() -> str:
