@@ -23,6 +23,15 @@ from alma_spei_tests.constants import (
 from alma_spei_tests.contracts import Schema
 
 
+# --- generic HTTP -------------------------------------------------------------
+def assert_status(response: httpx.Response, expected: HTTPStatus, what: str):
+    """``what`` names the call, e.g. ``"creating a donor"``."""
+    assert_that(response.status_code).described_as(
+        f"{what} should return HTTP {expected.value} {expected.phrase}"
+        f" (body: {response.text[:300]})"
+    ).is_equal_to(expected)
+
+
 def assert_json_content_type(response: httpx.Response):
     """The response is served as JSON."""
     assert_that(response.headers.get(Header.CONTENT_TYPE, "")).described_as(
@@ -86,3 +95,15 @@ def assert_valid_health_status(status: object):
     assert_that(status).described_as("status should be a valid health status value").is_in(
         *HEALTH_STATUS_VALUES
     )
+
+
+# --- auth ---------------------------------------------------------------------
+def assert_signed_in_as(response: httpx.Response, username: str):
+    """A session-issuing call succeeded for the given (canonical) username."""
+    with soft_assertions():
+        assert_that(response.status_code).described_as(
+            "session-issuing call should return HTTP 200"
+        ).is_equal_to(HTTPStatus.OK)
+        assert_that(response.json().get("user", {}).get("username")).described_as(
+            "session should belong to the signed-in account"
+        ).is_equal_to(username)
