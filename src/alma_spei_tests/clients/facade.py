@@ -13,12 +13,14 @@ from typing import Any
 
 from alma_spei_tests.clients.auth import AuthClient
 from alma_spei_tests.clients.base import ApiError, expect_status
+from alma_spei_tests.clients.health import HealthClient
 from alma_spei_tests.http import AuthSession
 
 
 class AlmaSpeiApi:
     def __init__(self, session: AuthSession):
         self.session = session
+        self.health = HealthClient(session)
         self.auth = AuthClient(session)
 
     @classmethod
