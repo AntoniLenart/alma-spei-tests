@@ -1,15 +1,29 @@
 """A tiny schema vocabulary for mirroring the app's Malli contracts in Python.
 
-Only what the contracts use: closed maps and enums. ``schema.explain(value)`` returns
+Only what the contracts use: closed maps, maybe, vectors, enums, strings and
+booleans. ``schema.explain(value)`` returns
 human-readable violations with a JSON path; an empty list means valid.
 """
 
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 
 
 class Schema:
     def explain(self, value: object, path: str = "$") -> list[str]:
         raise NotImplementedError
+
+
+class Predicate(Schema):
+    def __init__(self, description: str, check: Callable[[object], bool]):
+        self.description = description
+        self.check = check
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        return [] if self.check(value) else [f"{path}: expected {self.description}, got {value!r}"]
+
+
+STRING = Predicate("a string", lambda v: isinstance(v, str))
+BOOLEAN = Predicate("a boolean", lambda v: isinstance(v, bool))
 
 
 class Enum(Schema):
@@ -20,6 +34,27 @@ class Enum(Schema):
         if value in self.values:
             return []
         return [f"{path}: must be one of {list(self.values)}, got {value!r}"]
+
+
+class Maybe(Schema):
+    def __init__(self, inner: Schema):
+        self.inner = inner
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        return [] if value is None else self.inner.explain(value, path)
+
+
+class Vector(Schema):
+    def __init__(self, item: Schema):
+        self.item = item
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        if not isinstance(value, list):
+            return [f"{path}: expected an array, got {type(value).__name__}"]
+        problems: list[str] = []
+        for index, item in enumerate(value):
+            problems.extend(self.item.explain(item, f"{path}[{index}]"))
+        return problems
 
 
 class ClosedMap(Schema):

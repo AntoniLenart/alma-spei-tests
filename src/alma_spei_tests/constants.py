@@ -48,7 +48,9 @@ class ApiPath(StrEnum):
     HEALTH_READY = "/api/health/ready"
     AUTH_SESSION = "/api/auth/session"
     AUTH_LOGIN = "/api/auth/login"
+    AUTH_LOGOUT = "/api/auth/logout"
     AUTH_PASSWORD = "/api/auth/password"
+    ACCOUNTS = "/api/accounts"
     UNKNOWN = "/api/does-not-exist"
 
 
@@ -67,13 +69,79 @@ class ErrorCode(StrEnum):
     """Machine-readable ``code`` values of API error bodies."""
 
     NOT_FOUND = "not-found"
+    CSRF = "csrf"
+    UNAUTHENTICATED = "unauthenticated"
+    FORBIDDEN = "forbidden"
+    INVALID_CREDENTIALS = "invalid-credentials"
+    THROTTLED = "throttled"
+    VALIDATION = "validation"
+    USERNAME_EXISTS = "username-exists"
+    LAST_ADMINISTRATOR = "last-administrator"
+    INVALID_PASSWORD = "invalid-password"
+    PASSWORD_REUSED = "password-reused"
+    BODY_TOO_LARGE = "body-too-large"
 
 
 class ApiErrorPayload:
     """Exact JSON error payloads (``code`` + Polish ``message``) the backend returns."""
 
     NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono zasobu."}
+    CSRF = {"code": ErrorCode.CSRF, "message": "Sesja formularza wygasła. Odśwież stronę."}
+    UNAUTHENTICATED = {"code": ErrorCode.UNAUTHENTICATED, "message": "Zaloguj się ponownie."}
+    FORBIDDEN = {"code": ErrorCode.FORBIDDEN, "message": "Brak uprawnień do zarządzania kontami."}
+    INVALID_CREDENTIALS = {
+        "code": ErrorCode.INVALID_CREDENTIALS,
+        "message": "Nieprawidłowa nazwa użytkownika lub hasło.",
+    }
+    THROTTLED = {
+        "code": ErrorCode.THROTTLED,
+        "message": "Zbyt wiele prób. Spróbuj ponownie za 15 minut.",
+    }
+    AUTH_VALIDATION = {
+        "code": ErrorCode.VALIDATION,
+        "message": "Sprawdź poprawność danych formularza.",
+    }
+    USERNAME_EXISTS = {
+        "code": ErrorCode.USERNAME_EXISTS,
+        "message": "Ta nazwa użytkownika jest już zajęta.",
+    }
+    LAST_ADMINISTRATOR = {
+        "code": ErrorCode.LAST_ADMINISTRATOR,
+        "message": "Nie można wyłączyć ostatniego aktywnego administratora.",
+    }
+    INVALID_PASSWORD = {
+        "code": ErrorCode.INVALID_PASSWORD,
+        "message": "Obecne hasło jest nieprawidłowe.",
+    }
+    PASSWORD_REUSED = {
+        "code": ErrorCode.PASSWORD_REUSED,
+        "message": "Nowe hasło musi być inne od obecnego.",
+    }
+    ACCOUNT_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono konta."}
+    BODY_TOO_LARGE = {
+        "code": ErrorCode.BODY_TOO_LARGE,
+        "message": "Przekroczono rozmiar formularza.",
+    }
 
+
+class SecurityEvent(StrEnum):
+    """``security_audit_events.event_type`` values written by the auth service."""
+
+    BOOTSTRAP = "bootstrap"
+    LOGIN = "login"
+    LOGIN_FAILED = "login-failed"
+    LOGOUT = "logout"
+    PASSWORD_CHANGED = "password-changed"
+    ACCOUNT_CREATED = "account-created"
+    ACCOUNT_UPDATED = "account-updated"
+    PASSWORD_RESET = "password-reset"
+
+
+#: Non-GET request bodies are capped at 16 KiB by ``wrap-body-limit``.
+BODY_LIMIT_BYTES = 16384
+
+#: Logins are throttled at five attempts per username per 15 minutes.
+LOGIN_ATTEMPTS_PER_USERNAME = 5
 
 #: A temporary password issued by bootstrap/create/reset is at least this long.
 TEMPORARY_PASSWORD_MIN_LENGTH = 20
@@ -87,3 +155,12 @@ SINGLETON_ROW_COUNT = 1
 #: A password that satisfies the policy (8-128 chars, upper, digit, symbol, no
 #: spaces). Accounts created by tests are rotated to it; it is synthetic.
 KNOWN_PASSWORD = "QaAdmin!2026xyz"
+
+#: A second policy-valid password, for rotating away from KNOWN_PASSWORD.
+ROTATED_PASSWORD = "QaRotated#2026abc"
+
+#: Violates the policy (no uppercase, no symbol) - rejected with 422.
+WEAK_PASSWORD = "weakpassword1"
+
+#: Policy-valid but wrong for every account - used for failed-login checks.
+WRONG_PASSWORD = "Wrong-Password9!"

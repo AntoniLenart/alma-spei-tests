@@ -21,6 +21,10 @@ class AuthClient(BaseClient):
         """POST an arbitrary login body (for validation tests)."""
         return self._session.post(ApiPath.AUTH_LOGIN, json=body, headers=headers)
 
+    def logout(self, *, headers: HeaderOverrides | None = None) -> httpx.Response:
+        # The backend validates the body as a closed, empty map.
+        return self._session.post(ApiPath.AUTH_LOGOUT, json={}, headers=headers)
+
     def change_password(self, current_password: str, new_password: str) -> httpx.Response:
         return self._session.post(
             ApiPath.AUTH_PASSWORD,

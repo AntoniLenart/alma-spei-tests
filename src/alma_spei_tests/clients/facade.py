@@ -11,6 +11,7 @@ from http import HTTPStatus
 from types import TracebackType
 from typing import Any
 
+from alma_spei_tests.clients.accounts import AccountsClient
 from alma_spei_tests.clients.auth import AuthClient
 from alma_spei_tests.clients.base import ApiError, expect_status
 from alma_spei_tests.clients.health import HealthClient
@@ -22,6 +23,7 @@ class AlmaSpeiApi:
         self.session = session
         self.health = HealthClient(session)
         self.auth = AuthClient(session)
+        self.accounts = AccountsClient(session)
 
     @classmethod
     def connect(cls, base_url: str, *, timeout: float) -> "AlmaSpeiApi":
@@ -65,3 +67,15 @@ class AlmaSpeiApi:
             self.auth.change_password(password, new_password), HTTPStatus.OK, "Password rotation"
         )
         return rotated.json()["user"]
+
+    def current_user(self) -> dict[str, Any] | None:
+        """The principal of this session according to the backend, or None."""
+        return expect_status(self.auth.session(), HTTPStatus.OK, "Inspect session").json()["user"]
+
+    def signed_in_user(self) -> dict[str, Any]:
+        """The principal of this session; raises ApiError when the backend sees none."""
+        response = expect_status(self.auth.session(), HTTPStatus.OK, "Inspect session")
+        user = response.json()["user"]
+        if user is None:
+            raise ApiError("Inspect session (no signed-in user)", response)
+        return user
