@@ -6,13 +6,25 @@ from alma_spei_tests.contracts.auth import (
     SESSION_RESPONSE,
     TEMPORARY_RESPONSE,
 )
+from alma_spei_tests.contracts.donors import (
+    DETAIL_RESPONSE,
+    DONOR,
+    DONOR_RESPONSE,
+    DONORS_RESPONSE,
+    HISTORY_RESPONSE,
+)
 from alma_spei_tests.contracts.health import HEALTH_RESPONSE
 from alma_spei_tests.contracts.schema import Schema
 
 __all__ = [
     "ACCOUNTS_RESPONSE",
     "ACCOUNT_RESPONSE",
+    "DETAIL_RESPONSE",
+    "DONOR",
+    "DONORS_RESPONSE",
+    "DONOR_RESPONSE",
     "HEALTH_RESPONSE",
+    "HISTORY_RESPONSE",
     "SESSION_RESPONSE",
     "Schema",
     "TEMPORARY_RESPONSE",
