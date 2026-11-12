@@ -6,6 +6,7 @@ exact user-facing messages the backend returns; Polish UI strings live on the
 page objects.
 """
 
+from decimal import Decimal
 from enum import StrEnum
 
 
@@ -215,6 +216,34 @@ class Privilege(StrEnum):
     UPDATE = "UPDATE"
     DELETE = "DELETE"
     TRUNCATE = "TRUNCATE"
+
+
+class SeedStatus(StrEnum):
+    """``:status`` printed by the synthetic-data loader (``bb seed-demo``)."""
+
+    LOADED = "loaded"
+    UNCHANGED = "unchanged"
+
+
+class DemoDataset:
+    """The deterministic synthetic population (dev/alma_spei/dev/demo_data.clj)."""
+
+    NAME_PREFIX = "DANE SYNTETYCZNE — "
+    DONORS = 20
+    PAYMENTS = 30
+    ACTIVE = 18
+    ARCHIVED = 2
+    ENTITY_TYPES = {"individual": 12, "business": 4, "organization": 4}
+    TOTAL = Decimal("2650.0000")
+    CURRENCY = "PLN"
+    YEAR = 2026
+    #: Two separate profiles carry this full name, at different addresses.
+    SHARED_NAME = "DANE SYNTETYCZNE — Łukasz Próbowy"
+    #: Refusal when the chosen audit actor is not an active administrator.
+    INVALID_ACTOR = (
+        "Supply the username of an existing active account administrator;"
+        " no accounts are created by this command."
+    )
 
 
 #: Donor list defaults applied by the backend when a query omits them.

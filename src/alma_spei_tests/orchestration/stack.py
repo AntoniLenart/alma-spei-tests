@@ -24,11 +24,13 @@ stdout/stderr is captured to ``reports/stack/backend.log`` for debugging.
 """
 
 import os
+import re
 import shutil
 import subprocess
 import time
 import urllib.error
 import urllib.request
+from dataclasses import dataclass
 from pathlib import Path
 
 from alma_spei_tests.config import Settings
@@ -40,9 +42,27 @@ log = get_logger("orchestration")
 
 PROVISION_SCRIPT = Path(__file__).with_name("provision_admin.clj")
 
+#: ``:key value`` pairs of the EDN map the seed-demo loader prints.
+_EDN_PAIR = re.compile(r":([a-z-]+) :?([\w-]+)")
+
 
 class StackError(RuntimeError):
     """Raised when the stack cannot be brought up or becomes unhealthy."""
+
+
+@dataclass(frozen=True)
+class SeedResult:
+    """Outcome of one run of the app's synthetic-data loader (``bb seed-demo``)."""
+
+    returncode: int
+    stdout: str
+    stderr: str
+
+    @property
+    def summary(self) -> dict[str, str]:
+        """The EDN map printed on success, e.g. ``{"status": "loaded", "donors": "20"}``."""
+        lines = [line for line in self.stdout.splitlines() if line.strip()]
+        return dict(_EDN_PAIR.findall(lines[-1])) if lines else {}
 
 
 class Stack:
@@ -233,6 +253,23 @@ class Stack:
         self._stop_backend()
         self._start_backend()
         self._wait_ready()
+
+    def seed_demo(self, username: str) -> SeedResult:
+        """Run the synthetic-data loader with ``username`` as its audit actor.
+
+        The same command ``bb seed-demo`` runs, with the stack's database settings.
+        A non-zero exit is returned rather than raised, so tests can check refusals.
+        """
+        args = [self.settings.clojure_cmd, "-Srepro", "-M:seed-demo", username]
+        log.info("stack: seed-demo -> %s", " ".join(args))
+        result = subprocess.run(
+            _resolved(args),
+            cwd=self.settings.app_repo,
+            env=self._base_env(),
+            capture_output=True,
+            text=True,
+        )
+        return SeedResult(result.returncode, result.stdout, result.stderr)
 
     def _stop_backend(self):
         if self._backend is None:
