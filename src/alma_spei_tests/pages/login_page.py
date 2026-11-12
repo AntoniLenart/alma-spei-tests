@@ -32,6 +32,7 @@ class AuthMessages:
 
     SIGNED_IN_PREFIX = "Zalogowano: "
     LOGOUT_BUTTON = "Wyloguj się"
+    DONORS_NAV = "Darczyńcy"
     ACCOUNTS_NAV = "Konta użytkowników"
     HOME_HEADING = "Start"
 
@@ -92,6 +93,12 @@ class LoginPage(BasePage):
     @property
     def home_heading(self) -> Locator:
         return self.page.get_by_role("heading", name=AuthMessages.HOME_HEADING, exact=True)
+
+    @property
+    def donors_nav(self) -> Locator:
+        return self.page.get_by_role("navigation").get_by_role(
+            "button", name=AuthMessages.DONORS_NAV, exact=True
+        )
 
     @property
     def accounts_nav(self) -> Locator:
