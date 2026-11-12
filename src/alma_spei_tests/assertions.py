@@ -1,0 +1,88 @@
+"""Shared assertion helpers.
+
+Tests do not chain ``assert_that(...)`` for common checks; they call a named
+helper from here. Helpers that make more than one assertion use a
+``soft_assertions`` block so every failure is reported at once. Descriptions
+read as expectations ("... should ...").
+"""
+
+from collections.abc import Mapping
+from http import HTTPStatus
+
+import httpx
+from assertpy import assert_that, soft_assertions
+
+from alma_spei_tests.constants import (
+    HEALTH_STATUS_VALUES,
+    ApiErrorPayload,
+    ContentType,
+    Header,
+    HealthStatus,
+    SecurityHeaderValue,
+)
+from alma_spei_tests.contracts import Schema
+
+
+def assert_json_content_type(response: httpx.Response):
+    """The response is served as JSON."""
+    assert_that(response.headers.get(Header.CONTENT_TYPE, "")).described_as(
+        "response should be served as JSON"
+    ).contains(ContentType.JSON)
+
+
+def assert_error(response: httpx.Response, expected: HTTPStatus, payload: Mapping[str, str]):
+    """An error response with the exact ``{code, message}`` Polish payload."""
+    with soft_assertions():
+        assert_that(response.status_code).described_as(
+            f"error response should have HTTP {expected.value} {expected.phrase}"
+        ).is_equal_to(expected)
+        assert_that(response.json()).described_as(
+            f"error body should be the {payload['code']} payload"
+        ).is_equal_to(dict(payload))
+
+
+def assert_not_found(response: httpx.Response):
+    """An unknown API route returned the Polish JSON 404 payload."""
+    with soft_assertions():
+        assert_json_content_type(response)
+        assert_error(response, HTTPStatus.NOT_FOUND, ApiErrorPayload.NOT_FOUND)
+
+
+def assert_security_headers(response: httpx.Response):
+    """Responses are never cached and carry the hardening headers."""
+    expected = {
+        Header.CACHE_CONTROL: SecurityHeaderValue.NO_STORE,
+        Header.CONTENT_TYPE_OPTIONS: SecurityHeaderValue.NOSNIFF,
+        Header.REFERRER_POLICY: SecurityHeaderValue.NO_REFERRER,
+    }
+    with soft_assertions():
+        for header, value in expected.items():
+            assert_that(response.headers.get(header)).described_as(
+                f"{header} header should be {value}"
+            ).is_equal_to(value)
+
+
+def assert_matches_contract(body: object, schema: Schema, name: str):
+    """The body satisfies the Python mirror of the app's Malli contract."""
+    assert_that(schema.explain(body)).described_as(
+        f"response should satisfy the {name} contract"
+    ).is_empty()
+
+
+# --- health -------------------------------------------------------------------
+def assert_health_ok(response: httpx.Response):
+    """A health endpoint returned HTTP 200 with body ``{"status": "ok"}``."""
+    with soft_assertions():
+        assert_that(response.status_code).described_as(
+            "health endpoint should return HTTP 200"
+        ).is_equal_to(HTTPStatus.OK)
+        assert_that(response.json()).described_as(
+            "health body should report status ok"
+        ).is_equal_to({"status": HealthStatus.OK})
+
+
+def assert_valid_health_status(status: object):
+    """The status value is one of the allowed health statuses."""
+    assert_that(status).described_as("status should be a valid health status value").is_in(
+        *HEALTH_STATUS_VALUES
+    )
