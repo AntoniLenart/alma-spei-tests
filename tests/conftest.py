@@ -3,6 +3,9 @@
 Resource fixtures follow the create-in-setup / tear-down-after-yield pattern so
 cleanup always runs, independent of whether the test passed:
 
+* ``donor_factory`` / ``donor`` - donors created through the API; archived in
+  the database afterwards (the API has no delete/archive endpoint), so they drop
+  out of the default active list. Names carry the test's ``tag``.
 * ``account_factory`` / ``staff`` - accounts created by the admin; deactivated
   afterwards (which also ends their sessions).
 * ``staff_api`` - a staff account signed in on its own session, password
@@ -16,6 +19,7 @@ logging in through the form.
 """
 
 from collections.abc import Callable, Iterator
+from typing import Any
 
 import pytest
 from playwright.sync_api import Page
@@ -24,13 +28,49 @@ from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.config import Settings
 from alma_spei_tests.constants import KNOWN_PASSWORD
 from alma_spei_tests.data import (
+    DonorFactory,
+    DonorProfile,
     ProvisionedAccount,
     SyntheticAccount,
     new_account,
+    new_donor_profile,
+    unique_tag,
 )
 from alma_spei_tests.db import DbQueries
 from alma_spei_tests.pages import AppPage
-from alma_spei_tests.steps import auth_steps, db_steps, ui_steps
+from alma_spei_tests.steps import auth_steps, db_steps, donors_steps, ui_steps
+
+
+# --- data ---------------------------------------------------------------------
+@pytest.fixture
+def tag() -> str:
+    """A per-test marker embedded in donor names, for search isolation."""
+    return unique_tag()
+
+
+@pytest.fixture
+def donor_factory(api: AlmaSpeiApi, db: DbQueries) -> Iterator[DonorFactory]:
+    created: list[str] = []
+
+    def create(profile: DonorProfile) -> dict[str, Any]:
+        donor = donors_steps.create_donor(api, profile)
+        created.append(donor["id"])
+        return donor
+
+    yield create
+    for donor_id in created:
+        db.archive_donor(donor_id)
+
+
+@pytest.fixture
+def donor_profile(tag: str) -> DonorProfile:
+    return new_donor_profile(tag=tag)
+
+
+@pytest.fixture
+def donor(donor_factory: DonorFactory, donor_profile: DonorProfile) -> dict[str, Any]:
+    """One active individual donor (as returned by the API), tagged for this test."""
+    return donor_factory(donor_profile)
 
 
 # --- accounts -----------------------------------------------------------------

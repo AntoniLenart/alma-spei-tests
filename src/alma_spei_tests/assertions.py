@@ -6,8 +6,9 @@ helper from here. Helpers that make more than one assertion use a
 read as expectations ("... should ...").
 """
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from http import HTTPStatus
+from typing import Any
 
 import httpx
 from assertpy import assert_that, soft_assertions
@@ -16,6 +17,7 @@ from alma_spei_tests.constants import (
     HEALTH_STATUS_VALUES,
     ApiErrorPayload,
     ContentType,
+    ErrorCode,
     Header,
     HealthStatus,
     SecurityHeaderValue,
@@ -107,3 +109,40 @@ def assert_signed_in_as(response: httpx.Response, username: str):
         assert_that(response.json().get("user", {}).get("username")).described_as(
             "session should belong to the signed-in account"
         ).is_equal_to(username)
+
+
+# --- donors -------------------------------------------------------------------
+def assert_donor_matches_profile(donor: Mapping[str, object], payload: Mapping[str, object]):
+    """Every profile field of a returned donor equals the submitted payload."""
+    with soft_assertions():
+        for field, value in payload.items():
+            assert_that(donor.get(field)).described_as(
+                f"donor {field} should equal the submitted value"
+            ).is_equal_to(value)
+
+
+def assert_donor_validation_error(response: httpx.Response, field: str, code: str):
+    """A donor write was rejected with a per-field validation error.
+
+    ``field`` is the kebab-case field name; for unknown-field errors the backend
+    reports an empty field path, so pass ``""``.
+    """
+    body = response.json()
+    expected_path = [field] if field else []
+    with soft_assertions():
+        assert_that(response.status_code).described_as(
+            "invalid donor data should be rejected with HTTP 400"
+        ).is_equal_to(HTTPStatus.BAD_REQUEST)
+        assert_that(body.get("code")).described_as(
+            "rejection should carry the validation code"
+        ).is_equal_to(ErrorCode.VALIDATION)
+        assert_that([(e.get("field"), e.get("code")) for e in body.get("errors", [])]).described_as(
+            f"errors should flag {field or 'an unknown field'} as {code}"
+        ).contains((expected_path, code))
+
+
+def assert_ids(donors: Sequence[Mapping[str, Any]], expected: list[str], what: str):
+    """The listed donors are exactly ``expected``, in order."""
+    assert_that([d["id"] for d in donors]).described_as(
+        f"{what} should list exactly the expected donors in order"
+    ).is_equal_to(expected)

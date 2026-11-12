@@ -51,6 +51,7 @@ class ApiPath(StrEnum):
     AUTH_LOGOUT = "/api/auth/logout"
     AUTH_PASSWORD = "/api/auth/password"
     ACCOUNTS = "/api/accounts"
+    DONORS = "/api/donors"
     UNKNOWN = "/api/does-not-exist"
 
 
@@ -71,6 +72,7 @@ class ErrorCode(StrEnum):
     NOT_FOUND = "not-found"
     CSRF = "csrf"
     UNAUTHENTICATED = "unauthenticated"
+    PASSWORD_CHANGE_REQUIRED = "password-change-required"
     FORBIDDEN = "forbidden"
     INVALID_CREDENTIALS = "invalid-credentials"
     THROTTLED = "throttled"
@@ -79,6 +81,8 @@ class ErrorCode(StrEnum):
     LAST_ADMINISTRATOR = "last-administrator"
     INVALID_PASSWORD = "invalid-password"
     PASSWORD_REUSED = "password-reused"
+    STALE_DONOR = "stale-donor"
+    MALFORMED_BODY = "malformed-body"
     BODY_TOO_LARGE = "body-too-large"
 
 
@@ -88,6 +92,10 @@ class ApiErrorPayload:
     NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono zasobu."}
     CSRF = {"code": ErrorCode.CSRF, "message": "Sesja formularza wygasła. Odśwież stronę."}
     UNAUTHENTICATED = {"code": ErrorCode.UNAUTHENTICATED, "message": "Zaloguj się ponownie."}
+    PASSWORD_CHANGE_REQUIRED = {
+        "code": ErrorCode.PASSWORD_CHANGE_REQUIRED,
+        "message": "Najpierw zmień hasło tymczasowe.",
+    }
     FORBIDDEN = {"code": ErrorCode.FORBIDDEN, "message": "Brak uprawnień do zarządzania kontami."}
     INVALID_CREDENTIALS = {
         "code": ErrorCode.INVALID_CREDENTIALS,
@@ -118,6 +126,15 @@ class ApiErrorPayload:
         "message": "Nowe hasło musi być inne od obecnego.",
     }
     ACCOUNT_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono konta."}
+    DONOR_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono darczyńcy."}
+    STALE_DONOR = {
+        "code": ErrorCode.STALE_DONOR,
+        "message": "Dane darczyńcy zostały zmienione. Odśwież formularz i sprawdź zmiany.",
+    }
+    MALFORMED_BODY = {
+        "code": ErrorCode.MALFORMED_BODY,
+        "message": "Nieprawidłowy format danych formularza.",
+    }
     BODY_TOO_LARGE = {
         "code": ErrorCode.BODY_TOO_LARGE,
         "message": "Przekroczono rozmiar formularza.",
@@ -149,6 +166,34 @@ class EntityType(StrEnum):
     ORGANIZATION = "organization"
 
 
+class DonorStatusFilter(StrEnum):
+    """Values of the donor list ``status`` query parameter."""
+
+    ACTIVE = "active"
+    ARCHIVED = "archived"
+    ALL = "all"
+
+
+class DonorSortField(StrEnum):
+    """Columns the donor list can be sorted by."""
+
+    NAME = "name"
+    CITY = "city"
+    ENTITY_TYPE = "entity-type"
+
+
+class SortDirection(StrEnum):
+    ASC = "asc"
+    DESC = "desc"
+
+
+class AuditAction(StrEnum):
+    """Donor audit event ``action`` values."""
+
+    CREATE = "create"
+    UPDATE = "update"
+
+
 class SecurityEvent(StrEnum):
     """``security_audit_events.event_type`` values written by the auth service."""
 
@@ -171,6 +216,13 @@ class Privilege(StrEnum):
     DELETE = "DELETE"
     TRUNCATE = "TRUNCATE"
 
+
+#: Donor list defaults applied by the backend when a query omits them.
+DONOR_PAGE_DEFAULT_LIMIT = 25
+DONOR_PAGE_MAX_LIMIT = 100
+
+#: The first version a newly created donor gets; every effective update adds one.
+INITIAL_DONOR_VERSION = 1
 
 #: Non-GET request bodies are capped at 16 KiB by ``wrap-body-limit``.
 BODY_LIMIT_BYTES = 16384

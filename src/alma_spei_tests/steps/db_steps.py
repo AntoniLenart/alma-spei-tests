@@ -44,6 +44,26 @@ def count_security_events_mentioning(db: DbQueries, text: str) -> int:
     return db.security_events_mentioning(text)
 
 
+@step("Read donor row {donor_id}")
+def read_donor(db: DbQueries, donor_id: str) -> dict[str, Any]:
+    return _existing(db.donor(donor_id), f"donor {donor_id}")
+
+
+@step("Read audit actions of donor {donor_id}")
+def read_donor_audit_actions(db: DbQueries, donor_id: str) -> list[str]:
+    return db.donor_audit_actions(donor_id)
+
+
+@step("Read fields changed by '{action}' events of donor {donor_id}")
+def read_donor_changed_fields(db: DbQueries, donor_id: str, action: str) -> set[str]:
+    return db.donor_audit_changed_fields(donor_id, action)
+
+
+@step("Archive donor {donor_id} directly in the database")
+def archive_donor(db: DbQueries, donor_id: str):
+    db.archive_donor(donor_id)
+
+
 @step("Read the app role's {kinds} privileges on {table}")
 def read_privileges(db: DbQueries, table: str, kinds: Sequence[str]) -> dict[str, bool]:
     return db.privileges(table, kinds)

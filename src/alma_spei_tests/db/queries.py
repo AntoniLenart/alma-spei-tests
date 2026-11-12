@@ -2,9 +2,12 @@
 
 Tests and steps never write SQL; they call a method here. Everything is a read,
 except the constraint probes (writes that are always rolled back, see
-``DbClient.constraint_violated_by``) and one fixture-only write the app role is
+``DbClient.constraint_violated_by``) and two fixture-only writes the app role is
 granted and the API does not expose:
 
+* ``archive_donor``      - there is no archive endpoint yet; used to build an
+                           archived donor for the status filter and to keep the
+                           default (active) list clean after a test;
 * ``clear_auth_throttle`` - resets login throttle buckets after a test that
                            deliberately exhausts them.
 """
@@ -127,6 +130,39 @@ class DbQueries:
 
     def clear_auth_throttle(self):
         self.client.execute("DELETE FROM auth_throttle_buckets")
+
+    # --- donors ---------------------------------------------------------------
+    def donor(self, donor_id: str) -> dict[str, Any] | None:
+        rows = self.client.query(
+            "SELECT name, entity_type, city, is_active, version, created_by::text,"
+            " updated_by::text FROM donors WHERE id = %s",
+            (donor_id,),
+        )
+        if not rows:
+            return None
+        keys = ("name", "entity_type", "city", "is_active", "version", "created_by", "updated_by")
+        return dict(zip(keys, rows[0], strict=True))
+
+    def donor_audit_actions(self, donor_id: str) -> list[str]:
+        """Audit actions recorded for the donor, oldest first."""
+        rows = self.client.query(
+            "SELECT action FROM donor_audit_events WHERE donor_id = %s ORDER BY occurred_at, id",
+            (donor_id,),
+        )
+        return [row[0] for row in rows]
+
+    def donor_audit_changed_fields(self, donor_id: str, action: str) -> set[str]:
+        """Snake-case field names changed by the donor's events of one action."""
+        rows = self.client.query(
+            "SELECT c.field_name FROM donor_audit_changes c"
+            " JOIN donor_audit_events e ON e.id = c.event_id"
+            " WHERE e.donor_id = %s AND e.action = %s",
+            (donor_id, action),
+        )
+        return {row[0] for row in rows}
+
+    def archive_donor(self, donor_id: str):
+        self.client.execute("UPDATE donors SET is_active = false WHERE id = %s", (donor_id,))
 
 
 # --- probe statements ---------------------------------------------------------

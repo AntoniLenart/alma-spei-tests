@@ -2,9 +2,10 @@
 
     api = AlmaSpeiApi.connect(base_url, timeout=10)   # anonymous, CSRF primed
     api.sign_in("qa.admin", temporary, new_password=KNOWN_PASSWORD)
+    api.donors.create(profile.to_payload())
 
 The sub-clients share the facade's ``AuthSession``, so logging in through
-``api.auth`` authenticates every other sub-client too.
+``api.auth`` authenticates ``api.donors`` too.
 """
 
 from http import HTTPStatus
@@ -14,6 +15,7 @@ from typing import Any
 from alma_spei_tests.clients.accounts import AccountsClient
 from alma_spei_tests.clients.auth import AuthClient
 from alma_spei_tests.clients.base import ApiError, expect_status
+from alma_spei_tests.clients.donors import DonorsClient
 from alma_spei_tests.clients.health import HealthClient
 from alma_spei_tests.http import AuthSession
 
@@ -24,6 +26,7 @@ class AlmaSpeiApi:
         self.health = HealthClient(session)
         self.auth = AuthClient(session)
         self.accounts = AccountsClient(session)
+        self.donors = DonorsClient(session)
 
     @classmethod
     def connect(cls, base_url: str, *, timeout: float) -> "AlmaSpeiApi":

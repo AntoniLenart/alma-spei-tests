@@ -1,11 +1,11 @@
-"""API tests for password changes and the password policy."""
+"""API tests for password changes, including the forced temporary-password rotation."""
 
 from http import HTTPStatus
 
 import allure
 from assertpy import assert_that, soft_assertions
 
-from alma_spei_tests.assertions import assert_error, assert_status
+from alma_spei_tests.assertions import assert_error, assert_signed_in_as, assert_status
 from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.constants import (
     KNOWN_PASSWORD,
@@ -14,8 +14,46 @@ from alma_spei_tests.constants import (
     WRONG_PASSWORD,
     ApiErrorPayload,
 )
-from alma_spei_tests.steps import auth_steps
+from alma_spei_tests.data import ProvisionedAccount
+from alma_spei_tests.steps import auth_steps, donors_steps
 from alma_spei_tests.testbase import BaseApiTest
+
+
+@allure.feature("Password change")
+class TestTemporaryPassword(BaseApiTest):
+    def test_temporary_password_blocks_donor_access(
+        self, anonymous_api: AlmaSpeiApi, staff: ProvisionedAccount
+    ):
+        # 1. Log in with a temporary password (no rotation)
+        # 2. List donors
+        # 3. Verification: HTTP 403 password-change-required
+        auth_steps.login(anonymous_api, staff.username, staff.temporary_password)
+        response = donors_steps.list_donors(anonymous_api)
+        assert_error(response, HTTPStatus.FORBIDDEN, ApiErrorPayload.PASSWORD_CHANGE_REQUIRED)
+
+    def test_rotating_the_temporary_password_unlocks_the_account(
+        self, anonymous_api: AlmaSpeiApi, staff: ProvisionedAccount
+    ):
+        # 1. Log in with a temporary password
+        # 2. Change it to a policy-valid password
+        # 3. List donors with the new session
+        # 4. Verification: a fresh session without the change flag, and donors answer 200
+        login = auth_steps.login(anonymous_api, staff.username, staff.temporary_password)
+        old_token = anonymous_api.session.session_token
+        response = auth_steps.change_password(
+            anonymous_api, staff.temporary_password, KNOWN_PASSWORD
+        )
+        donors = donors_steps.list_donors(anonymous_api)
+        with soft_assertions():
+            assert_status(login, HTTPStatus.OK, "logging in with the temporary password")
+            assert_signed_in_as(response, staff.username)
+            assert_that(response.json()["user"]["password-change-required"]).described_as(
+                "the change flag should be cleared after rotation"
+            ).is_false()
+            assert_that(anonymous_api.session.session_token).described_as(
+                "rotation should issue a new session token"
+            ).is_not_equal_to(old_token)
+            assert_status(donors, HTTPStatus.OK, "listing donors after rotation")
 
 
 @allure.feature("Password change")

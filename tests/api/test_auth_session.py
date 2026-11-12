@@ -19,11 +19,12 @@ from alma_spei_tests.constants import (
     LOGIN_ATTEMPTS_PER_USERNAME,
     WRONG_PASSWORD,
     ApiErrorPayload,
+    Cookie,
     Header,
 )
-from alma_spei_tests.data import ProvisionedAccount, new_account
+from alma_spei_tests.data import DonorProfile, ProvisionedAccount, new_account
 from alma_spei_tests.db import DbQueries
-from alma_spei_tests.steps import auth_steps
+from alma_spei_tests.steps import auth_steps, donors_steps
 from alma_spei_tests.testbase import BaseApiTest
 
 #: An Origin that is not the app's own.
@@ -167,6 +168,39 @@ class TestCsrfProtection(BaseApiTest):
             assert_that(anonymous_api.session.session_token).described_as(
                 "a rejected login should not set alma-session"
             ).is_none()
+
+    def test_donor_mutation_without_csrf_header_is_forbidden(
+        self, api: AlmaSpeiApi, donor_profile: DonorProfile
+    ):
+        # 1. Submit a valid new donor from the signed-in session without X-CSRF-Token
+        # 2. Verification: HTTP 403 csrf payload
+        response = donors_steps.request_create(
+            api, donor_profile.to_payload(), headers={Header.CSRF_TOKEN: None}
+        )
+        assert_error(response, HTTPStatus.FORBIDDEN, ApiErrorPayload.CSRF)
+
+
+@allure.feature("Authentication")
+class TestLogout(BaseApiTest):
+    def test_logout_ends_the_session(self, staff_api: AlmaSpeiApi):
+        # 1. Log out a signed-in staff session
+        # 2. Inspect the session and list donors with the same cookies
+        # 3. Verification: logout returns no user, the session is gone and donors answer 401
+        response = auth_steps.logout(staff_api)
+        session_user = auth_steps.inspect_session(staff_api).json()["user"]
+        donors = donors_steps.list_donors(staff_api)
+        with soft_assertions():
+            assert_status(response, HTTPStatus.OK, "logging out")
+            assert_that(response.json()["user"]).described_as(
+                "logout response should carry no user"
+            ).is_none()
+            assert_that(staff_api.session.cookies()).described_as(
+                "logout should clear the alma-session cookie"
+            ).does_not_contain_key(Cookie.SESSION)
+            assert_that(session_user).described_as(
+                "the session should no longer resolve to a user"
+            ).is_none()
+            assert_error(donors, HTTPStatus.UNAUTHORIZED, ApiErrorPayload.UNAUTHENTICATED)
 
 
 # --- file-local fixtures and helpers ------------------------------------------
