@@ -124,6 +124,31 @@ class ApiErrorPayload:
     }
 
 
+class FieldErrorCode(StrEnum):
+    """Per-field ``errors[].code`` values of a donor validation response."""
+
+    REQUIRED = "required"
+    INVALID = "invalid"
+    UNKNOWN_FIELD = "unknown-field"
+
+
+class DonorFieldMessage(StrEnum):
+    """Polish per-field validation messages (contracts/donors.cljc ``field-messages``)."""
+
+    NAME = "Podaj nazwę lub imię i nazwisko darczyńcy."
+    CITY = "Podaj miejscowość."
+    POSTAL_CODE = "Podaj kod pocztowy w formacie XX-XXX."
+    UNKNOWN_FIELD = "Formularz zawiera nieobsługiwane pole."
+
+
+class EntityType(StrEnum):
+    """Donor ``entity-type`` values."""
+
+    INDIVIDUAL = "individual"
+    BUSINESS = "business"
+    ORGANIZATION = "organization"
+
+
 class SecurityEvent(StrEnum):
     """``security_audit_events.event_type`` values written by the auth service."""
 

@@ -1,11 +1,15 @@
 """A tiny schema vocabulary for mirroring the app's Malli contracts in Python.
 
-Only what the contracts use: closed maps, maybe, vectors, enums, strings and
-booleans. ``schema.explain(value)`` returns
+Only what the contracts use: closed maps, maybe, vectors, enums, regexes,
+bounded ints, strings and booleans. ``schema.explain(value)`` returns
 human-readable violations with a JSON path; an empty list means valid.
 """
 
+import re
 from collections.abc import Callable, Mapping
+
+#: Malli's safe-maximum for integer fields (JavaScript Number.MAX_SAFE_INTEGER).
+SAFE_MAXIMUM = 9007199254740991
 
 
 class Schema:
@@ -24,6 +28,20 @@ class Predicate(Schema):
 
 STRING = Predicate("a string", lambda v: isinstance(v, str))
 BOOLEAN = Predicate("a boolean", lambda v: isinstance(v, bool))
+NONBLANK_STRING = Predicate("a non-blank string", lambda v: isinstance(v, str) and bool(v.strip()))
+
+
+class Int(Schema):
+    def __init__(self, minimum: int = -SAFE_MAXIMUM, maximum: int = SAFE_MAXIMUM):
+        self.minimum = minimum
+        self.maximum = maximum
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        if isinstance(value, bool) or not isinstance(value, int):
+            return [f"{path}: expected an integer, got {value!r}"]
+        if not self.minimum <= value <= self.maximum:
+            return [f"{path}: expected {self.minimum}..{self.maximum}, got {value}"]
+        return []
 
 
 class Enum(Schema):
@@ -34,6 +52,16 @@ class Enum(Schema):
         if value in self.values:
             return []
         return [f"{path}: must be one of {list(self.values)}, got {value!r}"]
+
+
+class Regex(Schema):
+    def __init__(self, pattern: str):
+        self.pattern = re.compile(pattern)
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        if isinstance(value, str) and self.pattern.fullmatch(value):
+            return []
+        return [f"{path}: expected a string matching {self.pattern.pattern}, got {value!r}"]
 
 
 class Maybe(Schema):
