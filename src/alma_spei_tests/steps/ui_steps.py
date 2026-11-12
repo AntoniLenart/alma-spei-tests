@@ -1,10 +1,11 @@
-"""Reusable steps for the Polish UI (shell and auth panel)."""
+"""Reusable steps for the Polish UI (shell, auth panel, donor screens)."""
 
 from playwright.sync_api import Page, expect
 
 from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.pages import (
     AppPage,
+    DonorListPage,
     LoginPage,
     ShellMessages,
 )
@@ -78,3 +79,25 @@ def log_out_via_nav(login: LoginPage) -> LoginPage:
     login.logout_button.click()
     expect(login.login_heading).to_be_visible()
     return login
+
+
+# --- donors -------------------------------------------------------------------
+@step("Open the donor list")
+def open_donor_list(page: Page) -> DonorListPage:
+    login = LoginPage(page).open()
+    login.donors_nav.click()
+    donors = DonorListPage(page)
+    expect(donors.heading).to_be_visible()
+    return donors
+
+
+@step("Search donors for '{text}'")
+def search_donors(donors: DonorListPage, text: str) -> DonorListPage:
+    donors.search(text)
+    return donors
+
+
+@step("Wait until the list shows {count} donor(s)")
+def wait_for_row_count(donors: DonorListPage, count: int) -> DonorListPage:
+    expect(donors.rows).to_have_count(count)
+    return donors

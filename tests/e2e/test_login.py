@@ -44,6 +44,22 @@ class TestLoginForm(BaseE2ETest):
 
 @allure.feature("Login UI")
 class TestFirstLogin(BaseE2ETest):
+    def test_first_login_forces_a_password_change_then_signs_in(
+        self, page: Page, staff: ProvisionedAccount
+    ):
+        # 1. Log in through the form with the temporary password
+        # 2. Verify the forced "Zmiana hasła" screen with its notice
+        # 3. Change the password through the form
+        # 4. Verification: signed in as the account, with the donor navigation available
+        login = ui_steps.open_login(page)
+        ui_steps.log_in_via_form(login, staff.username, staff.temporary_password)
+        expect(login.temporary_notice).to_be_visible()
+        ui_steps.change_password_via_form(login, staff.temporary_password, KNOWN_PASSWORD)
+        ui_steps.wait_until_signed_in(login, staff.display_name)
+        assert_that(login.donors_nav.is_visible()).described_as(
+            "a signed-in account should see the donor navigation"
+        ).is_true()
+
     def test_mismatched_confirmation_is_caught_in_the_form(
         self, page: Page, staff: ProvisionedAccount
     ):
