@@ -8,7 +8,10 @@ from alma_spei_tests.pages import (
     DonorCardPage,
     DonorListPage,
     DonorMessages,
+    ImportMessages,
+    ImportsPage,
     LoginPage,
+    ReviewPage,
     ShellMessages,
 )
 from alma_spei_tests.steps import step
@@ -125,3 +128,69 @@ def edit_and_save(card: DonorCardPage, field: str, value: str) -> DonorCardPage:
 def wait_until_saved(card: DonorCardPage) -> DonorCardPage:
     expect(card.saved_notice).to_have_text(DonorMessages.SAVED)
     return card
+
+
+# --- bank upload (task 36) ----------------------------------------------------
+@step("Open the bank upload screen")
+def open_imports(page: Page) -> ImportsPage:
+    imports = ImportsPage(page).open_from_nav()
+    expect(imports.heading).to_be_visible()
+    return imports
+
+
+@step("Choose '{filename}' in the upload form")
+def choose_import_file(
+    imports: ImportsPage, filename: str, content: bytes, separator: str | None = None
+) -> ImportsPage:
+    imports.choose_file(filename, content)
+    if separator is not None:
+        imports.choose_separator(separator)
+    return imports
+
+
+@step("Submit the file for analysis")
+def submit_upload(imports: ImportsPage) -> ImportsPage:
+    imports.upload_button.click()
+    return imports
+
+
+@step("Wait for the analysis status '{state_label}'")
+def wait_for_import_state(imports: ImportsPage, state_label: str) -> ImportsPage:
+    expect(imports.summary_value(ImportMessages.STATUS)).to_have_text(state_label)
+    return imports
+
+
+@step("Confirm and retry the analysis of '{filename}'")
+def retry_upload(imports: ImportsPage, filename: str, content: bytes) -> ImportsPage:
+    imports.choose_file(filename, content)
+    imports.retry_confirmation.check()
+    imports.retry_button.click()
+    return imports
+
+
+# --- import review (task 37) --------------------------------------------------
+@step("Open the import review queue")
+def open_review_queue(page: Page) -> ReviewPage:
+    review = ReviewPage(page).open_from_nav()
+    expect(review.heading).to_be_visible()
+    return review
+
+
+@step("Deep-link to the review of import {batch_id}")
+def open_review_batch(page: Page, batch_id: str, filename: str) -> ReviewPage:
+    review = ReviewPage(page).open_batch(batch_id)
+    expect(review.batch_heading).to_have_text(filename)
+    return review
+
+
+@step("Pick staged row {row} for comparison")
+def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
+    review.select_row(row)
+    return review
+
+
+@step("Search for '{text}' and compare with '{name}'")
+def compare_with_donor(review: ReviewPage, text: str, name: str, city: str) -> ReviewPage:
+    review.search_donor(text)
+    review.compare_button(name, city).click()
+    return review

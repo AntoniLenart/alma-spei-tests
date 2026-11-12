@@ -175,6 +175,43 @@ soft assertions, constants, type hints except `-> None`, no
 - `role="status"` appears several times on the root page; the shell's own one
   is `main > p[role="status"]`.
 
+- [x] Step 2 (`trello/35-bank-parser`): `ImportsClient` (multipart upload,
+  retry, staged-row report), `data/bank.py` (synthetic CSV + stdlib-only XLSX
+  builder mirroring the app's fixture), import contracts (`BATCH` incl.
+  `counts-valid?`), import `DbQueries`, `imports_steps`, `staged_upload`
+  fixture; API (upload/rejections/authz, row report, retry), contract and DB
+  staging tests. Verified offline only.
+
+### Findings while building step 2
+
+- The backend refuses byte-identical files (409 `duplicate-file`), so every
+  upload embeds the test `tag`; the blank-only "no rows" file encodes the tag in
+  whitespace (`blank_only_csv`). Staged imports cannot be deleted (no endpoint,
+  no DELETE grant) - no teardown, uniqueness keeps runs independent.
+- Upload error bodies may add `batch-id`/`batch`; use `assert_error_includes`.
+- **Likely app bug on Windows**: `http/imports.clj` creates the temp upload dir
+  with `PosixFilePermissions` file attributes, which a Windows JVM rejects
+  (`UnsupportedOperationException`) -> every upload would 500. If uploads fail
+  that way in step 5, report it to dev rather than weakening tests.
+
+- [x] Step 3 (`trello/36-import-upload`): `ImportsPage` page object (form,
+  summary, paged report, retry confirmation; exact-text matching for summary
+  labels and row refs), upload UI steps, and e2e tests for navigation, CSV
+  separator gating, client-side file-type refusal, CSV/XLSX report, invalid
+  rows with Polish reasons, paging past 25 rows, duplicate alert and the
+  confirmed retry flow. Verified offline only.
+
+- [x] Step 4 (`trello/37-review-queue`): review client methods (queue, batch,
+  comparison), `BATCH_RESPONSE`/`QUEUE_RESPONSE`/`COMPARISON_RESPONSE`
+  contracts, `ReviewPage` page object and review UI steps; API tests (queue
+  order/paging/validation/authz, batch reads, comparison incl. invalid and
+  archived rows, locator/query validation, 409 for non-review batches),
+  contract tests, a DB test that reviewing writes nothing, and e2e tests (queue
+  progress, open by entry / upload link / deep link, no preselected donor,
+  side-by-side comparison, invalid-row notice). Verified offline only.
+  Note: the review UI's row `<select>` starts with no matching value, so tests
+  pick row 2 (picking the displayed first option may not fire React's change).
+
 ## Next steps (in order)
 
 1. On tests-`main`: build the client layer + extend config/constants/data/db,

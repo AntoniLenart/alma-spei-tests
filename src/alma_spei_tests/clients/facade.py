@@ -17,6 +17,7 @@ from alma_spei_tests.clients.auth import AuthClient
 from alma_spei_tests.clients.base import ApiError, expect_status
 from alma_spei_tests.clients.donors import DonorsClient
 from alma_spei_tests.clients.health import HealthClient
+from alma_spei_tests.clients.imports import ImportsClient
 from alma_spei_tests.http import AuthSession
 
 
@@ -27,6 +28,7 @@ class AlmaSpeiApi:
         self.auth = AuthClient(session)
         self.accounts = AccountsClient(session)
         self.donors = DonorsClient(session)
+        self.imports = ImportsClient(session)
 
     @classmethod
     def connect(cls, base_url: str, *, timeout: float) -> "AlmaSpeiApi":
