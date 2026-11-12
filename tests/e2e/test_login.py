@@ -56,9 +56,7 @@ class TestFirstLogin(BaseE2ETest):
         expect(login.temporary_notice).to_be_visible()
         ui_steps.change_password_via_form(login, staff.temporary_password, KNOWN_PASSWORD)
         ui_steps.wait_until_signed_in(login, staff.display_name)
-        assert_that(login.donors_nav.is_visible()).described_as(
-            "a signed-in account should see the donor navigation"
-        ).is_true()
+        expect(login.donors_nav).to_be_visible()
 
     def test_mismatched_confirmation_is_caught_in_the_form(
         self, page: Page, staff: ProvisionedAccount
