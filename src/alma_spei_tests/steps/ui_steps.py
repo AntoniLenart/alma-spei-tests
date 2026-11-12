@@ -5,7 +5,9 @@ from playwright.sync_api import Page, expect
 from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.pages import (
     AppPage,
+    DonorCardPage,
     DonorListPage,
+    DonorMessages,
     LoginPage,
     ShellMessages,
 )
@@ -101,3 +103,25 @@ def search_donors(donors: DonorListPage, text: str) -> DonorListPage:
 def wait_for_row_count(donors: DonorListPage, count: int) -> DonorListPage:
     expect(donors.rows).to_have_count(count)
     return donors
+
+
+@step("Open the card of donor '{name}'")
+def open_donor_card(donors: DonorListPage, name: str) -> DonorCardPage:
+    donors.open_card(name)
+    card = DonorCardPage(donors.page)
+    expect(card.heading).to_have_text(name)
+    return card
+
+
+@step("Edit the donor's {field} to '{value}' and save")
+def edit_and_save(card: DonorCardPage, field: str, value: str) -> DonorCardPage:
+    card.start_editing()
+    card.set_field(field, value)
+    card.save()
+    return card
+
+
+@step("Wait for the save confirmation")
+def wait_until_saved(card: DonorCardPage) -> DonorCardPage:
+    expect(card.saved_notice).to_have_text(DonorMessages.SAVED)
+    return card
