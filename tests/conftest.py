@@ -7,6 +7,8 @@ cleanup always runs, independent of whether the test passed:
   afterwards (which also ends their sessions).
 * ``staff_api`` - a staff account signed in on its own session, password
   rotated, for scenarios that must not touch the shared admin session.
+* ``admin_id`` - the QA administrator's user id, a valid author for rows that
+  database probes insert (and always roll back).
 
 Logins are throttled per client address (30 per 15 minutes), so e2e tests that
 are not about logging in borrow an API session via ``signed_in_page`` instead of
@@ -26,8 +28,9 @@ from alma_spei_tests.data import (
     SyntheticAccount,
     new_account,
 )
+from alma_spei_tests.db import DbQueries
 from alma_spei_tests.pages import AppPage
-from alma_spei_tests.steps import auth_steps, ui_steps
+from alma_spei_tests.steps import auth_steps, db_steps, ui_steps
 
 
 # --- accounts -----------------------------------------------------------------
@@ -62,6 +65,12 @@ def staff_api(
         yield client
     finally:
         client.close()
+
+
+@pytest.fixture
+def admin_id(db: DbQueries, settings: Settings) -> str:
+    """The QA administrator's user id, read from the database."""
+    return db_steps.read_user(db, settings.admin_username)["id"]
 
 
 # --- browser ------------------------------------------------------------------

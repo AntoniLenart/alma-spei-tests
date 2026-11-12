@@ -3,7 +3,8 @@
 Connects as the least-privileged application role (``alma_spei_app``), matching
 what the backend uses. That role has SELECT on the foundation tables and no DDL
 rights, which is exactly what we want for read-only verification of migrations,
-constraints and seeded metadata.
+constraints and seeded metadata. Constraint probes write inside a transaction
+that is always rolled back (``constraint_violated_by``), so they leave nothing.
 
 The password is read from the app repo's ``.secrets/app-password`` at connect
 time and never logged. Named queries live in ``db/queries.py``.
@@ -15,6 +16,9 @@ from typing import Any
 import psycopg
 
 from alma_spei_tests.config import Settings
+
+#: One SQL statement with its parameters.
+Statement = tuple[str, Sequence[Any]]
 
 
 class DbClient:
@@ -62,3 +66,18 @@ class DbClient:
         """Run a statement that returns no rows (fixture-only writes)."""
         with self._require_conn().cursor() as cur:
             cur.execute(sql, params)
+
+    def constraint_violated_by(self, statements: Sequence[Statement]) -> str | None:
+        """Run the writes in one transaction that is always rolled back.
+
+        Returns the name of the constraint the database enforced (the SQLSTATE
+        when it names none), or None when it accepted every statement.
+        """
+        conn = self._require_conn()
+        try:
+            with conn.transaction(force_rollback=True), conn.cursor() as cur:
+                for sql, params in statements:
+                    cur.execute(sql, params)
+        except psycopg.errors.IntegrityError as exc:
+            return exc.diag.constraint_name or exc.sqlstate
+        return None

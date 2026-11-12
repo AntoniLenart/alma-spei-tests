@@ -137,6 +137,16 @@ class SecurityEvent(StrEnum):
     PASSWORD_RESET = "password-reset"
 
 
+class Privilege(StrEnum):
+    """PostgreSQL privileges checked on the app role (``has_table_privilege``)."""
+
+    SELECT = "SELECT"
+    INSERT = "INSERT"
+    UPDATE = "UPDATE"
+    DELETE = "DELETE"
+    TRUNCATE = "TRUNCATE"
+
+
 #: Non-GET request bodies are capped at 16 KiB by ``wrap-body-limit``.
 BODY_LIMIT_BYTES = 16384
 
