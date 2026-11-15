@@ -141,3 +141,8 @@ def read_staged_rows(db: DbQueries, batch_id: str) -> list[dict[str, Any]]:
 @step("Count rows in the canonical donor tables")
 def read_canonical_counts(db: DbQueries) -> dict[str, int]:
     return db.canonical_counts()
+
+
+@step("Snapshot import batch {batch_id} (version, progress, events, rows)")
+def snapshot_import_batch(db: DbQueries, batch_id: str) -> dict[str, int]:
+    return db.import_batch_snapshot(batch_id)

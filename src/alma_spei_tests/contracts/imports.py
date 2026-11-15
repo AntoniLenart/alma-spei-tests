@@ -5,6 +5,7 @@ Mirrors ``src/common/alma_spei/common/contracts/imports.cljc`` (task 35):
 ``row-payload``, ``staged-row``, ``rows-response`` and ``upload-response``.
 """
 
+from alma_spei_tests.contracts.donors import DONOR
 from alma_spei_tests.contracts.schema import (
     SAFE_MAXIMUM,
     STRING,
@@ -135,3 +136,11 @@ _PAGE_FIELDS = {
 }
 ROWS_RESPONSE = ClosedMap(_PAGE_FIELDS)
 UPLOAD_RESPONSE = ClosedMap({**_PAGE_FIELDS, "skipped-empty-rows": ROW_COUNT})
+
+
+# --- review (task 37; contracts/review.cljc) ---------------------------------
+BATCH_RESPONSE = ClosedMap({"batch": BATCH})
+QUEUE_RESPONSE = ClosedMap(
+    {"batches": Vector(BATCH), "total": ROW_COUNT, "limit": Int(1, 100), "offset": ROW_COUNT}
+)
+COMPARISON_RESPONSE = ClosedMap({"batch": BATCH, "row": STAGED_ROW, "donor": DONOR})

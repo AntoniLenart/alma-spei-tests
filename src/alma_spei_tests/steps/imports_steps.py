@@ -57,3 +57,34 @@ def read_rows_with(
     api: AlmaSpeiApi, batch_id: str, params: list[tuple[str, str]]
 ) -> httpx.Response:
     return api.imports.rows_with(batch_id, params)
+
+
+# --- review (task 37) ---------------------------------------------------------
+@step("Read the bank review queue {page}")
+def review_queue(api: AlmaSpeiApi, **page: int | str) -> httpx.Response:
+    return api.imports.review_queue(**page)
+
+
+@step("Read the bank review queue with raw query {params}")
+def review_queue_with(api: AlmaSpeiApi, params: list[tuple[str, str]]) -> httpx.Response:
+    return api.imports.review_queue_with(params)
+
+
+@step("Read import batch {batch_id}")
+def read_batch(
+    api: AlmaSpeiApi, batch_id: str, params: list[tuple[str, str]] | None = None
+) -> httpx.Response:
+    return api.imports.batch(batch_id, params)
+
+
+@step("Compare staged row {worksheet}/{row} of import {batch_id} with donor {donor_id}")
+def compare(
+    api: AlmaSpeiApi,
+    batch_id: str,
+    worksheet: int | str,
+    row: int | str,
+    donor_id: str | None = None,
+    *,
+    params: list[tuple[str, str]] | None = None,
+) -> httpx.Response:
+    return api.imports.comparison(batch_id, worksheet, row, donor_id, params=params)

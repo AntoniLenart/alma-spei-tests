@@ -294,6 +294,17 @@ class DbQueries:
             for table in CANONICAL_TABLES
         }
 
+    def import_batch_snapshot(self, batch_id: str) -> dict[str, int]:
+        """What a read-only review must not change: version, progress, events, rows."""
+        row = self.client.query(
+            "SELECT b.version, b.reviewed_rows,"
+            " (SELECT count(*) FROM import_batch_events e WHERE e.batch_id = b.id),"
+            " (SELECT count(*) FROM staged_rows r WHERE r.batch_id = b.id)"
+            " FROM import_batches b WHERE b.id = %s",
+            (batch_id,),
+        )[0]
+        return dict(zip(("version", "reviewed_rows", "events", "staged_rows"), row, strict=True))
+
 
 # --- probe statements ---------------------------------------------------------
 def _new_id() -> str:

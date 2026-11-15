@@ -11,6 +11,7 @@ from alma_spei_tests.pages import (
     ImportMessages,
     ImportsPage,
     LoginPage,
+    ReviewPage,
     ShellMessages,
 )
 from alma_spei_tests.steps import step
@@ -165,3 +166,31 @@ def retry_upload(imports: ImportsPage, filename: str, content: bytes) -> Imports
     imports.retry_confirmation.check()
     imports.retry_button.click()
     return imports
+
+
+# --- import review (task 37) --------------------------------------------------
+@step("Open the import review queue")
+def open_review_queue(page: Page) -> ReviewPage:
+    review = ReviewPage(page).open_from_nav()
+    expect(review.heading).to_be_visible()
+    return review
+
+
+@step("Deep-link to the review of import {batch_id}")
+def open_review_batch(page: Page, batch_id: str, filename: str) -> ReviewPage:
+    review = ReviewPage(page).open_batch(batch_id)
+    expect(review.batch_heading).to_have_text(filename)
+    return review
+
+
+@step("Pick staged row {row} for comparison")
+def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
+    review.select_row(row)
+    return review
+
+
+@step("Search for '{text}' and compare with '{name}'")
+def compare_with_donor(review: ReviewPage, text: str, name: str, city: str) -> ReviewPage:
+    review.search_donor(text)
+    review.compare_button(name, city).click()
+    return review
