@@ -1,5 +1,7 @@
 # Alma Spei — SQA test suite
 
+[![Checks](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/checks.yml/badge.svg)](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/checks.yml)
+
 Automated quality assurance for the [Alma Spei](https://github.com/zapjur/alma-spei)
 donor management system, built with **pytest** and **Playwright**. The suite
 covers four layers — API/HTTP, response contracts, direct database checks, and
@@ -76,6 +78,33 @@ repo), point the suite at it. An administrator with the `ALMA_QA_ADMIN_USERNAME`
 ALMA_NO_ORCHESTRATION=1 BASE_URL=http://127.0.0.1:3000 uv run pytest --group smoke
 ```
 
+The synthetic-data tests (`tests/db/test_synthetic_data.py`) run the app's
+`seed-demo` loader and skip without orchestration, so they never write demo
+rows into a database you started yourself.
+
+### Running on Windows
+
+The suite runs on Windows, but the app's dev setup needs a few workarounds
+there:
+
+- **JDK 25 for the Clojure CLI.** Set `JAVA_HOME` to it and put its `bin` first
+  on `PATH`, so an older `java` (e.g. a Java 8 install) is never picked up.
+- **`bb init` fails** (it sets POSIX permissions on `.secrets`). Create the four
+  files in the app repo's `.secrets/` yourself (`admin-password`,
+  `migration-password`, `app-password`, `auth-secret`; each a random base64url
+  value plus a newline), then run with `ALMA_BB_CMD=true` to skip the step.
+- **Postgres container exits with code 2.** With `core.autocrlf=true` the app's
+  `infra/postgres/*.sh` scripts are checked out with CRLF; convert them to LF.
+- **Ports.** Hyper-V may reserve the default test DB port (55432); check
+  `netsh interface ipv4 show excludedportrange protocol=tcp` and set
+  `ALMA_TEST_DB_PORT` (and `ALMA_TEST_HTTP_PORT`) to free ports.
+- **Backend left running.** Teardown stops the `clojure` launcher, but its
+  `java` child keeps the HTTP port; stop it before the next run, or use another
+  `ALMA_TEST_HTTP_PORT`.
+- **Uploads return HTTP 500** on the import branches: the app creates its
+  upload directory with POSIX permissions. This is an app bug, so the import
+  tests fail on Windows until it is fixed.
+
 ## Static checks
 
 These need no app, Docker or browsers, and CI runs them on every pull request
@@ -87,6 +116,19 @@ uv run ruff format --check .
 uv run mypy                          # config in pyproject.toml
 uv run pytest --collect-only -q      # every test imports and collects
 ```
+
+## Branches and pull requests
+
+- Every dev branch with testable work gets a test branch **of the same name**
+  (`trello/<id>-<slug>`, `project-foundation`, …), stacked the same way the dev
+  branches are. Test-only changes use a descriptive branch name instead.
+- Test branches are written against the dev branch's real code, never against
+  planned behaviour, and run with `ALMA_APP_REPO` pointing at a checkout of the
+  matching dev branch.
+- Open each pull request into `main` with the template in `.github/`. Merge it
+  with a merge commit (not squash) once its dev branch is merged to dev `main`,
+  stacked branches in order, and with CI green. Delete the branch after the
+  merge.
 
 ## Reports and artifacts
 
@@ -111,11 +153,12 @@ alma-spei-tests/
 ├── .claude/agents/             # test-author, triage, page-object, coverage
 ├── src/alma_spei_tests/        # support package (no tests here)
 │   ├── config.py               # env-derived Settings
-│   ├── orchestration/          # toolchain preflight + Stack (up/down/restart)
+│   ├── orchestration/          # toolchain preflight + Stack (up/down/restart/seed-demo)
 │   │                           #   + provision_admin.clj (non-interactive admin)
 │   ├── http/                   # AuthSession: cookie jar, Origin, CSRF headers
 │   ├── clients/                # Health/Auth/Accounts/Donors clients + AlmaSpeiApi facade
-│   ├── db/                     # psycopg client + DbQueries (named queries)
+│   ├── db/                     # psycopg client + DbQueries (named queries,
+│   │                           #   constraint probes that always roll back)
 │   ├── contracts/              # Python mirrors of the app's Malli contracts (mini schema DSL)
 │   ├── pages/                  # Playwright page objects (locators, no asserts)
 │   ├── steps/                  # @step-decorated reusable steps
@@ -123,10 +166,12 @@ alma-spei-tests/
 │   ├── testbase/               # OOP base test classes
 │   └── plugin/                 # execution-group loader
 └── tests/
-    ├── conftest.py             # donor/account resource fixtures, staff_api, signed_in_page
+    ├── conftest.py             # donor/account fixtures, staff_api, admin_id, signed_in_page
     ├── api/                    # health, errors, sessions/CSRF, passwords, accounts, donors
     ├── contract/               # health, auth and donor responses vs schema
-    ├── db/                     # migration, credential/session/audit, donor persistence
+    ├── db/                     # migration, credential/session/audit, donor persistence,
+    │                           #   donor + import schema constraints and grants,
+    │                           #   synthetic demo data (seed-demo)
     └── e2e/                    # shell, login, donor list + card, backend-restart (disruptive)
 ```
 
