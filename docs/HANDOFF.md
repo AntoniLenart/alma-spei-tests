@@ -175,6 +175,25 @@ soft assertions, constants, type hints except `-> None`, no
 - `role="status"` appears several times on the root page; the shell's own one
   is `main > p[role="status"]`.
 
+- [x] Step 2 (`trello/35-bank-parser`): `ImportsClient` (multipart upload,
+  retry, staged-row report), `data/bank.py` (synthetic CSV + stdlib-only XLSX
+  builder mirroring the app's fixture), import contracts (`BATCH` incl.
+  `counts-valid?`), import `DbQueries`, `imports_steps`, `staged_upload`
+  fixture; API (upload/rejections/authz, row report, retry), contract and DB
+  staging tests. Verified offline only.
+
+### Findings while building step 2
+
+- The backend refuses byte-identical files (409 `duplicate-file`), so every
+  upload embeds the test `tag`; the blank-only "no rows" file encodes the tag in
+  whitespace (`blank_only_csv`). Staged imports cannot be deleted (no endpoint,
+  no DELETE grant) - no teardown, uniqueness keeps runs independent.
+- Upload error bodies may add `batch-id`/`batch`; use `assert_error_includes`.
+- **Likely app bug on Windows**: `http/imports.clj` creates the temp upload dir
+  with `PosixFilePermissions` file attributes, which a Windows JVM rejects
+  (`UnsupportedOperationException`) -> every upload would 500. If uploads fail
+  that way in step 5, report it to dev rather than weakening tests.
+
 ## Next steps (in order)
 
 1. On tests-`main`: build the client layer + extend config/constants/data/db,

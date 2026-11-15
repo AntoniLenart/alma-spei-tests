@@ -44,6 +44,9 @@ PROBE_BATCH: dict[str, object] = {
     "failure_code": None,
 }
 
+#: Canonical tables a staged (unapproved) import must leave untouched.
+CANONICAL_TABLES = ("donors", "donations", "donor_audit_events", "donor_audit_changes")
+
 
 class DbQueries:
     def __init__(self, client: DbClient):
@@ -248,6 +251,48 @@ class DbQueries:
             (prefix,),
         )
         return [row[0] for row in rows]
+
+    # --- imports (task 35) ----------------------------------------------------
+    def import_file(self, sha256: str) -> dict[str, Any] | None:
+        rows = self.client.query(
+            "SELECT id::text, byte_count FROM import_files WHERE file_hash_sha256 = %s", (sha256,)
+        )
+        return dict(zip(("id", "byte_count"), rows[0], strict=True)) if rows else None
+
+    def import_attempts(self, sha256: str) -> int:
+        """Batches (attempts) recorded for the file with this content hash."""
+        return self.client.scalar(
+            "SELECT count(*) FROM import_batches b JOIN import_files f ON f.id = b.file_id"
+            " WHERE f.file_hash_sha256 = %s",
+            (sha256,),
+        )
+
+    def import_batch_events(self, batch_id: str) -> list[tuple[str, str | None]]:
+        """``(event_type, reason_code)`` of the batch, oldest first."""
+        rows = self.client.query(
+            "SELECT event_type, reason_code FROM import_batch_events WHERE batch_id = %s"
+            " ORDER BY occurred_at, batch_version, id",
+            (batch_id,),
+        )
+        return [(row[0], row[1]) for row in rows]
+
+    def staged_rows(self, batch_id: str) -> list[dict[str, Any]]:
+        """Staged rows of the batch in sheet order."""
+        rows = self.client.query(
+            "SELECT row_number, validation_state, validation_codes, rule_version,"
+            " normalized_payload FROM staged_rows WHERE batch_id = %s"
+            " ORDER BY worksheet_index, row_number",
+            (batch_id,),
+        )
+        keys = ("row_number", "validation_state", "validation_codes", "rule_version", "payload")
+        return [dict(zip(keys, row, strict=True)) for row in rows]
+
+    def canonical_counts(self) -> dict[str, int]:
+        """Row counts of the canonical donor tables imports must not touch yet."""
+        return {
+            table: self.client.scalar(f"SELECT count(*) FROM {table}")  # fixed names only
+            for table in CANONICAL_TABLES
+        }
 
 
 # --- probe statements ---------------------------------------------------------

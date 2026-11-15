@@ -116,3 +116,28 @@ def read_donations_of_donors_named(db: DbQueries, prefix: str) -> list[dict[str,
 @step("Read the audit actions of the donors named '{prefix}…'")
 def read_audit_actions_of_donors_named(db: DbQueries, prefix: str) -> list[str]:
     return db.audit_actions_of_donors_named(prefix)
+
+
+@step("Read the import file with hash {sha256}")
+def read_import_file(db: DbQueries, sha256: str) -> dict[str, Any] | None:
+    return db.import_file(sha256)
+
+
+@step("Count import attempts of the file with hash {sha256}")
+def count_import_attempts(db: DbQueries, sha256: str) -> int:
+    return db.import_attempts(sha256)
+
+
+@step("Read the events of import batch {batch_id}")
+def read_import_events(db: DbQueries, batch_id: str) -> list[tuple[str, str | None]]:
+    return db.import_batch_events(batch_id)
+
+
+@step("Read the staged rows of import batch {batch_id}")
+def read_staged_rows(db: DbQueries, batch_id: str) -> list[dict[str, Any]]:
+    return db.staged_rows(batch_id)
+
+
+@step("Count rows in the canonical donor tables")
+def read_canonical_counts(db: DbQueries) -> dict[str, int]:
+    return db.canonical_counts()

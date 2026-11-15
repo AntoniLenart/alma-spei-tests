@@ -6,6 +6,7 @@ from alma_spei_tests.clients.base import ApiError, BaseClient, expect_status
 from alma_spei_tests.clients.donors import DonorsClient
 from alma_spei_tests.clients.facade import AlmaSpeiApi
 from alma_spei_tests.clients.health import HealthClient
+from alma_spei_tests.clients.imports import ImportsClient
 
 __all__ = [
     "AccountsClient",
@@ -15,5 +16,6 @@ __all__ = [
     "BaseClient",
     "DonorsClient",
     "HealthClient",
+    "ImportsClient",
     "expect_status",
 ]

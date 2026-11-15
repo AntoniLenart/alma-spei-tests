@@ -85,6 +85,31 @@ class Vector(Schema):
         return problems
 
 
+class AllOf(Schema):
+    """Every schema must hold (Malli ``[:and ...]``)."""
+
+    def __init__(self, *schemas: Schema):
+        self.schemas = schemas
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        problems: list[str] = []
+        for schema in self.schemas:
+            problems.extend(schema.explain(value, path))
+        return problems
+
+
+class Const(Schema):
+    """Exactly one value (Malli ``:nil`` / ``[:= x]``)."""
+
+    def __init__(self, expected: object):
+        self.expected = expected
+
+    def explain(self, value: object, path: str = "$") -> list[str]:
+        return (
+            [] if value == self.expected else [f"{path}: expected {self.expected!r}, got {value!r}"]
+        )
+
+
 class ClosedMap(Schema):
     """A JSON object with exactly the declared keys (``optional`` may be absent)."""
 

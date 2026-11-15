@@ -53,6 +53,8 @@ class ApiPath(StrEnum):
     AUTH_PASSWORD = "/api/auth/password"
     ACCOUNTS = "/api/accounts"
     DONORS = "/api/donors"
+    IMPORTS = "/api/imports"
+    IMPORT_UPLOAD = "/api/imports/upload"
     UNKNOWN = "/api/does-not-exist"
 
 
@@ -85,6 +87,16 @@ class ErrorCode(StrEnum):
     STALE_DONOR = "stale-donor"
     MALFORMED_BODY = "malformed-body"
     BODY_TOO_LARGE = "body-too-large"
+    # imports (the rejection codes double as batch failure codes)
+    INVALID_STRUCTURE = "invalid-structure"
+    UNSUPPORTED_FORMAT = "unsupported-format"
+    PARSE_FAILED = "parse-failed"
+    RESOURCE_LIMIT = "resource-limit"
+    DUPLICATE_FILE = "duplicate-file"
+    RETRY_FILE_MISMATCH = "retry-file-mismatch"
+    INELIGIBLE_RETRY = "ineligible-retry"
+    STALE_IMPORT = "stale-import"
+    EMPTY_FILE = "empty-file"
 
 
 class ApiErrorPayload:
@@ -142,6 +154,37 @@ class ApiErrorPayload:
     }
 
 
+class ImportErrorPayload:
+    """``{code, message}`` of import rejections (bodies may add batch-id/batch)."""
+
+    _BAD_FILE = "Nieprawidłowy format pliku importu."
+    INVALID_STRUCTURE = {"code": ErrorCode.INVALID_STRUCTURE, "message": _BAD_FILE}
+    UNSUPPORTED_FORMAT = {"code": ErrorCode.UNSUPPORTED_FORMAT, "message": _BAD_FILE}
+    RESOURCE_LIMIT = {
+        "code": ErrorCode.RESOURCE_LIMIT,
+        "message": "Plik przekracza limit importu.",
+    }
+    DUPLICATE_FILE = {
+        "code": ErrorCode.DUPLICATE_FILE,
+        "message": "Ten plik został już przesłany. Otwórz historię importów.",
+    }
+    RETRY_FILE_MISMATCH = {
+        "code": ErrorCode.RETRY_FILE_MISMATCH,
+        "message": "Ponowienie wymaga tego samego pliku źródłowego.",
+    }
+    INELIGIBLE_RETRY = {
+        "code": ErrorCode.INELIGIBLE_RETRY,
+        "message": "Można ponowić tylko ostatni nieudany import tego pliku.",
+    }
+    STALE_IMPORT = {
+        "code": ErrorCode.STALE_IMPORT,
+        "message": "Dane importu zostały zmienione. Odśwież widok.",
+    }
+    EMPTY_FILE = {"code": ErrorCode.EMPTY_FILE, "message": "Plik jest pusty."}
+    NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono importu."}
+    VALIDATION = {"code": ErrorCode.VALIDATION, "message": "Sprawdź dane importu."}
+
+
 class FieldErrorCode(StrEnum):
     """Per-field ``errors[].code`` values of a donor validation response."""
 
@@ -186,6 +229,70 @@ class DonorSortField(StrEnum):
 class SortDirection(StrEnum):
     ASC = "asc"
     DESC = "desc"
+
+
+class ImportSource(StrEnum):
+    """Upload ``source`` values; only ``bank`` is implemented (task 35)."""
+
+    BANK = "bank"
+    TAX = "tax"
+
+
+class CsvSeparator(StrEnum):
+    SEMICOLON = ";"
+    COMMA = ","
+
+
+class ImportState(StrEnum):
+    """``import_batches.state`` values reached so far."""
+
+    RESERVED = "reserved"
+    REVIEW = "review"
+    FAILED = "failed"
+
+
+class ImportEvent(StrEnum):
+    """``import_batch_events.event_type`` values reached so far."""
+
+    RESERVED = "reserved"
+    STAGED = "staged"
+    FAILED = "failed"
+    RETRY_REQUESTED = "retry-requested"
+
+
+class RowState(StrEnum):
+    VALID = "valid"
+    INVALID = "invalid"
+
+
+class RowErrorCode(StrEnum):
+    """Staged-row validation codes of the bank parser."""
+
+    INVALID_DATE = "invalid-date"
+    MISSING_SENDER = "missing-sender"
+    INVALID_AMOUNT = "invalid-amount"
+
+
+#: Polish message per staged-row validation code (contracts/imports.cljc ``row-messages``).
+ROW_ERROR_MESSAGES: dict[str, str] = {
+    RowErrorCode.INVALID_DATE: "Nieprawidłowa data transakcji.",
+    RowErrorCode.MISSING_SENDER: "Brakuje danych nadawcy.",
+    RowErrorCode.INVALID_AMOUNT: "Nieprawidłowa kwota transakcji.",
+}
+
+#: Parser/mapping versions recorded on staged bank batches.
+BANK_PARSE_VERSION = "bank-parser-v1"
+BANK_MAPPING_VERSION = "bank-four-columns-v1"
+
+#: Upload limits (imports/limits.clj): file 5 MiB, whole request 6 MiB.
+IMPORT_FILE_LIMIT_BYTES = 5 * 1024 * 1024
+
+#: Staged-row pages default to 25 rows, at most 100.
+IMPORT_PAGE_DEFAULT_LIMIT = 25
+IMPORT_PAGE_MAX_LIMIT = 100
+
+#: A freshly staged batch has gone reserved (1) -> review (2).
+STAGED_BATCH_VERSION = 2
 
 
 class AuditAction(StrEnum):

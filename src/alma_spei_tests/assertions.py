@@ -52,6 +52,20 @@ def assert_error(response: httpx.Response, expected: HTTPStatus, payload: Mappin
         ).is_equal_to(dict(payload))
 
 
+def assert_error_includes(
+    response: httpx.Response, expected: HTTPStatus, payload: Mapping[str, str]
+):
+    """Like ``assert_error``, but the body may carry more keys (e.g. batch-id)."""
+    body = response.json()
+    with soft_assertions():
+        assert_that(response.status_code).described_as(
+            f"error response should have HTTP {expected.value} {expected.phrase}"
+        ).is_equal_to(expected)
+        assert_that({key: body.get(key) for key in payload}).described_as(
+            f"error body should carry the {payload['code']} code and message"
+        ).is_equal_to(dict(payload))
+
+
 def assert_not_found(response: httpx.Response):
     """An unknown API route returned the Polish JSON 404 payload."""
     with soft_assertions():
