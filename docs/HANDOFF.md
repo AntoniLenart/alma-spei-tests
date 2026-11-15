@@ -194,6 +194,13 @@ soft assertions, constants, type hints except `-> None`, no
   (`UnsupportedOperationException`) -> every upload would 500. If uploads fail
   that way in step 5, report it to dev rather than weakening tests.
 
+- [x] Step 3 (`trello/36-import-upload`): `ImportsPage` page object (form,
+  summary, paged report, retry confirmation; exact-text matching for summary
+  labels and row refs), upload UI steps, and e2e tests for navigation, CSV
+  separator gating, client-side file-type refusal, CSV/XLSX report, invalid
+  rows with Polish reasons, paging past 25 rows, duplicate alert and the
+  confirmed retry flow. Verified offline only.
+
 ## Next steps (in order)
 
 1. On tests-`main`: build the client layer + extend config/constants/data/db,

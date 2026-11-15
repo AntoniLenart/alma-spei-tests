@@ -8,6 +8,8 @@ from alma_spei_tests.pages import (
     DonorCardPage,
     DonorListPage,
     DonorMessages,
+    ImportMessages,
+    ImportsPage,
     LoginPage,
     ShellMessages,
 )
@@ -125,3 +127,41 @@ def edit_and_save(card: DonorCardPage, field: str, value: str) -> DonorCardPage:
 def wait_until_saved(card: DonorCardPage) -> DonorCardPage:
     expect(card.saved_notice).to_have_text(DonorMessages.SAVED)
     return card
+
+
+# --- bank upload (task 36) ----------------------------------------------------
+@step("Open the bank upload screen")
+def open_imports(page: Page) -> ImportsPage:
+    imports = ImportsPage(page).open_from_nav()
+    expect(imports.heading).to_be_visible()
+    return imports
+
+
+@step("Choose '{filename}' in the upload form")
+def choose_import_file(
+    imports: ImportsPage, filename: str, content: bytes, separator: str | None = None
+) -> ImportsPage:
+    imports.choose_file(filename, content)
+    if separator is not None:
+        imports.choose_separator(separator)
+    return imports
+
+
+@step("Submit the file for analysis")
+def submit_upload(imports: ImportsPage) -> ImportsPage:
+    imports.upload_button.click()
+    return imports
+
+
+@step("Wait for the analysis status '{state_label}'")
+def wait_for_import_state(imports: ImportsPage, state_label: str) -> ImportsPage:
+    expect(imports.summary_value(ImportMessages.STATUS)).to_have_text(state_label)
+    return imports
+
+
+@step("Confirm and retry the analysis of '{filename}'")
+def retry_upload(imports: ImportsPage, filename: str, content: bytes) -> ImportsPage:
+    imports.choose_file(filename, content)
+    imports.retry_confirmation.check()
+    imports.retry_button.click()
+    return imports

@@ -33,9 +33,13 @@ class BankRow:
     description: str
     amount: str
 
+    @property
+    def date_text(self) -> str:
+        """The date cell as written to the file (ISO for ``date`` values)."""
+        return self.date.isoformat() if isinstance(self.date, dt.date) else self.date
+
     def cells(self) -> list[str]:
-        date = self.date.isoformat() if isinstance(self.date, dt.date) else self.date
-        return [date, self.sender, self.description, self.amount]
+        return [self.date_text, self.sender, self.description, self.amount]
 
 
 @dataclass(frozen=True)
