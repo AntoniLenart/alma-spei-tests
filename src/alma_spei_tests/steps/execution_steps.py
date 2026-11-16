@@ -139,6 +139,11 @@ def read_undo_eligibility(api: AlmaSpeiApi, batch_id: str, **page: int | str) ->
     return api.imports.undo_eligibility(batch_id, **page)
 
 
+@step("Read the import capabilities")
+def read_capabilities(api: AlmaSpeiApi) -> httpx.Response:
+    return api.imports.capabilities()
+
+
 @step("Read the import history {page}")
 def read_history(api: AlmaSpeiApi, **page: int | str) -> httpx.Response:
     return api.imports.history(**page)

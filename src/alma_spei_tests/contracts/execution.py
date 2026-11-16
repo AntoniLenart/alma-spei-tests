@@ -1,8 +1,10 @@
-"""Import execution contracts (task 39): backup receipts, commit and undo outcomes.
+"""Import execution contracts (tasks 39-40): backup receipts, commit and undo outcomes.
 
 Mirrors ``src/common/alma_spei/common/contracts/execution.cljc``: ``backup``,
 ``commit-receipt``, ``undo-receipt``, ``outcome``, ``history``, the undo
 ``eligibility`` with its ``conflict`` codes, and the applied ``items-response``.
+Task 40 adds ``capabilities``, the history's ``uploaders`` and the outcome's
+``uploaded-by-name`` (current display labels, never usernames).
 """
 
 from alma_spei_tests.contracts.decisions import JSON_OBJECT, SHA256, SUMMARY
@@ -54,8 +56,17 @@ UNDO_RECEIPT = ClosedMap(
         "archived-donors": ROW_COUNT,
     }
 )
-OUTCOME = ClosedMap({"batch": BATCH, "commit": Maybe(COMMIT_RECEIPT), "undo": Maybe(UNDO_RECEIPT)})
-IMPORT_HISTORY = ClosedMap({"batches": Vector(BATCH), **_PAGE})
+OUTCOME = ClosedMap(
+    {
+        "uploaded-by-name": STRING,
+        "batch": BATCH,
+        "commit": Maybe(COMMIT_RECEIPT),
+        "undo": Maybe(UNDO_RECEIPT),
+    }
+)
+UPLOADER = ClosedMap({"id": IDENTIFIER, "display-name": STRING})
+IMPORT_HISTORY = ClosedMap({"uploaders": Vector(UPLOADER), "batches": Vector(BATCH), **_PAGE})
+CAPABILITIES = ClosedMap({"commit-enabled": BOOLEAN, "mode": Enum("disabled", "synthetic-test-v1")})
 CONFLICT = ClosedMap(
     {
         "code": Enum(

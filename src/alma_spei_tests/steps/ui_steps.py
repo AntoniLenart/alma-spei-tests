@@ -9,6 +9,8 @@ from alma_spei_tests.pages import (
     DonorCardPage,
     DonorListPage,
     DonorMessages,
+    ExecutionMessages,
+    ExecutionPage,
     ImportMessages,
     ImportsPage,
     LoginPage,
@@ -268,3 +270,50 @@ def prepare_preview_via_form(review: ReviewPage) -> ReviewPage:
     expect(review.idle_editor).to_be_visible()
     review.preview_button(ReviewMessages.PREPARE_PREVIEW).click()
     return review
+
+
+# --- confirmation, history and undo (task 40) ---------------------------------
+@step("Open the import history from the navigation")
+def open_history(page: Page) -> ExecutionPage:
+    execution = ExecutionPage(page).open_history_from_nav()
+    expect(execution.heading(ExecutionMessages.HISTORY_HEADING)).to_be_visible()
+    return execution
+
+
+@step("Open the confirmation of preview {preview_id} of import {batch_id}")
+def open_confirmation(page: Page, batch_id: str, preview_id: str) -> ExecutionPage:
+    execution = ExecutionPage(page).open_confirmation(batch_id, preview_id)
+    expect(execution.heading(ExecutionMessages.CONFIRM_HEADING)).to_be_visible()
+    expect(execution.text(ExecutionMessages.SYNTHETIC_MODE)).to_be_visible()
+    return execution
+
+
+@step("Request the test backup receipt, consent and commit")
+def commit_via_confirmation(execution: ExecutionPage) -> ExecutionPage:
+    execution.button(ExecutionMessages.REQUEST_BACKUP).click()
+    expect(execution.backup_status).to_be_visible()
+    tick(execution.consent_checkbox)
+    execution.button(ExecutionMessages.COMMIT).click()
+    expect(execution.heading(ExecutionMessages.OUTCOME_HEADING)).to_be_visible()
+    return execution
+
+
+@step("Open the outcome of import {batch_id}")
+def open_outcome(page: Page, batch_id: str) -> ExecutionPage:
+    execution = ExecutionPage(page).open_outcome(batch_id)
+    expect(execution.heading(ExecutionMessages.OUTCOME_HEADING)).to_be_visible()
+    return execution
+
+
+@step("Open the undo dialog")
+def open_undo_dialog(execution: ExecutionPage) -> ExecutionPage:
+    undo = execution.button(ExecutionMessages.UNDO)
+    expect(undo).to_be_enabled()
+    undo.click()
+    expect(execution.undo_dialog).to_be_visible()
+    return execution
+
+
+def imports_page(page: Page) -> ImportsPage:
+    """The upload form shown inside another screen (e.g. the re-import context)."""
+    return ImportsPage(page)

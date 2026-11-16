@@ -26,6 +26,7 @@ from alma_spei_tests.contracts.donors import (
 from alma_spei_tests.contracts.execution import (
     APPLIED_ITEMS_RESPONSE,
     BACKUP_RESPONSE,
+    CAPABILITIES,
     ELIGIBILITY,
     IMPORT_HISTORY,
     OUTCOME,
@@ -44,6 +45,7 @@ from alma_spei_tests.contracts.schema import Schema
 __all__ = [
     "APPLIED_ITEMS_RESPONSE",
     "BACKUP_RESPONSE",
+    "CAPABILITIES",
     "ELIGIBILITY",
     "IMPORT_HISTORY",
     "OUTCOME",

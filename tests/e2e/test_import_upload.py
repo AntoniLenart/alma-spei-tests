@@ -195,13 +195,14 @@ class TestUploadFailures(BaseE2ETest):
     ):
         # 1. Stage a statement through the API (fixture)
         # 2. Upload the same bytes through the screen under another name
-        # 3. Verification: the Polish duplicate alert
+        # 3. Verification: the Polish duplicate alert, with a way to the import history
         imports = ui_steps.open_imports(signed_in_page)
         ui_steps.choose_import_file(
             imports, f"{tag}-copy.csv", bank_statement.to_csv(), CsvSeparator.SEMICOLON
         )
         ui_steps.submit_upload(imports)
-        expect(imports.alert).to_have_text(ImportMessages.DUPLICATE)
+        expect(imports.alert_message).to_have_text(ImportMessages.DUPLICATE)
+        expect(imports.history_link).to_be_visible()
 
     def test_failed_analysis_offers_a_confirmed_retry(self, signed_in_page: Page, tag: str):
         # 1. Upload a CSV without rows
