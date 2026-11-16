@@ -1,6 +1,7 @@
 """Import endpoints: bank file upload and the staged-row report (task 35), the
-review queue and comparison (task 37), and review decisions, donor proposals and
-import previews (task 38)."""
+review queue and comparison (task 37), review decisions, donor proposals and
+import previews (task 38), and backup receipts, commit, undo and the outcome
+reads (task 39)."""
 
 from collections.abc import Mapping, Sequence
 
@@ -164,3 +165,34 @@ class ImportsClient(BaseClient):
     def preview_items(self, batch_id: str, preview_id: str, **page: int | str) -> httpx.Response:
         path = f"{self.batch_path(batch_id)}/previews/{preview_id}/items"
         return self._session.get(path, params=page)
+
+    # --- commit and undo (task 39) ----------------------------------------------
+    def backup(
+        self, batch_id: str, preview_id: str, payload: Mapping[str, object]
+    ) -> httpx.Response:
+        """Ask the configured backup provider for a receipt bound to this preview."""
+        path = f"{self.batch_path(batch_id)}/previews/{preview_id}/backup"
+        return self._session.post(path, json=payload)
+
+    def commit(
+        self, payload: Mapping[str, object], *, headers: HeaderOverrides | None = None
+    ) -> httpx.Response:
+        return self._session.post(ApiPath.IMPORT_COMMIT, json=payload, headers=headers)
+
+    def undo_last(self, payload: Mapping[str, object]) -> httpx.Response:
+        return self._session.post(ApiPath.IMPORT_UNDO_LAST, json=payload)
+
+    def history(self, **page: int | str) -> httpx.Response:
+        """Every import attempt, newest upload first (``limit``/``offset``)."""
+        return self._session.get(ApiPath.IMPORTS, params=page)
+
+    def outcome(self, batch_id: str) -> httpx.Response:
+        """The batch with its commit and undo receipts (when they exist)."""
+        return self._session.get(f"{self.batch_path(batch_id)}/outcome")
+
+    def commit_items(self, batch_id: str, **page: int | str) -> httpx.Response:
+        """The applied effects of a committed batch, with their reversal state."""
+        return self._session.get(f"{self.batch_path(batch_id)}/commit-items", params=page)
+
+    def undo_eligibility(self, batch_id: str, **page: int | str) -> httpx.Response:
+        return self._session.get(f"{self.batch_path(batch_id)}/undo-eligibility", params=page)

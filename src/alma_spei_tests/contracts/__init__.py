@@ -23,6 +23,13 @@ from alma_spei_tests.contracts.donors import (
     DONORS_RESPONSE,
     HISTORY_RESPONSE,
 )
+from alma_spei_tests.contracts.execution import (
+    APPLIED_ITEMS_RESPONSE,
+    BACKUP_RESPONSE,
+    ELIGIBILITY,
+    IMPORT_HISTORY,
+    OUTCOME,
+)
 from alma_spei_tests.contracts.health import HEALTH_RESPONSE
 from alma_spei_tests.contracts.imports import (
     BATCH,
@@ -35,6 +42,11 @@ from alma_spei_tests.contracts.imports import (
 from alma_spei_tests.contracts.schema import Schema
 
 __all__ = [
+    "APPLIED_ITEMS_RESPONSE",
+    "BACKUP_RESPONSE",
+    "ELIGIBILITY",
+    "IMPORT_HISTORY",
+    "OUTCOME",
     "ACCOUNTS_RESPONSE",
     "ACCOUNT_RESPONSE",
     "BATCH",

@@ -166,3 +166,23 @@ def count_previews(db: DbQueries, batch_id: str) -> int:
 @step("Read the stored profile of donor proposal {proposal_id}")
 def read_proposal_profile(db: DbQueries, proposal_id: str) -> dict[str, Any]:
     return _existing(db.proposal_profile(proposal_id), f"proposal {proposal_id}")
+
+
+@step("Read which import created donor {donor_id}")
+def read_donor_import_batch(db: DbQueries, donor_id: str) -> str | None:
+    return db.donor_import_batch(donor_id)
+
+
+@step("Count the records attributed to import batch {batch_id}")
+def read_import_attribution(db: DbQueries, batch_id: str) -> dict[str, int]:
+    return db.import_attribution(batch_id)
+
+
+@step("Count the active donors and payments")
+def read_active_catalog_counts(db: DbQueries) -> dict[str, int]:
+    return db.active_catalog_counts()
+
+
+@step("Read the canonical catalogue revision")
+def read_catalog_revision(db: DbQueries) -> int:
+    return db.catalog_revision()

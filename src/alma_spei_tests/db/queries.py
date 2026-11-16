@@ -337,6 +337,36 @@ class DbQueries:
             "SELECT profile FROM import_donor_proposals WHERE id = %s", (proposal_id,)
         )
 
+    # --- commit and undo (task 39) ----------------------------------------------
+    def donor_import_batch(self, donor_id: str) -> str | None:
+        """The batch that created the donor (None for manual and demo donors)."""
+        return self.client.scalar(
+            "SELECT import_batch_id::text FROM donors WHERE id = %s", (donor_id,)
+        )
+
+    def import_attribution(self, batch_id: str) -> dict[str, int]:
+        """Rows attributed to the batch: created donors, original donations, reversals."""
+        row = self.client.query(
+            "SELECT (SELECT count(*) FROM donors WHERE import_batch_id = %s),"
+            " (SELECT count(*) FROM donations WHERE import_batch_id = %s),"
+            " (SELECT count(*) FROM active_donations WHERE import_batch_id = %s),"
+            " (SELECT count(*) FROM donation_reversals WHERE import_batch_id = %s)",
+            (batch_id, batch_id, batch_id, batch_id),
+        )[0]
+        keys = ("donors", "donations", "active_donations", "reversals")
+        return dict(zip(keys, row, strict=True))
+
+    def active_catalog_counts(self) -> dict[str, int]:
+        """What normal reads see: active donors and payments (reversals excluded)."""
+        row = self.client.query(
+            "SELECT (SELECT count(*) FROM donors WHERE is_active),"
+            " (SELECT count(*) FROM active_donations)"
+        )[0]
+        return dict(zip(("donors", "donations"), row, strict=True))
+
+    def catalog_revision(self) -> int:
+        return self.client.scalar("SELECT revision FROM canonical_catalog_state WHERE singleton")
+
 
 # --- probe statements ---------------------------------------------------------
 def _new_id() -> str:

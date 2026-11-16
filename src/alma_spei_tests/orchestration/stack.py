@@ -13,7 +13,9 @@ Lifecycle (``up``):
   5. provision the QA administrator (``provision_admin.clj``) and keep its
      one-time temporary password in memory - the ``api`` fixture rotates it;
   6. ``clojure -M:ui ... release app`` to compile the frontend assets;
-  7. start the backend (``clojure -M:run``) serving API + assets on loopback;
+  7. start the backend (``clojure -M:run``) serving API + assets on loopback,
+     in the app's synthetic import mode unless ``ALMA_TEST_SYNTHETIC_IMPORTS=0``
+     (imports can only be committed with its labelled test backup receipts);
   8. poll ``/api/health/ready`` until it reports 200.
 
 Teardown (``down``) stops the backend process and removes the DB volume.
@@ -85,6 +87,7 @@ class Stack:
         env["ALMA_DB_PASSWORD_FILE"] = str(self.settings.app_password_file)
         # Isolate from a dev stack sharing the app repo's compose file.
         env["COMPOSE_PROJECT_NAME"] = self.settings.compose_project
+        env["ALMA_SYNTHETIC_IMPORTS"] = "true" if self.settings.synthetic_imports else "false"
         return env
 
     def _migration_env(self) -> dict[str, str]:
