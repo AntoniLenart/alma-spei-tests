@@ -12,9 +12,10 @@ cleanup always runs, independent of whether the test passed:
   rotated, for scenarios that must not touch the shared admin session.
 * ``admin_id`` - the QA administrator's user id, a valid author for rows that
   database probes insert (and always roll back).
-* ``staged_upload`` / ``decided_upload`` - a staged bank batch, and the same
-  batch with both rows decided (no teardown: imports have no delete endpoint
-  and review decisions write nothing canonical).
+* ``staged_upload`` / ``decided_upload`` / ``committed_import`` - a staged bank
+  batch, the same batch with both rows decided, and then committed (no
+  teardown: imports have no delete endpoint, review decisions write nothing
+  canonical, and a commit is permanent, undoable-once history).
 
 Logins are throttled per client address (30 per 15 minutes), so e2e tests that
 are not about logging in borrow an API session via ``signed_in_page`` instead of
@@ -48,10 +49,12 @@ from alma_spei_tests.steps import (
     auth_steps,
     db_steps,
     donors_steps,
+    execution_steps,
     imports_steps,
     review_steps,
     ui_steps,
 )
+from alma_spei_tests.steps.execution_steps import CommittedImport
 
 
 # --- data ---------------------------------------------------------------------
@@ -119,6 +122,18 @@ def decided_upload(api: AlmaSpeiApi, staged_batch_id: str, donor: dict[str, Any]
     """
     decision = existing_donor(donor)
     return review_steps.decide_rows(api, staged_batch_id, [decision, decision])
+
+
+# --- commit and undo (task 39) ----------------------------------------------------
+@pytest.fixture
+def committed_import(api: AlmaSpeiApi, decided_upload: dict[str, Any]) -> CommittedImport:
+    """``decided_upload`` previewed, backed up (synthetic receipt) and committed.
+
+    No teardown: a commit is permanent history, and undo is itself under test
+    (only the latest commit can be undone). ``donor`` is archived afterwards as
+    usual; its imported payments stay attributed to this batch.
+    """
+    return execution_steps.commit_import(api, decided_upload["batch"]["id"])
 
 
 # --- accounts -----------------------------------------------------------------

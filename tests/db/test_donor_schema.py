@@ -20,11 +20,13 @@ from alma_spei_tests.testbase import BaseDbTest
 #: Every privilege the grants tests look at.
 ALL_PRIVILEGES = tuple(Privilege)
 
-#: The app role reads, creates and edits donors but never deletes them.
+#: The app role reads and creates donors but never deletes them. Since the import
+#: execution migration it edits them through column grants only (the attribution
+#: columns stay fixed), so it holds no table-wide UPDATE.
 DONOR_GRANTS = {
     Privilege.SELECT: True,
     Privilege.INSERT: True,
-    Privilege.UPDATE: True,
+    Privilege.UPDATE: False,
     Privilege.DELETE: False,
     Privilege.TRUNCATE: False,
 }
@@ -120,10 +122,11 @@ class TestDonorConstraints(BaseDbTest):
 @allure.feature("Donor schema")
 class TestDonorGrants(BaseDbTest):
     def test_the_app_role_never_deletes_donors(self, db: DbQueries):
-        # 1. Read the app role's privileges on donors
-        # 2. Verification: read, create and edit only (archiving is an update)
+        # 1. Read the app role's table privileges on donors
+        # 2. Verification: read and create, no table-wide update, never delete (column-level
+        #    edits are covered by the import execution grants test)
         assert_that(db_steps.read_privileges(db, "donors", ALL_PRIVILEGES)).described_as(
-            "the app role should read, create and edit donors but never delete them"
+            "the app role should read and create donors but never delete them"
         ).is_equal_to(DONOR_GRANTS)
 
     @pytest.mark.parametrize("table", ["donations", "donor_audit_events", "donor_audit_changes"])

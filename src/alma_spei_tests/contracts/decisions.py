@@ -1,8 +1,10 @@
-"""Review decision, donor proposal and preview contracts (task 38).
+"""Review decision, donor proposal and preview contracts (tasks 38-39).
 
 Mirrors ``src/common/alma_spei/common/contracts/decisions.cljc``: ``proposal``,
 ``decision``, the proposal/decision/blocker/payment/event responses, and the
-immutable ``preview`` with its paged ``items``.
+immutable ``preview`` with its paged ``items``. Since task 39 every response
+reports the current ``catalog-version``, complete decisions keep the revision
+they were accepted under, and previews bind it (rule ``review-preview-v2``).
 """
 
 from alma_spei_tests.contracts.donors import ENTITY_TYPE
@@ -58,6 +60,7 @@ DECISION_FIELDS = {
 DECISION = ClosedMap(
     {
         "version": POSITIVE,
+        "accepted-catalog-version": Maybe(POSITIVE),
         "reviewer-id": IDENTIFIER,
         "reviewer-name": Maybe(STRING),
         "target-label": Maybe(STRING),
@@ -79,12 +82,15 @@ PROPOSAL = ClosedMap(
     }
 )
 _PAGE = {"total": ROW_COUNT, "limit": POSITIVE, "offset": ROW_COUNT}
+_CATALOG = {"catalog-version": POSITIVE}
 
-PROPOSAL_RESPONSE = ClosedMap({"batch": BATCH, "proposal": PROPOSAL})
-PROPOSALS_RESPONSE = ClosedMap({"batch": BATCH, "proposals": Vector(PROPOSAL), **_PAGE})
-DECISION_RESPONSE = ClosedMap({"batch": BATCH, "row": STAGED_ROW, "decision": Maybe(DECISION)})
+PROPOSAL_RESPONSE = ClosedMap({**_CATALOG, "batch": BATCH, "proposal": PROPOSAL})
+PROPOSALS_RESPONSE = ClosedMap({**_CATALOG, "batch": BATCH, "proposals": Vector(PROPOSAL), **_PAGE})
+DECISION_RESPONSE = ClosedMap(
+    {**_CATALOG, "batch": BATCH, "row": STAGED_ROW, "decision": Maybe(DECISION)}
+)
 BLOCKER = ClosedMap({"worksheet-index": POSITIVE, "row-number": POSITIVE, "code": STRING})
-BLOCKERS_RESPONSE = ClosedMap({"batch": BATCH, "blockers": Vector(BLOCKER), **_PAGE})
+BLOCKERS_RESPONSE = ClosedMap({**_CATALOG, "batch": BATCH, "blockers": Vector(BLOCKER), **_PAGE})
 PAYMENT = ClosedMap(
     {
         "id": IDENTIFIER,
@@ -95,7 +101,7 @@ PAYMENT = ClosedMap(
     }
 )
 PAYMENTS_RESPONSE = ClosedMap(
-    {"batch": BATCH, "donor-id": IDENTIFIER, "payments": Vector(PAYMENT), **_PAGE}
+    {**_CATALOG, "batch": BATCH, "donor-id": IDENTIFIER, "payments": Vector(PAYMENT), **_PAGE}
 )
 ITEM = ClosedMap(
     {
@@ -122,13 +128,14 @@ PREVIEW = ClosedMap(
         "batch-version": POSITIVE,
         "created-by": IDENTIFIER,
         "created-at": STRING,
-        "rule-version": Enum("review-preview-v1"),
+        "catalog-version": Maybe(POSITIVE),
+        "rule-version": Enum("review-preview-v1", "review-preview-v2"),
         "effect-digest": SHA256,
         "item-count": ROW_COUNT,
         "summary": SUMMARY,
     }
 )
-PREVIEW_RESPONSE = ClosedMap({"batch": BATCH, "preview": PREVIEW, "stale": BOOLEAN})
+PREVIEW_RESPONSE = ClosedMap({**_CATALOG, "batch": BATCH, "preview": PREVIEW, "stale": BOOLEAN})
 ITEMS_RESPONSE = ClosedMap({"preview": PREVIEW, "items": Vector(ITEM), **_PAGE})
 REVIEW_EVENT = ClosedMap(
     {
@@ -153,4 +160,4 @@ REVIEW_EVENT = ClosedMap(
         "after": JSON_OBJECT,
     }
 )
-EVENTS_RESPONSE = ClosedMap({"batch": BATCH, "events": Vector(REVIEW_EVENT), **_PAGE})
+EVENTS_RESPONSE = ClosedMap({**_CATALOG, "batch": BATCH, "events": Vector(REVIEW_EVENT), **_PAGE})

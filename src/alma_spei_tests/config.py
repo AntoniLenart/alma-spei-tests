@@ -63,6 +63,12 @@ class Settings:
     readiness_timeout_s: int = field(
         default_factory=lambda: _env_int("ALMA_READINESS_TIMEOUT", 180)
     )
+    # The orchestrated backend runs with the app's synthetic import mode, the
+    # only way to commit imports before a real backup provider exists. It is a
+    # development/test-only setting that labels every receipt as synthetic.
+    synthetic_imports: bool = field(
+        default_factory=lambda: _env_bool("ALMA_TEST_SYNTHETIC_IMPORTS", True)
+    )
 
     # External command names, overridable where the CLI is not plainly on PATH
     # (common for the Clojure CLI / Babashka on Windows).

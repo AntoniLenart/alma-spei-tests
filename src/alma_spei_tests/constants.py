@@ -56,6 +56,8 @@ class ApiPath(StrEnum):
     IMPORTS = "/api/imports"
     IMPORT_UPLOAD = "/api/imports/upload"
     IMPORT_REVIEW = "/api/imports/review"
+    IMPORT_COMMIT = "/api/imports/commit"
+    IMPORT_UNDO_LAST = "/api/imports/undo-last"
     UNKNOWN = "/api/does-not-exist"
 
 
@@ -105,6 +107,13 @@ class ErrorCode(StrEnum):
     INACTIVE_DONOR = "inactive-donor"
     DUPLICATE_MISMATCH = "duplicate-mismatch"
     REVIEW_BLOCKED = "review-blocked"
+    # commit and undo (task 39)
+    STALE_CATALOG = "stale-catalog"
+    STALE_PREVIEW = "stale-preview"
+    BACKUP_REQUIRED = "backup-required"
+    DIFFERENT_REQUEST = "different-request"
+    INELIGIBLE_UNDO = "ineligible-undo"
+    UNDO_BLOCKED = "undo-blocked"
 
 
 class ApiErrorPayload:
@@ -182,7 +191,7 @@ class ImportErrorPayload:
     }
     INELIGIBLE_RETRY = {
         "code": ErrorCode.INELIGIBLE_RETRY,
-        "message": "Można ponowić tylko ostatni nieudany import tego pliku.",
+        "message": "Można ponowić tylko ostatni nieudany lub wycofany import tego pliku.",
     }
     STALE_IMPORT = {
         "code": ErrorCode.STALE_IMPORT,
@@ -228,6 +237,59 @@ class ReviewErrorPayload:
         "message": "Nie znaleziono propozycji darczyńcy.",
     }
     PREVIEW_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono podglądu importu."}
+    STALE_CATALOG = {
+        "code": ErrorCode.STALE_CATALOG,
+        "message": "Baza darczyńców lub wpłat zmieniła się. Wczytaj i zweryfikuj decyzje ponownie.",
+    }
+
+
+class ExecutionErrorPayload:
+    """``{code, message}`` of backup, commit and undo refusals (task 39)."""
+
+    STALE_PREVIEW = {
+        "code": ErrorCode.STALE_PREVIEW,
+        "message": (
+            "Podgląd wymaga ponownej weryfikacji decyzji i przygotowania aktualnej wersji."
+        ),
+    }
+    CHANGED_PREVIEW = {
+        "code": ErrorCode.STALE_PREVIEW,
+        "message": "Podgląd nie odpowiada potwierdzonym zmianom.",
+    }
+    BACKUP_REQUIRED = {
+        "code": ErrorCode.BACKUP_REQUIRED,
+        "message": "Wymagane jest aktualne potwierdzenie kopii zapasowej dla tego podglądu.",
+    }
+    DIFFERENT_REQUEST = {
+        "code": ErrorCode.DIFFERENT_REQUEST,
+        "message": "Operację już wykonano z innymi danymi. Otwórz aktualną historię importu.",
+    }
+    INELIGIBLE_UNDO = {
+        "code": ErrorCode.INELIGIBLE_UNDO,
+        "message": "Wskazany import nie ma oczekiwanego zatwierdzenia.",
+    }
+    UNDO_BLOCKED = {
+        "code": ErrorCode.UNDO_BLOCKED,
+        "message": "Wycofanie wstrzymano. Sprawdź aktualną listę powiązań i zmian.",
+    }
+
+
+class UndoConflict(StrEnum):
+    """Why an import cannot be undone (``eligibility.blockers[].code``)."""
+
+    NOT_LATEST = "not-latest"
+    ALREADY_UNDONE = "already-undone"
+    NOT_COMMITTED = "not-committed"
+    CHANGED_DONOR = "changed-donor"
+    CHANGED_PAYMENT = "changed-payment"
+    DEPENDENT_RECORDS = "dependent-records"
+
+
+#: The only backup provider implemented so far: labelled, synthetic, no real backup.
+SYNTHETIC_BACKUP_ADAPTER = "synthetic-test-v1"
+
+#: Its receipts are valid for five minutes (a development constant, not a policy).
+SYNTHETIC_RECEIPT_LIFETIME_S = 300
 
 
 class DecisionKind(StrEnum):
@@ -251,6 +313,7 @@ class BlockerCode(StrEnum):
 
     INVALID_ROW = "invalid-row"
     MISSING_DECISION = "missing-decision"
+    STALE_CATALOG = "stale-catalog"
     UNSUPPORTED_AMOUNT = "unsupported-amount"
     STALE_TARGET = "stale-target"
     INACTIVE_DONOR = "inactive-donor"
@@ -281,8 +344,9 @@ OTHER_CURRENCY = "EUR"
 #: The longest evidence note a decision may carry.
 EVIDENCE_MAX_LENGTH = 500
 
-#: Rule version of previews built by task 38.
+#: Rule version of previews built by task 38, and of the catalogue-bound ones since task 39.
 PREVIEW_RULE_V1 = "review-preview-v1"
+PREVIEW_RULE_V2 = "review-preview-v2"
 
 #: Review pages (proposals, events, blockers, preview items) default to 25 entries.
 REVIEW_PAGE_DEFAULT_LIMIT = 25
@@ -352,6 +416,9 @@ class ImportState(StrEnum):
     RESERVED = "reserved"
     REVIEW = "review"
     FAILED = "failed"
+    APPROVED = "approved"
+    COMMITTED = "committed"
+    UNDONE = "undone"
 
 
 class ImportEvent(StrEnum):
@@ -362,6 +429,9 @@ class ImportEvent(StrEnum):
     FAILED = "failed"
     RETRY_REQUESTED = "retry-requested"
     REVIEWED = "reviewed"
+    APPROVED = "approved"
+    COMMITTED = "committed"
+    UNDONE = "undone"
 
 
 class RowState(StrEnum):
@@ -404,6 +474,7 @@ class AuditAction(StrEnum):
 
     CREATE = "create"
     UPDATE = "update"
+    ARCHIVE = "archive"
 
 
 class SecurityEvent(StrEnum):

@@ -39,6 +39,12 @@ The QA administrator (`qa.admin`) is provisioned without a console and its
 one-time temporary password is rotated by the session `api` fixture to a known
 synthetic password (`ALMA_QA_ADMIN_*` overrides; see `config.py`).
 
+The backend runs in the app's **synthetic import mode** (`ALMA_SYNTHETIC_IMPORTS`),
+the only way to commit an import before a real backup provider exists: its
+receipts are labelled `synthetic-test-v1` and create no real backup. Set
+`ALMA_TEST_SYNTHETIC_IMPORTS=0` to start it without; the commit and undo tests
+then fail with `backup-unavailable`, as the app intends.
+
 Orchestrated runs are **serial**: one stack owns fixed ports and one database,
 so `-n` is refused unless `ALMA_NO_ORCHESTRATION=1`. Logins are throttled per
 client address (30 per 15 min), so e2e tests borrow an API session instead of
@@ -80,7 +86,9 @@ ALMA_NO_ORCHESTRATION=1 BASE_URL=http://127.0.0.1:3000 uv run pytest --group smo
 
 The synthetic-data tests (`tests/db/test_synthetic_data.py`) run the app's
 `seed-demo` loader and skip without orchestration, so they never write demo
-rows into a database you started yourself.
+rows into a database you started yourself. The commit and undo tests need the
+app started with `ALMA_SYNTHETIC_IMPORTS=true`, and they write committed
+(and undone) synthetic imports into its database.
 
 ### Running on Windows
 
@@ -156,23 +164,31 @@ alma-spei-tests/
 │   ├── orchestration/          # toolchain preflight + Stack (up/down/restart/seed-demo)
 │   │                           #   + provision_admin.clj (non-interactive admin)
 │   ├── http/                   # AuthSession: cookie jar, Origin, CSRF headers
-│   ├── clients/                # Health/Auth/Accounts/Donors clients + AlmaSpeiApi facade
+│   ├── clients/                # Health/Auth/Accounts/Donors/Imports clients + AlmaSpeiApi facade
 │   ├── db/                     # psycopg client + DbQueries (named queries,
 │   │                           #   constraint probes that always roll back)
 │   ├── contracts/              # Python mirrors of the app's Malli contracts (mini schema DSL)
 │   ├── pages/                  # Playwright page objects (locators, no asserts)
-│   ├── steps/                  # @step-decorated reusable steps
-│   ├── data/                   # synthetic (Faker pl_PL) factories
+│   ├── steps/                  # @step-decorated reusable steps (review and execution
+│   │                           #   workflows read the versions they must send first)
+│   ├── data/                   # synthetic (Faker pl_PL) factories, bank statements,
+│   │                           #   review decisions
 │   ├── testbase/               # OOP base test classes
 │   └── plugin/                 # execution-group loader
 └── tests/
-    ├── conftest.py             # donor/account fixtures, staff_api, admin_id, signed_in_page
-    ├── api/                    # health, errors, sessions/CSRF, passwords, accounts, donors
-    ├── contract/               # health, auth and donor responses vs schema
+    ├── conftest.py             # donor/account fixtures, staff_api, admin_id, signed_in_page,
+    │                           #   staged/decided/committed imports
+    ├── api/                    # health, errors, sessions/CSRF, passwords, accounts, donors,
+    │                           #   bank upload + rows, review queue, decisions, previews,
+    │                           #   commit, undo and re-import
+    ├── contract/               # health, auth, donor, import, review, decision and
+    │                           #   execution responses vs schema
     ├── db/                     # migration, credential/session/audit, donor persistence,
     │                           #   donor + import schema constraints and grants,
-    │                           #   synthetic demo data (seed-demo)
-    └── e2e/                    # shell, login, donor list + card, backend-restart (disruptive)
+    │                           #   synthetic demo data (seed-demo), staging, review
+    │                           #   decisions, commit provenance and undo compensation
+    └── e2e/                    # shell, login, donor list + card, upload, review queue,
+                                #   decision editor + preview, backend-restart (disruptive)
 ```
 
 ## Conventions (summary)

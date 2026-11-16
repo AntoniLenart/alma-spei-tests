@@ -78,6 +78,9 @@ class ReviewMessages:
     #: Readiness blocker messages (contracts/decisions.cljc ``blocker-messages``).
     BLOCKER_MESSAGES = {
         "invalid-row": "Wiersz zawiera błędy odczytu. Popraw plik źródłowy.",
+        "stale-catalog": (
+            "Baza darczyńców lub wpłat zmieniła się. Wczytaj, sprawdź i zapisz decyzję ponownie."
+        ),
         "missing-decision": "Brakuje pełnej decyzji o darczyńcy i wpłacie.",
         "unsupported-amount": "Kwota ujemna wymaga ustalenia zasad zwrotów.",
         "stale-target": "Profil lub propozycja zmieniły się. Zweryfikuj decyzję ponownie.",
