@@ -1,6 +1,8 @@
 # Alma Spei — SQA test suite
 
 [![Checks](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/checks.yml/badge.svg)](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/checks.yml)
+[![Regression](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/regression.yml/badge.svg)](https://github.com/AntoniLenart/alma-spei-tests/actions/workflows/regression.yml)
+[Latest regression report (Allure)](https://antonilenart.github.io/alma-spei-tests/)
 
 Automated quality assurance for the [Alma Spei](https://github.com/zapjur/alma-spei)
 donor management system, built with **pytest** and **Playwright**. The suite
@@ -120,6 +122,31 @@ uv run ruff format --check .
 uv run mypy                          # config in pyproject.toml
 uv run pytest --collect-only -q      # every test imports and collects
 ```
+
+## Full regression in GitHub Actions
+
+[`.github/workflows/regression.yml`](.github/workflows/regression.yml) runs the
+whole app-backed suite against the dev repo and publishes the
+[Allure report](https://antonilenart.github.io/alma-spei-tests/) to GitHub Pages:
+
+- **After every merge to dev `main`.** A light job checks dev `main` every 15
+  minutes and starts a run once per new commit (the tested commit is recorded
+  next to the report as `last-dev-sha`).
+- **By hand** (*Actions → Regression → Run workflow*) against any dev branch,
+  tag or commit, e.g. a dev branch before it is merged.
+- **From a pull request** that changes the workflow (validation, nothing is
+  published).
+
+Each run checks out that dev commit, installs the toolchain at the versions the
+dev CI pins (Temurin JDK, Clojure CLI, Babashka, Node), lets the suite bring up a
+fresh stack (synthetic import mode), runs `--group regression` and then
+`--group disruptive`, and builds one Allure report with the history of earlier
+runs. The run summary lists the counts and failing tests; the HTML reports, the
+backend log and Playwright artifacts are kept as run artifacts for 14 days. A run
+with failing tests is marked failed, but its report is still published.
+
+GitHub pauses scheduled workflows in a public repository after 60 days without
+activity; re-enable it in the Actions tab if that happens.
 
 ## Branches and pull requests
 

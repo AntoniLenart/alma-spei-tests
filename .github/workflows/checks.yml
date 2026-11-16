@@ -1,7 +1,7 @@
 name: Checks
 
 # Static checks that need no running app: lint, formatting, types, and test
-# collection. The app-backed suite (Docker + JDK + Clojure) runs locally.
+# collection. The app-backed suite runs in regression.yml (and locally).
 on:
   pull_request:
   push:

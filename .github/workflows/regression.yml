@@ -1,0 +1,267 @@
+name: Regression
+
+# Full regression of the app-backed suite against the dev repo.
+#
+# A light scheduled job watches dev `main` and starts the full run once for every
+# new commit there (every merge). The suite orchestrates a fresh stack from that
+# exact dev commit (Postgres in Docker, migrations, frontend build, backend), runs
+# the regression group and then the disruptive tests, and publishes one Allure
+# report (with history across runs) to GitHub Pages, together with the tested dev
+# commit. It can also be run by hand against any dev branch, tag or commit.
+#
+# A pull request that changes this workflow runs it too, without publishing.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      dev_ref:
+        description: Dev branch, tag or full commit SHA to test
+        default: main
+  repository_dispatch:
+    # For a future trigger from the dev repo (needs a token there).
+    types: [dev-main-merged]
+  pull_request:
+    paths:
+      - .github/workflows/regression.yml
+      - .github/scripts/**
+
+permissions:
+  contents: read
+
+env:
+  DEV_REPO: zapjur/alma-spei
+  JAVA_VERSION: "25.0.5+8.0.LTS"
+  BABASHKA_VERSION: "1.12.218"
+  BABASHKA_SHA256: 7bd028cc794732ffde3da31ce4379840893c8e54f1046f92a8dfc4f4b3cddaf8
+  CLOJURE_CLI_VERSION: "1.12.5.1664"
+  CLOJURE_CLI_SHA256: fb2f0ce23373d64bb4f13fce2ce2924c54ee0c033755357900808a1250621d82
+  ALLURE_VERSION: "2.46.1"
+  ALLURE_SHA256: 37428164f310c8d137cfdd2c3a25d049b233261ddab13e1bd4dfd7627b5cbf8d
+  REPORT_URL: https://antonilenart.github.io/alma-spei-tests/
+
+jobs:
+  detect:
+    name: Detect a new dev commit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      sha: ${{ steps.resolve.outputs.sha }}
+      ref: ${{ steps.resolve.outputs.ref }}
+      run: ${{ steps.decide.outputs.run }}
+    steps:
+      - name: Check out the workflow scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+
+      - name: Resolve the dev commit
+        id: resolve
+        env:
+          DEV_REF: ${{ inputs.dev_ref || 'main' }}
+        run: |
+          ref="$DEV_REF"
+          sha="$(git ls-remote "https://github.com/$DEV_REPO" "refs/heads/$ref" "refs/tags/$ref" | head -n1 | cut -f1)"
+          if [ -z "$sha" ] && printf '%s' "$ref" | grep -Eq '^[0-9a-f]{40}$'; then sha="$ref"; fi
+          if [ -z "$sha" ]; then echo "::error::Unknown dev ref: $ref"; exit 1; fi
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "Dev $ref is at $sha"
+
+      - name: Decide whether to run
+        id: decide
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ steps.resolve.outputs.sha }}
+        run: bash .github/scripts/should_run.sh "${{ github.event_name }}" "$SHA" >> "$GITHUB_OUTPUT"
+
+  regression:
+    name: Full regression (dev ${{ needs.detect.outputs.ref }})
+    needs: detect
+    if: needs.detect.outputs.run == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    # One run at a time: they share the Pages report and its history.
+    concurrency:
+      group: regression
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    env:
+      DEV_SHA: ${{ needs.detect.outputs.sha }}
+      DEV_REF: ${{ needs.detect.outputs.ref }}
+      ALMA_APP_REPO: ${{ github.workspace }}/alma-spei
+      PUBLISH: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Check out the tests
+        uses: actions/checkout@v4
+        with:
+          path: tests
+
+      - name: Skip a commit tested while this run was queued
+        id: guard
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash tests/.github/scripts/should_run.sh schedule "$DEV_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the dev commit
+        if: steps.guard.outputs.run != 'false'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.DEV_REPO }}
+          ref: ${{ env.DEV_SHA }}
+          path: alma-spei
+
+      - name: Set up Temurin JDK
+        if: steps.guard.outputs.run != 'false'
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Set up Node
+        if: steps.guard.outputs.run != 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: alma-spei/.nvmrc
+          cache: npm
+          cache-dependency-path: alma-spei/package-lock.json
+
+      - name: Install pinned Babashka and Clojure CLI
+        if: steps.guard.outputs.run != 'false'
+        run: |
+          dir="$(mktemp -d)"
+          curl -fsSL "https://github.com/babashka/babashka/releases/download/v${BABASHKA_VERSION}/babashka-${BABASHKA_VERSION}-linux-amd64-static.tar.gz" -o "$dir/bb.tar.gz"
+          echo "${BABASHKA_SHA256}  $dir/bb.tar.gz" | sha256sum --check
+          tar -xzf "$dir/bb.tar.gz" -C "$dir"
+          sudo install -m 755 "$dir/bb" /usr/local/bin/bb
+          curl -fsSL "https://download.clojure.org/install/linux-install-${CLOJURE_CLI_VERSION}.sh" -o "$dir/install-clojure.sh"
+          echo "${CLOJURE_CLI_SHA256}  $dir/install-clojure.sh" | sha256sum --check
+          (cd "$dir" && sudo bash install-clojure.sh)
+          bb --version
+          clojure --version
+
+      - name: Cache Clojure dependencies
+        if: steps.guard.outputs.run != 'false'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.gitlibs
+          key: clojure-${{ hashFiles('alma-spei/deps.edn') }}
+          restore-keys: clojure-
+
+      - name: Set up Python and uv
+        if: steps.guard.outputs.run != 'false'
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install the test suite and its browser
+        if: steps.guard.outputs.run != 'false'
+        working-directory: tests
+        run: |
+          uv sync
+          uv run playwright install --with-deps chromium
+
+      - name: Run the regression group
+        id: regression
+        if: steps.guard.outputs.run != 'false'
+        continue-on-error: true
+        working-directory: tests
+        run: >-
+          uv run pytest --group regression -p no:cacheprovider
+          --junitxml=reports/junit-regression.xml
+
+      - name: Keep the backend log of the regression run
+        if: always() && steps.guard.outputs.run != 'false'
+        run: cp tests/reports/stack/backend.log tests/reports/stack/backend-regression.log || true
+
+      - name: Run the disruptive tests
+        id: disruptive
+        if: always() && steps.guard.outputs.run != 'false'
+        continue-on-error: true
+        working-directory: tests
+        run: >-
+          uv run pytest --group disruptive -p no:cacheprovider
+          --junitxml=reports/junit-disruptive.xml --html=reports/report-disruptive.html
+
+      - name: Install the Allure CLI
+        if: always() && steps.guard.outputs.run != 'false'
+        run: |
+          dir="$(mktemp -d)"
+          curl -fsSL "https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz" -o "$dir/allure.tgz"
+          echo "${ALLURE_SHA256}  $dir/allure.tgz" | sha256sum --check
+          sudo tar -xzf "$dir/allure.tgz" -C /opt
+          sudo ln -sf "/opt/allure-${ALLURE_VERSION}/bin/allure" /usr/local/bin/allure
+          allure --version
+
+      - name: Build the Allure report (with the previous history)
+        if: always() && steps.guard.outputs.run != 'false'
+        run: |
+          results=tests/reports/allure-results
+          mkdir -p "$results"
+          if git clone --quiet --depth 1 --branch gh-pages "https://github.com/${GITHUB_REPOSITORY}.git" previous 2>/dev/null \
+             && [ -d previous/history ]; then
+            cp -r previous/history "$results/history"
+          fi
+          short="${DEV_SHA:0:7}"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          cat > "$results/executor.json" <<EOF
+          {"name": "GitHub Actions", "type": "github", "url": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions",
+           "buildOrder": ${GITHUB_RUN_NUMBER}, "buildName": "Regression #${GITHUB_RUN_NUMBER} (dev ${DEV_REF} @ ${short})",
+           "buildUrl": "${run_url}", "reportUrl": "${REPORT_URL}", "reportName": "Alma Spei — full regression"}
+          EOF
+          cat > "$results/environment.properties" <<EOF
+          Dev.repository=${DEV_REPO}
+          Dev.ref=${DEV_REF}
+          Dev.commit=${DEV_SHA}
+          Tests.commit=${GITHUB_SHA}
+          App.imports=synthetic mode (labelled test backup receipts)
+          Data=synthetic only
+          EOF
+          allure generate "$results" --clean -o site
+
+      - name: Summarise the run
+        if: always() && steps.guard.outputs.run != 'false'
+        run: >-
+          python3 tests/.github/scripts/regression_summary.py
+          tests/reports/junit-regression.xml tests/reports/junit-disruptive.xml
+          >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish the report to GitHub Pages
+        if: always() && steps.guard.outputs.run != 'false' && env.PUBLISH == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp -r site pages
+          cd pages
+          echo "$DEV_SHA" > last-dev-sha
+          touch .nojekyll
+          git init --quiet --initial-branch gh-pages
+          git add --all
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit --quiet -m "Regression report for dev ${DEV_REF} @ ${DEV_SHA:0:7}"
+          git push --quiet --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          echo "Report: ${REPORT_URL}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the reports
+        if: always() && steps.guard.outputs.run != 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-${{ github.run_number }}
+          retention-days: 14
+          path: |
+            site
+            tests/reports/*.html
+            tests/reports/*.xml
+            tests/reports/stack
+            tests/reports/playwright-artifacts
+
+      - name: Fail when a test failed
+        if: steps.regression.outcome == 'failure' || steps.disruptive.outcome == 'failure'
+        run: |
+          echo "::error::The regression found failures - see the summary and the Allure report."
+          exit 1
