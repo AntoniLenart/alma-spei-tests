@@ -146,3 +146,23 @@ def read_canonical_counts(db: DbQueries) -> dict[str, int]:
 @step("Snapshot import batch {batch_id} (version, progress, events, rows)")
 def snapshot_import_batch(db: DbQueries, batch_id: str) -> dict[str, int]:
     return db.import_batch_snapshot(batch_id)
+
+
+@step("Read the stored decision of row {row_number} of import batch {batch_id}")
+def read_review_decision(db: DbQueries, batch_id: str, row_number: int) -> dict[str, Any]:
+    return _existing(db.review_decision(batch_id, row_number), f"decision of row {row_number}")
+
+
+@step("Read the review journal of import batch {batch_id}")
+def read_review_events(db: DbQueries, batch_id: str) -> list[str]:
+    return db.review_event_types(batch_id)
+
+
+@step("Count the previews of import batch {batch_id}")
+def count_previews(db: DbQueries, batch_id: str) -> int:
+    return db.preview_count(batch_id)
+
+
+@step("Read the stored profile of donor proposal {proposal_id}")
+def read_proposal_profile(db: DbQueries, proposal_id: str) -> dict[str, Any]:
+    return _existing(db.proposal_profile(proposal_id), f"proposal {proposal_id}")
