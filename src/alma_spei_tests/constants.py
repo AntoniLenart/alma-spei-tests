@@ -99,6 +99,12 @@ class ErrorCode(StrEnum):
     STALE_IMPORT = "stale-import"
     EMPTY_FILE = "empty-file"
     REVIEW_UNAVAILABLE = "review-unavailable"
+    # review decisions and previews (task 38)
+    STALE_REVIEW = "stale-review"
+    INVALID_ROW = "invalid-row"
+    INACTIVE_DONOR = "inactive-donor"
+    DUPLICATE_MISMATCH = "duplicate-mismatch"
+    REVIEW_BLOCKED = "review-blocked"
 
 
 class ApiErrorPayload:
@@ -192,6 +198,96 @@ class ImportErrorPayload:
     VALIDATION = {"code": ErrorCode.VALIDATION, "message": "Sprawdź dane importu."}
 
 
+class ReviewErrorPayload:
+    """``{code, message}`` of review decision, proposal and preview errors (task 38)."""
+
+    CSRF = {"code": ErrorCode.CSRF, "message": "Sesja formularza wygasła. Odśwież stronę."}
+    QUERY = {"code": ErrorCode.VALIDATION, "message": "Nieprawidłowe parametry weryfikacji."}
+    STALE_REVIEW = {
+        "code": ErrorCode.STALE_REVIEW,
+        "message": "Dane weryfikacji zmieniły się. Zachowaj potrzebne poprawki i odśwież widok.",
+    }
+    INVALID_ROW = {
+        "code": ErrorCode.INVALID_ROW,
+        "message": "Popraw wiersz w pliku źródłowym przed podjęciem decyzji.",
+    }
+    INACTIVE_DONOR = {
+        "code": ErrorCode.INACTIVE_DONOR,
+        "message": "Wybierz aktywny profil darczyńcy.",
+    }
+    REVIEW_UNAVAILABLE = {
+        "code": ErrorCode.REVIEW_UNAVAILABLE,
+        "message": "Ten import nie oczekuje na weryfikację.",
+    }
+    REVIEW_BLOCKED = {
+        "code": ErrorCode.REVIEW_BLOCKED,
+        "message": "Uzupełnij lub odśwież decyzje przed przygotowaniem podglądu.",
+    }
+    PROPOSAL_NOT_FOUND = {
+        "code": ErrorCode.NOT_FOUND,
+        "message": "Nie znaleziono propozycji darczyńcy.",
+    }
+    PREVIEW_NOT_FOUND = {"code": ErrorCode.NOT_FOUND, "message": "Nie znaleziono podglądu importu."}
+
+
+class DecisionKind(StrEnum):
+    """``kind`` of a saved row decision: which donor the row's payment belongs to."""
+
+    UNRESOLVED = "unresolved"
+    EXISTING_DONOR = "existing-donor"
+    NEW_PROPOSAL = "new-proposal"
+
+
+class Disposition(StrEnum):
+    """``financial.disposition``: a separate new payment, or one already in the catalogue."""
+
+    UNRESOLVED = "unresolved"
+    NEW = "new"
+    EXISTING = "existing"
+
+
+class BlockerCode(StrEnum):
+    """Readiness blocker ``code`` values of a review (contracts/decisions.cljc)."""
+
+    INVALID_ROW = "invalid-row"
+    MISSING_DECISION = "missing-decision"
+    UNSUPPORTED_AMOUNT = "unsupported-amount"
+    STALE_TARGET = "stale-target"
+    INACTIVE_DONOR = "inactive-donor"
+    DUPLICATE_MISMATCH = "duplicate-mismatch"
+
+
+class PreviewItemKind(StrEnum):
+    NEW_DONOR = "new-donor"
+    EXISTING_DONOR_REFERENCE = "existing-donor-reference"
+    NEW_PAYMENT = "new-payment"
+    DUPLICATE_REFERENCE = "duplicate-reference"
+
+
+class ReviewEventType(StrEnum):
+    """``import_review_events.event_type`` values."""
+
+    PROPOSAL_CREATED = "proposal-created"
+    PROPOSAL_UPDATED = "proposal-updated"
+    DECISION_SAVED = "decision-saved"
+    DECISION_CLEARED = "decision-cleared"
+    PREVIEW_CREATED = "preview-created"
+
+
+#: A reviewer-asserted currency (three upper-case letters; there is no default).
+REVIEW_CURRENCY = "PLN"
+OTHER_CURRENCY = "EUR"
+
+#: The longest evidence note a decision may carry.
+EVIDENCE_MAX_LENGTH = 500
+
+#: Rule version of previews built by task 38.
+PREVIEW_RULE_V1 = "review-preview-v1"
+
+#: Review pages (proposals, events, blockers, preview items) default to 25 entries.
+REVIEW_PAGE_DEFAULT_LIMIT = 25
+
+
 class FieldErrorCode(StrEnum):
     """Per-field ``errors[].code`` values of a donor validation response."""
 
@@ -265,6 +361,7 @@ class ImportEvent(StrEnum):
     STAGED = "staged"
     FAILED = "failed"
     RETRY_REQUESTED = "retry-requested"
+    REVIEWED = "reviewed"
 
 
 class RowState(StrEnum):

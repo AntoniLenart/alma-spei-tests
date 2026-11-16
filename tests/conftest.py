@@ -12,6 +12,9 @@ cleanup always runs, independent of whether the test passed:
   rotated, for scenarios that must not touch the shared admin session.
 * ``admin_id`` - the QA administrator's user id, a valid author for rows that
   database probes insert (and always roll back).
+* ``staged_upload`` / ``decided_upload`` - a staged bank batch, and the same
+  batch with both rows decided (no teardown: imports have no delete endpoint
+  and review decisions write nothing canonical).
 
 Logins are throttled per client address (30 per 15 minutes), so e2e tests that
 are not about logging in borrow an API session via ``signed_in_page`` instead of
@@ -33,6 +36,7 @@ from alma_spei_tests.data import (
     DonorProfile,
     ProvisionedAccount,
     SyntheticAccount,
+    existing_donor,
     new_account,
     new_bank_statement,
     new_donor_profile,
@@ -40,7 +44,14 @@ from alma_spei_tests.data import (
 )
 from alma_spei_tests.db import DbQueries
 from alma_spei_tests.pages import AppPage
-from alma_spei_tests.steps import auth_steps, db_steps, donors_steps, imports_steps, ui_steps
+from alma_spei_tests.steps import (
+    auth_steps,
+    db_steps,
+    donors_steps,
+    imports_steps,
+    review_steps,
+    ui_steps,
+)
 
 
 # --- data ---------------------------------------------------------------------
@@ -91,6 +102,23 @@ def staged_upload(api: AlmaSpeiApi, bank_statement: BankStatement, tag: str) -> 
     (the backend refuses a byte-identical file twice).
     """
     return imports_steps.upload_staged(api, f"{tag}.csv", bank_statement.to_csv())
+
+
+# --- review decisions (task 38) -------------------------------------------------
+@pytest.fixture
+def staged_batch_id(staged_upload: dict[str, Any]) -> str:
+    return staged_upload["batch"]["id"]
+
+
+@pytest.fixture
+def decided_upload(api: AlmaSpeiApi, staged_batch_id: str, donor: dict[str, Any]) -> dict[str, Any]:
+    """``staged_upload`` with both rows linked to ``donor`` as new PLN payments.
+
+    Returns the last decision response (its ``batch`` is current). Decisions
+    write nothing canonical, so there is nothing to clean up.
+    """
+    decision = existing_donor(donor)
+    return review_steps.decide_rows(api, staged_batch_id, [decision, decision])
 
 
 # --- accounts -----------------------------------------------------------------

@@ -305,6 +305,38 @@ class DbQueries:
         )[0]
         return dict(zip(("version", "reviewed_rows", "events", "staged_rows"), row, strict=True))
 
+    # --- review decisions and previews (task 38) -------------------------------
+    def review_decision(self, batch_id: str, row_number: int) -> dict[str, Any] | None:
+        """The stored decision of one staged row (worksheet 1)."""
+        rows = self.client.query(
+            "SELECT version, kind, donor_id::text, proposal_id::text, complete,"
+            " reviewer_id::text, financial->>'currency' FROM import_review_decisions"
+            " WHERE batch_id = %s AND worksheet_index = 1 AND row_number = %s",
+            (batch_id, row_number),
+        )
+        keys = ("version", "kind", "donor_id", "proposal_id", "complete", "reviewer_id", "currency")
+        return dict(zip(keys, rows[0], strict=True)) if rows else None
+
+    def review_event_types(self, batch_id: str) -> list[str]:
+        """The batch's review journal, oldest first."""
+        rows = self.client.query(
+            "SELECT event_type FROM import_review_events WHERE batch_id = %s"
+            " ORDER BY occurred_at, id",
+            (batch_id,),
+        )
+        return [row[0] for row in rows]
+
+    def preview_count(self, batch_id: str) -> int:
+        return self.client.scalar(
+            "SELECT count(*) FROM import_previews WHERE batch_id = %s", (batch_id,)
+        )
+
+    def proposal_profile(self, proposal_id: str) -> dict[str, Any] | None:
+        """The stored profile JSON of a donor proposal."""
+        return self.client.scalar(
+            "SELECT profile FROM import_donor_proposals WHERE id = %s", (proposal_id,)
+        )
+
 
 # --- probe statements ---------------------------------------------------------
 def _new_id() -> str:

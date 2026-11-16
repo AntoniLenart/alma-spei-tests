@@ -1,8 +1,9 @@
-"""Reusable steps for the Polish UI (shell, auth panel, donor screens)."""
+"""Reusable steps for the Polish UI (shell, auth panel, donor and import screens)."""
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Locator, Page, expect
 
 from alma_spei_tests.clients import AlmaSpeiApi
+from alma_spei_tests.data import DonorProfile, Financial
 from alma_spei_tests.pages import (
     AppPage,
     DonorCardPage,
@@ -11,10 +12,23 @@ from alma_spei_tests.pages import (
     ImportMessages,
     ImportsPage,
     LoginPage,
+    ReviewMessages,
     ReviewPage,
     ShellMessages,
 )
 from alma_spei_tests.steps import step
+
+
+# --- form controls ------------------------------------------------------------
+def tick(checkbox: Locator):
+    """Click a checkbox and wait until it shows as checked.
+
+    The app's checkboxes are controlled by Reagent/re-frame state that renders
+    on the next animation frame, so ``Locator.check()`` (which verifies the
+    state right after its click) reports a false failure.
+    """
+    checkbox.click()
+    expect(checkbox).to_be_checked()
 
 
 # --- shell --------------------------------------------------------------------
@@ -163,7 +177,7 @@ def wait_for_import_state(imports: ImportsPage, state_label: str) -> ImportsPage
 @step("Confirm and retry the analysis of '{filename}'")
 def retry_upload(imports: ImportsPage, filename: str, content: bytes) -> ImportsPage:
     imports.choose_file(filename, content)
-    imports.retry_confirmation.check()
+    tick(imports.retry_confirmation)
     imports.retry_button.click()
     return imports
 
@@ -185,7 +199,15 @@ def open_review_batch(page: Page, batch_id: str, filename: str) -> ReviewPage:
 
 @step("Pick staged row {row} for comparison")
 def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
+    """Select the row once the editor is idle, then wait for that row's decision.
+
+    While a decision loads, changing rows asks to discard a draft (a browser
+    confirm the test would dismiss), so the editor must be idle first.
+    """
+    expect(review.idle_editor).to_be_visible()
     review.select_row(row)
+    expect(review.source_card).to_contain_text(ReviewMessages.source_location(row))
+    expect(review.idle_editor).to_be_visible()
     return review
 
 
@@ -193,4 +215,56 @@ def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
 def compare_with_donor(review: ReviewPage, text: str, name: str, city: str) -> ReviewPage:
     review.search_donor(text)
     review.compare_button(name, city).click()
+    return review
+
+
+# --- review decisions (task 38) -----------------------------------------------
+@step("Choose the compared donor as the row's target")
+def choose_compared_donor(review: ReviewPage, name: str) -> ReviewPage:
+    expect(review.card_value(review.donor_card, ReviewMessages.DONOR_NAME)).to_have_text(name)
+    review.editor_button(ReviewMessages.CHOOSE_COMPARED).click()
+    expect(review.target_line).to_have_text(
+        ReviewMessages.target(ReviewMessages.TARGET_EXISTING, name)
+    )
+    return review
+
+
+@step("Fill in the payment review ({financial.currency}, {financial.disposition})")
+def fill_payment_review(review: ReviewPage, financial: Financial) -> ReviewPage:
+    review.currency_input.fill(financial.currency or "")
+    review.evidence_input.fill(financial.evidence)
+    review.disposition_select.select_option(financial.disposition.value)
+    if financial.overlap_checked:
+        tick(review.overlap_checkbox)
+    return review
+
+
+@step("Save the row decision through the form")
+def save_decision_via_form(review: ReviewPage) -> ReviewPage:
+    review.editor_button(ReviewMessages.SAVE_DECISION).click()
+    expect(review.saved_notice).to_be_visible()
+    expect(review.idle_editor).to_be_visible()
+    return review
+
+
+@step("Propose donor '{profile.name}' through the form and use it")
+def propose_and_use_donor(review: ReviewPage, profile: DonorProfile) -> ReviewPage:
+    review.editor_button(ReviewMessages.NEW_PROFILE).click()
+    review.proposal_type_select.select_option(profile.entity_type.value)
+    review.proposal_field("name").fill(profile.name)
+    review.proposal_field("city").fill(profile.city)
+    tick(review.proposal_check(ReviewMessages.CHECKED_EXISTING))
+    tick(review.proposal_check(ReviewMessages.CHECKED_PROPOSALS))
+    review.editor_button(ReviewMessages.SAVE_PROPOSAL).click()
+    review.saved_proposal.get_by_role("button", name=ReviewMessages.USE_PROPOSAL).click()
+    expect(review.target_line).to_have_text(
+        ReviewMessages.target(ReviewMessages.TARGET_PROPOSAL, profile.name)
+    )
+    return review
+
+
+@step("Prepare the import preview through the form")
+def prepare_preview_via_form(review: ReviewPage) -> ReviewPage:
+    expect(review.idle_editor).to_be_visible()
+    review.preview_button(ReviewMessages.PREPARE_PREVIEW).click()
     return review

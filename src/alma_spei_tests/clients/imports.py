@@ -1,4 +1,6 @@
-"""Import endpoints (task 35): bank file upload and the staged-row report."""
+"""Import endpoints: bank file upload and the staged-row report (task 35), the
+review queue and comparison (task 37), and review decisions, donor proposals and
+import previews (task 38)."""
 
 from collections.abc import Mapping, Sequence
 
@@ -92,3 +94,73 @@ class ImportsClient(BaseClient):
     def rows_with(self, batch_id: str, params: list[tuple[str, str]]) -> httpx.Response:
         """Rows with raw query params (for invalid/duplicate parameter tests)."""
         return self._session.get(f"{self.batch_path(batch_id)}/rows", params=params)
+
+    # --- decisions, proposals and previews (task 38) ---------------------------
+    def decision_path(self, batch_id: str, worksheet: int | str, row: int | str) -> str:
+        return f"{self.batch_path(batch_id)}/rows/{worksheet}/{row}/decision"
+
+    def decision(self, batch_id: str, worksheet: int | str, row: int | str) -> httpx.Response:
+        """The row's saved decision (or null) with the current batch."""
+        return self._session.get(self.decision_path(batch_id, worksheet, row))
+
+    def save_decision(
+        self,
+        batch_id: str,
+        worksheet: int | str,
+        row: int | str,
+        payload: Mapping[str, object],
+        *,
+        headers: HeaderOverrides | None = None,
+    ) -> httpx.Response:
+        return self._session.put(
+            self.decision_path(batch_id, worksheet, row), json=payload, headers=headers
+        )
+
+    def proposals(self, batch_id: str, **page: int | str) -> httpx.Response:
+        return self._session.get(f"{self.batch_path(batch_id)}/donor-proposals", params=page)
+
+    def create_proposal(
+        self,
+        batch_id: str,
+        payload: Mapping[str, object],
+        *,
+        headers: HeaderOverrides | None = None,
+    ) -> httpx.Response:
+        return self._session.post(
+            f"{self.batch_path(batch_id)}/donor-proposals", json=payload, headers=headers
+        )
+
+    def update_proposal(
+        self, batch_id: str, proposal_id: str, payload: Mapping[str, object]
+    ) -> httpx.Response:
+        path = f"{self.batch_path(batch_id)}/donor-proposals/{proposal_id}"
+        return self._session.put(path, json=payload)
+
+    def payments(self, batch_id: str, params: Sequence[tuple[str, str | int]]) -> httpx.Response:
+        """Existing payments of one explicitly chosen donor (``donor-id`` + paging)."""
+        return self._session.get(f"{self.batch_path(batch_id)}/payments", params=params)
+
+    def review_events(self, batch_id: str, **page: int | str) -> httpx.Response:
+        return self._session.get(f"{self.batch_path(batch_id)}/review-events", params=page)
+
+    def review_blockers(self, batch_id: str, **page: int | str) -> httpx.Response:
+        return self._session.get(f"{self.batch_path(batch_id)}/review-blockers", params=page)
+
+    def create_preview(
+        self,
+        batch_id: str,
+        payload: Mapping[str, object],
+        *,
+        headers: HeaderOverrides | None = None,
+    ) -> httpx.Response:
+        return self._session.post(
+            f"{self.batch_path(batch_id)}/preview", json=payload, headers=headers
+        )
+
+    def preview(self, batch_id: str, preview_id: str) -> httpx.Response:
+        """Preview metadata with ``stale`` recomputed against the current review."""
+        return self._session.get(f"{self.batch_path(batch_id)}/previews/{preview_id}")
+
+    def preview_items(self, batch_id: str, preview_id: str, **page: int | str) -> httpx.Response:
+        path = f"{self.batch_path(batch_id)}/previews/{preview_id}/items"
+        return self._session.get(path, params=page)
