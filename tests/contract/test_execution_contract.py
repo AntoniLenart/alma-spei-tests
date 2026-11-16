@@ -1,5 +1,5 @@
-"""Contract tests: backup, outcome, history, eligibility and applied-item responses vs
-contracts/execution.cljc (task 39)."""
+"""Contract tests: backup, outcome, history, eligibility, applied-item and capability
+responses vs contracts/execution.cljc (tasks 39-40)."""
 
 from typing import Any
 
@@ -11,6 +11,7 @@ from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.contracts import (
     APPLIED_ITEMS_RESPONSE,
     BACKUP_RESPONSE,
+    CAPABILITIES,
     ELIGIBILITY,
     IMPORT_HISTORY,
     OUTCOME,
@@ -53,3 +54,9 @@ class TestExecutionContract(BaseContractTest):
             assert_matches_contract(history, IMPORT_HISTORY, "history")
             assert_matches_contract(items, APPLIED_ITEMS_RESPONSE, "items-response")
             assert_matches_contract(eligibility, ELIGIBILITY, "eligibility")
+
+    def test_capabilities_match_contract(self, api: AlmaSpeiApi):
+        # 1. Read the import capabilities
+        # 2. Verification: the body satisfies capabilities
+        body = execution_steps.read_capabilities(api).json()
+        assert_matches_contract(body, CAPABILITIES, "capabilities")

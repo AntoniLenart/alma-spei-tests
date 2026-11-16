@@ -182,6 +182,10 @@ class ImportsClient(BaseClient):
     def undo_last(self, payload: Mapping[str, object]) -> httpx.Response:
         return self._session.post(ApiPath.IMPORT_UNDO_LAST, json=payload)
 
+    def capabilities(self) -> httpx.Response:
+        """Whether commits are enabled and in which mode (task 40)."""
+        return self._session.get(ApiPath.IMPORT_CAPABILITIES)
+
     def history(self, **page: int | str) -> httpx.Response:
         """Every import attempt, newest upload first (``limit``/``offset``)."""
         return self._session.get(ApiPath.IMPORTS, params=page)

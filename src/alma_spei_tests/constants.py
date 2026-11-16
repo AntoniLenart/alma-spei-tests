@@ -56,6 +56,7 @@ class ApiPath(StrEnum):
     IMPORTS = "/api/imports"
     IMPORT_UPLOAD = "/api/imports/upload"
     IMPORT_REVIEW = "/api/imports/review"
+    IMPORT_CAPABILITIES = "/api/imports/capabilities"
     IMPORT_COMMIT = "/api/imports/commit"
     IMPORT_UNDO_LAST = "/api/imports/undo-last"
     UNKNOWN = "/api/does-not-exist"

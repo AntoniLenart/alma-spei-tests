@@ -92,26 +92,22 @@ app started with `ALMA_SYNTHETIC_IMPORTS=true`, and they write committed
 
 ### Running on Windows
 
-The suite runs on Windows, but the app's dev setup needs a few workarounds
-there:
+The suite and the app run on Windows (the app's Windows fixes - private files
+under Windows ACLs and LF-only shell scripts via `.gitattributes` - are on its
+`main`). A few machine-level points remain:
 
 - **JDK 25 for the Clojure CLI.** Set `JAVA_HOME` to it and put its `bin` first
   on `PATH`, so an older `java` (e.g. a Java 8 install) is never picked up.
-- **`bb init` fails** (it sets POSIX permissions on `.secrets`). Create the four
-  files in the app repo's `.secrets/` yourself (`admin-password`,
-  `migration-password`, `app-password`, `auth-secret`; each a random base64url
-  value plus a newline), then run with `ALMA_BB_CMD=true` to skip the step.
-- **Postgres container exits with code 2.** With `core.autocrlf=true` the app's
-  `infra/postgres/*.sh` scripts are checked out with CRLF; convert them to LF.
 - **Ports.** Hyper-V may reserve the default test DB port (55432); check
   `netsh interface ipv4 show excludedportrange protocol=tcp` and set
   `ALMA_TEST_DB_PORT` (and `ALMA_TEST_HTTP_PORT`) to free ports.
 - **Backend left running.** Teardown stops the `clojure` launcher, but its
   `java` child keeps the HTTP port; stop it before the next run, or use another
   `ALMA_TEST_HTTP_PORT`.
-- **Uploads return HTTP 500** on the import branches: the app creates its
-  upload directory with POSIX permissions. This is an app bug, so the import
-  tests fail on Windows until it is fixed.
+
+Older app checkouts (before those fixes) still need the earlier workarounds:
+create `.secrets/` by hand with `ALMA_BB_CMD=true`, convert
+`infra/postgres/*.sh` to LF, and expect uploads to fail with HTTP 500.
 
 ## Static checks
 
@@ -188,7 +184,8 @@ alma-spei-tests/
     │                           #   synthetic demo data (seed-demo), staging, review
     │                           #   decisions, commit provenance and undo compensation
     └── e2e/                    # shell, login, donor list + card, upload, review queue,
-                                #   decision editor + preview, backend-restart (disruptive)
+                                #   decision editor + preview, confirmation, history,
+                                #   undo + re-import, backend-restart (disruptive)
 ```
 
 ## Conventions (summary)

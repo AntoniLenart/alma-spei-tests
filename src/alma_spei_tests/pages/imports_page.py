@@ -51,6 +51,7 @@ class ImportMessages:
         "Ten plik został już przesłany, także jeśli wcześniej miał inną nazwę. "
         "Kolejny import nie został utworzony."
     )
+    OPEN_HISTORY = "Otwórz historię importów"
     INVALID_FILE = (
         "Nie można odczytać pliku. Sprawdź układ czterech kolumn, daty i kwoty. "
         "Formuły nie są obsługiwane."
@@ -108,6 +109,15 @@ class ImportsPage(BasePage):
     @property
     def alert(self) -> Locator:
         return self.page.locator("section.import-screen").get_by_role("alert")
+
+    @property
+    def alert_message(self) -> Locator:
+        """The alert's text without its links (task 40 adds a history link to some)."""
+        return self.alert.locator("p")
+
+    @property
+    def history_link(self) -> Locator:
+        return self.alert.get_by_role("link", name=ImportMessages.OPEN_HISTORY)
 
     def choose_file(self, filename: str, content: bytes):
         self.file_input.set_input_files(
