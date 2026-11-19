@@ -1,0 +1,25 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-bbe45abc.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Norbert Gumienny QA-bbe45abc'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read preview 3355dd57-24a6-4d5b-b913-11ff67a23703 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/previews/3355dd57-24a6-4d5b-b913-11ff67a23703 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the planned effects of preview 3355dd57-24a6-4d5b-b913-11ff67a23703 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/previews/3355dd57-24a6-4d5b-b913-11ff67a23703/items "HTTP/1.1 200 OK"

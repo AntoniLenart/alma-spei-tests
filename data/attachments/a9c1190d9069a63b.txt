@@ -1,0 +1,4 @@
+20:25:12 INFO  step: STEP: Open donor card 30de7f51-7193-42e4-b639-00faa2ebb903
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/30de7f51-7193-42e4-b639-00faa2ebb903 "HTTP/1.1 404 Not Found"
+20:25:12 INFO  step: STEP: Read the change history of donor 30de7f51-7193-42e4-b639-00faa2ebb903
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/30de7f51-7193-42e4-b639-00faa2ebb903/history "HTTP/1.1 404 Not Found"

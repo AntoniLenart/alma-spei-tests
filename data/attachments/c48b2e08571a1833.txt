@@ -1,0 +1,5 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.6ed9fc6abf72
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read user qa.6ed9fc6abf72 with its local credential
+INFO     step:_decorator.py:52 STEP: Deactivate account 52b67c6a-4195-4603-b963-2e71761f3a2c
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/52b67c6a-4195-4603-b963-2e71761f3a2c "HTTP/1.1 200 OK"

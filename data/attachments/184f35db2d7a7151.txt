@@ -1,0 +1,9 @@
+20:25:50 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:50 INFO  step: STEP: Create donor 'Olgierd Grodek QA-8ce6be81'
+20:25:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:50 INFO  step: STEP: Create donor 'Grupa Nawój QA-8ce6be81'
+20:25:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:50 INFO  step: STEP: Open the donor list
+20:25:50 INFO  step: STEP: Search donors for 'QA-8ce6be81'
+20:25:50 INFO  step: STEP: Wait until the list shows 2 donor(s)
+20:25:50 INFO  step: STEP: Wait until the list shows 1 donor(s)

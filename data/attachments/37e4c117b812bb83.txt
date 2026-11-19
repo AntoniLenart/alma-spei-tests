@@ -1,0 +1,7 @@
+20:25:28 INFO  step: STEP: Create donor 'Nela Mydlarz QA-c9ba618a'
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:28 INFO  step: STEP: Update donor 73d3dfec-bf2c-45ce-bda1-90a33ff650bd
+20:25:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/73d3dfec-bf2c-45ce-bda1-90a33ff650bd "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Read donor row 73d3dfec-bf2c-45ce-bda1-90a33ff650bd
+20:25:28 INFO  step: STEP: Read audit actions of donor 73d3dfec-bf2c-45ce-bda1-90a33ff650bd
+20:25:28 INFO  step: STEP: Read fields changed by 'update' events of donor 73d3dfec-bf2c-45ce-bda1-90a33ff650bd

@@ -1,0 +1,31 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-643a009e.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Stanisław Domian QA-643a009e'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import f92330cc-36b3-40d6-93d1-6b096f3d6797 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import f92330cc-36b3-40d6-93d1-6b096f3d6797 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import f92330cc-36b3-40d6-93d1-6b096f3d6797 at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview 23259267-d640-40dd-b362-927d2df052a1 of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/previews/23259267-d640-40dd-b362-927d2df052a1/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 409 Conflict"
+INFO     step:_decorator.py:52 STEP: Read the outcome of import f92330cc-36b3-40d6-93d1-6b096f3d6797
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/f92330cc-36b3-40d6-93d1-6b096f3d6797/outcome "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Open donor card e5eb4ef7-1769-457d-8eb6-65147a92cbcc
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/e5eb4ef7-1769-457d-8eb6-65147a92cbcc "HTTP/1.1 200 OK"

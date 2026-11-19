@@ -1,0 +1,6 @@
+20:25:16 INFO  step: STEP: Upload 'QA-e1cc743a.csv' and expect it to be staged
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Create donor 'Robert Soczewka QA-e1cc743a'
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Compare staged row 1/99 of import bafb3d66-3e4b-4a9d-897b-5ad575046595 with donor d6fe1fdf-c35b-4aa3-8204-789f951c7304
+20:25:17 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/bafb3d66-3e4b-4a9d-897b-5ad575046595/rows/1/99/comparison?donor-id=d6fe1fdf-c35b-4aa3-8204-789f951c7304 "HTTP/1.1 404 Not Found"

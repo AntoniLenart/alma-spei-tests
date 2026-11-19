@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Konstanty Ziętal QA-8ccfcacd'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open donor card 1df21a37-73ec-4e9c-b5b3-1b5073d31192
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/1df21a37-73ec-4e9c-b5b3-1b5073d31192 "HTTP/1.1 200 OK"

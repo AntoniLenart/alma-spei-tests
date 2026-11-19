@@ -1,0 +1,6 @@
+20:25:22 INFO  step: STEP: Upload 'QA-f4041e84.csv' and expect it to be staged
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Create donor 'Stefan Sypień QA-f4041e84'
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Look up existing payments for import 7ff5f361-cb61-4e12-b951-c4b13953c543 with [('donor-id', 'd2363073-91fd-4847-95d0-b968babaa825')]
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/7ff5f361-cb61-4e12-b951-c4b13953c543/payments?donor-id=d2363073-91fd-4847-95d0-b968babaa825 "HTTP/1.1 200 OK"

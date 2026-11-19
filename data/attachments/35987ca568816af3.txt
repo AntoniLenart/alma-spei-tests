@@ -1,0 +1,34 @@
+20:25:18 INFO  step: STEP: Upload 'QA-4d0cd97b.csv' and expect it to be staged
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Create donor 'Mieszko Bartuś QA-4d0cd97b'
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Decide every row of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Decide row 1 of import 418188b7-6dad-4d10-9979-781021c4b5c5 ('existing-donor')
+20:25:18 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Read the review versions of row 1 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Decide row 2 of import 418188b7-6dad-4d10-9979-781021c4b5c5 ('existing-donor')
+20:25:18 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Read the review versions of row 2 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Commit import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Prepare, back up and approve import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Create a ready preview of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Prepare a preview of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  step: STEP: Read the review versions of row 1 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Request a preview of import 418188b7-6dad-4d10-9979-781021c4b5c5 at batch version 4
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/preview "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:18 INFO  step: STEP: Request a backup receipt for preview b5ae38f4-3a84-49ef-b010-433792954597 of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/previews/b5ae38f4-3a84-49ef-b010-433792954597/backup "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Submit an import commit
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Read the outcome of import 418188b7-6dad-4d10-9979-781021c4b5c5
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/418188b7-6dad-4d10-9979-781021c4b5c5/outcome "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Submit an undo of the latest import
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Open donor card e5a15b8f-62b6-4dee-8d01-ec5ae681c86c
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/e5a15b8f-62b6-4dee-8d01-ec5ae681c86c "HTTP/1.1 200 OK"

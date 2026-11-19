@@ -1,0 +1,30 @@
+20:25:13 INFO  step: STEP: Create donor 'Jeremi Orzeszek QA-dc926212'
+20:25:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:13 INFO  step: STEP: Upload 'QA-dc926212.csv' and expect it to be staged
+20:25:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:13 INFO  step: STEP: Decide every row of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Decide row 1 of import 3f24b70e-5de9-4f80-924b-977f41475a33 ('existing-donor')
+20:25:13 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Read the review versions of row 1 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Decide row 2 of import 3f24b70e-5de9-4f80-924b-977f41475a33 ('existing-donor')
+20:25:13 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Read the review versions of row 2 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Commit import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Prepare, back up and approve import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Create a ready preview of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Prepare a preview of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  step: STEP: Read the review versions of row 1 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Request a preview of import 3f24b70e-5de9-4f80-924b-977f41475a33 at batch version 4
+20:25:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/preview "HTTP/1.1 201 Created"
+20:25:13 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:13 INFO  step: STEP: Request a backup receipt for preview 3078763d-ccad-432d-9c85-a43c1fd41e32 of import 3f24b70e-5de9-4f80-924b-977f41475a33
+20:25:14 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3f24b70e-5de9-4f80-924b-977f41475a33/previews/3078763d-ccad-432d-9c85-a43c1fd41e32/backup "HTTP/1.1 200 OK"
+20:25:14 INFO  step: STEP: Submit an import commit
+20:25:14 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:14 INFO  step: STEP: Open donor card 68787a18-99ec-4fdd-a7b7-8d34fb3a21f9
+20:25:14 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/68787a18-99ec-4fdd-a7b7-8d34fb3a21f9 "HTTP/1.1 200 OK"

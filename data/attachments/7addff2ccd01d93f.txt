@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser

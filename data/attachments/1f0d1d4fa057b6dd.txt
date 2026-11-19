@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-ebcb7ea1.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Gaja Sommer QA-ebcb7ea1'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import aa17ecfc-44cf-48aa-8014-1104c532c6e9
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/aa17ecfc-44cf-48aa-8014-1104c532c6e9/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit a decision payload for row 1 of import aa17ecfc-44cf-48aa-8014-1104c532c6e9
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/aa17ecfc-44cf-48aa-8014-1104c532c6e9/rows/1/1/decision "HTTP/1.1 403 Forbidden"

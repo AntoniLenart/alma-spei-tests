@@ -1,0 +1,24 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-d86ec97d.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Robert Gortat QA-d86ec97d' for import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Propose donor 'Robert Gortat QA-d86ec97d' for import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 11463ce9-ecb9-4121-8175-23f5052646b2 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 11463ce9-ecb9-4121-8175-23f5052646b2 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 11463ce9-ecb9-4121-8175-23f5052646b2
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 11463ce9-ecb9-4121-8175-23f5052646b2 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/11463ce9-ecb9-4121-8175-23f5052646b2/preview "HTTP/1.1 201 Created"

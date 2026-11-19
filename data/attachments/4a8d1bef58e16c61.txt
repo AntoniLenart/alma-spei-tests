@@ -1,0 +1,4 @@
+20:25:34 INFO  step: STEP: List donors {'search': 'DANE SYNTETYCZNE —', 'limit': 100}
+20:25:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=DANE+SYNTETYCZNE+%E2%80%94&limit=100 "HTTP/1.1 200 OK"
+20:25:34 INFO  step: STEP: List donors {'search': 'DANE SYNTETYCZNE —', 'limit': 100, 'status': <DonorStatusFilter.ALL: 'all'>}
+20:25:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=DANE+SYNTETYCZNE+%E2%80%94&limit=100&status=all "HTTP/1.1 200 OK"

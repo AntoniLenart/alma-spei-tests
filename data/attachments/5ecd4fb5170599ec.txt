@@ -1,0 +1,14 @@
+20:25:23 INFO  step: STEP: Upload 'QA-c6f7a4ef.csv' and expect it to be staged
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:23 INFO  step: STEP: Create donor 'Maciej Polaszek QA-c6f7a4ef'
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:23 INFO  step: STEP: Decide row 1 of import 39f73497-c0be-479c-ba3e-73edb8b8116d ('existing-donor')
+20:25:23 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 39f73497-c0be-479c-ba3e-73edb8b8116d
+20:25:23 INFO  step: STEP: Read the review versions of row 1 of import 39f73497-c0be-479c-ba3e-73edb8b8116d
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/39f73497-c0be-479c-ba3e-73edb8b8116d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/39f73497-c0be-479c-ba3e-73edb8b8116d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  step: STEP: Prepare a preview of import 39f73497-c0be-479c-ba3e-73edb8b8116d
+20:25:23 INFO  step: STEP: Read the review versions of row 1 of import 39f73497-c0be-479c-ba3e-73edb8b8116d
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/39f73497-c0be-479c-ba3e-73edb8b8116d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  step: STEP: Request a preview of import 39f73497-c0be-479c-ba3e-73edb8b8116d at batch version 3
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/39f73497-c0be-479c-ba3e-73edb8b8116d/preview "HTTP/1.1 409 Conflict"

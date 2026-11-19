@@ -1,0 +1,25 @@
+20:25:25 INFO  step: STEP: Upload 'QA-bbe45abc.csv' and expect it to be staged
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Create donor 'Norbert Gumienny QA-bbe45abc'
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Decide every row of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  step: STEP: Decide row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c ('existing-donor')
+20:25:25 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Decide row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c ('existing-donor')
+20:25:25 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  step: STEP: Read the review versions of row 2 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Create a ready preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  step: STEP: Prepare a preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Request a preview of import d7e64d1d-9ee8-4f06-a19d-74407612084c at batch version 4
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/preview "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Read preview 3355dd57-24a6-4d5b-b913-11ff67a23703 of import d7e64d1d-9ee8-4f06-a19d-74407612084c
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/previews/3355dd57-24a6-4d5b-b913-11ff67a23703 "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Read the planned effects of preview 3355dd57-24a6-4d5b-b913-11ff67a23703 {}
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e64d1d-9ee8-4f06-a19d-74407612084c/previews/3355dd57-24a6-4d5b-b913-11ff67a23703/items "HTTP/1.1 200 OK"

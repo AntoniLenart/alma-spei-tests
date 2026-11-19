@@ -1,0 +1,30 @@
+20:25:54 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:54 INFO  step: STEP: Upload 'QA-82ae3a96.csv' and expect it to be staged
+20:25:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:54 INFO  step: STEP: Create donor 'Olga Durlak QA-82ae3a96'
+20:25:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:54 INFO  step: STEP: Decide every row of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Decide row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631 ('existing-donor')
+20:25:54 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Read the review versions of row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:54 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:54 INFO  step: STEP: Decide row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631 ('existing-donor')
+20:25:54 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Read the review versions of row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:54 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:54 INFO  step: STEP: Commit import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Prepare, back up and approve import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Create a ready preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Prepare a preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  step: STEP: Read the review versions of row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:54 INFO  step: STEP: Request a preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631 at batch version 4
+20:25:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/preview "HTTP/1.1 201 Created"
+20:25:54 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:54 INFO  step: STEP: Request a backup receipt for preview 63ddd9ae-6ed1-46ad-89d5-29ff1e8e5fcc of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+20:25:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/previews/63ddd9ae-6ed1-46ad-89d5-29ff1e8e5fcc/backup "HTTP/1.1 200 OK"
+20:25:54 INFO  step: STEP: Submit an import commit
+20:25:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:54 INFO  step: STEP: Open the import history from the navigation

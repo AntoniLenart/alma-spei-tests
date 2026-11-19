@@ -1,0 +1,10 @@
+20:25:51 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:51 INFO  step: STEP: Create donor 'Kamila Piwowarek QA-a65da4ed'
+20:25:51 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:51 INFO  step: STEP: Open the donor list
+20:25:51 INFO  step: STEP: Search donors for 'QA-a65da4ed'
+20:25:51 INFO  step: STEP: Open the card of donor 'Kamila Piwowarek QA-a65da4ed'
+20:25:51 INFO  step: STEP: Edit the donor's name to 'Kamila Piwowarek QA-a65da4ed (zmieniony)' and save
+20:25:51 INFO  step: STEP: Wait for the save confirmation
+20:25:51 INFO  step: STEP: Open donor card 22cb97d5-a251-49ac-842a-32e75e9f6721
+20:25:51 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/22cb97d5-a251-49ac-842a-32e75e9f6721 "HTTP/1.1 200 OK"

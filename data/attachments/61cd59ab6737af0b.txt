@@ -1,0 +1,12 @@
+20:26:11 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:11 INFO  step: STEP: Upload 'QA-42806efe.csv' and expect it to be staged
+20:26:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:11 INFO  step: STEP: Create donor 'Mariusz Maciuszek QA-42806efe'
+20:26:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:26:11 INFO  step: STEP: Deep-link to the review of import 8aa9d0a9-e28d-4d8c-9848-3bc966478aec
+20:26:11 INFO  step: STEP: Search for 'QA-42806efe' and compare with 'Mariusz Maciuszek QA-42806efe'
+20:26:11 INFO  step: STEP: Choose the compared donor as the row's target
+20:26:11 INFO  step: STEP: Fill in the payment review (PLN, new)
+20:26:11 INFO  step: STEP: Save the row decision through the form
+20:26:11 INFO  step: STEP: Read the decision of row 1 of import 8aa9d0a9-e28d-4d8c-9848-3bc966478aec
+20:26:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/8aa9d0a9-e28d-4d8c-9848-3bc966478aec/rows/1/1/decision "HTTP/1.1 200 OK"

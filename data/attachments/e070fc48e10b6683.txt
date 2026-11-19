@@ -1,0 +1,8 @@
+20:25:12 INFO  step: STEP: Create donor 'Marcel Myszak QA-ee8e475a'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Create donor 'Nikołajuk-Roj Sp.j. QA-ee8e475a'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Create donor 'Fundacja Komuda QA-ee8e475a'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: List donors tagged QA-ee8e475a
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-ee8e475a&entity-type=business "HTTP/1.1 200 OK"

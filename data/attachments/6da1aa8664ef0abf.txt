@@ -1,0 +1,6 @@
+20:25:02 INFO  step: STEP: Create account qa.0417f0fea29c
+20:25:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:02 INFO  step: STEP: Request account QA.0417F0FEA29C
+20:25:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 409 Conflict"
+20:25:02 INFO  step: STEP: Deactivate account 94cf91db-b11b-4ea1-81bf-b84d9008db93
+20:25:02 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/94cf91db-b11b-4ea1-81bf-b84d9008db93 "HTTP/1.1 200 OK"

@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Julian Szczap QA-642fa107'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-642FA107
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-642FA107 "HTTP/1.1 200 OK"

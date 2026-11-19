@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's UPDATE privilege on columns ('name', 'city', 'is_active', 'version', 'updated_by', 'updated_at') of donors
+INFO     step:_decorator.py:52 STEP: Read the app role's UPDATE privilege on columns ('id', 'created_by', 'created_at', 'import_batch_id') of donors

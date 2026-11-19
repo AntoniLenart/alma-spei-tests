@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-96fed19d.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the undo eligibility of import 2bbf29f9-1a09-4739-84a3-5d18c26073ab
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/2bbf29f9-1a09-4739-84a3-5d18c26073ab/undo-eligibility "HTTP/1.1 200 OK"

@@ -1,0 +1,5 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-0f025cab.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the review of import cc610317-391a-443f-969a-9fde32c7ad07
+INFO     step:_decorator.py:52 STEP: Prepare the import preview through the form

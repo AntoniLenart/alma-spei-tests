@@ -1,0 +1,6 @@
+20:25:17 INFO  step: STEP: Upload 'QA-831c90f0.csv' and expect it to be staged
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Create donor 'Adrian Grupa QA-831c90f0'
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Compare staged row 1/1 of import 567fd0e9-7302-49da-8fe8-891fd8d13152 with donor None
+20:25:17 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/567fd0e9-7302-49da-8fe8-891fd8d13152/rows/1/1/comparison?donor-id=bad "HTTP/1.1 400 Bad Request"

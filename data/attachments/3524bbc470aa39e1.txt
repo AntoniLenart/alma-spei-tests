@@ -1,0 +1,30 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-82ae3a96.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Olga Durlak QA-82ae3a96'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Commit import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import c30d9568-f7ab-47fc-a531-4b35e85cd631 at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview 63ddd9ae-6ed1-46ad-89d5-29ff1e8e5fcc of import c30d9568-f7ab-47fc-a531-4b35e85cd631
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/c30d9568-f7ab-47fc-a531-4b35e85cd631/previews/63ddd9ae-6ed1-46ad-89d5-29ff1e8e5fcc/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Open the import history from the navigation

@@ -1,0 +1,12 @@
+20:25:40 INFO  step: STEP: Create account qa.be08c4f97bbc
+20:25:40 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:40 INFO  step: STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+20:25:40 INFO  step: STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+20:25:40 INFO  step: STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+20:25:40 INFO  step: STEP: Run seed-demo with qa.be08c4f97bbc as the audit actor
+20:25:40 INFO  orchestration: stack: seed-demo -> clojure -Srepro -M:seed-demo qa.be08c4f97bbc
+20:25:43 INFO  step: STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+20:25:43 INFO  step: STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+20:25:43 INFO  step: STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+20:25:43 INFO  step: STEP: Deactivate account b56e9cba-c641-417d-9d0e-b5c61cb0e6ee
+20:25:43 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b56e9cba-c641-417d-9d0e-b5c61cb0e6ee "HTTP/1.1 200 OK"

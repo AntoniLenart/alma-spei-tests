@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-5f0e061e.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import dcd05f0d-6593-4b7a-b75d-e3e908b1580e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/dcd05f0d-6593-4b7a-b75d-e3e908b1580e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit a donor proposal for import dcd05f0d-6593-4b7a-b75d-e3e908b1580e
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/dcd05f0d-6593-4b7a-b75d-e3e908b1580e/donor-proposals "HTTP/1.1 400 Bad Request"

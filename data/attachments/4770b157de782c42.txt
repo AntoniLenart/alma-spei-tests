@@ -1,0 +1,2 @@
+20:25:28 INFO  step: STEP: Read user qa.admin with its local credential
+20:25:28 INFO  step: STEP: Probe a donor row with {'created_by': '2e3ab02d-fe44-40e3-ad06-b0c102c7c93c'} (rolled back)

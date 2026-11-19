@@ -1,0 +1,34 @@
+20:25:29 INFO  step: STEP: Upload 'QA-be0492f3.csv' and expect it to be staged
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Create donor 'Igor Perka QA-be0492f3'
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Decide every row of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Decide row 1 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb ('existing-donor')
+20:25:29 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Read the review versions of row 1 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Decide row 2 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb ('existing-donor')
+20:25:29 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Read the review versions of row 2 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Commit import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Prepare, back up and approve import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Create a ready preview of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Prepare a preview of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  step: STEP: Read the review versions of row 1 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Request a preview of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb at batch version 4
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/preview "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:29 INFO  step: STEP: Request a backup receipt for preview be8fc8bd-3dd9-44ea-91e5-cc702eb1c988 of import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/previews/be8fc8bd-3dd9-44ea-91e5-cc702eb1c988/backup "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Submit an import commit
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Undo committed import dd929634-51a0-44f2-b2a6-d8a8aab8a6bb
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd929634-51a0-44f2-b2a6-d8a8aab8a6bb/outcome "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Submit an undo of the latest import
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Count import attempts of the file with hash a9412f0f6c38a6d10d10251dd6331282d8eef8836da53804e9e0adb188fbd07a

@@ -1,0 +1,39 @@
+20:25:29 INFO  step: STEP: Upload 'QA-e923de65.csv' and expect it to be staged
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Count the active donors and payments
+20:25:29 INFO  step: STEP: Create donor proposal 'Ksawery Lazarek QA-e923de65' for import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Propose donor 'Ksawery Lazarek QA-e923de65' for import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Read the review versions of row 1 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/donor-proposals "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Decide every row of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Decide row 1 of import 19729ece-dbc7-468e-9813-0e5212198c8d ('new-proposal')
+20:25:29 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Read the review versions of row 1 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Decide row 2 of import 19729ece-dbc7-468e-9813-0e5212198c8d ('new-proposal')
+20:25:29 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Read the review versions of row 2 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Commit import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Prepare, back up and approve import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Create a ready preview of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Prepare a preview of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  step: STEP: Read the review versions of row 1 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Request a preview of import 19729ece-dbc7-468e-9813-0e5212198c8d at batch version 5
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/preview "HTTP/1.1 201 Created"
+20:25:29 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:29 INFO  step: STEP: Request a backup receipt for preview 3f6809c7-23d2-4349-bd64-1ca1562851f9 of import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/previews/3f6809c7-23d2-4349-bd64-1ca1562851f9/backup "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Submit an import commit
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Count the active donors and payments
+20:25:29 INFO  step: STEP: Undo committed import 19729ece-dbc7-468e-9813-0e5212198c8d
+20:25:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19729ece-dbc7-468e-9813-0e5212198c8d/outcome "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Submit an undo of the latest import
+20:25:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:29 INFO  step: STEP: Count the active donors and payments
+20:25:29 INFO  step: STEP: Count the records attributed to import batch 19729ece-dbc7-468e-9813-0e5212198c8d

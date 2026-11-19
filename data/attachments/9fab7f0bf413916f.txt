@@ -1,0 +1,4 @@
+20:25:17 INFO  step: STEP: Upload 'QA-3f54c1ce.csv' and expect it to be staged
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Compare staged row 1/1 of import 0aef2aca-21cf-4ce4-933c-d00b7edc3802 with donor 122d05dc-0232-4715-a99c-f3539e71761f
+20:25:17 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0aef2aca-21cf-4ce4-933c-d00b7edc3802/rows/1/1/comparison?donor-id=122d05dc-0232-4715-a99c-f3539e71761f "HTTP/1.1 404 Not Found"

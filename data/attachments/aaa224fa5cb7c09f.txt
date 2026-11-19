@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-98809766.csv' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+INFO     step:_decorator.py:52 STEP: Retry failed import 98c9c108-82e1-4b5f-a41e-1796e8f78038 (version 1) with 'QA-98809766.csv'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 409 Conflict"

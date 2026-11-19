@@ -1,0 +1,8 @@
+20:25:11 INFO  step: STEP: Create donor 'Eryk Makurat QA-0cfea4cd'
+20:25:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:11 INFO  step: STEP: Create donor 'Krzysztof Budzyń QA-0cfea4cd'
+20:25:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:11 INFO  step: STEP: Create donor 'Róża Zacharewicz QA-35196df1'
+20:25:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:11 INFO  step: STEP: List donors {'search': 'QA-0cfea4cd'}
+20:25:11 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-0cfea4cd "HTTP/1.1 200 OK"

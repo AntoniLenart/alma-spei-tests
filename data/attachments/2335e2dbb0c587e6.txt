@@ -1,0 +1,1 @@
+20:25:34 INFO  step: STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'

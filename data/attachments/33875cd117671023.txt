@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.f3bbded3d5d7
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Count security audit rows mentioning a secret
+INFO     step:_decorator.py:52 STEP: Deactivate account 62a455b3-5b9a-400d-9690-ea951e8783ba
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/62a455b3-5b9a-400d-9690-ea951e8783ba "HTTP/1.1 200 OK"

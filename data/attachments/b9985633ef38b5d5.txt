@@ -1,0 +1,1 @@
+20:25:48 INFO  step: STEP: Open the application shell and wait for its health check

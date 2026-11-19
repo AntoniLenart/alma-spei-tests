@@ -1,0 +1,4 @@
+20:25:59 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:59 INFO  step: STEP: Open the bank upload screen
+20:25:59 INFO  step: STEP: Choose 'QA-17510999.csv' in the upload form
+20:25:59 INFO  step: STEP: Submit the file for analysis

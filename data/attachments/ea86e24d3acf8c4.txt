@@ -1,0 +1,27 @@
+20:25:30 INFO  step: STEP: Upload 'QA-85c57ae5.csv' and expect it to be staged
+20:25:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:30 INFO  step: STEP: Count rows in the canonical donor tables
+20:25:30 INFO  step: STEP: Create donor proposal 'Aurelia Klama QA-85c57ae5' for import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Propose donor 'Aurelia Klama QA-85c57ae5' for import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Read the review versions of row 1 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/donor-proposals "HTTP/1.1 201 Created"
+20:25:30 INFO  step: STEP: Decide every row of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Decide row 1 of import dffcdf1f-4183-40f4-9847-fb1e342d240d ('new-proposal')
+20:25:30 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Read the review versions of row 1 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Decide row 2 of import dffcdf1f-4183-40f4-9847-fb1e342d240d ('new-proposal')
+20:25:30 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Read the review versions of row 2 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Create a ready preview of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Prepare a preview of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  step: STEP: Read the review versions of row 1 of import dffcdf1f-4183-40f4-9847-fb1e342d240d
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Request a preview of import dffcdf1f-4183-40f4-9847-fb1e342d240d at batch version 5
+20:25:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dffcdf1f-4183-40f4-9847-fb1e342d240d/preview "HTTP/1.1 201 Created"
+20:25:30 INFO  step: STEP: Count rows in the canonical donor tables
+20:25:30 INFO  step: STEP: Count the previews of import batch dffcdf1f-4183-40f4-9847-fb1e342d240d

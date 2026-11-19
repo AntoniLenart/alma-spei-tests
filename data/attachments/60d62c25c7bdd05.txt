@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Count rows in application_metadata

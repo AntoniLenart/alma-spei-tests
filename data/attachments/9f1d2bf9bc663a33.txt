@@ -1,0 +1,1 @@
+20:25:30 INFO  step: STEP: Read the app role's [<Privilege.UPDATE: 'UPDATE'>] privileges on import_review_events

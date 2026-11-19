@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Maurycy Siedlik QA-4d76c688'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Update donor 1f21c150-185f-4eef-9f49-5b93bd24e335
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/1f21c150-185f-4eef-9f49-5b93bd24e335 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the change history of donor 1f21c150-185f-4eef-9f49-5b93bd24e335
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/1f21c150-185f-4eef-9f49-5b93bd24e335/history "HTTP/1.1 200 OK"

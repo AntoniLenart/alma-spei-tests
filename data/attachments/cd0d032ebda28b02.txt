@@ -1,0 +1,8 @@
+20:25:25 INFO  step: STEP: Upload 'QA-000d4003.csv' and expect it to be staged
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Create donor 'Aurelia Szczap QA-000d4003'
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 4d30e06a-292a-4aa2-8f4a-ba855a62c17b
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import 4d30e06a-292a-4aa2-8f4a-ba855a62c17b
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4d30e06a-292a-4aa2-8f4a-ba855a62c17b/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4d30e06a-292a-4aa2-8f4a-ba855a62c17b/rows/1/1/decision "HTTP/1.1 200 OK"

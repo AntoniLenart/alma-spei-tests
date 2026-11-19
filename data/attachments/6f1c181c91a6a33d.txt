@@ -1,0 +1,6 @@
+20:26:06 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:06 INFO  step: STEP: Open the bank upload screen
+20:26:06 INFO  step: STEP: Choose 'QA-52af1782.csv' in the upload form
+20:26:06 INFO  step: STEP: Submit the file for analysis
+20:26:06 INFO  step: STEP: Wait for the analysis status 'Analiza zakończona błędem'
+20:26:06 INFO  step: STEP: Confirm and retry the analysis of 'QA-52af1782.csv'

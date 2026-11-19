@@ -1,0 +1,6 @@
+20:25:17 INFO  step: STEP: Upload 'QA-7a16557f.csv' and expect it to be staged
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Create donor 'Jan Kozubal QA-7a16557f'
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Compare staged row 2/1 of import db8f7c45-ba26-40b3-bb7b-cc6db37f84f7 with donor 1644c7b6-67b8-4446-a435-c4fe8d503451
+20:25:17 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db8f7c45-ba26-40b3-bb7b-cc6db37f84f7/rows/2/1/comparison?donor-id=1644c7b6-67b8-4446-a435-c4fe8d503451 "HTTP/1.1 404 Not Found"

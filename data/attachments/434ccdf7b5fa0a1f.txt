@@ -1,0 +1,3 @@
+20:25:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:26 INFO  step: STEP: Request liveness probe GET /api/health/live
+20:25:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/health/live "HTTP/1.1 200 OK"

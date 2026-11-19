@@ -1,0 +1,15 @@
+20:25:22 INFO  step: STEP: Upload 'QA-4301a539.csv' and expect it to be staged
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Create donor proposal 'Krzysztof Janasik QA-4301a539' for import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  step: STEP: Propose donor 'Krzysztof Janasik QA-4301a539' for import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  step: STEP: Edit donor proposal eb924357-5c31-499f-a42c-e21f7935e6be of import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals/eb924357-5c31-499f-a42c-e21f7935e6be "HTTP/1.1 200 OK"
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  step: STEP: Edit donor proposal eb924357-5c31-499f-a42c-e21f7935e6be of import 99224a07-6c0e-438e-9472-7eceaa01786a
+20:25:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals/eb924357-5c31-499f-a42c-e21f7935e6be "HTTP/1.1 409 Conflict"

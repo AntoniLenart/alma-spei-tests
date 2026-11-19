@@ -1,0 +1,6 @@
+20:25:24 INFO  step: STEP: Create account qa.8a3266735bcc
+20:25:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:24 INFO  step: STEP: Edit account 70d5e472-3c24-4b57-a64b-63b208279006
+20:25:24 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/70d5e472-3c24-4b57-a64b-63b208279006 "HTTP/1.1 200 OK"
+20:25:24 INFO  step: STEP: Deactivate account 70d5e472-3c24-4b57-a64b-63b208279006
+20:25:24 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/70d5e472-3c24-4b57-a64b-63b208279006 "HTTP/1.1 200 OK"

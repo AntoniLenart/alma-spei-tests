@@ -1,0 +1,36 @@
+20:25:55 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:55 INFO  step: STEP: Upload 'QA-2a22f71a.csv' and expect it to be staged
+20:25:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:55 INFO  step: STEP: Create donor proposal 'Konrad Cabała QA-2a22f71a' for import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Propose donor 'Konrad Cabała QA-2a22f71a' for import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Read the review versions of row 1 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/donor-proposals "HTTP/1.1 201 Created"
+20:25:55 INFO  step: STEP: Decide every row of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Decide row 1 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88 ('new-proposal')
+20:25:55 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Read the review versions of row 1 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  step: STEP: Decide row 2 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88 ('new-proposal')
+20:25:55 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Read the review versions of row 2 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  step: STEP: Commit import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Prepare, back up and approve import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Create a ready preview of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Prepare a preview of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  step: STEP: Read the review versions of row 1 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:55 INFO  step: STEP: Request a preview of import e14d19f3-6b66-4b02-9fd6-e774ca589d88 at batch version 5
+20:25:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/preview "HTTP/1.1 201 Created"
+20:25:55 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:55 INFO  step: STEP: Request a backup receipt for preview 619423c7-6740-4980-b5ac-d3f129c314c5 of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/e14d19f3-6b66-4b02-9fd6-e774ca589d88/previews/619423c7-6740-4980-b5ac-d3f129c314c5/backup "HTTP/1.1 200 OK"
+20:25:55 INFO  step: STEP: Submit an import commit
+20:25:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:55 INFO  step: STEP: Open the outcome of import e14d19f3-6b66-4b02-9fd6-e774ca589d88
+20:25:56 INFO  step: STEP: Open the undo dialog
+20:25:56 INFO  step: STEP: Open the donor list
+20:25:56 INFO  step: STEP: Search donors for 'QA-2a22f71a'

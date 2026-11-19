@@ -1,0 +1,15 @@
+20:26:19 INFO  orchestration: stack: bb init (secrets) -> bb init
+20:26:20 INFO  orchestration: stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans
+20:26:20 INFO  orchestration: stack: compose up db -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml up -d --wait db
+20:26:22 INFO  orchestration: stack: migrate up -> clojure -Srepro -M:migrate up
+20:26:25 INFO  orchestration: stack: provision QA admin -> clojure -Srepro -M /home/runner/work/alma-spei-tests/alma-spei-tests/tests/src/alma_spei_tests/orchestration/provision_admin.clj
+20:26:29 INFO  orchestration: stack: frontend release build -> clojure -Srepro -M:ui -m shadow.cljs.devtools.cli release app
+20:26:46 INFO  orchestration: stack: starting backend -> /home/runner/work/alma-spei-tests/alma-spei-tests/tests/reports/stack/backend.log
+20:26:52 INFO  orchestration: stack: ready at http://127.0.0.1:3100
+20:26:52 INFO  step: STEP: Open the application shell and wait for its health check
+20:26:52 INFO  orchestration: stack: restarting backend
+20:26:52 INFO  orchestration: stack: starting backend -> /home/runner/work/alma-spei-tests/alma-spei-tests/tests/reports/stack/backend.log
+20:26:58 INFO  step: STEP: Open the application shell and wait for its health check
+20:26:59 INFO  step: STEP: Open the login form
+20:26:59 INFO  orchestration: stack: tearing down
+20:26:59 INFO  orchestration: stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans

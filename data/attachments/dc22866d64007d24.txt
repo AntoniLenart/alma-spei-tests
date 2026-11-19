@@ -1,0 +1,2 @@
+20:25:28 INFO  step: STEP: Read user qa.admin with its local credential
+20:25:28 INFO  step: STEP: Probe a donation with {'amount': '0'} (rolled back)

@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'

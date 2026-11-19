@@ -1,0 +1,1 @@
+20:25:26 INFO  step: STEP: Read user qa.admin with its local credential

@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's UPDATE privilege on columns ('updated_at', 'version', 'state', 'failure_code', 'total_rows', 'valid_rows', 'id', 'file_id', 'attempt_number', 'retry_of', 'source_type', 'original_filename') of import_batches

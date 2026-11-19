@@ -1,0 +1,15 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-4301a539.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Krzysztof Janasik QA-4301a539' for import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     step:_decorator.py:52 STEP: Propose donor 'Krzysztof Janasik QA-4301a539' for import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Edit donor proposal eb924357-5c31-499f-a42c-e21f7935e6be of import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals/eb924357-5c31-499f-a42c-e21f7935e6be "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Edit donor proposal eb924357-5c31-499f-a42c-e21f7935e6be of import 99224a07-6c0e-438e-9472-7eceaa01786a
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/99224a07-6c0e-438e-9472-7eceaa01786a/donor-proposals/eb924357-5c31-499f-a42c-e21f7935e6be "HTTP/1.1 409 Conflict"

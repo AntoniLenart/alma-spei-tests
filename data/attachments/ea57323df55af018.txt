@@ -1,0 +1,24 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-7f6efdfb.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Sonia Kucab QA-7f6efdfb'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import cbf41c22-0cca-41ba-a075-73aa68d93706 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import cbf41c22-0cca-41ba-a075-73aa68d93706 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deep-link to the review of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Prepare the import preview through the form
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import cbf41c22-0cca-41ba-a075-73aa68d93706
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import cbf41c22-0cca-41ba-a075-73aa68d93706 at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/cbf41c22-0cca-41ba-a075-73aa68d93706/preview "HTTP/1.1 201 Created"

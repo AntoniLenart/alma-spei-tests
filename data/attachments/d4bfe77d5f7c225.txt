@@ -1,0 +1,6 @@
+20:25:25 INFO  step: STEP: Upload 'QA-16bccd2e.csv' and expect it to be staged
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Create donor 'Maciej Doktór QA-16bccd2e'
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Look up existing payments for import 203d7a9b-1809-4260-8bc3-d31b998c3228 with [('donor-id', 'bb297734-0783-4510-a5c3-fe3af799d32b')]
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/203d7a9b-1809-4260-8bc3-d31b998c3228/payments?donor-id=bb297734-0783-4510-a5c3-fe3af799d32b "HTTP/1.1 200 OK"

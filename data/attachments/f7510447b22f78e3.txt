@@ -1,0 +1,2 @@
+20:26:10 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:10 INFO  step: STEP: Wait until signed in as QA Admin

@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Justyna Świech QA-b7579ce6'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the change history of donor 2a6ac250-028a-47c5-bf6b-575d3c1b3e07
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/2a6ac250-028a-47c5-bf6b-575d3c1b3e07/history "HTTP/1.1 200 OK"

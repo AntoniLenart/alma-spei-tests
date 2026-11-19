@@ -1,0 +1,15 @@
+20:25:21 INFO  step: STEP: Upload 'QA-0a98a112.csv' and expect it to be staged
+20:25:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:21 INFO  step: STEP: Create donor 'Filip Komuda QA-0a98a112'
+20:25:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:21 INFO  step: STEP: Decide row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0 ('existing-donor')
+20:25:21 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0
+20:25:21 INFO  step: STEP: Read the review versions of row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0
+20:25:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0dc6f370-fd2d-4191-af32-e4c63c70d7f0/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/0dc6f370-fd2d-4191-af32-e4c63c70d7f0/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:21 INFO  step: STEP: Read the review versions of row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0
+20:25:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0dc6f370-fd2d-4191-af32-e4c63c70d7f0/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:21 INFO  step: STEP: Submit a decision payload for row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0
+20:25:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/0dc6f370-fd2d-4191-af32-e4c63c70d7f0/rows/1/1/decision "HTTP/1.1 409 Conflict"
+20:25:21 INFO  step: STEP: Read the decision of row 1 of import 0dc6f370-fd2d-4191-af32-e4c63c70d7f0
+20:25:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0dc6f370-fd2d-4191-af32-e4c63c70d7f0/rows/1/1/decision "HTTP/1.1 200 OK"

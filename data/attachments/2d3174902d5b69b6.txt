@@ -1,0 +1,11 @@
+20:25:02 INFO  step: STEP: Create account qa.cb4cba3dfe2c
+20:25:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+20:25:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+20:25:03 INFO  step: STEP: Reset the password of account 88b42c67-ce79-46dc-a4b1-7058d63af151
+20:25:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts/88b42c67-ce79-46dc-a4b1-7058d63af151/reset-password "HTTP/1.1 200 OK"
+20:25:03 INFO  step: STEP: List donors {}
+20:25:03 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors "HTTP/1.1 401 Unauthorized"
+20:25:03 INFO  step: STEP: Deactivate account 88b42c67-ce79-46dc-a4b1-7058d63af151
+20:25:03 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/88b42c67-ce79-46dc-a4b1-7058d63af151 "HTTP/1.1 200 OK"

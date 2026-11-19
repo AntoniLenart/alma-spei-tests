@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-d1d63945.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Propose donor 'Paweł Gotfryd QA-d1d63945' for import d3d7d141-3869-410e-906b-66bf23c4fea7
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import d3d7d141-3869-410e-906b-66bf23c4fea7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: List the donor proposals of import d3d7d141-3869-410e-906b-66bf23c4fea7 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/donor-proposals "HTTP/1.1 200 OK"

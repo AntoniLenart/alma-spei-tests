@@ -1,0 +1,2 @@
+20:25:29 INFO  step: STEP: Read user qa.admin with its local credential
+20:25:29 INFO  step: STEP: Probe import attempts ({}, {'attempt_number': 2, 'retry_of': 0}) of one file (rolled back)

@@ -1,0 +1,32 @@
+20:25:25 INFO  step: STEP: Upload 'QA-d2b44707.csv' and expect it to be staged
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Create donor 'Gaja Tatarczyk QA-d2b44707'
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Decide every row of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Decide row 1 of import caad0433-7362-45b9-b8e7-c9cf72203ecf ('existing-donor')
+20:25:25 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Decide row 2 of import caad0433-7362-45b9-b8e7-c9cf72203ecf ('existing-donor')
+20:25:25 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Read the review versions of row 2 of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Commit import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Prepare, back up and approve import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Create a ready preview of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Prepare a preview of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Request a preview of import caad0433-7362-45b9-b8e7-c9cf72203ecf at batch version 4
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/preview "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:25 INFO  step: STEP: Request a backup receipt for preview 802c8816-fff6-4256-a70e-1df6e7d7f98e of import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/previews/802c8816-fff6-4256-a70e-1df6e7d7f98e/backup "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Submit an import commit
+20:25:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:26 INFO  step: STEP: Undo committed import caad0433-7362-45b9-b8e7-c9cf72203ecf
+20:25:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/caad0433-7362-45b9-b8e7-c9cf72203ecf/outcome "HTTP/1.1 200 OK"
+20:25:26 INFO  step: STEP: Submit an undo of the latest import
+20:25:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"

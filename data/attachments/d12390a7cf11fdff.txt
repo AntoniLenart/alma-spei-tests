@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Open the bank upload screen
+INFO     step:_decorator.py:52 STEP: Choose 'QA-52af1782.csv' in the upload form
+INFO     step:_decorator.py:52 STEP: Submit the file for analysis
+INFO     step:_decorator.py:52 STEP: Wait for the analysis status 'Analiza zakończona błędem'
+INFO     step:_decorator.py:52 STEP: Confirm and retry the analysis of 'QA-52af1782.csv'

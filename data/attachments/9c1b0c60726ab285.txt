@@ -1,0 +1,3 @@
+20:25:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:04 INFO  step: STEP: Request unknown API route GET /api/does-not-exist
+20:25:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/does-not-exist "HTTP/1.1 404 Not Found"

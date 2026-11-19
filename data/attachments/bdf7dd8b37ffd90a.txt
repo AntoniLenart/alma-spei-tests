@@ -1,0 +1,8 @@
+20:25:25 INFO  step: STEP: Upload 'QA-d1d63945.csv' and expect it to be staged
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: Propose donor 'Paweł Gotfryd QA-d1d63945' for import d3d7d141-3869-410e-906b-66bf23c4fea7
+20:25:25 INFO  step: STEP: Read the review versions of row 1 of import d3d7d141-3869-410e-906b-66bf23c4fea7
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/donor-proposals "HTTP/1.1 201 Created"
+20:25:25 INFO  step: STEP: List the donor proposals of import d3d7d141-3869-410e-906b-66bf23c4fea7 {}
+20:25:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d3d7d141-3869-410e-906b-66bf23c4fea7/donor-proposals "HTTP/1.1 200 OK"

@@ -1,0 +1,7 @@
+20:25:16 INFO  step: STEP: Upload 'QA-04983394.csv' and expect it to be staged
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Create donor 'Janina Tórz QA-04983394'
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Archive donor 5e2deb18-ec57-4c6e-a450-5fa658fc0bcf directly in the database
+20:25:16 INFO  step: STEP: Compare staged row 1/1 of import 90df5a04-01f2-4ee9-8e24-1fce51a0bed3 with donor 5e2deb18-ec57-4c6e-a450-5fa658fc0bcf
+20:25:16 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/90df5a04-01f2-4ee9-8e24-1fce51a0bed3/rows/1/1/comparison?donor-id=5e2deb18-ec57-4c6e-a450-5fa658fc0bcf "HTTP/1.1 200 OK"

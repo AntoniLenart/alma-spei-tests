@@ -1,0 +1,6 @@
+20:25:24 INFO  step: STEP: Create account qa.65a3dd8268b6
+20:25:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:24 INFO  step: STEP: Reset the password of account 6c701b27-29a5-40ff-a8e9-c5c08cedb5e3
+20:25:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts/6c701b27-29a5-40ff-a8e9-c5c08cedb5e3/reset-password "HTTP/1.1 200 OK"
+20:25:25 INFO  step: STEP: Deactivate account 6c701b27-29a5-40ff-a8e9-c5c08cedb5e3
+20:25:25 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/6c701b27-29a5-40ff-a8e9-c5c08cedb5e3 "HTTP/1.1 200 OK"

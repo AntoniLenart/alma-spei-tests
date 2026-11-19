@@ -1,0 +1,12 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.be08c4f97bbc
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Run seed-demo with qa.be08c4f97bbc as the audit actor
+INFO     orchestration:stack.py:267 stack: seed-demo -> clojure -Srepro -M:seed-demo qa.be08c4f97bbc
+INFO     step:_decorator.py:52 STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Deactivate account b56e9cba-c641-417d-9d0e-b5c61cb0e6ee
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b56e9cba-c641-417d-9d0e-b5c61cb0e6ee "HTTP/1.1 200 OK"

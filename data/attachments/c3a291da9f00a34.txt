@@ -1,0 +1,2 @@
+20:25:11 INFO  step: STEP: Upload 'QA-974d7489.xls' as a bank import
+20:25:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 415 Unsupported Media Type"

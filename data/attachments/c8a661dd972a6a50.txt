@@ -1,0 +1,8 @@
+20:26:00 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:00 INFO  step: STEP: Upload 'QA-34ffc827.csv' and expect it to be staged
+20:26:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:00 INFO  step: STEP: Create donor 'Franciszek Michalczak QA-34ffc827'
+20:26:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:26:00 INFO  step: STEP: Deep-link to the review of import 1ddfffd8-3462-434a-95f6-6ee4d3d60015
+20:26:00 INFO  step: STEP: Pick staged row 2 for comparison
+20:26:00 INFO  step: STEP: Search for 'QA-34ffc827' and compare with 'Franciszek Michalczak QA-34ffc827'

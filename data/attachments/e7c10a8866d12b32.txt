@@ -1,0 +1,6 @@
+20:25:49 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:49 INFO  step: STEP: Create donor 'Arkadiusz Omiotek QA-6e416501'
+20:25:49 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:49 INFO  step: STEP: Open the donor list
+20:25:49 INFO  step: STEP: Search donors for 'QA-6e416501'
+20:25:49 INFO  step: STEP: Wait until the list shows 1 donor(s)

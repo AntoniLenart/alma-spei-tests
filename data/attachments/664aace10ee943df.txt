@@ -1,0 +1,2 @@
+20:25:48 INFO  step: STEP: Make the readiness probe answer HTTP 200 with {"status": "starting"}
+20:25:48 INFO  step: STEP: Open the application shell and wait for its health check

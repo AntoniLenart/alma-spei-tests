@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Probe import attempts ({'original_filename': 'statements/2026.csv'},) of one file (rolled back)

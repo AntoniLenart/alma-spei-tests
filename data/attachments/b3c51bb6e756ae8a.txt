@@ -1,0 +1,31 @@
+20:25:28 INFO  step: STEP: Upload 'QA-81a83f60.csv' and expect it to be staged
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:28 INFO  step: STEP: Create donor 'Ada Lepka QA-81a83f60'
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:28 INFO  step: STEP: Decide every row of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Decide row 1 of import 609de625-c56f-4e65-8ed5-238195477390 ('existing-donor')
+20:25:28 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Read the review versions of row 1 of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Decide row 2 of import 609de625-c56f-4e65-8ed5-238195477390 ('existing-donor')
+20:25:28 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Read the review versions of row 2 of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Commit import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Prepare, back up and approve import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Create a ready preview of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Prepare a preview of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Read the review versions of row 1 of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Request a preview of import 609de625-c56f-4e65-8ed5-238195477390 at batch version 4
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/preview "HTTP/1.1 201 Created"
+20:25:28 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:28 INFO  step: STEP: Request a backup receipt for preview 37537d4b-564c-4fae-a89f-3a9f73cb4c5a of import 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/609de625-c56f-4e65-8ed5-238195477390/previews/37537d4b-564c-4fae-a89f-3a9f73cb4c5a/backup "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Submit an import commit
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Count the records attributed to import batch 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Read the events of import batch 609de625-c56f-4e65-8ed5-238195477390
+20:25:28 INFO  step: STEP: Read which import created donor f8e605e7-5f8e-4a7e-a506-a7dbeb810c12

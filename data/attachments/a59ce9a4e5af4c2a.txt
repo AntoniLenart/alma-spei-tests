@@ -1,0 +1,6 @@
+20:25:17 INFO  step: STEP: Create donor 'Tobiasz Budrewicz QA-ffdf8f5d'
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:17 INFO  step: STEP: Upload 'QA-ffdf8f5d.csv' as a bank import
+20:25:17 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+20:25:17 INFO  step: STEP: Compare staged row 1/1 of import 7cb90f69-b207-4247-9d0a-fc482377d7d3 with donor 490ecf05-16e5-4638-b4a3-b97196645cd1
+20:25:17 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/7cb90f69-b207-4247-9d0a-fc482377d7d3/rows/1/1/comparison?donor-id=490ecf05-16e5-4638-b4a3-b97196645cd1 "HTTP/1.1 409 Conflict"

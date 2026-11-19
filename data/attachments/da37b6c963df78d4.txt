@@ -1,0 +1,4 @@
+20:25:58 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:58 INFO  step: STEP: Upload 'QA-dd162372.csv' and expect it to be staged
+20:25:58 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:58 INFO  step: STEP: Open the import review queue

@@ -1,0 +1,7 @@
+20:25:10 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:10 INFO  step: STEP: Create account qa.3679ae5f8047
+20:25:10 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:10 INFO  step: STEP: Log in as qa.3679ae5f8047
+20:25:10 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 403 Forbidden"
+20:25:10 INFO  step: STEP: Deactivate account 130e4558-43ca-4c47-b582-ca8f1a935e95
+20:25:10 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/130e4558-43ca-4c47-b582-ca8f1a935e95 "HTTP/1.1 200 OK"

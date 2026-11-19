@@ -1,0 +1,37 @@
+20:25:57 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:57 INFO  step: STEP: Upload 'QA-2c852d39.csv' and expect it to be staged
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:57 INFO  step: STEP: Create donor 'Jędrzej Żołna QA-2c852d39'
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:57 INFO  step: STEP: Decide every row of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Decide row 1 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7 ('existing-donor')
+20:25:57 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Read the review versions of row 1 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:57 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Decide row 2 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7 ('existing-donor')
+20:25:57 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Read the review versions of row 2 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:57 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Commit import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Prepare, back up and approve import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Create a ready preview of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Prepare a preview of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Read the review versions of row 1 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Request a preview of import c4687f01-8619-4f72-a7dd-f7ed9439ace7 at batch version 4
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/preview "HTTP/1.1 201 Created"
+20:25:57 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:57 INFO  step: STEP: Request a backup receipt for preview ced95142-d6c8-48a6-a8a1-f9f36a626180 of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/previews/ced95142-d6c8-48a6-a8a1-f9f36a626180/backup "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Submit an import commit
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Undo committed import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c4687f01-8619-4f72-a7dd-f7ed9439ace7/outcome "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Submit an undo of the latest import
+20:25:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:57 INFO  step: STEP: Open the outcome of import c4687f01-8619-4f72-a7dd-f7ed9439ace7
+20:25:57 INFO  step: STEP: Choose 'QA-2c852d39.csv' in the upload form
+20:25:58 INFO  step: STEP: Confirm and retry the analysis of 'QA-2c852d39.csv'
+20:25:58 INFO  step: STEP: Wait for the analysis status 'Oczekuje na weryfikację'

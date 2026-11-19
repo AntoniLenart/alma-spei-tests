@@ -1,0 +1,4 @@
+20:25:12 INFO  step: STEP: Create donor 'Eryk Migoń QA-db5f2114'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Update donor c20bd03f-40a2-4b6f-80c6-5da2b19644e5
+20:25:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/c20bd03f-40a2-4b6f-80c6-5da2b19644e5 "HTTP/1.1 200 OK"

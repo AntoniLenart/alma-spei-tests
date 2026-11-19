@@ -1,0 +1,17 @@
+20:26:12 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:12 INFO  step: STEP: Upload 'QA-4858ec6f.csv' and expect it to be staged
+20:26:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:12 INFO  step: STEP: Create donor 'Marcin Szyda QA-4858ec6f'
+20:26:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:26:12 INFO  step: STEP: Decide every row of import d7020f06-83dd-4b76-b4c7-60dc47384c00
+20:26:12 INFO  step: STEP: Decide row 1 of import d7020f06-83dd-4b76-b4c7-60dc47384c00 ('existing-donor')
+20:26:12 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import d7020f06-83dd-4b76-b4c7-60dc47384c00
+20:26:12 INFO  step: STEP: Read the review versions of row 1 of import d7020f06-83dd-4b76-b4c7-60dc47384c00
+20:26:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7020f06-83dd-4b76-b4c7-60dc47384c00/rows/1/1/decision "HTTP/1.1 200 OK"
+20:26:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7020f06-83dd-4b76-b4c7-60dc47384c00/rows/1/1/decision "HTTP/1.1 200 OK"
+20:26:12 INFO  step: STEP: Decide row 2 of import d7020f06-83dd-4b76-b4c7-60dc47384c00 ('existing-donor')
+20:26:12 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import d7020f06-83dd-4b76-b4c7-60dc47384c00
+20:26:12 INFO  step: STEP: Read the review versions of row 2 of import d7020f06-83dd-4b76-b4c7-60dc47384c00
+20:26:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7020f06-83dd-4b76-b4c7-60dc47384c00/rows/1/2/decision "HTTP/1.1 200 OK"
+20:26:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7020f06-83dd-4b76-b4c7-60dc47384c00/rows/1/2/decision "HTTP/1.1 200 OK"
+20:26:12 INFO  step: STEP: Deep-link to the review of import d7020f06-83dd-4b76-b4c7-60dc47384c00

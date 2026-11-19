@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-3619e323.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Łukasz Dorobisz QA-3619e323'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Compare staged row 1/1 of import 0053c5d8-5554-47c7-9a5a-5b4ef12a5d5b with donor 4d599d84-a0b6-4cd7-a8af-8371ee993f76
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/0053c5d8-5554-47c7-9a5a-5b4ef12a5d5b/rows/1/1/comparison?donor-id=4d599d84-a0b6-4cd7-a8af-8371ee993f76 "HTTP/1.1 200 OK"

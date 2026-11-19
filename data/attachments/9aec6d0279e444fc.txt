@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Bianka Kusyk QA-c20e43b3'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Upload 'QA-c20e43b3.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 030e3f8e-bd0f-4722-867f-f6e1e757d272
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 030e3f8e-bd0f-4722-867f-f6e1e757d272
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/030e3f8e-bd0f-4722-867f-f6e1e757d272/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/030e3f8e-bd0f-4722-867f-f6e1e757d272/rows/1/1/decision "HTTP/1.1 409 Conflict"

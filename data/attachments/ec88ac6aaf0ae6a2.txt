@@ -1,0 +1,2 @@
+20:25:26 INFO  step: STEP: Upload 'QA-92876df7.csv' as a bank import
+20:25:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"

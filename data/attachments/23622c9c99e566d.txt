@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-a72241df.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the review of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2
+INFO     step:_decorator.py:52 STEP: Propose donor 'Kamil Wawrzynek QA-a72241df' through the form and use it
+INFO     step:_decorator.py:52 STEP: Fill in the payment review (PLN, new)
+INFO     step:_decorator.py:52 STEP: Save the row decision through the form
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c6a8ace2-144c-4c61-8bdc-d3fa73499dc2/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List the donor proposals of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c6a8ace2-144c-4c61-8bdc-d3fa73499dc2/donor-proposals "HTTP/1.1 200 OK"

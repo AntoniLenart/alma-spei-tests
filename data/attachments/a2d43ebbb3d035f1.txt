@@ -1,0 +1,5 @@
+20:25:28 INFO  step: STEP: Create donor 'Marcel Chuchla QA-52f62723'
+20:25:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:28 INFO  step: STEP: Read donor row d6fb08a1-c4e2-474e-9320-506904860577
+20:25:28 INFO  step: STEP: Read audit actions of donor d6fb08a1-c4e2-474e-9320-506904860577

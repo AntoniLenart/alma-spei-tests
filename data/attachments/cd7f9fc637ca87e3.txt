@@ -1,0 +1,8 @@
+20:26:13 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:13 INFO  step: STEP: Upload 'QA-6ef3ea8c.csv' and expect it to be staged
+20:26:14 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:14 INFO  step: STEP: Create donor 'Liwia Robaszkiewicz QA-6ef3ea8c'
+20:26:14 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:26:14 INFO  step: STEP: Archive donor 29047f8c-75b4-4e0a-91a9-9f58f4b59774 directly in the database
+20:26:14 INFO  step: STEP: Deep-link to the review of import feb0d01b-5e7f-4724-acaf-59964f85a014
+20:26:14 INFO  step: STEP: Search for 'QA-6ef3ea8c' and compare with 'Liwia Robaszkiewicz QA-6ef3ea8c'

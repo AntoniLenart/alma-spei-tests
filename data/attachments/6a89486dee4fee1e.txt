@@ -1,0 +1,10 @@
+20:25:12 INFO  step: STEP: Create donor 'Alfa QA-bd80210e'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Create donor 'Beta QA-bd80210e'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Create donor 'Gamma QA-bd80210e'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: List donors tagged QA-bd80210e
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-bd80210e&sort-by=name&sort-direction=asc "HTTP/1.1 200 OK"
+20:25:12 INFO  step: STEP: List donors tagged QA-bd80210e
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-bd80210e&sort-by=name&sort-direction=desc "HTTP/1.1 200 OK"

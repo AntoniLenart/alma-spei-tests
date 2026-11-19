@@ -1,0 +1,13 @@
+20:25:22 INFO  step: STEP: Upload 'QA-98f69dae.csv' and expect it to be staged
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Create donor proposal 'Alan Bogdał QA-98f69dae' for import 2fc33912-8a8d-42da-9998-d1fcd7d7f5fb
+20:25:22 INFO  step: STEP: Propose donor 'Alan Bogdał QA-98f69dae' for import 2fc33912-8a8d-42da-9998-d1fcd7d7f5fb
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 2fc33912-8a8d-42da-9998-d1fcd7d7f5fb
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/2fc33912-8a8d-42da-9998-d1fcd7d7f5fb/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/2fc33912-8a8d-42da-9998-d1fcd7d7f5fb/donor-proposals "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Upload 'QA-98f69dae-b.csv' and expect it to be staged
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import 1f100f23-21ac-4f6a-babb-d9498f234e76
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 1f100f23-21ac-4f6a-babb-d9498f234e76
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/1f100f23-21ac-4f6a-babb-d9498f234e76/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/1f100f23-21ac-4f6a-babb-d9498f234e76/rows/1/1/decision "HTTP/1.1 404 Not Found"

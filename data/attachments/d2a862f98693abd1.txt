@@ -1,0 +1,2 @@
+20:25:30 INFO  step: STEP: Run seed-demo with qa.admin as the audit actor
+20:25:30 INFO  orchestration: stack: seed-demo -> clojure -Srepro -M:seed-demo qa.admin

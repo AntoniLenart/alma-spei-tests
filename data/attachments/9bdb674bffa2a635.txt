@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-99d5d62c.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Propose donor 'Konrad Margol QA-99d5d62c' for import 5582258c-14c8-4199-9e1f-554f32d6b389
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 5582258c-14c8-4199-9e1f-554f32d6b389
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/5582258c-14c8-4199-9e1f-554f32d6b389/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/5582258c-14c8-4199-9e1f-554f32d6b389/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-99d5d62c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-99d5d62c&status=all "HTTP/1.1 200 OK"

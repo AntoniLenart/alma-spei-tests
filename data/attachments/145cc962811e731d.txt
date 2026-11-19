@@ -1,0 +1,8 @@
+20:25:12 INFO  step: STEP: Create donor 'Tobiasz Mroczko QA-619ff26c'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Update donor 43efde58-ad95-43f7-a1d3-b16e7cf858d8
+20:25:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/43efde58-ad95-43f7-a1d3-b16e7cf858d8 "HTTP/1.1 200 OK"
+20:25:12 INFO  step: STEP: Update donor 43efde58-ad95-43f7-a1d3-b16e7cf858d8
+20:25:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/43efde58-ad95-43f7-a1d3-b16e7cf858d8 "HTTP/1.1 409 Conflict"
+20:25:12 INFO  step: STEP: Open donor card 43efde58-ad95-43f7-a1d3-b16e7cf858d8
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/43efde58-ad95-43f7-a1d3-b16e7cf858d8 "HTTP/1.1 200 OK"

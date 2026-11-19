@@ -1,0 +1,3 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Open the bank upload screen
+INFO     step:_decorator.py:52 STEP: Choose 'QA-63f8f125.txt' in the upload form

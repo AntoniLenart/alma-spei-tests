@@ -1,0 +1,8 @@
+20:26:07 INFO  step: STEP: Create account qa.3dac37339ad4
+20:26:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:26:07 INFO  step: STEP: Open the login form
+20:26:08 INFO  step: STEP: Log in through the form as qa.3dac37339ad4
+20:26:08 INFO  step: STEP: Change the temporary password through the form
+20:26:08 INFO  step: STEP: Wait until signed in as QA Dorota Pawliczek
+20:26:09 INFO  step: STEP: Deactivate account 0fc42fe7-5252-4576-b286-403c33e5a624
+20:26:09 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/0fc42fe7-5252-4576-b286-403c33e5a624 "HTTP/1.1 200 OK"

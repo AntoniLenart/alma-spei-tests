@@ -1,0 +1,17 @@
+20:25:22 INFO  step: STEP: Upload 'QA-63933e9a.csv' and expect it to be staged
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Create donor 'Andrzej Strzyż QA-63933e9a'
+20:25:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:22 INFO  step: STEP: Decide every row of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e
+20:25:22 INFO  step: STEP: Decide row 1 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e ('existing-donor')
+20:25:22 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e
+20:25:22 INFO  step: STEP: Read the review versions of row 1 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  step: STEP: Decide row 2 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e ('existing-donor')
+20:25:22 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e
+20:25:22 INFO  step: STEP: Read the review versions of row 2 of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e
+20:25:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:22 INFO  step: STEP: Read the readiness blockers of import 41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e {}
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/41c677bf-8aa2-4e1c-9e82-f6e66ff4e62e/review-blockers "HTTP/1.1 200 OK"

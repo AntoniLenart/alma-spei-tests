@@ -1,0 +1,6 @@
+20:25:12 INFO  step: STEP: Create donor 'Sylwia Pagacz QA-0544bf0b'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Update donor 693eb808-6dc5-4d82-9276-b656cfdfd549
+20:25:12 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/693eb808-6dc5-4d82-9276-b656cfdfd549 "HTTP/1.1 200 OK"
+20:25:12 INFO  step: STEP: Read the change history of donor 693eb808-6dc5-4d82-9276-b656cfdfd549
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/693eb808-6dc5-4d82-9276-b656cfdfd549/history "HTTP/1.1 200 OK"

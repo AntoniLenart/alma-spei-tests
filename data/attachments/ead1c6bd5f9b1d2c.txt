@@ -1,0 +1,36 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-944b3baa.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Jerzy Chalimoniuk QA-944b3baa' for import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Propose donor 'Jerzy Chalimoniuk QA-944b3baa' for import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Commit import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview 75afa49e-6569-4dc6-94ef-a24b6b55bfcd of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/previews/75afa49e-6569-4dc6-94ef-a24b6b55bfcd/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the applied effects of import 510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/510e3c23-ca47-4dbb-9d7c-cd2a8c4ae698/commit-items "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read which import created donor 5bef4945-2ba3-4cff-bc2c-8a2a54fa5b52
+INFO     step:_decorator.py:52 STEP: Read audit actions of donor 5bef4945-2ba3-4cff-bc2c-8a2a54fa5b52

@@ -1,0 +1,2 @@
+20:25:29 INFO  step: STEP: Read the app role's UPDATE privilege on columns ('name', 'city', 'is_active', 'version', 'updated_by', 'updated_at') of donors
+20:25:29 INFO  step: STEP: Read the app role's UPDATE privilege on columns ('id', 'created_by', 'created_at', 'import_batch_id') of donors

@@ -1,0 +1,6 @@
+20:26:05 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:05 INFO  step: STEP: Upload 'QA-5cbd807a.csv' and expect it to be staged
+20:26:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:05 INFO  step: STEP: Open the bank upload screen
+20:26:05 INFO  step: STEP: Choose 'QA-5cbd807a-copy.csv' in the upload form
+20:26:05 INFO  step: STEP: Submit the file for analysis

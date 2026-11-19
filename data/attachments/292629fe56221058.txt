@@ -1,0 +1,25 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-3ee6efb1.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Justyna Bałazy QA-3ee6efb1'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open the confirmation of preview 1abbb377-cf59-4617-95fa-d130df2738db of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     step:_decorator.py:52 STEP: Read the outcome of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/outcome "HTTP/1.1 200 OK"

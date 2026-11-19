@@ -1,0 +1,8 @@
+20:25:21 INFO  step: STEP: Upload 'QA-ebcb7ea1.csv' and expect it to be staged
+20:25:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:21 INFO  step: STEP: Create donor 'Gaja Sommer QA-ebcb7ea1'
+20:25:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:21 INFO  step: STEP: Read the review versions of row 1 of import aa17ecfc-44cf-48aa-8014-1104c532c6e9
+20:25:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/aa17ecfc-44cf-48aa-8014-1104c532c6e9/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:21 INFO  step: STEP: Submit a decision payload for row 1 of import aa17ecfc-44cf-48aa-8014-1104c532c6e9
+20:25:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/aa17ecfc-44cf-48aa-8014-1104c532c6e9/rows/1/1/decision "HTTP/1.1 403 Forbidden"

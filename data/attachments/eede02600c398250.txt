@@ -1,0 +1,26 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-a111ab5b.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Urszula Gołota QA-a111ab5b' for import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Propose donor 'Urszula Gołota QA-a111ab5b' for import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import b4856108-f08a-4ae4-a6ac-060147c03f2b ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import b4856108-f08a-4ae4-a6ac-060147c03f2b ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b4856108-f08a-4ae4-a6ac-060147c03f2b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import b4856108-f08a-4ae4-a6ac-060147c03f2b at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review history of import b4856108-f08a-4ae4-a6ac-060147c03f2b {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b4856108-f08a-4ae4-a6ac-060147c03f2b/review-events "HTTP/1.1 200 OK"

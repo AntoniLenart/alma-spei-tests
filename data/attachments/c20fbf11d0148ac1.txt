@@ -1,0 +1,34 @@
+20:25:18 INFO  step: STEP: Upload 'QA-c6f3e476.csv' and expect it to be staged
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Create donor 'Miłosz Krzeszowiec QA-c6f3e476'
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Decide every row of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Decide row 1 of import a7388c14-ceb3-405f-9938-5fc624240fc8 ('existing-donor')
+20:25:18 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Read the review versions of row 1 of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Decide row 2 of import a7388c14-ceb3-405f-9938-5fc624240fc8 ('existing-donor')
+20:25:18 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Read the review versions of row 2 of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Commit import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Prepare, back up and approve import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Create a ready preview of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Prepare a preview of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  step: STEP: Read the review versions of row 1 of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Request a preview of import a7388c14-ceb3-405f-9938-5fc624240fc8 at batch version 4
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/preview "HTTP/1.1 201 Created"
+20:25:18 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:18 INFO  step: STEP: Request a backup receipt for preview fac695ff-b2de-4f24-9af3-8e3a064d2aec of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/previews/fac695ff-b2de-4f24-9af3-8e3a064d2aec/backup "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Submit an import commit
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Read the outcome of import a7388c14-ceb3-405f-9938-5fc624240fc8
+20:25:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7388c14-ceb3-405f-9938-5fc624240fc8/outcome "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Submit an undo of the latest import
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:18 INFO  step: STEP: Submit an undo of the latest import
+20:25:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"

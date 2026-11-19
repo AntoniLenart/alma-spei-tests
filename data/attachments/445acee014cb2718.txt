@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Run seed-demo with qa.9e5ffde7d4db as the audit actor
+INFO     orchestration:stack.py:267 stack: seed-demo -> clojure -Srepro -M:seed-demo qa.9e5ffde7d4db
+INFO     step:_decorator.py:52 STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+INFO     step:_decorator.py:52 STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'

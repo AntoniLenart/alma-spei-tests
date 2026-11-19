@@ -1,0 +1,19 @@
+20:25:15 INFO  step: STEP: Upload 'QA-ff5ac84b.csv' and expect it to be staged
+20:25:15 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:15 INFO  step: STEP: Create donor 'Ada Bodzak QA-ff5ac84b'
+20:25:15 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:15 INFO  step: STEP: Decide every row of import 030312bf-eb57-4cde-bdca-4690f3afca01
+20:25:15 INFO  step: STEP: Decide row 1 of import 030312bf-eb57-4cde-bdca-4690f3afca01 ('existing-donor')
+20:25:15 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 030312bf-eb57-4cde-bdca-4690f3afca01
+20:25:15 INFO  step: STEP: Read the review versions of row 1 of import 030312bf-eb57-4cde-bdca-4690f3afca01
+20:25:15 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/030312bf-eb57-4cde-bdca-4690f3afca01/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:15 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/030312bf-eb57-4cde-bdca-4690f3afca01/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:15 INFO  step: STEP: Decide row 2 of import 030312bf-eb57-4cde-bdca-4690f3afca01 ('existing-donor')
+20:25:15 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 030312bf-eb57-4cde-bdca-4690f3afca01
+20:25:15 INFO  step: STEP: Read the review versions of row 2 of import 030312bf-eb57-4cde-bdca-4690f3afca01
+20:25:15 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/030312bf-eb57-4cde-bdca-4690f3afca01/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:15 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/030312bf-eb57-4cde-bdca-4690f3afca01/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:15 INFO  step: STEP: Create donor 'Aleks Hołota QA-ff5ac84b'
+20:25:15 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:15 INFO  step: STEP: Read the readiness blockers of import 030312bf-eb57-4cde-bdca-4690f3afca01 {}
+20:25:15 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/030312bf-eb57-4cde-bdca-4690f3afca01/review-blockers "HTTP/1.1 200 OK"

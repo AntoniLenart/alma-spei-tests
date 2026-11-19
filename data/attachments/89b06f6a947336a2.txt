@@ -1,0 +1,9 @@
+20:25:20 INFO  step: STEP: Upload 'QA-4095b704.csv' and expect it to be staged
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Create donor 'Dariusz Pietrus QA-4095b704'
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Decide row 1 of import 3ed072bc-3df6-4063-a018-9db29af81865 ('existing-donor')
+20:25:20 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 3ed072bc-3df6-4063-a018-9db29af81865
+20:25:20 INFO  step: STEP: Read the review versions of row 1 of import 3ed072bc-3df6-4063-a018-9db29af81865
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3ed072bc-3df6-4063-a018-9db29af81865/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/3ed072bc-3df6-4063-a018-9db29af81865/rows/1/1/decision "HTTP/1.1 200 OK"

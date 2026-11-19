@@ -1,0 +1,23 @@
+20:25:12 INFO  step: STEP: Upload 'QA-89eab97c.csv' and expect it to be staged
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Create donor 'Dagmara Galos QA-89eab97c'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Decide every row of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:12 INFO  step: STEP: Decide row 1 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e ('existing-donor')
+20:25:12 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:12 INFO  step: STEP: Read the review versions of row 1 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Decide row 2 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e ('existing-donor')
+20:25:13 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  step: STEP: Read the review versions of row 2 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Create a ready preview of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  step: STEP: Prepare a preview of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  step: STEP: Read the review versions of row 1 of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:13 INFO  step: STEP: Request a preview of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e at batch version 4
+20:25:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/preview "HTTP/1.1 201 Created"
+20:25:13 INFO  step: STEP: Request a backup receipt for preview c9fefe1e-f9c9-433e-a88f-4d754234edff of import b51c2ab2-d222-4b2b-ba73-16d6dd50da7e
+20:25:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/b51c2ab2-d222-4b2b-ba73-16d6dd50da7e/previews/c9fefe1e-f9c9-433e-a88f-4d754234edff/backup "HTTP/1.1 200 OK"

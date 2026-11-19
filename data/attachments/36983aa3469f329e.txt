@@ -1,0 +1,5 @@
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:12 INFO  step: STEP: Create donor 'Maks Suszko QA-c10d9f5a'
+20:25:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:12 INFO  step: STEP: Open donor card d8f56c0d-859f-4c31-a419-2e591d37a789
+20:25:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/d8f56c0d-859f-4c31-a419-2e591d37a789 "HTTP/1.1 401 Unauthorized"

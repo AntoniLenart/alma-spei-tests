@@ -1,0 +1,5 @@
+20:26:14 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:14 INFO  step: STEP: Upload 'QA-0f025cab.csv' and expect it to be staged
+20:26:14 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:14 INFO  step: STEP: Deep-link to the review of import cc610317-391a-443f-969a-9fde32c7ad07
+20:26:14 INFO  step: STEP: Prepare the import preview through the form

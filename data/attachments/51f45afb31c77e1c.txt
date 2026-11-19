@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Alex Wojtczuk QA-9fb09589'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"

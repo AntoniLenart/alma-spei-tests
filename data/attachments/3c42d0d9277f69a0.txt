@@ -1,0 +1,36 @@
+20:25:20 INFO  step: STEP: Upload 'QA-e44ed549.csv' and expect it to be staged
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Create donor 'Dagmara Bronka QA-e44ed549'
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Decide every row of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Decide row 1 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946 ('existing-donor')
+20:25:20 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Read the review versions of row 1 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Decide row 2 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946 ('existing-donor')
+20:25:20 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Read the review versions of row 2 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Commit import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Prepare, back up and approve import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Create a ready preview of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Prepare a preview of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  step: STEP: Read the review versions of row 1 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Request a preview of import 54f4bee9-1666-4f30-8891-61bd6a3a7946 at batch version 4
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/preview "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Confirm a backup of the ready preview
+20:25:20 INFO  step: STEP: Request a backup receipt for preview dd8a3981-0ce5-4002-bb73-874cf48beea7 of import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/previews/dd8a3981-0ce5-4002-bb73-874cf48beea7/backup "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Submit an import commit
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Undo committed import 54f4bee9-1666-4f30-8891-61bd6a3a7946
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/54f4bee9-1666-4f30-8891-61bd6a3a7946/outcome "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Submit an undo of the latest import
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+20:25:20 INFO  step: STEP: Retry failed import 54f4bee9-1666-4f30-8891-61bd6a3a7946 (version 7) with 'QA-e44ed549.csv'
+20:25:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:20 INFO  step: STEP: Read the decision of row 1 of import b8ea6583-f57d-4d92-999f-264f2e64b157
+20:25:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b8ea6583-f57d-4d92-999f-264f2e64b157/rows/1/1/decision "HTTP/1.1 200 OK"

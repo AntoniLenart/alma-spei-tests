@@ -1,0 +1,5 @@
+20:25:59 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:59 INFO  step: STEP: Upload 'QA-db966c1f.csv' and expect it to be staged
+20:25:59 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:00 INFO  step: STEP: Deep-link to the review of import 74dbd722-141c-49ca-aceb-9022c00c7b6f
+20:26:00 INFO  step: STEP: Pick staged row 2 for comparison

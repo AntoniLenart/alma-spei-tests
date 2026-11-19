@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-6ef3ea8c.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Liwia Robaszkiewicz QA-6ef3ea8c'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Archive donor 29047f8c-75b4-4e0a-91a9-9f58f4b59774 directly in the database
+INFO     step:_decorator.py:52 STEP: Deep-link to the review of import feb0d01b-5e7f-4724-acaf-59964f85a014
+INFO     step:_decorator.py:52 STEP: Search for 'QA-6ef3ea8c' and compare with 'Liwia Robaszkiewicz QA-6ef3ea8c'

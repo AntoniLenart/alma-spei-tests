@@ -1,0 +1,8 @@
+20:25:34 INFO  step: STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+20:25:34 INFO  step: STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+20:25:34 INFO  step: STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'
+20:25:34 INFO  step: STEP: Run seed-demo with qa.admin as the audit actor
+20:25:34 INFO  orchestration: stack: seed-demo -> clojure -Srepro -M:seed-demo qa.admin
+20:25:37 INFO  step: STEP: Read the donations of the donors named 'DANE SYNTETYCZNE — …'
+20:25:37 INFO  step: STEP: Read the donors named 'DANE SYNTETYCZNE — …'
+20:25:37 INFO  step: STEP: Read the audit actions of the donors named 'DANE SYNTETYCZNE — …'

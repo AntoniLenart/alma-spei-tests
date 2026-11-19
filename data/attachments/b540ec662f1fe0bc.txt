@@ -1,0 +1,2 @@
+20:25:30 INFO  step: STEP: Read the app role's UPDATE privilege on columns ('version', 'kind', 'donor_id', 'financial', 'complete', 'reviewer_id') of import_review_decisions
+20:25:30 INFO  step: STEP: Read the app role's UPDATE privilege on columns ('batch_id', 'worksheet_index', 'row_number') of import_review_decisions

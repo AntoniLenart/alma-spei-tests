@@ -1,0 +1,11 @@
+20:26:12 INFO  step: STEP: Hand the API session's cookies to the browser
+20:26:12 INFO  step: STEP: Upload 'QA-a72241df.csv' and expect it to be staged
+20:26:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:26:12 INFO  step: STEP: Deep-link to the review of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2
+20:26:12 INFO  step: STEP: Propose donor 'Kamil Wawrzynek QA-a72241df' through the form and use it
+20:26:13 INFO  step: STEP: Fill in the payment review (PLN, new)
+20:26:13 INFO  step: STEP: Save the row decision through the form
+20:26:13 INFO  step: STEP: Read the decision of row 1 of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2
+20:26:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c6a8ace2-144c-4c61-8bdc-d3fa73499dc2/rows/1/1/decision "HTTP/1.1 200 OK"
+20:26:13 INFO  step: STEP: List the donor proposals of import c6a8ace2-144c-4c61-8bdc-d3fa73499dc2 {}
+20:26:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c6a8ace2-144c-4c61-8bdc-d3fa73499dc2/donor-proposals "HTTP/1.1 200 OK"

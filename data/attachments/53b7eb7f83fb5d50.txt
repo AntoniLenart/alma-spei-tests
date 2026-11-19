@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Szymon Machoń QA-c401e4f7'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Malwina Haraburda QA-c401e4f7'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Archive donor 522a002e-067b-4614-944f-7a71fcf96698 directly in the database
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-c401e4f7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-c401e4f7 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-c401e4f7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-c401e4f7&status=archived "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-c401e4f7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-c401e4f7&status=all "HTTP/1.1 200 OK"

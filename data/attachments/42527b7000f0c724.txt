@@ -1,0 +1,2 @@
+20:25:02 INFO  step: STEP: Edit account 8b218503-2730-47d2-a05c-1901aa68c1b9
+20:25:02 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/8b218503-2730-47d2-a05c-1901aa68c1b9 "HTTP/1.1 404 Not Found"

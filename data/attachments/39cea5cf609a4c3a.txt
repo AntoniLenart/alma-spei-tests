@@ -1,0 +1,23 @@
+20:25:23 INFO  step: STEP: Upload 'QA-ad694901.csv' and expect it to be staged
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:23 INFO  step: STEP: Create donor 'Nikodem Oleksa QA-ad694901'
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:23 INFO  step: STEP: Decide every row of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  step: STEP: Decide row 1 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df ('existing-donor')
+20:25:23 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  step: STEP: Read the review versions of row 1 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  step: STEP: Decide row 2 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df ('existing-donor')
+20:25:23 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  step: STEP: Read the review versions of row 2 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  step: STEP: Create a ready preview of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  step: STEP: Prepare a preview of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  step: STEP: Read the review versions of row 1 of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:23 INFO  step: STEP: Request a preview of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df at batch version 4
+20:25:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/preview "HTTP/1.1 201 Created"
+20:25:23 INFO  step: STEP: Read staged rows of import c29bfc0a-d90c-44e4-90f6-9a6b85df57df {}
+20:25:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c29bfc0a-d90c-44e4-90f6-9a6b85df57df/rows "HTTP/1.1 200 OK"

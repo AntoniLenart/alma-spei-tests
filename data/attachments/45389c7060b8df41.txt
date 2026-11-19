@@ -1,0 +1,10 @@
+20:25:05 INFO  step: STEP: Create account qa.1f9fe8fa36cb
+20:25:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+20:25:05 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+20:25:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+20:25:06 INFO  step: STEP: Change the password
+20:25:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+20:25:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+20:25:06 INFO  step: STEP: Deactivate account 2f187ba7-fc08-40ed-b1eb-c37950fadf50
+20:25:06 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/2f187ba7-fc08-40ed-b1eb-c37950fadf50 "HTTP/1.1 200 OK"

@@ -1,0 +1,25 @@
+20:25:53 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:53 INFO  step: STEP: Upload 'QA-3ee6efb1.csv' and expect it to be staged
+20:25:53 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:53 INFO  step: STEP: Create donor 'Justyna Bałazy QA-3ee6efb1'
+20:25:53 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:53 INFO  step: STEP: Decide every row of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Decide row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba ('existing-donor')
+20:25:53 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Read the review versions of row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:53 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:53 INFO  step: STEP: Decide row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba ('existing-donor')
+20:25:53 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Read the review versions of row 2 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:53 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/2/decision "HTTP/1.1 200 OK"
+20:25:53 INFO  step: STEP: Create a ready preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Prepare a preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Read the review versions of row 1 of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/rows/1/1/decision "HTTP/1.1 200 OK"
+20:25:53 INFO  step: STEP: Request a preview of import 4dd7d880-f571-4d54-992a-2ff24c713aba at batch version 4
+20:25:53 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/preview "HTTP/1.1 201 Created"
+20:25:53 INFO  step: STEP: Open the confirmation of preview 1abbb377-cf59-4617-95fa-d130df2738db of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:53 INFO  step: STEP: Read the outcome of import 4dd7d880-f571-4d54-992a-2ff24c713aba
+20:25:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4dd7d880-f571-4d54-992a-2ff24c713aba/outcome "HTTP/1.1 200 OK"

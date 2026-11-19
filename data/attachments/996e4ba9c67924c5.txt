@@ -1,0 +1,39 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-6c2a24bc.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Filip Sromek QA-6c2a24bc' for import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Propose donor 'Filip Sromek QA-6c2a24bc' for import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Commit import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview 3279b953-b44d-400d-b7bb-b9c3ff4f3736 of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/previews/3279b953-b44d-400d-b7bb-b9c3ff4f3736/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the applied effects of import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/commit-items "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Undo committed import 3d72bfa6-2443-4740-91ed-d2f6d7331ba8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d72bfa6-2443-4740-91ed-d2f6d7331ba8/outcome "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an undo of the latest import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read donor row cd889c0f-942f-485e-83d4-4a420467e4ea
+INFO     step:_decorator.py:52 STEP: Read audit actions of donor cd889c0f-942f-485e-83d4-4a420467e4ea

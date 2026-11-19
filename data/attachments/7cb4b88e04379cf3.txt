@@ -1,0 +1,16 @@
+20:25:30 INFO  step: STEP: Upload 'QA-278c1950.csv' and expect it to be staged
+20:25:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:30 INFO  step: STEP: Create donor 'Nataniel Kukawka QA-278c1950'
+20:25:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:30 INFO  step: STEP: Snapshot import batch 19ea3462-912f-47e1-83f5-d345e599f97a (version, progress, events, rows)
+20:25:30 INFO  step: STEP: Count rows in the canonical donor tables
+20:25:30 INFO  step: STEP: Read the bank review queue {}
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/review "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Read import batch 19ea3462-912f-47e1-83f5-d345e599f97a
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19ea3462-912f-47e1-83f5-d345e599f97a "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Compare staged row 1/1 of import 19ea3462-912f-47e1-83f5-d345e599f97a with donor e0d876e4-d3ef-4ec5-b47d-6adc46425630
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19ea3462-912f-47e1-83f5-d345e599f97a/rows/1/1/comparison?donor-id=e0d876e4-d3ef-4ec5-b47d-6adc46425630 "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Compare staged row 1/2 of import 19ea3462-912f-47e1-83f5-d345e599f97a with donor e0d876e4-d3ef-4ec5-b47d-6adc46425630
+20:25:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/19ea3462-912f-47e1-83f5-d345e599f97a/rows/1/2/comparison?donor-id=e0d876e4-d3ef-4ec5-b47d-6adc46425630 "HTTP/1.1 200 OK"
+20:25:30 INFO  step: STEP: Snapshot import batch 19ea3462-912f-47e1-83f5-d345e599f97a (version, progress, events, rows)
+20:25:30 INFO  step: STEP: Count rows in the canonical donor tables

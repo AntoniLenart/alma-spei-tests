@@ -1,0 +1,6 @@
+20:25:50 INFO  step: STEP: Hand the API session's cookies to the browser
+20:25:50 INFO  step: STEP: Create donor 'Aleksander Synak QA-38b48f95'
+20:25:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:50 INFO  step: STEP: Open the donor list
+20:25:51 INFO  step: STEP: Search donors for 'QA-38b48f95'
+20:25:51 INFO  step: STEP: Open the card of donor 'Aleksander Synak QA-38b48f95'

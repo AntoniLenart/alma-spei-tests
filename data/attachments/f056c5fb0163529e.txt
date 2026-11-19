@@ -1,0 +1,6 @@
+20:25:16 INFO  step: STEP: Create donor 'Sebastian Rząca QA-49e86cf7'
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Upload 'QA-49e86cf7.csv' and expect it to be staged
+20:25:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+20:25:16 INFO  step: STEP: Compare staged row 1/1 of import 5c49caad-3910-4a05-9218-d3f8dce978b5 with donor 794a9625-02bc-4010-96e0-728c1f5398d8
+20:25:16 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/5c49caad-3910-4a05-9218-d3f8dce978b5/rows/1/1/comparison?donor-id=794a9625-02bc-4010-96e0-728c1f5398d8 "HTTP/1.1 200 OK"

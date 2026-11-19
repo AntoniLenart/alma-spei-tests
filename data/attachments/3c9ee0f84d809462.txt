@@ -1,0 +1,12 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-42806efe.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Mariusz Maciuszek QA-42806efe'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the review of import 8aa9d0a9-e28d-4d8c-9848-3bc966478aec
+INFO     step:_decorator.py:52 STEP: Search for 'QA-42806efe' and compare with 'Mariusz Maciuszek QA-42806efe'
+INFO     step:_decorator.py:52 STEP: Choose the compared donor as the row's target
+INFO     step:_decorator.py:52 STEP: Fill in the payment review (PLN, new)
+INFO     step:_decorator.py:52 STEP: Save the row decision through the form
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 8aa9d0a9-e28d-4d8c-9848-3bc966478aec
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/8aa9d0a9-e28d-4d8c-9848-3bc966478aec/rows/1/1/decision "HTTP/1.1 200 OK"
