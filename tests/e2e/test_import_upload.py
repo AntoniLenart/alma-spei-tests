@@ -31,7 +31,7 @@ EMPTY_CELL = "—"
 class TestUploadScreen(BaseE2ETest):
     def test_navigation_opens_the_upload_screen(self, signed_in_page: Page):
         # 1. Open the app with the administrator's session
-        # 2. Choose "Import przelewów" in the navigation
+        # 2. Choose "Nowy import" in the sidebar
         # 3. Verification: the upload screen with its synthetic-data note and a disabled submit
         imports = ui_steps.open_imports(signed_in_page)
         with soft_assertions():
@@ -41,6 +41,26 @@ class TestUploadScreen(BaseE2ETest):
             assert_that(imports.upload_button.is_disabled()).described_as(
                 "submit should stay disabled until a file is chosen"
             ).is_true()
+
+    def test_the_import_steps_follow_the_upload(
+        self, signed_in_page: Page, bank_statement: BankStatement, tag: str
+    ):
+        # 1. Open the upload screen
+        # 2. Verify the five import steps, with "Plik" as the current one
+        # 3. Upload a valid statement
+        # 4. Verification: "Sprawdzenie danych" is now current, and the next step offers the
+        #    review of the batch
+        imports = ui_steps.open_imports(signed_in_page)
+        expect(imports.step_labels).to_have_text(list(ImportMessages.STEPS))
+        expect(imports.current_step).to_contain_text(ImportMessages.STEPS[0])
+        ui_steps.choose_import_file(
+            imports, f"{tag}.csv", bank_statement.to_csv(), CsvSeparator.SEMICOLON
+        )
+        ui_steps.submit_upload(imports)
+        ui_steps.wait_for_import_state(imports, ImportMessages.STATE_REVIEW)
+        expect(imports.current_step).to_contain_text(ImportMessages.STEPS[1])
+        expect(imports.next_step_card).to_contain_text(ImportMessages.NEXT_STEP_HEADING)
+        expect(imports.review_link).to_be_visible()
 
     def test_csv_needs_a_separator_before_it_can_be_sent(
         self, signed_in_page: Page, bank_statement: BankStatement, tag: str

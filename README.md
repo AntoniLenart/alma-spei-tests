@@ -210,9 +210,10 @@ alma-spei-tests/
     │                           #   donor + import schema constraints and grants,
     │                           #   synthetic demo data (seed-demo), staging, review
     │                           #   decisions, commit provenance and undo compensation
-    └── e2e/                    # shell, login, donor list + card, upload, review queue,
-                                #   decision editor + preview, confirmation, history,
-                                #   undo + re-import, backend-restart (disruptive)
+    └── e2e/                    # shell, login, workspace (Start + sidebar), donor list +
+                                #   card, upload, review queue, decision editor + preview,
+                                #   confirmation, history, undo + re-import,
+                                #   backend-restart (disruptive)
 ```
 
 ## Conventions (summary)

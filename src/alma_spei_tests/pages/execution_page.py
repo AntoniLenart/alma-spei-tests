@@ -93,10 +93,7 @@ class ExecutionPage(BasePage):
     path = "/"
 
     def open_history_from_nav(self) -> "ExecutionPage":
-        LoginPage(self.page).open()
-        self.page.get_by_role("navigation").get_by_role(
-            "button", name=ExecutionMessages.NAV_HISTORY, exact=True
-        ).click()
+        LoginPage(self.page).open().nav_button(ExecutionMessages.NAV_HISTORY).click()
         return self
 
     def open_outcome(self, batch_id: str) -> "ExecutionPage":

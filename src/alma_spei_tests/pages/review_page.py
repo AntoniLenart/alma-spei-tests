@@ -1,8 +1,9 @@
 """Page object for the import review screen (tasks 37-38).
 
 Mirrors src/ui/alma_spei/ui/imports/review_views.cljs and decision_views.cljs.
-Reached from the nav ("Weryfikacja importów"), the upload report's "Przejdź do
-weryfikacji" link, or a deep link ``/#review/<batch-id>/<offset>``. It shows the
+Reached from the sidebar ("Do weryfikacji"), the Start screen ("Wznów
+weryfikację"), the upload report's "Przejdź do weryfikacji" link, or a deep link
+``/#review/<batch-id>/<offset>``. It shows the
 queue of bank batches awaiting review, then a batch with a row picker, the
 source row, a donor search and the chosen donor's current profile. Below them
 (task 38) the decision editor saves an explicit decision per row, donor
@@ -20,7 +21,7 @@ from alma_spei_tests.pages.login_page import LoginPage
 class ReviewMessages:
     """Exact Polish strings of the review screen."""
 
-    NAV = "Weryfikacja importów"
+    NAV = "Do weryfikacji"
     HEADING = "Weryfikacja importów"
     QUEUE_HEADING = "Importy oczekujące na weryfikację"
     OPEN_FROM_UPLOAD = "Przejdź do weryfikacji"
@@ -136,10 +137,7 @@ class ReviewPage(BasePage):
     path = "/"
 
     def open_from_nav(self) -> "ReviewPage":
-        LoginPage(self.page).open()
-        self.page.get_by_role("navigation").get_by_role(
-            "button", name=ReviewMessages.NAV, exact=True
-        ).click()
+        LoginPage(self.page).open().nav_button(ReviewMessages.NAV).click()
         return self
 
     def open_batch(self, batch_id: str) -> "ReviewPage":
