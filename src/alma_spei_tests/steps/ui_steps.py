@@ -1,8 +1,9 @@
 """Reusable steps for the Polish UI (shell, auth panel, donor and import screens)."""
 
-from playwright.sync_api import Locator, Page, expect
+from playwright.sync_api import Locator, Page, Response, Route, expect
 
 from alma_spei_tests.clients import AlmaSpeiApi
+from alma_spei_tests.constants import ApiPath, ContentType
 from alma_spei_tests.data import DonorProfile, Financial
 from alma_spei_tests.pages import (
     AppPage,
@@ -16,7 +17,6 @@ from alma_spei_tests.pages import (
     LoginPage,
     ReviewMessages,
     ReviewPage,
-    ShellMessages,
 )
 from alma_spei_tests.steps import step
 
@@ -34,20 +34,36 @@ def tick(checkbox: Locator):
 
 
 # --- shell --------------------------------------------------------------------
-@step("Open the application shell")
+def _is_readiness_probe(response: Response) -> bool:
+    return response.url.endswith(ApiPath.HEALTH_READY)
+
+
+@step("Open the application shell and wait for its health check")
 def open_application(page: Page) -> AppPage:
-    return AppPage(page).open()
-
-
-@step("Wait for the shell to report readiness")
-def wait_until_ready(app: AppPage) -> AppPage:
-    app.wait_for_status(ShellMessages.OK)
+    with page.expect_response(_is_readiness_probe):
+        app = AppPage(page).open()
     return app
 
 
-@step("Trigger a connection re-check")
+@step("Make the readiness probe answer HTTP {status} with {body}")
+def fake_readiness(page: Page, status: int, body: str):
+    """Route the shell's health check to a canned answer (the backend is untouched)."""
+
+    def answer(route: Route):
+        route.fulfill(status=status, content_type=ContentType.JSON, body=body)
+
+    page.route(f"**{ApiPath.HEALTH_READY}", answer)
+
+
+@step("Let the readiness probe reach the backend again")
+def restore_readiness(page: Page):
+    page.unroute(f"**{ApiPath.HEALTH_READY}")
+
+
+@step("Re-check the connection from the notice")
 def trigger_recheck(app: AppPage) -> AppPage:
-    app.click_recheck()
+    with app.page.expect_response(_is_readiness_probe):
+        app.recheck_button.click()
     return app
 
 
@@ -91,7 +107,7 @@ def change_password_via_form(
 
 @step("Wait until signed in as {display_name}")
 def wait_until_signed_in(login: LoginPage, display_name: str) -> LoginPage:
-    expect(login.signed_in_banner(display_name)).to_be_visible()
+    expect(login.signed_in_as(display_name)).to_be_visible()
     return login
 
 

@@ -1,8 +1,9 @@
 """Page object for the bank upload screen and its validation report (task 36).
 
 Mirrors src/ui/alma_spei/ui/imports/views.cljs. The screen is reached from the
-signed-in navigation ("Import przelewów") and shows, in turn, the upload form,
-upload progress, the analysis summary and the paged row report.
+sidebar ("Nowy import") or the Start screen ("Importuj przelewy") and shows the
+import steps, then, in turn, the upload form, upload progress, the analysis
+summary and the paged row report with the next step (the review link).
 """
 
 import re
@@ -16,9 +17,12 @@ from alma_spei_tests.pages.login_page import LoginPage
 class ImportMessages:
     """Exact Polish strings of the upload screen."""
 
-    NAV = "Import przelewów"
-    HEADING = "Import przelewów bankowych"
-    SYNTHETIC_NOTE = "Na tym etapie używaj wyłącznie danych syntetycznych."
+    NAV = "Nowy import"
+    HEADING = "Import przelewów"
+    SYNTHETIC_NOTE = "Wersja testowa. Używaj wyłącznie danych syntetycznych."
+    #: The import steps, in order; the current one is marked ``aria-current="step"``.
+    STEPS = ("Plik", "Sprawdzenie danych", "Dopasowanie", "Podsumowanie", "Zatwierdzenie")
+    NEXT_STEP_HEADING = "Następny krok: dopasuj darczyńców"
     UPLOAD_BUTTON = "Prześlij do analizy"
     RETRY_BUTTON = "Ponów analizę tego samego pliku"
     RETRY_CONFIRMATION = "Potwierdzam ponowną analizę tego samego pliku."
@@ -71,11 +75,24 @@ class ImportsPage(BasePage):
 
     def open_from_nav(self) -> "ImportsPage":
         """Open the app and switch to the upload screen."""
-        LoginPage(self.page).open()
-        self.page.get_by_role("navigation").get_by_role(
-            "button", name=ImportMessages.NAV, exact=True
-        ).click()
+        LoginPage(self.page).open().nav_button(ImportMessages.NAV).click()
         return self
+
+    # --- import steps -----------------------------------------------------------
+    @property
+    def step_labels(self) -> Locator:
+        """The step names, without their numbers."""
+        return self.page.get_by_role("list", name="Etapy importu").locator(
+            "li > span:not(.step-number)"
+        )
+
+    @property
+    def current_step(self) -> Locator:
+        return self.page.locator("ol.import-steps li[aria-current='step']")
+
+    @property
+    def next_step_card(self) -> Locator:
+        return self.page.locator("div.next-step-card")
 
     # --- form -----------------------------------------------------------------
     @property

@@ -44,7 +44,6 @@ from alma_spei_tests.data import (
     unique_tag,
 )
 from alma_spei_tests.db import DbQueries
-from alma_spei_tests.pages import AppPage
 from alma_spei_tests.steps import (
     auth_steps,
     db_steps,
@@ -177,12 +176,6 @@ def admin_id(db: DbQueries, settings: Settings) -> str:
 
 
 # --- browser ------------------------------------------------------------------
-@pytest.fixture
-def app_page(page: Page) -> AppPage:
-    """A fresh AppPage per test (pytest-playwright provides ``page``)."""
-    return AppPage(page)
-
-
 @pytest.fixture
 def signed_in_page(page: Page, api: AlmaSpeiApi, base_url: str) -> Page:
     """A browser page sharing the admin's API session (no UI login spent)."""
