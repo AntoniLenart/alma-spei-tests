@@ -511,7 +511,8 @@ class SeedStatus(StrEnum):
 class DemoDataset:
     """The deterministic synthetic population (dev/alma_spei/dev/demo_data.clj)."""
 
-    NAME_PREFIX = "DANE SYNTETYCZNE — "
+    #: Every demo row's id is derived from this namespace (see ``data.demo``).
+    ID_NAMESPACE = "alma-spei:synthetic-demo:v1"
     DONORS = 20
     PAYMENTS = 30
     ACTIVE = 18
@@ -521,7 +522,7 @@ class DemoDataset:
     CURRENCY = "PLN"
     YEAR = 2026
     #: Two separate profiles carry this full name, at different addresses.
-    SHARED_NAME = "DANE SYNTETYCZNE — Łukasz Próbowy"
+    SHARED_NAME = "Jan Kowalski"
     #: Refusal when the chosen audit actor is not an active administrator.
     INVALID_ACTOR = (
         "Supply the username of an existing active account administrator;"

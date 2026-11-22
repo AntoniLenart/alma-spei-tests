@@ -1,9 +1,12 @@
-"""Page object for the bank upload screen and its validation report (task 36).
+"""Page object for the bank upload screen (task 36, guided import review).
 
 Mirrors src/ui/alma_spei/ui/imports/views.cljs. The screen is reached from the
 sidebar ("Nowy import") or the Start screen ("Importuj przelewy") and shows the
-import steps, then, in turn, the upload form, upload progress, the analysis
-summary and the paged row report with the next step (the review link).
+import steps and the upload form: the file, the CSV separator and the source
+settings confirmed once per file (currency, optionally the type of new donors).
+A successful upload hands those settings to the automatic matching and opens the
+import summary on the review screen; a rejected or failed analysis stays here
+with its alert (and, for a failed batch, its summary and a confirmed retry).
 """
 
 import re
@@ -12,6 +15,9 @@ from playwright.sync_api import Locator
 
 from alma_spei_tests.pages.base_page import BasePage
 from alma_spei_tests.pages.login_page import LoginPage
+
+#: The step shown as current in the shared import step indicator.
+CURRENT_STEP = "ol.import-steps li[aria-current='step']"
 
 
 class ImportMessages:
@@ -22,31 +28,15 @@ class ImportMessages:
     SYNTHETIC_NOTE = "Wersja testowa. Używaj wyłącznie danych syntetycznych."
     #: The import steps, in order; the current one is marked ``aria-current="step"``.
     STEPS = ("Plik", "Sprawdzenie danych", "Dopasowanie", "Podsumowanie", "Zatwierdzenie")
-    NEXT_STEP_HEADING = "Następny krok: dopasuj darczyńców"
-    UPLOAD_BUTTON = "Prześlij do analizy"
+    UPLOAD_BUTTON = "Prześlij i dopasuj automatycznie"
     RETRY_BUTTON = "Ponów analizę tego samego pliku"
     RETRY_CONFIRMATION = "Potwierdzam ponowną analizę tego samego pliku."
-    CHOOSE_ANOTHER = "Wybierz inny plik"
-    NEXT_ROWS = "Następne wiersze"
-    OPEN_REVIEW = "Przejdź do weryfikacji"
-    REPORT_REGION = "Raport wierszy importu"
-    INVALID_ROWS_NOTICE = (
-        "Wiersze z błędami pozostają w raporcie. Wymagają wyjaśnienia przed zatwierdzeniem importu."
-    )
-    VALID_FORMAT = "Poprawny format"
-    UNKNOWN_CURRENCY = "Nieustalona"
 
-    # summary <dt> labels
-    FILE = "Plik"
+    # summary <dt> labels (shown for a failed batch)
     ATTEMPT = "Próba"
     STATUS = "Status"
-    TOTAL_ROWS = "Wiersze z danymi"
-    VALID_ROWS = "Poprawne technicznie"
-    INVALID_ROWS = "Wiersze z błędami"
-    SKIPPED_ROWS = "Pominięte puste wiersze"
 
     # batch state labels
-    STATE_REVIEW = "Oczekuje na weryfikację"
     STATE_FAILED = "Analiza zakończona błędem"
 
     # alerts
@@ -60,14 +50,6 @@ class ImportMessages:
         "Nie można odczytać pliku. Sprawdź układ czterech kolumn, daty i kwoty. "
         "Formuły nie są obsługiwane."
     )
-
-    @staticmethod
-    def rows_summary(first: int, last: int, total: int) -> str:
-        return f"Wiersze: {first}–{last} z {total}"
-
-    @staticmethod
-    def row_ref(row_number: int, worksheet: int = 1) -> str:
-        return f"{worksheet} / {row_number}"
 
 
 class ImportsPage(BasePage):
@@ -88,11 +70,7 @@ class ImportsPage(BasePage):
 
     @property
     def current_step(self) -> Locator:
-        return self.page.locator("ol.import-steps li[aria-current='step']")
-
-    @property
-    def next_step_card(self) -> Locator:
-        return self.page.locator("div.next-step-card")
+        return self.page.locator(CURRENT_STEP)
 
     # --- form -----------------------------------------------------------------
     @property
@@ -110,6 +88,16 @@ class ImportsPage(BasePage):
     @property
     def separator_select(self) -> Locator:
         return self.page.locator("#import-separator")
+
+    @property
+    def currency_input(self) -> Locator:
+        """The file's currency, confirmed once for every transfer in it."""
+        return self.page.locator("#import-currency")
+
+    @property
+    def donor_type_select(self) -> Locator:
+        """The optional type of new donors in this file (blank: ask for each)."""
+        return self.page.locator("#import-donor-type")
 
     @property
     def upload_button(self) -> Locator:
@@ -144,47 +132,13 @@ class ImportsPage(BasePage):
     def choose_separator(self, separator: str):
         self.separator_select.select_option(separator)
 
-    # --- summary & report -----------------------------------------------------
+    # --- summary of a failed batch ----------------------------------------------
     def summary_value(self, label: str) -> Locator:
         return (
             self.page.locator("dl.import-summary > div")
             .filter(has=self.page.locator("dt", has_text=_exactly(label)))
             .locator("dd")
         )
-
-    @property
-    def invalid_rows_notice(self) -> Locator:
-        return self.page.get_by_text(ImportMessages.INVALID_ROWS_NOTICE, exact=True)
-
-    @property
-    def report_rows(self) -> Locator:
-        return self.page.get_by_role("region", name=ImportMessages.REPORT_REGION).locator(
-            "tbody tr:has(th[scope='row'])"
-        )
-
-    def report_row(self, row_number: int) -> Locator:
-        return self.report_rows.filter(
-            has=self.page.locator("th", has_text=_exactly(ImportMessages.row_ref(row_number)))
-        )
-
-    def report_cells(self, row_number: int) -> list[str]:
-        return [t.strip() for t in self.report_row(row_number).locator("td").all_inner_texts()]
-
-    def report_errors(self, row_number: int) -> list[str]:
-        return [t.strip() for t in self.report_row(row_number).locator("li").all_inner_texts()]
-
-    @property
-    def rows_summary(self) -> Locator:
-        return self.page.locator('nav.import-pagination [role="status"]')
-
-    @property
-    def review_link(self) -> Locator:
-        """ "Przejdź do weryfikacji" - shown for a batch awaiting review (task 37)."""
-        return self.page.get_by_role("link", name=ImportMessages.OPEN_REVIEW)
-
-    @property
-    def next_rows_button(self) -> Locator:
-        return self.page.get_by_role("button", name=ImportMessages.NEXT_ROWS)
 
 
 def _exactly(text: str) -> re.Pattern[str]:

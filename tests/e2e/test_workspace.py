@@ -19,6 +19,7 @@ from alma_spei_tests.pages import (
     ExecutionPage,
     ImportsPage,
     LoginPage,
+    ReviewMessages,
     ReviewPage,
 )
 from alma_spei_tests.testbase import BaseE2ETest
@@ -41,7 +42,9 @@ class TestStartScreen(BaseE2ETest):
                 id="new-import",
             ),
             pytest.param(
-                AuthMessages.RESUME_REVIEW, lambda page: ReviewPage(page).heading, id="review"
+                AuthMessages.RESUME_REVIEW,
+                lambda page: ReviewPage(page).screen_heading(ReviewMessages.QUEUE_TITLE),
+                id="review",
             ),
             pytest.param(
                 AuthMessages.IMPORT_HISTORY,
@@ -67,6 +70,12 @@ class TestStartScreen(BaseE2ETest):
 
 @allure.feature("Workspace UI")
 class TestSidebar(BaseE2ETest):
+    def test_the_sidebar_labels_the_data_as_fictional(self, signed_in_page: Page):
+        # 1. Open the app with the administrator's session
+        # 2. Verification: the account panel says this is a test version with invented data
+        login = LoginPage(signed_in_page).open()
+        expect(login.demo_label).to_be_visible()
+
     def test_the_current_screen_is_marked_in_the_navigation(self, signed_in_page: Page):
         # 1. Open the app with the administrator's session
         # 2. Choose "Darczyńcy" in the sidebar

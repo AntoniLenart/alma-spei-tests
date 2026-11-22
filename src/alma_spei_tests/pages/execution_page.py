@@ -1,7 +1,7 @@
 """Page object for import confirmation, outcome, history and undo (task 40).
 
 Mirrors src/ui/alma_spei/ui/imports/execution_views.cljs. Reached from the nav
-("Historia importów"), the review preview's "Przejdź do zatwierdzenia" link, or
+("Historia importów"), the import summary's "Sprawdź zmiany i zatwierdź", or
 UUID-only fragments: ``#imports/history/<offset>``,
 ``#imports/confirm/<batch>/<preview>/<offset>``, ``#imports/batch/<batch>/<offset>``
 and ``#imports/reimport/<batch>``. Nothing is written on opening a screen: the
@@ -19,11 +19,12 @@ class ExecutionMessages:
 
     NAV_HISTORY = "Historia importów"
     HISTORY_HEADING = "Historia importów"
-    OPEN_OUTCOME = "Otwórz wynik importu"
-    GO_TO_CONFIRMATION = "Przejdź do zatwierdzenia"
+    OPEN_OUTCOME = "Zobacz wynik importu"
+    #: Collapsed metadata of a history entry.
+    ENTRY_DETAILS = "Szczegóły pliku i przebiegu"
 
     # confirmation
-    CONFIRM_HEADING = "Zatwierdzenie importu"
+    CONFIRM_HEADING = "Zatwierdź sprawdzone przelewy"
     NO_FIELD_CHANGES = (
         "Istniejące profile pozostają bez zmian pól. Kwoty różnych walut nie są sumowane."
     )
@@ -31,7 +32,7 @@ class ExecutionMessages:
         "Tryb testowy — nie powstaje rzeczywista kopia zapasowa."
         " Używaj wyłącznie danych syntetycznych."
     )
-    REQUEST_BACKUP = "Poproś o testowe potwierdzenie kopii"
+    REQUEST_BACKUP = "Przygotuj zatwierdzenie testowe"
     CONSENT = (
         "Zatwierdzam cały wyświetlony podgląd. Potwierdzam użycie wyłącznie danych"
         " syntetycznych i rozumiem, że nie powstała rzeczywista kopia zapasowa."
@@ -144,6 +145,16 @@ class ExecutionPage(BasePage):
         return self.screen.locator("article.execution-history-entry").filter(
             has=self.page.get_by_role("heading", name=filename, exact=True)
         )
+
+    def state_badge(self, entry: Locator) -> Locator:
+        return entry.locator("span.state-badge")
+
+    def open_entry_details(self, entry: Locator):
+        entry.locator("summary", has_text=ExecutionMessages.ENTRY_DETAILS).click()
+
+    @property
+    def preview_items(self) -> Locator:
+        return self.screen.locator("article.preview-item")
 
     # --- undo -------------------------------------------------------------------
     @property

@@ -52,6 +52,8 @@ class AuthMessages:
     ACCOUNTS_NAV = "Konta użytkowników"
     OPEN_MENU = "Menu"
     CLOSE_MENU = "Zamknij menu"
+    #: The account panel's reminder that this installation holds invented data.
+    DEMO_LABEL = "Wersja testowa · dane fikcyjne"
 
     # Start screen
     HOME_HEADING = "Od czego zaczynamy?"
@@ -115,6 +117,10 @@ class LoginPage(BasePage):
     def account_panel(self) -> Locator:
         """The sidebar's "Zalogowano jako <name>" block with the logout button."""
         return self.page.locator(".sidebar-account")
+
+    @property
+    def demo_label(self) -> Locator:
+        return self.account_panel.get_by_text(AuthMessages.DEMO_LABEL, exact=True)
 
     def signed_in_as(self, display_name: str) -> Locator:
         """The account panel's name, once it shows ``display_name``."""

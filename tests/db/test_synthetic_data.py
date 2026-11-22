@@ -3,7 +3,8 @@
 The loader runs once per module against the orchestrated, disposable database
 (``first_seed``), with the QA administrator as its audit actor; the tests then
 inspect what it stored, run it again and try actors it must refuse. Every
-profile it writes is invented and named ``DANE SYNTETYCZNE — …``.
+profile it writes is invented, with an ordinary Polish name; the demo rows are
+recognised by the loader's stable ids (``data.demo``), not by their names.
 """
 
 from collections import Counter
@@ -17,14 +18,17 @@ from assertpy import assert_that, soft_assertions
 from alma_spei_tests.clients import AlmaSpeiApi, expect_status
 from alma_spei_tests.config import Settings
 from alma_spei_tests.constants import AuditAction, DemoDataset, DonorStatusFilter, SeedStatus
-from alma_spei_tests.data import ProvisionedAccount, new_account
+from alma_spei_tests.data import ProvisionedAccount, demo_donor_ids, new_account
 from alma_spei_tests.db import DbQueries
 from alma_spei_tests.orchestration import SeedResult, Stack
 from alma_spei_tests.steps import db_steps, demo_steps, donors_steps
 from alma_spei_tests.testbase import BaseDbTest
 
-#: Large enough for one page holding the whole dataset.
+#: The largest donor list page the API serves.
 PAGE_LIMIT = 100
+
+#: Every demo profile, by its stable id.
+DEMO_IDS = demo_donor_ids()
 
 
 @allure.feature("Synthetic demo data")
@@ -40,13 +44,13 @@ class TestSyntheticDataset(BaseDbTest):
                 "the first load should report the whole dataset as loaded"
             ).is_equal_to(seed_summary(SeedStatus.LOADED))
 
-    def test_profiles_are_synthetic_and_split_by_type_and_status(
+    def test_profiles_are_the_stable_set_split_by_type_and_status(
         self, db: DbQueries, first_seed: SeedResult
     ):
-        # 1. Read the donors carrying the synthetic name prefix
+        # 1. Read the donors with the loader's stable ids
         # 2. Verification: 20 profiles at version 1 - 12 individuals, 4 businesses and
         #    4 organizations - of which 18 are active and 2 archived
-        donors = db_steps.read_donors_named(db, DemoDataset.NAME_PREFIX)
+        donors = db_steps.read_donors_with_ids(db, DEMO_IDS)
         with soft_assertions():
             assert_that(len(donors)).described_as(
                 "every synthetic profile should be stored"
@@ -64,7 +68,7 @@ class TestSyntheticDataset(BaseDbTest):
     def test_payments_are_pln_in_2026_and_add_up(self, db: DbQueries, first_seed: SeedResult):
         # 1. Read the donations of the synthetic profiles
         # 2. Verification: 30 positive PLN payments dated 2026, totalling 2650 PLN
-        payments = db_steps.read_donations_of_donors_named(db, DemoDataset.NAME_PREFIX)
+        payments = db_steps.read_donations_of_donors(db, DEMO_IDS)
         with soft_assertions():
             assert_that(len(payments)).described_as(
                 "payments that look alike should stay separate facts"
@@ -85,9 +89,10 @@ class TestSyntheticDataset(BaseDbTest):
     def test_profiles_sharing_a_full_name_stay_separate(
         self, db: DbQueries, first_seed: SeedResult
     ):
-        # 1. Read the profiles carrying the shared full name
+        # 1. Read the synthetic profiles carrying the shared full name
         # 2. Verification: two distinct donors at different streets, never merged
-        namesakes = db_steps.read_donors_named(db, DemoDataset.SHARED_NAME)
+        donors = db_steps.read_donors_with_ids(db, DEMO_IDS)
+        namesakes = [d for d in donors if d["name"] == DemoDataset.SHARED_NAME]
         with soft_assertions():
             assert_that(len({d["id"] for d in namesakes})).described_as(
                 "two profiles should share the full name"
@@ -99,7 +104,7 @@ class TestSyntheticDataset(BaseDbTest):
     def test_every_profile_has_its_creation_audited(self, db: DbQueries, first_seed: SeedResult):
         # 1. Read the audit actions of the synthetic profiles
         # 2. Verification: one creation entry per profile and nothing else
-        actions = db_steps.read_audit_actions_of_donors_named(db, DemoDataset.NAME_PREFIX)
+        actions = db_steps.read_audit_actions_of_donors(db, DEMO_IDS)
         assert_that(actions).described_as(
             "each synthetic profile should have exactly its creation audited"
         ).is_equal_to([AuditAction.CREATE] * DemoDataset.DONORS)
@@ -107,12 +112,11 @@ class TestSyntheticDataset(BaseDbTest):
     def test_the_api_lists_only_the_active_profiles_by_default(
         self, api: AlmaSpeiApi, first_seed: SeedResult
     ):
-        # 1. Search the donor list for the synthetic prefix, by default and with every status
-        # 2. Verification: 18 active profiles by default, all 20 with status "all"
-        prefix = DemoDataset.NAME_PREFIX.strip()
-        default = list_total(api, search=prefix, limit=PAGE_LIMIT)
-        everyone = list_total(api, search=prefix, limit=PAGE_LIMIT, status=DonorStatusFilter.ALL)
-        assert_that((default, everyone)).described_as(
+        # 1. Page through the donor list, by default and with every status
+        # 2. Verification: 18 synthetic profiles are listed by default, all 20 with status "all"
+        default = listed_demo_ids(api)
+        everyone = listed_demo_ids(api, status=DonorStatusFilter.ALL)
+        assert_that((len(default), len(everyone))).described_as(
             "the API should list the active profiles by default and all of them on request"
         ).is_equal_to((DemoDataset.ACTIVE, DemoDataset.DONORS))
 
@@ -181,17 +185,25 @@ def seed_summary(status: SeedStatus) -> dict[str, str]:
 
 def demo_snapshot(db: DbQueries) -> tuple[list, list, list]:
     """The synthetic donors, payments and audit actions, comparable across runs."""
-    prefix = DemoDataset.NAME_PREFIX
-    payments = db_steps.read_donations_of_donors_named(db, prefix)
+    payments = db_steps.read_donations_of_donors(db, DEMO_IDS)
     return (
-        db_steps.read_donors_named(db, prefix),
+        db_steps.read_donors_with_ids(db, DEMO_IDS),
         sorted(payments, key=lambda p: (p["received_on"], p["amount"])),
-        sorted(db_steps.read_audit_actions_of_donors_named(db, prefix)),
+        sorted(db_steps.read_audit_actions_of_donors(db, DEMO_IDS)),
     )
 
 
-def list_total(api: AlmaSpeiApi, **query: str | int) -> int:
-    response = expect_status(
-        donors_steps.list_donors(api, **query), HTTPStatus.OK, "List synthetic donors"
-    )
-    return response.json()["total"]
+def listed_demo_ids(api: AlmaSpeiApi, **query: str) -> set[str]:
+    """The demo ids among every donor the list serves for ``query``, page by page."""
+    listed: set[str] = set()
+    offset, total = 0, 1
+    while offset < total:
+        response = expect_status(
+            donors_steps.list_donors(api, limit=PAGE_LIMIT, offset=offset, **query),
+            HTTPStatus.OK,
+            "List donors",
+        )
+        body = response.json()
+        listed |= {d["id"] for d in body["donors"]}
+        offset, total = offset + PAGE_LIMIT, body["total"]
+    return listed & set(DEMO_IDS)

@@ -1,7 +1,8 @@
 """E2E tests for the final import confirmation, history and undo screens (task 40).
 
 The browser borrows the administrator's API session. Batches are staged and
-decided through the API; the screen under test performs the explicit actions:
+decided through the API; the import summary leads to the confirmation, and the
+screen under test performs the explicit actions:
 the labelled test backup receipt, the consent, the commit, and the confirmed
 undo. Opening a screen must never write anything.
 """
@@ -24,30 +25,33 @@ from alma_spei_tests.data import (
     new_donor_profile,
     proposed_donor,
 )
-from alma_spei_tests.pages import ExecutionMessages, ExecutionPage, ImportMessages
+from alma_spei_tests.pages import ExecutionMessages, ReviewPage
 from alma_spei_tests.steps import execution_steps, imports_steps, review_steps, ui_steps
 from alma_spei_tests.steps.execution_steps import CommittedImport
 from alma_spei_tests.testbase import BaseE2ETest
 
+#: The donor reference and both payments of a decided two-line batch.
+PLANNED_CHANGES = 3
+
+#: Undoing an import and loading the file again makes its second attempt.
+REIMPORT_ATTEMPT = 2
+
 
 @allure.feature("Import confirmation UI")
 class TestConfirmationUi(BaseE2ETest):
-    def test_the_review_preview_leads_to_the_confirmation(
+    def test_the_summary_leads_to_the_confirmation(
         self, signed_in_page: Page, decided_upload: dict[str, Any]
     ):
         # 1. Decide both rows through the API (fixture)
-        # 2. Open the batch, prepare the preview and follow "Przejdź do zatwierdzenia"
-        # 3. Verification: the confirmation shows the scope, the unchanged-profiles note and the
-        #    synthetic-mode warning; committing is disabled before a receipt and consent
+        # 2. Open the batch's summary and choose "Sprawdź zmiany i zatwierdź"
+        # 3. Verification: the confirmation shows the scope and every planned change, the
+        #    unchanged-profiles note and the synthetic-mode warning; committing is disabled
+        #    before a receipt and consent
         batch = decided_upload["batch"]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
-        ui_steps.prepare_preview_via_form(review)
-        review.preview_section.get_by_role(
-            "link", name=ExecutionMessages.GO_TO_CONFIRMATION
-        ).click()
-        execution = ExecutionPage(signed_in_page)
-        expect(execution.heading(ExecutionMessages.CONFIRM_HEADING)).to_be_visible()
+        execution = ui_steps.review_changes(review)
         expect(execution.text(ExecutionMessages.summary(0, 2, 0))).to_be_visible()
+        expect(execution.preview_items).to_have_count(PLANNED_CHANGES)
         expect(execution.text(ExecutionMessages.NO_FIELD_CHANGES)).to_be_visible()
         expect(execution.text(ExecutionMessages.SYNTHETIC_MODE)).to_be_visible()
         expect(execution.button(ExecutionMessages.COMMIT)).to_be_disabled()
@@ -101,12 +105,15 @@ class TestHistoryUi(BaseE2ETest):
         settings: Settings,
     ):
         # 1. Commit a batch through the API (fixture)
-        # 2. Open the history from the navigation and the batch's outcome
-        # 3. Verification: the entry shows the uploader and the committed state; the outcome
-        #    shows the saved commit
+        # 2. Open the history from the navigation, then the entry's details
+        # 3. Open the batch's outcome
+        # 4. Verification: the entry shows the committed state and, in its details, the
+        #    uploader; the outcome shows the saved commit
         filename = committed_import.outcome["batch"]["original-filename"]
         execution = ui_steps.open_history(signed_in_page)
         entry = execution.history_entry(filename)
+        expect(execution.state_badge(entry)).to_have_text(ExecutionMessages.STATE_COMMITTED)
+        execution.open_entry_details(entry)
         expect(execution.context_value(ExecutionMessages.UPLOADED_BY, entry)).to_have_text(
             settings.admin_display_name
         )
@@ -184,19 +191,27 @@ class TestReimportUi(BaseE2ETest):
     ):
         # 1. Commit a batch (fixture) and undo it through the API
         # 2. Open its outcome and follow "Wczytaj ten sam plik ponownie"
-        # 3. Choose the same file and separator, confirm and retry
-        # 4. Verification: attempt 2 is staged and awaits review
+        # 3. Choose the same file and separator, confirm PLN and the retry, and retry
+        # 4. Verification: the summary of the file opens for a new batch: attempt 2, staged and
+        #    awaiting review
+        filename = f"{tag}.csv"
         execution_steps.undo_import(api, committed_import)
         execution = ui_steps.open_outcome(signed_in_page, committed_import.batch_id)
         execution.link(ExecutionMessages.REIMPORT).click()
         expect(execution.heading(ExecutionMessages.REIMPORT_HEADING)).to_be_visible()
         imports = ui_steps.imports_page(signed_in_page)
         ui_steps.choose_import_file(
-            imports, f"{tag}.csv", bank_statement.to_csv(), CsvSeparator.SEMICOLON
+            imports, filename, bank_statement.to_csv(), CsvSeparator.SEMICOLON
         )
-        ui_steps.retry_upload(imports, f"{tag}.csv", bank_statement.to_csv())
-        expect(imports.summary_value(ImportMessages.ATTEMPT)).to_have_text("2")
-        ui_steps.wait_for_import_state(imports, ImportMessages.STATE_REVIEW)
+        ui_steps.retry_upload(imports, filename, bank_statement.to_csv())
+        review = ui_steps.wait_for_summary(ReviewPage(signed_in_page), filename)
+        assert_that(review.batch_id).described_as(
+            "the re-import should be staged as a new batch"
+        ).is_not_none().is_not_equal_to(committed_import.batch_id)
+        batch = execution_steps.read_outcome(api, str(review.batch_id)).json()["batch"]
+        assert_that((batch["attempt-number"], batch["state"])).described_as(
+            "the re-import should be a fresh attempt awaiting review"
+        ).is_equal_to((REIMPORT_ATTEMPT, ImportState.REVIEW))
 
 
 # --- file-local fixtures --------------------------------------------------------

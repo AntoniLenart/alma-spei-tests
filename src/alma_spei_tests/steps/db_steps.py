@@ -123,19 +123,19 @@ def probe_import_attempts(
     return db.import_attempts_violation(actor_id, *attempts)
 
 
-@step("Read the donors named '{prefix}…'")
-def read_donors_named(db: DbQueries, prefix: str) -> list[dict[str, Any]]:
-    return db.donors_named(prefix)
+@step("Read the donors with {ids}")
+def read_donors_with_ids(db: DbQueries, ids: list[str]) -> list[dict[str, Any]]:
+    return db.donors_with_ids(ids)
 
 
-@step("Read the donations of the donors named '{prefix}…'")
-def read_donations_of_donors_named(db: DbQueries, prefix: str) -> list[dict[str, Any]]:
-    return db.donations_of_donors_named(prefix)
+@step("Read the donations of the donors with {ids}")
+def read_donations_of_donors(db: DbQueries, ids: list[str]) -> list[dict[str, Any]]:
+    return db.donations_of_donors(ids)
 
 
-@step("Read the audit actions of the donors named '{prefix}…'")
-def read_audit_actions_of_donors_named(db: DbQueries, prefix: str) -> list[str]:
-    return db.audit_actions_of_donors_named(prefix)
+@step("Read the audit actions of the donors with {ids}")
+def read_audit_actions_of_donors(db: DbQueries, ids: list[str]) -> list[str]:
+    return db.audit_actions_of_donors(ids)
 
 
 @step("Read the import file with hash {sha256}")

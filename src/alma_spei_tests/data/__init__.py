@@ -7,6 +7,7 @@ from alma_spei_tests.data.bank import (
     new_bank_statement,
     sha256_hex,
 )
+from alma_spei_tests.data.demo import demo_donor_ids, stable_demo_id
 from alma_spei_tests.data.factories import (
     TAG_PREFIX,
     DonorFactory,
@@ -45,6 +46,7 @@ __all__ = [
     "SyntheticAccount",
     "already_recorded",
     "blank_only_csv",
+    "demo_donor_ids",
     "existing_donor",
     "new_account",
     "new_bank_statement",
@@ -53,5 +55,6 @@ __all__ = [
     "proposed_donor",
     "seeded_faker",
     "sha256_hex",
+    "stable_demo_id",
     "unique_tag",
 ]
