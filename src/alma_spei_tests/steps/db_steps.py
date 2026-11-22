@@ -44,6 +44,26 @@ def count_security_events_mentioning(db: DbQueries, text: str) -> int:
     return db.security_events_mentioning(text)
 
 
+@step("Check which of the tables {names} exist")
+def read_tables_present(db: DbQueries, names: Sequence[str]) -> dict[str, bool]:
+    return db.tables_present(names)
+
+
+@step("Probe an account row with {changes} (rolled back)")
+def probe_user(db: DbQueries, **changes: object) -> str | None:
+    return db.user_violation(**changes)
+
+
+@step("Read the stored sessions of user {user_id}")
+def read_sessions(db: DbQueries, user_id: str) -> list[dict[str, Any]]:
+    return db.sessions_of(user_id)
+
+
+@step("Age the sessions of user {user_id} (idle {idle_minutes} min, expired {expired})")
+def age_sessions(db: DbQueries, user_id: str, *, idle_minutes: int = 0, expired: bool = False):
+    db.age_sessions(user_id, idle_minutes=idle_minutes, expired=expired)
+
+
 @step("Read donor row {donor_id}")
 def read_donor(db: DbQueries, donor_id: str) -> dict[str, Any]:
     return _existing(db.donor(donor_id), f"donor {donor_id}")

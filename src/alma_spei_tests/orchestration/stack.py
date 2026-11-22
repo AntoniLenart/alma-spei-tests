@@ -53,12 +53,17 @@ class StackError(RuntimeError):
 
 
 @dataclass(frozen=True)
-class SeedResult:
-    """Outcome of one run of the app's synthetic-data loader (``bb seed-demo``)."""
+class CommandResult:
+    """Outcome of one app command run against the stack (never raises on failure)."""
 
     returncode: int
     stdout: str
     stderr: str
+
+
+@dataclass(frozen=True)
+class SeedResult(CommandResult):
+    """Outcome of one run of the app's synthetic-data loader (``bb seed-demo``)."""
 
     @property
     def summary(self) -> dict[str, str]:
@@ -273,6 +278,43 @@ class Stack:
             text=True,
         )
         return SeedResult(result.returncode, result.stdout, result.stderr)
+
+    def bootstrap_admin(self, username: str, display_name: str) -> CommandResult:
+        """Run the app's first-administrator bootstrap again, for another account.
+
+        The same service call that provisioned the QA administrator; the app must
+        refuse it now that an account exists.
+        """
+        env = self._utf8_env()
+        env["ALMA_QA_ADMIN_USERNAME"] = username
+        env["ALMA_QA_ADMIN_DISPLAY_NAME"] = display_name
+        return self._command(
+            [self.settings.clojure_cmd, "-Srepro", "-M", str(PROVISION_SCRIPT)], env
+        )
+
+    def create_admin_without_terminal(self) -> CommandResult:
+        """The command behind ``bb create-admin``, with no console attached."""
+        args = [self.settings.clojure_cmd, "-Srepro", "-M:create-admin"]
+        return self._command(args, self._utf8_env())
+
+    def _utf8_env(self) -> dict[str, str]:
+        """The stack env with the JVM writing UTF-8, so Polish messages decode everywhere."""
+        env = self._base_env()
+        env["JAVA_TOOL_OPTIONS"] = "-Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"
+        return env
+
+    def _command(self, args: list[str], env: dict[str, str]) -> CommandResult:
+        log.info("stack: %s", " ".join(args))
+        result = subprocess.run(
+            _resolved(args),
+            cwd=self.settings.app_repo,
+            env=env,
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        return CommandResult(result.returncode, result.stdout, result.stderr)
 
     def _stop_backend(self):
         if self._backend is None:

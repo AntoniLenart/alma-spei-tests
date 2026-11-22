@@ -542,6 +542,26 @@ BODY_LIMIT_BYTES = 16384
 #: Logins are throttled at five attempts per username per 15 minutes.
 LOGIN_ATTEMPTS_PER_USERNAME = 5
 
+#: A session ends after 30 minutes without activity, and 8 hours after it began.
+SESSION_IDLE_MINUTES = 30
+SESSION_LIFETIME_HOURS = 8
+
+#: Session tokens are 32 random bytes, base64url without padding (43 characters).
+SESSION_TOKEN_LENGTH = 43
+
+
+class BootstrapMessage(StrEnum):
+    """Refusals of the first-administrator bootstrap (``bb create-admin``)."""
+
+    #: The service refuses once any account exists.
+    ALREADY_DONE = "Pierwsze konto zostało już utworzone."
+    #: The console command's single, generic failure line.
+    FAILED = (
+        "Nie udało się utworzyć pierwszego administratora."
+        " Sprawdź konfigurację, dane i istniejące konta."
+    )
+
+
 #: A temporary password issued by bootstrap/create/reset is at least this long.
 TEMPORARY_PASSWORD_MIN_LENGTH = 20
 

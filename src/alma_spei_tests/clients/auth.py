@@ -25,8 +25,11 @@ class AuthClient(BaseClient):
         # The backend validates the body as a closed, empty map.
         return self._session.post(ApiPath.AUTH_LOGOUT, json={}, headers=headers)
 
-    def change_password(self, current_password: str, new_password: str) -> httpx.Response:
+    def change_password(
+        self, current_password: str, new_password: str, *, headers: HeaderOverrides | None = None
+    ) -> httpx.Response:
         return self._session.post(
             ApiPath.AUTH_PASSWORD,
             json={"current-password": current_password, "password": new_password},
+            headers=headers,
         )
