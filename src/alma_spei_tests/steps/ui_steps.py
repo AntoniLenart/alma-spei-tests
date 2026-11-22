@@ -6,6 +6,8 @@ from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.constants import ApiPath, ContentType
 from alma_spei_tests.data import DonorProfile, Financial
 from alma_spei_tests.pages import (
+    AccountMessages,
+    AccountsPage,
     AppPage,
     DonorCardPage,
     DonorListPage,
@@ -65,6 +67,13 @@ def trigger_recheck(app: AppPage) -> AppPage:
     with app.page.expect_response(_is_readiness_probe):
         app.recheck_button.click()
     return app
+
+
+# --- dialogs ------------------------------------------------------------------
+@step("Accept the next browser confirmation")
+def confirm_next_dialog(page: Page):
+    """Save and reset ask ``window.confirm`` first; accept the next one."""
+    page.once("dialog", lambda dialog: dialog.accept())
 
 
 # --- auth panel ---------------------------------------------------------------
@@ -333,3 +342,36 @@ def open_undo_dialog(execution: ExecutionPage) -> ExecutionPage:
 def imports_page(page: Page) -> ImportsPage:
     """The upload form shown inside another screen (e.g. the re-import context)."""
     return ImportsPage(page)
+
+
+# --- account management (task 58) ---------------------------------------------
+@step("Open the account management panel")
+def open_accounts(page: Page) -> AccountsPage:
+    accounts = AccountsPage(page).open_from_nav()
+    expect(accounts.heading).to_be_visible()
+    return accounts
+
+
+@step("Create account {username} through the panel")
+def create_account_via_panel(accounts: AccountsPage, username: str, display_name: str) -> str:
+    """Create the account and return the one-time temporary password the panel shows."""
+    accounts.create(username, display_name)
+    expect(accounts.temporary_password).not_to_be_empty()
+    return accounts.temporary_password.inner_text()
+
+
+@step("Reset the password of {username} through the panel")
+def reset_password_via_panel(accounts: AccountsPage, username: str) -> str:
+    confirm_next_dialog(accounts.page)
+    accounts.account_button(username, AccountMessages.RESET_PASSWORD).click()
+    expect(accounts.temporary_password).not_to_be_empty()
+    return accounts.temporary_password.inner_text()
+
+
+@step("Deactivate {username} through the panel")
+def deactivate_via_panel(accounts: AccountsPage, username: str) -> AccountsPage:
+    accounts.active_checkbox(username).uncheck()
+    confirm_next_dialog(accounts.page)
+    with accounts.page.expect_response(lambda r: r.request.method == "PATCH"):
+        accounts.account_button(username, AccountMessages.SAVE).click()
+    return accounts
