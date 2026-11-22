@@ -261,12 +261,12 @@ class DbQueries:
         self.client.execute("UPDATE donors SET is_active = false WHERE id = %s", (donor_id,))
 
     # --- synthetic demo data ---------------------------------------------------
-    def donors_named(self, prefix: str) -> list[dict[str, Any]]:
-        """Donors whose name starts with ``prefix``, by name then id."""
+    def donors_with_ids(self, ids: list[str]) -> list[dict[str, Any]]:
+        """The donors with these ids, by name then id."""
         rows = self.client.query(
             "SELECT id::text, name, entity_type, is_active, version, street, postal_code, city"
-            " FROM donors WHERE starts_with(name, %s) ORDER BY name, id",
-            (prefix,),
+            " FROM donors WHERE id = ANY(%s::uuid[]) ORDER BY name, id",
+            (ids,),
         )
         keys = (
             "id",
@@ -280,22 +280,21 @@ class DbQueries:
         )
         return [dict(zip(keys, row, strict=True)) for row in rows]
 
-    def donations_of_donors_named(self, prefix: str) -> list[dict[str, Any]]:
-        """Donations of the donors whose name starts with ``prefix``."""
+    def donations_of_donors(self, ids: list[str]) -> list[dict[str, Any]]:
+        """Donations of the donors with these ids."""
         rows = self.client.query(
-            "SELECT d.amount, d.currency, d.received_on, d.version FROM donations d"
-            " JOIN donors p ON p.id = d.donor_id WHERE starts_with(p.name, %s)",
-            (prefix,),
+            "SELECT amount, currency, received_on, version FROM donations"
+            " WHERE donor_id = ANY(%s::uuid[])",
+            (ids,),
         )
         keys = ("amount", "currency", "received_on", "version")
         return [dict(zip(keys, row, strict=True)) for row in rows]
 
-    def audit_actions_of_donors_named(self, prefix: str) -> list[str]:
-        """Audit actions recorded for the donors whose name starts with ``prefix``."""
+    def audit_actions_of_donors(self, ids: list[str]) -> list[str]:
+        """Audit actions recorded for the donors with these ids."""
         rows = self.client.query(
-            "SELECT e.action FROM donor_audit_events e JOIN donors p ON p.id = e.donor_id"
-            " WHERE starts_with(p.name, %s)",
-            (prefix,),
+            "SELECT action FROM donor_audit_events WHERE donor_id = ANY(%s::uuid[])",
+            (ids,),
         )
         return [row[0] for row in rows]
 

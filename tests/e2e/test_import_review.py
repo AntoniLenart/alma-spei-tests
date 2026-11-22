@@ -1,8 +1,10 @@
-"""E2E tests for the Polish import review screen (task 37).
+"""E2E tests for the Polish import review screen (task 37, automatic reconciliation).
 
 The browser borrows the administrator's API session. Batches are staged through
-the API (``staged_upload``) unless the upload screen itself is under test.
-Rows are picked explicitly; the screen never preselects a donor.
+the API (``staged_upload``), so their summary first asks for the file's currency;
+the matching then lists the default synthetic lines (senders without an address)
+as exceptions. An exception opens beside its source row, and no donor is ever
+chosen for the reviewer.
 """
 
 from typing import Any
@@ -13,10 +15,10 @@ from assertpy import assert_that, soft_assertions
 from playwright.sync_api import Locator, Page, expect
 
 from alma_spei_tests.clients import AlmaSpeiApi
-from alma_spei_tests.constants import ROW_ERROR_MESSAGES, CsvSeparator, RowErrorCode
+from alma_spei_tests.constants import ROW_ERROR_MESSAGES, DecisionKind, RowErrorCode
 from alma_spei_tests.data import BankRow, BankStatement
 from alma_spei_tests.pages import DonorMessages, ReviewMessages, ReviewPage
-from alma_spei_tests.steps import imports_steps, ui_steps
+from alma_spei_tests.steps import imports_steps, review_steps, ui_steps
 from alma_spei_tests.testbase import BaseE2ETest
 
 #: Valid rows in the default two-line statement.
@@ -34,7 +36,7 @@ class TestReviewQueueUi(BaseE2ETest):
     ):
         # 1. Stage an upload (fixture)
         # 2. Open the review queue from the navigation
-        # 3. Verification: the batch is listed by file name with zero reviewed rows
+        # 3. Verification: the batch is listed by file name with zero checked transfers
         filename = staged_upload["batch"]["original-filename"]
         review = ui_steps.open_review_queue(signed_in_page)
         item = review.queue_item(filename)
@@ -46,40 +48,57 @@ class TestReviewQueueUi(BaseE2ETest):
     def test_queue_entry_opens_the_batch(self, signed_in_page: Page, staged_upload: dict[str, Any]):
         # 1. Open the review queue
         # 2. Choose the staged batch
-        # 3. Verification: the batch view, headed by the file name, with a deep link in the URL
+        # 3. Verification: the batch's summary, by its deep link, asking for the source
+        #    settings the API upload did not give
         batch = staged_upload["batch"]
         review = ui_steps.open_review_queue(signed_in_page)
         review.queue_button(batch["original-filename"]).click()
-        expect(review.batch_heading).to_have_text(batch["original-filename"])
+        ui_steps.wait_for_summary(review, batch["original-filename"])
+        expect(review.summary_button(ReviewMessages.RUN_MATCHING)).to_be_visible()
         assert_that(signed_in_page.url).described_as(
             "the batch view should be addressable by a deep link"
         ).ends_with(ReviewMessages.deep_link(batch["id"]))
 
-    def test_upload_report_links_to_the_review(
-        self, signed_in_page: Page, bank_statement: BankStatement, tag: str
+    def test_the_source_settings_are_confirmed_once(
+        self, signed_in_page: Page, staged_upload: dict[str, Any]
     ):
-        # 1. Upload a statement through the upload screen
-        # 2. Follow "Przejdź do weryfikacji"
-        # 3. Verification: the review of that very batch opens
-        filename = f"{tag}.csv"
-        imports = ui_steps.open_imports(signed_in_page)
-        ui_steps.choose_import_file(
-            imports, filename, bank_statement.to_csv(), CsvSeparator.SEMICOLON
-        )
-        ui_steps.submit_upload(imports)
-        imports.review_link.click()
-        expect(ReviewPage(signed_in_page).batch_heading).to_have_text(filename)
+        # 1. Deep-link to a staged batch, confirm PLN and run the matching
+        # 2. Reload the page
+        # 3. Verification: the summary comes back with its counts and exceptions, without
+        #    asking for the settings again
+        batch = staged_upload["batch"]
+        review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
+        ui_steps.run_matching(review)
+        signed_in_page.reload()
+        ui_steps.wait_for_summary(review, batch["original-filename"])
+        expect(review.summary_button(ReviewMessages.RUN_MATCHING)).to_have_count(0)
+        expect(review.exception_cards).to_have_count(STAGED_VALID_ROWS)
 
 
 @allure.feature("Import review UI")
-class TestManualComparisonUi(BaseE2ETest):
-    def test_no_donor_is_preselected(self, signed_in_page: Page, staged_upload: dict[str, Any]):
-        # 1. Deep-link to a staged batch and pick row 2
-        # 2. Verification: the donor card asks for a search - no profile is chosen automatically
+class TestExceptionUi(BaseE2ETest):
+    def test_no_donor_is_preselected(
+        self,
+        signed_in_page: Page,
+        api: AlmaSpeiApi,
+        staged_upload: dict[str, Any],
+        bank_statement: BankStatement,
+    ):
+        # 1. Deep-link to a staged batch, run the matching and explain row 2
+        # 2. Verification: no donor is chosen and no payment question is asked; the reviewer
+        #    is offered the catalogue or a new donor; the row stays unresolved
         batch = staged_upload["batch"]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
-        ui_steps.pick_review_row(review, 2)
-        expect(review.donor_card).to_contain_text(ReviewMessages.NO_DONOR_YET)
+        ui_steps.run_matching(review)
+        ui_steps.explain_exception(review, 2, bank_statement.rows[1].sender)
+        expect(review.chosen_donor).to_have_count(0)
+        expect(review.payment_form).to_have_count(0)
+        expect(review.choice_button(ReviewMessages.FROM_CATALOGUE)).to_be_enabled()
+        expect(review.choice_button(ReviewMessages.NEW_DONOR)).to_be_enabled()
+        decision = review_steps.read_decision(api, batch["id"], 2).json()["decision"]
+        assert_that(decision["kind"]).described_as(
+            "explaining a row should not choose anything by itself"
+        ).is_equal_to(DecisionKind.UNRESOLVED)
 
     def test_comparison_shows_the_source_row_beside_the_chosen_donor(
         self,
@@ -89,18 +108,17 @@ class TestManualComparisonUi(BaseE2ETest):
         donor: dict[str, Any],
         tag: str,
     ):
-        # 1. Deep-link to a staged batch and pick row 2
-        # 2. Search donors by this test's tag and compare with the tagged donor
+        # 1. Deep-link to a staged batch, run the matching and explain row 2
+        # 2. Search the catalogue by this test's tag and compare with the tagged donor
         # 3. Verification: the source card shows row 2's raw values and an unknown currency;
         #    the donor card shows the donor's type, name, city and active status
         batch = staged_upload["batch"]
         source = bank_statement.rows[1]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
-        ui_steps.pick_review_row(review, 2)
+        ui_steps.run_matching(review)
+        ui_steps.explain_exception(review, 2, source.sender)
+        ui_steps.look_up_donors(review)
         ui_steps.compare_with_donor(review, tag, donor["name"], donor["city"])
-        expect(review.card_value(review.donor_card, ReviewMessages.DONOR_NAME)).to_have_text(
-            donor["name"]
-        )
         with soft_assertions():
             assert_that(card_values(review, review.source_card, SOURCE_LABELS)).described_as(
                 "the source card should show the row as written in the file"
@@ -123,19 +141,19 @@ class TestManualComparisonUi(BaseE2ETest):
                     ReviewMessages.DONOR_STATUS: ReviewMessages.ACTIVE,
                 }
             )
-            assert_that(review.source_card.inner_text()).described_as(
-                "the source card should name the compared row"
-            ).contains(ReviewMessages.source_location(2))
 
     def test_invalid_row_shows_its_errors_beside_the_comparison(
         self, signed_in_page: Page, api_staged_invalid: dict[str, Any]
     ):
         # 1. Stage a statement whose second line is invalid (fixture)
-        # 2. Deep-link to it and pick row 2
-        # 3. Verification: the notice that comparing fixes nothing, with the Polish reasons
+        # 2. Deep-link to it, run the matching and explain the invalid row
+        # 3. Verification: the alert that choosing a donor fixes nothing, and the source card's
+        #    notice with the Polish reasons
         batch = api_staged_invalid["batch"]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
-        ui_steps.pick_review_row(review, 2)
+        ui_steps.run_matching(review)
+        ui_steps.explain_exception(review, 2, ReviewMessages.REASONS["invalid-row"])
+        expect(review.invalid_row_alert).to_have_text(ReviewMessages.INVALID_ROW_ALERT)
         expect(review.source_card).to_contain_text(ReviewMessages.INVALID_ROW_NOTICE)
         expect(review.source_card.locator("li")).to_have_text(
             [

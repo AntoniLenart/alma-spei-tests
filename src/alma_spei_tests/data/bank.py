@@ -13,6 +13,7 @@ import hashlib
 import io
 import zipfile
 from dataclasses import dataclass
+from decimal import Decimal
 from xml.sax.saxutils import escape
 
 from faker import Faker
@@ -48,6 +49,10 @@ class BankStatement:
     #: Blank lines appended after the rows (the parser skips and counts them).
     trailing_blank_lines: int = 0
     separator: CsvSeparator = CsvSeparator.SEMICOLON
+
+    def total(self) -> Decimal:
+        """The sum of the amounts, as the app reads them (comma or dot decimals)."""
+        return sum((Decimal(row.amount.replace(",", ".")) for row in self.rows), Decimal(0))
 
     # --- CSV ------------------------------------------------------------------
     def to_csv(self) -> bytes:

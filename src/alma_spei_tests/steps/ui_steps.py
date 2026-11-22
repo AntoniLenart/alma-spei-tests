@@ -3,7 +3,7 @@
 from playwright.sync_api import Locator, Page, Response, Route, expect
 
 from alma_spei_tests.clients import AlmaSpeiApi
-from alma_spei_tests.constants import ApiPath, ContentType
+from alma_spei_tests.constants import REVIEW_CURRENCY, ApiPath, ContentType, DonorStatusFilter
 from alma_spei_tests.data import DonorProfile, Financial
 from alma_spei_tests.pages import (
     AccountMessages,
@@ -189,8 +189,10 @@ def choose_import_file(
     return imports
 
 
-@step("Submit the file for analysis")
-def submit_upload(imports: ImportsPage) -> ImportsPage:
+@step("Confirm the file's currency {currency} and submit it")
+def submit_upload(imports: ImportsPage, currency: str = REVIEW_CURRENCY) -> ImportsPage:
+    """Confirm the source currency once for the file and send it for matching."""
+    imports.currency_input.fill(currency)
     imports.upload_button.click()
     return imports
 
@@ -201,40 +203,65 @@ def wait_for_import_state(imports: ImportsPage, state_label: str) -> ImportsPage
     return imports
 
 
-@step("Confirm and retry the analysis of '{filename}'")
-def retry_upload(imports: ImportsPage, filename: str, content: bytes) -> ImportsPage:
+@step("Confirm and retry the analysis of '{filename}' in {currency}")
+def retry_upload(
+    imports: ImportsPage, filename: str, content: bytes, currency: str = REVIEW_CURRENCY
+) -> ImportsPage:
     imports.choose_file(filename, content)
+    imports.currency_input.fill(currency)
     tick(imports.retry_confirmation)
     imports.retry_button.click()
     return imports
 
 
-# --- import review (task 37) --------------------------------------------------
+# --- import review (task 37, automatic reconciliation) -------------------------
 @step("Open the import review queue")
 def open_review_queue(page: Page) -> ReviewPage:
     review = ReviewPage(page).open_from_nav()
-    expect(review.heading).to_be_visible()
+    expect(review.screen_heading(ReviewMessages.QUEUE_TITLE)).to_be_visible()
     return review
 
 
-@step("Deep-link to the review of import {batch_id}")
+@step("Deep-link to the summary of import {batch_id}")
 def open_review_batch(page: Page, batch_id: str, filename: str) -> ReviewPage:
-    review = ReviewPage(page).open_batch(batch_id)
-    expect(review.batch_heading).to_have_text(filename)
+    return wait_for_summary(ReviewPage(page).open_batch(batch_id), filename)
+
+
+@step("Wait for the import summary of '{filename}'")
+def wait_for_summary(review: ReviewPage, filename: str) -> ReviewPage:
+    """Wait until the summary shows its settings form or its counts, and is idle."""
+    expect(review.screen_heading(ReviewMessages.SUMMARY_TITLE)).to_be_visible()
+    expect(review.batch_filename).to_have_text(filename)
+    expect(review.summary_button(ReviewMessages.RUN_MATCHING).or_(review.counts)).to_be_visible()
+    expect(review.idle_summary).to_be_visible()
     return review
 
 
-@step("Pick staged row {row} for comparison")
-def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
-    """Select the row once the editor is idle, then wait for that row's decision.
+@step("Confirm the source currency {currency} and run the matching")
+def run_matching(review: ReviewPage, currency: str = REVIEW_CURRENCY) -> ReviewPage:
+    review.settings_currency_input.fill(currency)
+    review.summary_button(ReviewMessages.RUN_MATCHING).click()
+    expect(review.counts).to_be_visible()
+    expect(review.idle_summary).to_be_visible()
+    return review
 
-    While a decision loads, changing rows asks to discard a draft (a browser
-    confirm the test would dismiss), so the editor must be idle first.
-    """
-    expect(review.idle_editor).to_be_visible()
-    review.select_row(row)
+
+@step("Explain the exception of row {row} (the card showing '{card_text}')")
+def explain_exception(review: ReviewPage, row: int, card_text: str) -> ReviewPage:
+    """Open one exception beside its source row, once its decision is loaded."""
+    review.exception_card(card_text).get_by_role("button", name=ReviewMessages.EXPLAIN).click()
+    expect(review.exception_heading).to_have_text(ReviewMessages.EXCEPTION_HEADING)
     expect(review.source_card).to_contain_text(ReviewMessages.source_location(row))
     expect(review.idle_editor).to_be_visible()
+    return review
+
+
+@step("Look up {status} donors in the catalogue")
+def look_up_donors(
+    review: ReviewPage, status: DonorStatusFilter = DonorStatusFilter.ACTIVE
+) -> ReviewPage:
+    review.choice_button(ReviewMessages.FROM_CATALOGUE).click()
+    review.status_filter_select.select_option(status.value)
     return review
 
 
@@ -242,59 +269,47 @@ def pick_review_row(review: ReviewPage, row: int) -> ReviewPage:
 def compare_with_donor(review: ReviewPage, text: str, name: str, city: str) -> ReviewPage:
     review.search_donor(text)
     review.compare_button(name, city).click()
-    return review
-
-
-# --- review decisions (task 38) -----------------------------------------------
-@step("Choose the compared donor as the row's target")
-def choose_compared_donor(review: ReviewPage, name: str) -> ReviewPage:
     expect(review.card_value(review.donor_card, ReviewMessages.DONOR_NAME)).to_have_text(name)
-    review.editor_button(ReviewMessages.CHOOSE_COMPARED).click()
-    expect(review.target_line).to_have_text(
-        ReviewMessages.target(ReviewMessages.TARGET_EXISTING, name)
-    )
     return review
 
 
-@step("Fill in the payment review ({financial.currency}, {financial.disposition})")
-def fill_payment_review(review: ReviewPage, financial: Financial) -> ReviewPage:
-    review.currency_input.fill(financial.currency or "")
-    review.evidence_input.fill(financial.evidence)
-    review.disposition_select.select_option(financial.disposition.value)
-    if financial.overlap_checked:
-        tick(review.overlap_checkbox)
+@step("Assign the transfer to the compared donor")
+def assign_compared_donor(review: ReviewPage) -> ReviewPage:
+    """The server then checks the payment itself; a clear one returns to the summary."""
+    review.choice_button(ReviewMessages.ASSIGN).click()
     return review
 
 
-@step("Save the row decision through the form")
-def save_decision_via_form(review: ReviewPage) -> ReviewPage:
-    review.editor_button(ReviewMessages.SAVE_DECISION).click()
-    expect(review.saved_notice).to_be_visible()
-    expect(review.idle_editor).to_be_visible()
-    return review
-
-
-@step("Propose donor '{profile.name}' through the form and use it")
-def propose_and_use_donor(review: ReviewPage, profile: DonorProfile) -> ReviewPage:
-    review.editor_button(ReviewMessages.NEW_PROFILE).click()
+@step("Prepare new donor '{profile.name}' for the transfer")
+def propose_new_donor(review: ReviewPage, profile: DonorProfile) -> ReviewPage:
+    review.choice_button(ReviewMessages.NEW_DONOR).click()
     review.proposal_type_select.select_option(profile.entity_type.value)
     review.proposal_field("name").fill(profile.name)
     review.proposal_field("city").fill(profile.city)
     tick(review.proposal_check(ReviewMessages.CHECKED_EXISTING))
     tick(review.proposal_check(ReviewMessages.CHECKED_PROPOSALS))
-    review.editor_button(ReviewMessages.SAVE_PROPOSAL).click()
-    review.saved_proposal.get_by_role("button", name=ReviewMessages.USE_PROPOSAL).click()
-    expect(review.target_line).to_have_text(
-        ReviewMessages.target(ReviewMessages.TARGET_PROPOSAL, profile.name)
-    )
+    review.donor_choice.get_by_role("button", name=ReviewMessages.SAVE_PROPOSAL).click()
     return review
 
 
-@step("Prepare the import preview through the form")
-def prepare_preview_via_form(review: ReviewPage) -> ReviewPage:
-    expect(review.idle_editor).to_be_visible()
-    review.preview_button(ReviewMessages.PREPARE_PREVIEW).click()
+@step("Settle the payment as {financial.disposition} and return to the summary")
+def settle_payment_via_form(review: ReviewPage, financial: Financial) -> ReviewPage:
+    expect(review.payment_form).to_be_visible()
+    review.currency_input.fill(financial.currency or "")
+    review.evidence_input.fill(financial.evidence)
+    review.disposition_select.select_option(financial.disposition.value)
+    if financial.overlap_checked:
+        tick(review.overlap_checkbox)
+    review.editor_button(ReviewMessages.SAVE_EXPLANATION).click()
     return review
+
+
+@step("Open the full change plan from the summary")
+def review_changes(review: ReviewPage) -> ExecutionPage:
+    review.summary_button(ReviewMessages.REVIEW_CHANGES).click()
+    execution = ExecutionPage(review.page)
+    expect(execution.heading(ExecutionMessages.CONFIRM_HEADING)).to_be_visible()
+    return execution
 
 
 # --- confirmation, history and undo (task 40) ---------------------------------
