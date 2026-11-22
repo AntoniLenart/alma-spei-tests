@@ -40,6 +40,7 @@ from alma_spei_tests.contracts.imports import (
     ROWS_RESPONSE,
     UPLOAD_RESPONSE,
 )
+from alma_spei_tests.contracts.reconciliation import RECONCILIATION_RESPONSE
 from alma_spei_tests.contracts.schema import Schema
 
 __all__ = [
@@ -68,6 +69,7 @@ __all__ = [
     "PREVIEW_RESPONSE",
     "PROPOSALS_RESPONSE",
     "PROPOSAL_RESPONSE",
+    "RECONCILIATION_RESPONSE",
     "QUEUE_RESPONSE",
     "ROWS_RESPONSE",
     "SESSION_RESPONSE",

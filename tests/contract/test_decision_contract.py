@@ -17,6 +17,7 @@ from alma_spei_tests.contracts import (
     PREVIEW_RESPONSE,
     PROPOSAL_RESPONSE,
     PROPOSALS_RESPONSE,
+    RECONCILIATION_RESPONSE,
 )
 from alma_spei_tests.data import existing_donor, new_donor_profile
 from alma_spei_tests.steps import review_steps
@@ -93,3 +94,15 @@ class TestPreviewContract(BaseContractTest):
         # 2. Verification: the body satisfies events-response
         body = review_steps.read_review_events(api, decided_upload["batch"]["id"]).json()
         assert_matches_contract(body, EVENTS_RESPONSE, "events-response")
+
+
+@allure.feature("Review decision contract")
+class TestReconciliationContract(BaseContractTest):
+    def test_reconciliation_responses_match_contract(self, api: AlmaSpeiApi, staged_batch_id: str):
+        # 1. Reconcile a staged batch, then read its report
+        # 2. Verification: both bodies satisfy the reconciliation response
+        posted = review_steps.reconcile(api, staged_batch_id, review_steps.policy()).json()
+        read = review_steps.read_reconciliation(api, staged_batch_id).json()
+        with soft_assertions():
+            assert_matches_contract(posted, RECONCILIATION_RESPONSE, "reconciliation (POST)")
+            assert_matches_contract(read, RECONCILIATION_RESPONSE, "reconciliation (GET)")

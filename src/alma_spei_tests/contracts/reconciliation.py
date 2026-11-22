@@ -1,0 +1,49 @@
+"""Automatic reconciliation contracts (task 60).
+
+Mirrors ``src/common/alma_spei/common/contracts/reconciliation.cljc``: the
+confirmed ``policy``, the ``counts``, and the report with the rows left for a
+person (``exceptions``) and their candidate donors.
+"""
+
+from alma_spei_tests.contracts.decisions import CURRENCY
+from alma_spei_tests.contracts.donors import DONOR
+from alma_spei_tests.contracts.imports import BATCH, POSITIVE, ROW_COUNT, STAGED_ROW
+from alma_spei_tests.contracts.schema import (
+    BOOLEAN,
+    STRING,
+    ClosedMap,
+    Enum,
+    Maybe,
+    Vector,
+)
+
+POLICY = ClosedMap(
+    {
+        "currency": CURRENCY,
+        "new-donor-type": Maybe(Enum("individual", "business", "organization")),
+    }
+)
+COUNTS = ClosedMap(
+    {
+        "matched": ROW_COUNT,
+        "new-donors": ROW_COUNT,
+        "new-payments": ROW_COUNT,
+        "duplicates": ROW_COUNT,
+        "exceptions": ROW_COUNT,
+        "total": ROW_COUNT,
+    }
+)
+EXCEPTION_ROW = ClosedMap({"row": STAGED_ROW, "reason": STRING, "candidates": Vector(DONOR)})
+RECONCILIATION_RESPONSE = ClosedMap(
+    {
+        "batch": BATCH,
+        "catalog-version": POSITIVE,
+        "policy": Maybe(POLICY),
+        "counts": COUNTS,
+        "totals": Vector(ClosedMap({"currency": CURRENCY, "amount": STRING})),
+        "exceptions": Vector(EXCEPTION_ROW),
+        "limit": POSITIVE,
+        "offset": ROW_COUNT,
+        "ready": BOOLEAN,
+    }
+)

@@ -12,6 +12,7 @@ from typing import Any
 import httpx
 
 from alma_spei_tests.clients import AlmaSpeiApi, expect_status
+from alma_spei_tests.constants import REVIEW_CURRENCY
 from alma_spei_tests.data import ReviewVersions, RowDecision, proposal_payload
 from alma_spei_tests.http import HeaderOverrides
 from alma_spei_tests.steps import step
@@ -175,3 +176,21 @@ def read_preview_items(
     api: AlmaSpeiApi, batch_id: str, preview_id: str, **page: int | str
 ) -> httpx.Response:
     return api.imports.preview_items(batch_id, preview_id, **page)
+
+
+# --- automatic reconciliation (task 60) ---------------------------------------
+def policy(currency: str = REVIEW_CURRENCY, new_donor_type: str | None = None) -> dict[str, object]:
+    """The policy a person confirms before matching: the file's currency, the new-donor type."""
+    return {"currency": currency, "new-donor-type": new_donor_type}
+
+
+@step("Reconcile import {batch_id} under {confirmed}")
+def reconcile(api: AlmaSpeiApi, batch_id: str, confirmed: Mapping[str, object]) -> httpx.Response:
+    """Run the matching at the batch version read just before."""
+    batch_version = read_versions(api, batch_id, 1).batch_version
+    return api.imports.reconcile(batch_id, {"batch-version": batch_version, "policy": confirmed})
+
+
+@step("Read the reconciliation report of import {batch_id} {page}")
+def read_reconciliation(api: AlmaSpeiApi, batch_id: str, **page: int | str) -> httpx.Response:
+    return api.imports.reconciliation(batch_id, **page)
