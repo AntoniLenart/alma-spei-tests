@@ -85,3 +85,41 @@ def deactivate_account(api: AlmaSpeiApi, account_id: str, display_name: str):
 @step("Reset the password of account {account_id}")
 def reset_password(api: AlmaSpeiApi, account_id: str) -> httpx.Response:
     return api.accounts.reset_password(account_id)
+
+
+# --- hardening checks (task 57) ------------------------------------------------
+@step("Request account {account.username} with header overrides {headers}")
+def request_account_with(
+    api: AlmaSpeiApi, account: SyntheticAccount, headers: HeaderOverrides
+) -> httpx.Response:
+    return api.accounts.create(
+        account.username, account.display_name, administrator=account.administrator, headers=headers
+    )
+
+
+@step("Edit account {account_id} with header overrides {headers}")
+def edit_account_with(
+    api: AlmaSpeiApi, account_id: str, display_name: str, headers: HeaderOverrides
+) -> httpx.Response:
+    return api.accounts.edit(
+        account_id, display_name, active=True, administrator=False, headers=headers
+    )
+
+
+@step("Reset the password of account {account_id} with header overrides {headers}")
+def reset_password_with(
+    api: AlmaSpeiApi, account_id: str, headers: HeaderOverrides
+) -> httpx.Response:
+    return api.accounts.reset_password(account_id, headers=headers)
+
+
+@step("Change the password with header overrides {headers}")
+def change_password_with(
+    api: AlmaSpeiApi, current_password: str, new_password: str, headers: HeaderOverrides
+) -> httpx.Response:
+    return api.auth.change_password(current_password, new_password, headers=headers)
+
+
+@step("POST {path} (a route that must not exist)")
+def post_path(api: AlmaSpeiApi, path: str, body: dict[str, Any]) -> httpx.Response:
+    return api.session.post(path, json=body)

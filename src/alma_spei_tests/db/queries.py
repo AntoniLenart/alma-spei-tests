@@ -9,7 +9,9 @@ granted and the API does not expose:
                            archived donor for the status filter and to keep the
                            default (active) list clean after a test;
 * ``clear_auth_throttle`` - resets login throttle buckets after a test that
-                           deliberately exhausts them.
+                           deliberately exhausts them;
+* ``age_sessions``        - moves a user's sessions back in time, to check idle
+                           and absolute expiry without waiting.
 """
 
 import secrets
@@ -43,6 +45,9 @@ PROBE_BATCH: dict[str, object] = {
     "state": "reserved",
     "failure_code": None,
 }
+
+#: A valid account row for constraint probes (the other columns have defaults).
+PROBE_USER: dict[str, object] = {"username": "qa.schema.probe", "display_name": "QA probe"}
 
 #: Canonical tables a staged (unapproved) import must leave untouched.
 CANONICAL_TABLES = ("donors", "donations", "donor_audit_events", "donor_audit_changes")
@@ -179,6 +184,48 @@ class DbQueries:
 
     def clear_auth_throttle(self):
         self.client.execute("DELETE FROM auth_throttle_buckets")
+
+    # --- authentication schema (task 57) -------------------------------------
+    def tables_present(self, names: Sequence[str]) -> dict[str, bool]:
+        return {
+            name: self.client.scalar("SELECT to_regclass(%s) IS NOT NULL", (name,))
+            for name in names
+        }
+
+    def user_violation(self, **changes: object) -> str | None:
+        """The constraint a new account row violates; ``changes`` alter a valid row."""
+        row = {**PROBE_USER, **changes}
+        return self.client.constraint_violated_by(
+            [
+                (
+                    "INSERT INTO users (id, username, display_name) VALUES (%s, %s, %s)",
+                    (_new_id(), row["username"], row["display_name"]),
+                )
+            ]
+        )
+
+    def sessions_of(self, user_id: str) -> list[dict[str, Any]]:
+        """The user's stored sessions, oldest first."""
+        rows = self.client.query(
+            "SELECT token_digest, csrf_digest, created_at, last_activity, expires_at"
+            " FROM sessions WHERE user_id = %s ORDER BY created_at",
+            (user_id,),
+        )
+        keys = ("token_digest", "csrf_digest", "created_at", "last_activity", "expires_at")
+        return [dict(zip(keys, row, strict=True)) for row in rows]
+
+    def age_sessions(self, user_id: str, *, idle_minutes: int = 0, expired: bool = False):
+        """Make the user's sessions idle for ``idle_minutes`` and/or past their expiry."""
+        self.client.execute(
+            "UPDATE sessions SET last_activity = now() - make_interval(mins => %s)"
+            " WHERE user_id = %s",
+            (idle_minutes, user_id),
+        )
+        if expired:
+            self.client.execute(
+                "UPDATE sessions SET expires_at = now() - interval '1 second' WHERE user_id = %s",
+                (user_id,),
+            )
 
     # --- donors ---------------------------------------------------------------
     def donor(self, donor_id: str) -> dict[str, Any] | None:
