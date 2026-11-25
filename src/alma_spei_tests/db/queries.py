@@ -46,6 +46,27 @@ PROBE_BATCH: dict[str, object] = {
     "failure_code": None,
 }
 
+#: A valid observation of a master-workbook cell in staged row 1/1, for constraint probes.
+PROBE_OBSERVATION: dict[str, object] = {
+    "worksheet_index": 1,
+    "row_number": 1,
+    "column_index": 7,
+    "observed_value": "120",
+    "source_value_type": "number",
+    "observed_year": 2024,
+    "observed_month": None,
+}
+
+#: A valid tax-list role of staged row 1/1, for constraint probes. ``donor_id`` True
+#: links a new valid donor created in the same probe.
+PROBE_TAX_ROLE: dict[str, object] = {
+    "worksheet_index": 1,
+    "row_number": 1,
+    "subject_role": "taxpayer",
+    "donor_id": None,
+    "tax_year": 2024,
+}
+
 #: A valid account row for constraint probes (the other columns have defaults).
 PROBE_USER: dict[str, object] = {"username": "qa.schema.probe", "display_name": "QA probe"}
 
@@ -131,6 +152,60 @@ class DbQueries:
                 changes["retry_of"] = batch_ids[retry_of]
             statements.append(_import_batch_insert(batch_id, file_id, actor_id, changes))
         return self.client.constraint_violated_by(statements)
+
+    def source_evidence_violation(
+        self,
+        actor_id: str,
+        source_type: str,
+        *,
+        observations: Sequence[Mapping[str, object]] = (),
+        tax_roles: Sequence[Mapping[str, object]] = (),
+    ) -> str | None:
+        """The constraint violated when staged row 1/1 of a new ``source_type`` batch gets
+        this evidence; each observation or tax role changes a valid one."""
+        file_id, batch_id = _new_id(), _new_id()
+        statements = [
+            _import_file_insert(file_id, {}),
+            _import_batch_insert(batch_id, file_id, actor_id, {"source_type": source_type}),
+            (
+                "INSERT INTO staged_rows (batch_id, worksheet_index, row_number,"
+                " normalized_payload, validation_state, rule_version)"
+                " VALUES (%s, 1, 1, '{}'::jsonb, 'valid', 'qa-probe-v1')",
+                (batch_id,),
+            ),
+        ]
+        statements += [_observation_insert(batch_id, changes) for changes in observations]
+        for changes in tax_roles:
+            role = {**PROBE_TAX_ROLE, **changes}
+            if role["donor_id"] is True:
+                role["donor_id"] = _new_id()
+                statements.append(_donor_insert(str(role["donor_id"]), actor_id, {}))
+            statements.append(_tax_role_insert(batch_id, role))
+        return self.client.constraint_violated_by(statements)
+
+    def foreign_key_targets(self, table: str) -> set[str]:
+        """The tables that ``table``'s foreign keys reference."""
+        rows = self.client.query(
+            "SELECT DISTINCT confrelid::regclass::text FROM pg_constraint"
+            " WHERE contype = 'f' AND conrelid = %s::regclass",
+            (table,),
+        )
+        return {row[0] for row in rows}
+
+    def triggers_on(self, table: str) -> list[str]:
+        """The user-defined triggers of ``table``."""
+        rows = self.client.query(
+            "SELECT tgname FROM pg_trigger WHERE tgrelid = %s::regclass AND NOT tgisinternal",
+            (table,),
+        )
+        return [row[0] for row in rows]
+
+    def column_names(self, table: str) -> set[str]:
+        rows = self.client.query(
+            "SELECT column_name FROM information_schema.columns WHERE table_name = %s",
+            (table,),
+        )
+        return {row[0] for row in rows}
 
     # --- foundation -----------------------------------------------------------
     def foundation_version(self) -> int | None:
@@ -443,6 +518,34 @@ def _import_file_insert(file_id: str, changes: Mapping[str, object]) -> Statemen
     return (
         "INSERT INTO import_files (id, file_hash_sha256, byte_count) VALUES (%s, %s, %s)",
         (file_id, row["file_hash_sha256"], row["byte_count"]),
+    )
+
+
+def _observation_insert(batch_id: str, changes: Mapping[str, object]) -> Statement:
+    row = {**PROBE_OBSERVATION, **changes}
+    columns = (
+        "worksheet_index",
+        "row_number",
+        "column_index",
+        "observed_value",
+        "source_value_type",
+        "observed_year",
+        "observed_month",
+    )
+    return (
+        "INSERT INTO source_observations (batch_id, worksheet_index, row_number, column_index,"
+        " observed_value, source_value_type, observed_year, observed_month)"
+        " VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+        (batch_id, *(row[column] for column in columns)),
+    )
+
+
+def _tax_role_insert(batch_id: str, role: Mapping[str, object]) -> Statement:
+    columns = ("worksheet_index", "row_number", "subject_role", "donor_id", "tax_year")
+    return (
+        "INSERT INTO tax_identification_evidence (batch_id, worksheet_index, row_number,"
+        " subject_role, donor_id, tax_year) VALUES (%s, %s, %s, %s, %s::uuid, %s)",
+        (batch_id, *(role[column] for column in columns)),
     )
 
 

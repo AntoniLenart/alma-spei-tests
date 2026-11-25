@@ -116,6 +116,35 @@ def probe_import_files(db: DbQueries, *files: Mapping[str, object]) -> str | Non
     return db.import_files_violation(*files)
 
 
+@step("Probe source evidence of a {source_type} batch (rolled back)")
+def probe_source_evidence(
+    db: DbQueries,
+    actor_id: str,
+    source_type: str,
+    *,
+    observations: Sequence[Mapping[str, object]] = (),
+    tax_roles: Sequence[Mapping[str, object]] = (),
+) -> str | None:
+    return db.source_evidence_violation(
+        actor_id, source_type, observations=observations, tax_roles=tax_roles
+    )
+
+
+@step("Read the tables referenced by {table}")
+def read_foreign_key_targets(db: DbQueries, table: str) -> set[str]:
+    return db.foreign_key_targets(table)
+
+
+@step("Read the triggers on {table}")
+def read_triggers(db: DbQueries, table: str) -> list[str]:
+    return db.triggers_on(table)
+
+
+@step("Read the columns of {table}")
+def read_columns(db: DbQueries, table: str) -> set[str]:
+    return db.column_names(table)
+
+
 @step("Probe import attempts {attempts} of one file (rolled back)")
 def probe_import_attempts(
     db: DbQueries, actor_id: str, *attempts: Mapping[str, object]
