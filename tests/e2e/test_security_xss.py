@@ -7,6 +7,7 @@ and the flag must stay unset.
 """
 
 import datetime as dt
+from http import HTTPStatus
 
 import allure
 import pytest
@@ -48,18 +49,22 @@ class TestStoredXss(BaseE2ETest):
         ui_steps.open_donor_card(donors, donor["name"])
         assert_no_script_ran(signed_in_page)
 
+    @pytest.mark.parametrize("name", [PROBES[0], ENTITY_NAME], ids=["markup-name", "entity-name"])
     def test_an_import_file_name_and_sender_are_shown_as_text(
-        self, signed_in_page: Page, api: AlmaSpeiApi, tag: str
+        self, signed_in_page: Page, api: AlmaSpeiApi, tag: str, name: str
     ):
         # 1. Stage a statement whose sender is a script probe and whose file name holds
-        #    HTML entities (markup itself is refused in file names)
+        #    markup or HTML entities
         # 2. Open it from the review queue, run the matching and explain its row
         # 3. Open the import history
         # 4. Verification: the file name and sender are shown literally, and no script ran
-        filename = f"{ENTITY_NAME}{tag}.csv"
+        filename = f"{name}{tag}.csv"
         sender = f"{PROBES[1]} {tag}"
         row = BankRow(dt.date(2026, 1, 15), sender, f"Darowizna {tag}", "10,00")
-        batch = imports_steps.upload_staged(api, filename, BankStatement([row]).to_csv())["batch"]
+        response = imports_steps.upload(api, filename, BankStatement([row]).to_csv())
+        if response.status_code == HTTPStatus.BAD_REQUEST:
+            pytest.skip("this platform's form reader refuses the name (Windows); nothing to show")
+        batch = response.json()["batch"]
         review = ui_steps.open_review_queue(signed_in_page)
         expect(review.queue_item(filename)).to_be_visible()
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], filename)

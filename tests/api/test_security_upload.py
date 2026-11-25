@@ -89,15 +89,25 @@ class TestFileNames(BaseApiTest):
     @pytest.mark.parametrize(
         "name", ["<b>{tag}.csv", "<img src=x onerror=alert(1)>{tag}.csv"], ids=["tag", "img"]
     )
-    def test_a_file_name_with_markup_is_refused(
+    def test_a_file_name_with_markup_is_refused_or_kept_as_text(
         self, api: AlmaSpeiApi, bank_statement: BankStatement, tag: str, name: str
     ):
         # 1. Upload a valid statement under a name holding HTML markup
-        # 2. Verification: 400 invalid structure - the name never reaches the screens
-        response = imports_steps.upload(api, name.replace("{tag}", tag), bank_statement.to_csv())
-        assert_error_includes(
-            response, HTTPStatus.BAD_REQUEST, ImportErrorPayload.INVALID_STRUCTURE
-        )
+        # 2. Verification: either refused as a whole (400, as the form reader on Windows
+        #    does) or staged with the name stored exactly as written (as on Linux); the
+        #    screens then show it as text (tests/e2e/test_security_xss.py)
+        filename = name.replace("{tag}", tag)
+        response = imports_steps.upload(api, filename, bank_statement.to_csv())
+        if response.status_code == HTTPStatus.BAD_REQUEST:
+            assert_error_includes(
+                response, HTTPStatus.BAD_REQUEST, ImportErrorPayload.INVALID_STRUCTURE
+            )
+            return
+        assert_that(
+            (response.status_code, response.json()["batch"]["original-filename"])
+        ).described_as(
+            "an accepted name should be stored exactly as written, as plain text"
+        ).is_equal_to((HTTPStatus.CREATED, filename))
 
     @pytest.mark.parametrize(
         "suffix", [".html", ".csv.exe", ".svg"], ids=["html", "double-extension", "svg"]
