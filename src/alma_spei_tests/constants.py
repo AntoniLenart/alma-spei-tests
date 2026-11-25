@@ -179,6 +179,7 @@ class ImportErrorPayload:
 
     _BAD_FILE = "Nieprawidłowy format pliku importu."
     INVALID_STRUCTURE = {"code": ErrorCode.INVALID_STRUCTURE, "message": _BAD_FILE}
+    PARSE_FAILED = {"code": ErrorCode.PARSE_FAILED, "message": _BAD_FILE}
     UNSUPPORTED_FORMAT = {"code": ErrorCode.UNSUPPORTED_FORMAT, "message": _BAD_FILE}
     RESOURCE_LIMIT = {
         "code": ErrorCode.RESOURCE_LIMIT,

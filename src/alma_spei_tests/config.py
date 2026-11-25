@@ -90,6 +90,16 @@ class Settings:
         default_factory=lambda: _env("ALMA_MIGRATION_USER", "alma_spei_migrator")
     )
 
+    # --- Generated corrupt imports ---------------------------------------------
+    # The regression run uploads this many damaged files from this seed; set a
+    # larger count (or another seed) for a longer exploratory run.
+    corruption_seed: int = field(
+        default_factory=lambda: _env_int("ALMA_TEST_CORRUPTION_SEED", 20261125)
+    )
+    corruption_count: int = field(
+        default_factory=lambda: _env_int("ALMA_TEST_CORRUPTION_COUNT", 40)
+    )
+
     # --- Timeouts (seconds) ----------------------------------------------------
     http_timeout_s: float = field(default_factory=lambda: float(_env("ALMA_HTTP_TIMEOUT", "10")))
 
