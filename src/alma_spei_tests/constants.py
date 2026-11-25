@@ -115,6 +115,8 @@ class ErrorCode(StrEnum):
     DIFFERENT_REQUEST = "different-request"
     INELIGIBLE_UNDO = "ineligible-undo"
     UNDO_BLOCKED = "undo-blocked"
+    # automatic reconciliation (task 60)
+    POLICY_CONFLICT = "policy-conflict"
 
 
 class ApiErrorPayload:
@@ -273,6 +275,34 @@ class ExecutionErrorPayload:
         "code": ErrorCode.UNDO_BLOCKED,
         "message": "Wycofanie wstrzymano. Sprawdź aktualną listę powiązań i zmian.",
     }
+
+
+class ReconciliationErrorPayload:
+    """Refusals of the automatic reconciliation (task 60)."""
+
+    POLICY_CONFLICT = {
+        "code": ErrorCode.POLICY_CONFLICT,
+        "message": (
+            "Ten import ma już inne potwierdzone ustawienia. Nie zmieniono zapisanych decyzji."
+        ),
+    }
+
+
+class ExceptionReason(StrEnum):
+    """Why the reconciliation left a row for a person (``exceptions[].reason``)."""
+
+    SENDER_FORMAT = "sender-format"
+    IDENTITY_AMBIGUITY = "identity-ambiguity"
+    DONOR_TYPE = "donor-type"
+    PAYMENT_AMBIGUITY = "payment-ambiguity"
+    INVALID_ROW = "invalid-row"
+    UNSUPPORTED_AMOUNT = "unsupported-amount"
+    STALE_CATALOG = "stale-catalog"
+    MANUAL_REVIEW = "manual-review"
+
+
+#: The matching rules recorded on automatic decisions since task 60.
+MATCHING_RULE_VERSION = "bank-exact-identity-v2"
 
 
 class UndoConflict(StrEnum):

@@ -166,6 +166,23 @@ class ImportsClient(BaseClient):
         path = f"{self.batch_path(batch_id)}/previews/{preview_id}/items"
         return self._session.get(path, params=page)
 
+    # --- automatic reconciliation (task 60) -------------------------------------
+    def reconciliation(self, batch_id: str, **page: int | str) -> httpx.Response:
+        """The reconciliation report: counts, totals and the rows left for a person."""
+        return self._session.get(f"{self.batch_path(batch_id)}/reconciliation", params=page)
+
+    def reconcile(
+        self,
+        batch_id: str,
+        payload: Mapping[str, object],
+        *,
+        headers: HeaderOverrides | None = None,
+    ) -> httpx.Response:
+        """Run the automatic matching under a confirmed policy (currency, new-donor type)."""
+        return self._session.post(
+            f"{self.batch_path(batch_id)}/reconciliation", json=payload, headers=headers
+        )
+
     # --- commit and undo (task 39) ----------------------------------------------
     def backup(
         self, batch_id: str, preview_id: str, payload: Mapping[str, object]

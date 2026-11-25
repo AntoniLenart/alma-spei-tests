@@ -80,6 +80,11 @@ class BankStatement:
         return buffer.getvalue()
 
 
+def sender_with_address(name: str, street: str, postal_code: str, city: str) -> str:
+    """The only sender layout the matching reads: ``name, street, NN-NNN city``."""
+    return f"{name}, {street}, {postal_code} {city}"
+
+
 def sha256_hex(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
 
