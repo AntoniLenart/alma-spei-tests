@@ -67,6 +67,7 @@ markers = [
     "smoke: minimal fast checks that the stack is alive",
     "slow: tests that take noticeably longer",
     "disruptive: restarts/disrupts the running stack; opt-in via --run-disruptive",
+    "zap: the OWASP ZAP baseline scan; opt-in via ALMA_TEST_ZAP_SCAN (the zap group)",
 ]
 
 # ---------------------------------------------------------------------------

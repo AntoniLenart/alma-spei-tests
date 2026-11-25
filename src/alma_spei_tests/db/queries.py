@@ -97,6 +97,20 @@ class DbQueries:
             ]
         )
 
+    def role_attributes(self) -> dict[str, bool]:
+        """The connected app role's powerful role attributes."""
+        row = self.client.query(
+            "SELECT rolsuper, rolcreaterole, rolcreatedb, rolbypassrls, rolreplication"
+            " FROM pg_roles WHERE rolname = current_user"
+        )[0]
+        keys = ("superuser", "create-role", "create-database", "bypass-rls", "replication")
+        return dict(zip(keys, row, strict=True))
+
+    def can_create_in_schema(self, schema: str) -> bool:
+        return self.client.scalar(
+            "SELECT has_schema_privilege(current_user, %s::text, 'CREATE')", (schema,)
+        )
+
     def column_privileges(self, table: str, columns: Sequence[str], kind: str) -> dict[str, bool]:
         """Whether the app role holds the column privilege ``kind`` on each column."""
         return {

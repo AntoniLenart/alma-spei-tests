@@ -28,7 +28,7 @@ groups:
 
   # Pure HTTP/API tests, excluding anything disruptive.
   api:
-    markers: "api and not disruptive"
+    markers: "api and not disruptive and not zap"
     parallel: false
 
   # Schema/contract tests.
@@ -48,7 +48,7 @@ groups:
 
   # Everything that does NOT disrupt the shared stack. The default CI-style run.
   regression:
-    markers: "not disruptive"
+    markers: "not disruptive and not zap"
     parallel: false
 
   # Disruptive tests (app restarts, etc.). Opt-in and serial so they cannot
@@ -57,3 +57,9 @@ groups:
     markers: "disruptive"
     parallel: false
     disruptive: true
+
+  # The OWASP ZAP baseline scan of the stack (needs ALMA_TEST_ZAP_SCAN=1 and
+  # Docker host networking, so it runs in the CI regression workflow).
+  zap:
+    markers: "zap"
+    parallel: false
