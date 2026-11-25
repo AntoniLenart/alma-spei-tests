@@ -100,6 +100,14 @@ class Settings:
         default_factory=lambda: _env_int("ALMA_TEST_CORRUPTION_COUNT", 40)
     )
 
+    # --- OWASP ZAP baseline scan ------------------------------------------------
+    # Opt-in: the scan needs Docker host networking (Linux) and takes minutes, so
+    # only the "zap" group of the CI regression workflow turns it on.
+    zap_scan: bool = field(default_factory=lambda: _env_bool("ALMA_TEST_ZAP_SCAN", False))
+    zap_image: str = field(
+        default_factory=lambda: _env("ALMA_TEST_ZAP_IMAGE", "ghcr.io/zaproxy/zaproxy:2.16.1")
+    )
+
     # --- Timeouts (seconds) ----------------------------------------------------
     http_timeout_s: float = field(default_factory=lambda: float(_env("ALMA_HTTP_TIMEOUT", "10")))
 

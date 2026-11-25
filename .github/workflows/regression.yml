@@ -187,6 +187,17 @@ jobs:
           uv run pytest --group disruptive -p no:cacheprovider
           --junitxml=reports/junit-disruptive.xml --html=reports/report-disruptive.html
 
+      - name: Run the OWASP ZAP baseline scan
+        id: zap
+        if: always() && steps.guard.outputs.run != 'false'
+        continue-on-error: true
+        working-directory: tests
+        env:
+          ALMA_TEST_ZAP_SCAN: "1"
+        run: >-
+          uv run pytest --group zap -p no:cacheprovider
+          --junitxml=reports/junit-zap.xml --html=reports/report-zap.html
+
       - name: Install the Allure CLI
         if: always() && steps.guard.outputs.run != 'false'
         run: |
@@ -228,6 +239,7 @@ jobs:
         run: >-
           python3 tests/.github/scripts/regression_summary.py
           tests/reports/junit-regression.xml tests/reports/junit-disruptive.xml
+          tests/reports/junit-zap.xml
           >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publish the report to GitHub Pages
@@ -258,10 +270,13 @@ jobs:
             tests/reports/*.html
             tests/reports/*.xml
             tests/reports/stack
+            tests/reports/zap
             tests/reports/playwright-artifacts
 
       - name: Fail when a test failed
-        if: steps.regression.outcome == 'failure' || steps.disruptive.outcome == 'failure'
+        if: >-
+          steps.regression.outcome == 'failure' || steps.disruptive.outcome == 'failure'
+          || steps.zap.outcome == 'failure'
         run: |
           echo "::error::The regression found failures - see the summary and the Allure report."
           exit 1

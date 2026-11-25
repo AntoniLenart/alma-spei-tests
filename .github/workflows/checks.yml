@@ -37,3 +37,22 @@ jobs:
 
       - name: Collect tests
         run: uv run pytest --collect-only -q -p no:cacheprovider
+
+  dependencies:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync
+
+      # Known vulnerabilities in the suite's own dependencies (PyPI advisory data).
+      # The audit tool is fetched for this step only; it is not a project dependency.
+      - name: Audit installed packages
+        run: uv run --with pip-audit pip-audit --skip-editable

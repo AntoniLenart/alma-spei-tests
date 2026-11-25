@@ -206,3 +206,13 @@ def read_active_catalog_counts(db: DbQueries) -> dict[str, int]:
 @step("Read the canonical catalogue revision")
 def read_catalog_revision(db: DbQueries) -> int:
     return db.catalog_revision()
+
+
+@step("Read the app role's attributes")
+def read_role_attributes(db: DbQueries) -> dict[str, bool]:
+    return db.role_attributes()
+
+
+@step("Check whether the app role may create objects in schema {schema}")
+def read_can_create_in_schema(db: DbQueries, schema: str) -> bool:
+    return db.can_create_in_schema(schema)
