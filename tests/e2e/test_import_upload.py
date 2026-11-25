@@ -171,18 +171,18 @@ class TestUploadSummary(BaseE2ETest):
     def test_the_exceptions_page_through_more_rows_than_fit(self, signed_in_page: Page, tag: str):
         # 1. Upload a CSV one row longer than a page of exceptions
         # 2. Go to the next exceptions
-        # 3. Verification: all rows are counted as exceptions; 25 cards, then the last one
+        # 3. Verification: the exceptions view counts every row; 25 cards, then the last one
         filename = f"{tag}.csv"
         statement = new_bank_statement(tag, rows=PAGED_ROW_COUNT)
         imports = ui_steps.open_imports(signed_in_page)
         ui_steps.choose_import_file(imports, filename, statement.to_csv(), CsvSeparator.SEMICOLON)
         ui_steps.submit_upload(imports)
         review = ui_steps.wait_for_summary(ReviewPage(signed_in_page), filename)
-        expect(review.exceptions_pager).to_contain_text(
-            ReviewMessages.exceptions_count(PAGED_ROW_COUNT)
-        )
+        expect(
+            review.filter_button(ReviewMessages.exceptions_filter(PAGED_ROW_COUNT))
+        ).to_have_attribute("aria-pressed", "true")
         expect(review.exception_cards).to_have_count(EXCEPTIONS_PAGE)
-        review.summary_button(ReviewMessages.NEXT_EXCEPTIONS).click()
+        review.queue_pager.get_by_role("button", name=ReviewMessages.NEXT_PAGE).click()
         expect(review.exception_cards).to_have_count(PAGED_ROW_COUNT - EXCEPTIONS_PAGE)
         expect(review.exception_card(statement.rows[-1].sender)).to_be_visible()
 

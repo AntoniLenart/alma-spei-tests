@@ -1,11 +1,11 @@
-"""E2E tests for explaining import exceptions and the import summary (task 38, automatic
-reconciliation).
+"""E2E tests for explaining import exceptions and the import summary (tasks 38, 62).
 
 The browser borrows the administrator's API session. Batches are staged (and,
 where the screen is not under test, decided) through the API. After the matching,
 the default synthetic lines are exceptions; the reviewer explains one by picking
-a donor from the catalogue or preparing a new one. The server then checks the
-payment itself and asks the payment question only for a possible duplicate.
+a donor from the catalogue or preparing a new one. That prepares a draft: the
+reviewer then types the currency and the evidence, chooses how the payment is
+treated and confirms the overlap check before the explanation can be saved.
 """
 
 from typing import Any
@@ -18,11 +18,9 @@ from alma_spei_tests.clients import AlmaSpeiApi
 from alma_spei_tests.constants import (
     REVIEW_CURRENCY,
     DecisionKind,
-    Disposition,
     DonorStatusFilter,
 )
 from alma_spei_tests.data import (
-    BankRow,
     BankStatement,
     DonorFactory,
     Financial,
@@ -30,8 +28,7 @@ from alma_spei_tests.data import (
 )
 from alma_spei_tests.db import DbQueries
 from alma_spei_tests.pages import ReviewMessages
-from alma_spei_tests.steps import db_steps, imports_steps, review_steps, ui_steps
-from alma_spei_tests.steps.execution_steps import CommittedImport
+from alma_spei_tests.steps import db_steps, review_steps, ui_steps
 from alma_spei_tests.testbase import BaseE2ETest
 
 #: Valid rows in the default two-line statement.
@@ -51,7 +48,8 @@ class TestExceptionDecisionsUi(BaseE2ETest):
     ):
         # 1. Open a staged batch, run the matching and explain row 1
         # 2. Compare row 1 with the tagged donor from the catalogue and assign it
-        # 3. Verification: back on the summary with one matched transfer, one new payment and
+        # 3. Type PLN and the evidence, mark it a new payment with the overlap check, and save
+        # 4. Verification: back on the summary with one matched transfer, one new payment and
         #    one exception left; the API stores a complete link to that donor in PLN
         batch = staged_upload["batch"]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
@@ -60,6 +58,7 @@ class TestExceptionDecisionsUi(BaseE2ETest):
         ui_steps.look_up_donors(review)
         ui_steps.compare_with_donor(review, tag, donor["name"], donor["city"])
         ui_steps.assign_compared_donor(review)
+        ui_steps.settle_payment_via_form(review, Financial())
         ui_steps.wait_for_summary(review, batch["original-filename"])
         expect(review.count_value(ReviewMessages.EXCEPTIONS)).to_have_text(
             str(STAGED_VALID_ROWS - 1)
@@ -85,7 +84,8 @@ class TestExceptionDecisionsUi(BaseE2ETest):
     ):
         # 1. Open a staged batch, run the matching and explain row 1
         # 2. Prepare a new donor by hand (type, name, city, both checks) and save it
-        # 3. Verification: back on the summary with one new donor; the row is linked to the
+        # 3. Answer the payment question and save the explanation
+        # 4. Verification: back on the summary with one new donor; the row is linked to the
         #    new proposal, which is not a donor yet
         batch = staged_upload["batch"]
         profile = new_donor_profile(tag=tag)
@@ -93,6 +93,7 @@ class TestExceptionDecisionsUi(BaseE2ETest):
         ui_steps.run_matching(review)
         ui_steps.explain_exception(review, 1, bank_statement.rows[0].sender)
         ui_steps.propose_new_donor(review, profile)
+        ui_steps.settle_payment_via_form(review, Financial())
         ui_steps.wait_for_summary(review, batch["original-filename"])
         expect(review.count_value(ReviewMessages.NEW_DONORS)).to_have_text("1")
         saved = review_steps.read_decision(api, batch["id"], 1).json()["decision"]
@@ -129,40 +130,50 @@ class TestExceptionDecisionsUi(BaseE2ETest):
         expect(review.choice_button(ReviewMessages.ASSIGN)).to_be_disabled()
         expect(review.donor_choice).to_contain_text(ReviewMessages.ARCHIVED_NOTICE)
 
-    def test_a_possible_duplicate_asks_for_the_payment_decision(
+    def test_an_explanation_needs_the_currency_and_the_overlap_check(
         self,
         signed_in_page: Page,
         api: AlmaSpeiApi,
-        committed_import: CommittedImport,
+        staged_upload: dict[str, Any],
         bank_statement: BankStatement,
         donor: dict[str, Any],
         tag: str,
     ):
-        # 1. Commit a batch for the tagged donor (fixture)
-        # 2. Stage a new file repeating the date and amount of its first payment
-        # 3. Run the matching, explain the row and assign it to the same donor
-        # 4. Verification: the payment question is asked; answering it as a separate new
-        #    payment returns to the summary and completes the decision
-        first = bank_statement.rows[0]
-        repeat = BankRow(first.date, first.sender, f"Darowizna {tag} ponownie", first.amount)
-        filename = f"{tag}-repeat.csv"
-        batch = imports_steps.upload_staged(api, filename, BankStatement([repeat]).to_csv())[
-            "batch"
-        ]
-        review = ui_steps.open_review_batch(signed_in_page, batch["id"], filename)
+        # 1. Open a staged batch, run the matching, explain row 1 and assign the tagged donor
+        # 2. Verify nothing is filled in for the payment and the save is disabled, with the
+        #    currency, evidence, treatment and overlap check listed as missing
+        # 3. Answer everything but the overlap check
+        # 4. Verify the save is still disabled, with only the overlap check missing
+        # 5. Confirm the overlap check and save
+        # 6. Verification: back on the summary; the decision is complete in the typed currency
+        batch = staged_upload["batch"]
+        review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
         ui_steps.run_matching(review)
-        ui_steps.explain_exception(review, 1, repeat.sender)
+        ui_steps.explain_exception(review, 1, bank_statement.rows[0].sender)
         ui_steps.look_up_donors(review)
         ui_steps.compare_with_donor(review, tag, donor["name"], donor["city"])
         ui_steps.assign_compared_donor(review)
-        expect(review.payment_form).to_be_visible()
-        ui_steps.settle_payment_via_form(review, Financial())
-        ui_steps.wait_for_summary(review, filename)
-        expect(review.ready_card).to_contain_text(ReviewMessages.READY_HEADING)
+        save = review.editor_button(ReviewMessages.SAVE_EXPLANATION)
+        expect(review.currency_input).to_have_value("")
+        expect(save).to_be_disabled()
+        expect(review.missing_checks).to_have_text(
+            [
+                ReviewMessages.MISSING_CURRENCY,
+                ReviewMessages.MISSING_EVIDENCE,
+                ReviewMessages.MISSING_DISPOSITION,
+                ReviewMessages.MISSING_OVERLAP,
+            ]
+        )
+        ui_steps.answer_payment_question(review, Financial(overlap_checked=False))
+        expect(save).to_be_disabled()
+        expect(review.missing_checks).to_have_text([ReviewMessages.MISSING_OVERLAP])
+        ui_steps.tick(review.overlap_checkbox)
+        save.click()
+        ui_steps.wait_for_summary(review, batch["original-filename"])
         saved = review_steps.read_decision(api, batch["id"], 1).json()["decision"]
-        assert_that((saved["complete"], saved["financial"]["disposition"])).described_as(
-            "the explicit answer should complete the row as a separate new payment"
-        ).is_equal_to((True, Disposition.NEW))
+        assert_that((saved["complete"], saved_currency(saved))).described_as(
+            "the explanation should be saved complete in the typed currency"
+        ).is_equal_to((True, REVIEW_CURRENCY))
 
 
 @allure.feature("Review decisions UI")
@@ -171,14 +182,14 @@ class TestSummaryUi(BaseE2ETest):
         self, signed_in_page: Page, staged_upload: dict[str, Any]
     ):
         # 1. Open an undecided staged batch and run the matching
-        # 2. Verification: only the exceptions are listed, and no approval is offered
+        # 2. Verification: the exceptions view lists both rows, and no approval is offered
         batch = staged_upload["batch"]
         review = ui_steps.open_review_batch(signed_in_page, batch["id"], batch["original-filename"])
         ui_steps.run_matching(review)
-        expect(review.summary).to_contain_text(ReviewMessages.EXCEPTIONS_HEADING)
-        expect(review.exceptions_pager).to_contain_text(
-            ReviewMessages.exceptions_count(STAGED_VALID_ROWS)
-        )
+        expect(
+            review.filter_button(ReviewMessages.exceptions_filter(STAGED_VALID_ROWS))
+        ).to_have_attribute("aria-pressed", "true")
+        expect(review.exception_cards).to_have_count(STAGED_VALID_ROWS)
         expect(review.summary_button(ReviewMessages.REVIEW_CHANGES)).to_have_count(0)
 
     def test_a_decided_batch_is_ready_with_its_total(

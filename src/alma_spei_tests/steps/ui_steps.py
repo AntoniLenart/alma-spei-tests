@@ -275,8 +275,17 @@ def compare_with_donor(review: ReviewPage, text: str, name: str, city: str) -> R
 
 @step("Assign the transfer to the compared donor")
 def assign_compared_donor(review: ReviewPage) -> ReviewPage:
-    """The server then checks the payment itself; a clear one returns to the summary."""
+    """Choose the donor for the draft; the payment question follows (task 62)."""
     review.choice_button(ReviewMessages.ASSIGN).click()
+    expect(review.payment_form).to_be_visible()
+    return review
+
+
+@step("Choose the suggested donor '{name}'")
+def choose_suggested_donor(review: ReviewPage, name: str) -> ReviewPage:
+    review.candidate_card(name).get_by_role("button", name=ReviewMessages.THIS_DONOR).click()
+    expect(review.chosen_donor).to_contain_text(name)
+    expect(review.payment_form).to_be_visible()
     return review
 
 
@@ -289,17 +298,25 @@ def propose_new_donor(review: ReviewPage, profile: DonorProfile) -> ReviewPage:
     tick(review.proposal_check(ReviewMessages.CHECKED_EXISTING))
     tick(review.proposal_check(ReviewMessages.CHECKED_PROPOSALS))
     review.donor_choice.get_by_role("button", name=ReviewMessages.SAVE_PROPOSAL).click()
+    expect(review.payment_form).to_be_visible()
     return review
 
 
-@step("Settle the payment as {financial.disposition} and return to the summary")
-def settle_payment_via_form(review: ReviewPage, financial: Financial) -> ReviewPage:
+@step("Answer the payment question ({financial.currency}, {financial.disposition})")
+def answer_payment_question(review: ReviewPage, financial: Financial) -> ReviewPage:
+    """Type the currency and evidence, choose the treatment and confirm the overlap check."""
     expect(review.payment_form).to_be_visible()
     review.currency_input.fill(financial.currency or "")
     review.evidence_input.fill(financial.evidence)
     review.disposition_select.select_option(financial.disposition.value)
     if financial.overlap_checked:
         tick(review.overlap_checkbox)
+    return review
+
+
+@step("Settle the payment as {financial.disposition} and return to the summary")
+def settle_payment_via_form(review: ReviewPage, financial: Financial) -> ReviewPage:
+    answer_payment_question(review, financial)
     review.editor_button(ReviewMessages.SAVE_EXPLANATION).click()
     return review
 

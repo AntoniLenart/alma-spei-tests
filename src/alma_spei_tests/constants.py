@@ -312,6 +312,13 @@ class MatchReason:
     LAST_NAME = "Zgodny ostatni człon nazwy; sprawdź imię i adres."
 
 
+class ReconciliationQueue(StrEnum):
+    """Views of the reconciliation report (``queue`` query parameter, task 62)."""
+
+    EXCEPTIONS = "exceptions"
+    EXACT = "exact"
+
+
 #: At most this many donors are suggested for one row.
 MAX_SUGGESTIONS = 5
 
