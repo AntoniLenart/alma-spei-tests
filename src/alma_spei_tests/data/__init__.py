@@ -5,8 +5,10 @@ from alma_spei_tests.data.bank import (
     BankStatement,
     blank_only_csv,
     new_bank_statement,
+    sender_of,
     sender_with_address,
     sha256_hex,
+    statement_of_senders,
 )
 from alma_spei_tests.data.demo import demo_donor_ids, stable_demo_id
 from alma_spei_tests.data.factories import (
@@ -55,8 +57,10 @@ __all__ = [
     "proposal_payload",
     "proposed_donor",
     "seeded_faker",
+    "sender_of",
     "sender_with_address",
     "sha256_hex",
     "stable_demo_id",
+    "statement_of_senders",
     "unique_tag",
 ]

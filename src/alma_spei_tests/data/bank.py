@@ -12,8 +12,10 @@ import datetime as dt
 import hashlib
 import io
 import zipfile
+from collections.abc import Mapping
 from dataclasses import dataclass
 from decimal import Decimal
+from typing import Any
 from xml.sax.saxutils import escape
 
 from faker import Faker
@@ -83,6 +85,26 @@ class BankStatement:
 def sender_with_address(name: str, street: str, postal_code: str, city: str) -> str:
     """The only sender layout the matching reads: ``name, street, NN-NNN city``."""
     return f"{name}, {street}, {postal_code} {city}"
+
+
+def sender_of(donor: Mapping[str, Any]) -> str:
+    """A donor's identity (as the API returns it) written as a bank sender."""
+    return sender_with_address(donor["name"], donor["street"], donor["postal-code"], donor["city"])
+
+
+def statement_of_senders(tag: str, senders: list[str]) -> BankStatement:
+    """One row per sender, with distinct dates and amounts and the tag in each description."""
+    return BankStatement(
+        [
+            BankRow(
+                dt.date(2026, 3, 1) + dt.timedelta(days=i),
+                sender,
+                f"{tag} #{i + 1}",
+                f"{10 + i},00",
+            )
+            for i, sender in enumerate(senders)
+        ]
+    )
 
 
 def sha256_hex(content: bytes) -> str:

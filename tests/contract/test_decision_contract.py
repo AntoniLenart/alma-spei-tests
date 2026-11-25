@@ -4,7 +4,7 @@
 from typing import Any
 
 import allure
-from assertpy import soft_assertions
+from assertpy import assert_that, soft_assertions
 
 from alma_spei_tests.assertions import assert_matches_contract
 from alma_spei_tests.clients import AlmaSpeiApi
@@ -19,8 +19,8 @@ from alma_spei_tests.contracts import (
     PROPOSALS_RESPONSE,
     RECONCILIATION_RESPONSE,
 )
-from alma_spei_tests.data import existing_donor, new_donor_profile
-from alma_spei_tests.steps import review_steps
+from alma_spei_tests.data import existing_donor, new_donor_profile, sender_with_address
+from alma_spei_tests.steps import imports_steps, review_steps
 from alma_spei_tests.testbase import BaseContractTest
 
 
@@ -106,3 +106,18 @@ class TestReconciliationContract(BaseContractTest):
         with soft_assertions():
             assert_matches_contract(posted, RECONCILIATION_RESPONSE, "reconciliation (POST)")
             assert_matches_contract(read, RECONCILIATION_RESPONSE, "reconciliation (GET)")
+
+    def test_a_report_with_suggested_donors_matches_contract(
+        self, api: AlmaSpeiApi, donor: dict[str, Any], tag: str
+    ):
+        # 1. Stage a row from the donor's name at another address and reconcile it
+        # 2. Verification: the report, with the donor suggested and its reason, satisfies the
+        #    reconciliation response
+        sender = sender_with_address(donor["name"], f"ul. Kontraktowa {tag}", "00-950", "Innowo")
+        batch_id = imports_steps.stage_senders(api, tag, [sender])
+        body = review_steps.reconcile(api, batch_id, review_steps.policy()).json()
+        with soft_assertions():
+            assert_that(
+                [c["id"] for e in body["exceptions"] for c in e["candidates"]]
+            ).described_as("the report should carry the suggested donor").contains(donor["id"])
+            assert_matches_contract(body, RECONCILIATION_RESPONSE, "reconciliation (suggestions)")

@@ -7,6 +7,7 @@ import httpx
 
 from alma_spei_tests.clients import AlmaSpeiApi, expect_status
 from alma_spei_tests.constants import CsvSeparator, ImportSource
+from alma_spei_tests.data import statement_of_senders
 from alma_spei_tests.http import HeaderOverrides
 from alma_spei_tests.steps import step
 
@@ -38,6 +39,13 @@ def upload_staged(
     """Setup step: the upload must answer 201; returns the upload report."""
     response = api.imports.upload(filename, content, separator=separator)
     return expect_status(response, HTTPStatus.CREATED, "Upload bank file").json()
+
+
+@step("Stage one row per sender for {tag}")
+def stage_senders(api: AlmaSpeiApi, tag: str, senders: list[str]) -> str:
+    """Stage ``statement_of_senders`` as a CSV import; returns the batch id."""
+    statement = statement_of_senders(tag, senders)
+    return upload_staged(api, f"{tag}.csv", statement.to_csv())["batch"]["id"]
 
 
 @step("Retry failed import {batch_id} (version {version}) with '{filename}'")
