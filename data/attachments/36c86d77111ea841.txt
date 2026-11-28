@@ -1,0 +1,4 @@
+17:21:19 INFO  step: STEP: Upload 'QA-a8c96533.csv' and expect it to be staged
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Read staged rows of import 5e1b827f-8947-4091-819b-86e269106c78 with raw query [('limit', '101')]
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/5e1b827f-8947-4091-819b-86e269106c78/rows?limit=101 "HTTP/1.1 400 Bad Request"

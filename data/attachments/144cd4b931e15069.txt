@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Roksana Kempka QA-a65de616'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-a65de616
+INFO     step:_decorator.py:52 STEP: Upload 'QA-a65de616.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Reconcile import 505c0274-59d0-412c-88ef-bc4ccacd5949 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 505c0274-59d0-412c-88ef-bc4ccacd5949
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/505c0274-59d0-412c-88ef-bc4ccacd5949/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/505c0274-59d0-412c-88ef-bc4ccacd5949/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the reconciliation report of import 505c0274-59d0-412c-88ef-bc4ccacd5949 {'queue': <ReconciliationQueue.EXACT: 'exact'>}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/505c0274-59d0-412c-88ef-bc4ccacd5949/reconciliation?queue=exact "HTTP/1.1 200 OK"

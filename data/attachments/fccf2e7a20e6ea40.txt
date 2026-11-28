@@ -1,0 +1,26 @@
+17:22:30 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:30 INFO  step: STEP: Upload 'QA-1956c915.csv' and expect it to be staged
+17:22:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:30 INFO  step: STEP: Create donor 'Daniel Ruchała QA-1956c915'
+17:22:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:30 INFO  step: STEP: Decide every row of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  step: STEP: Decide row 1 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f ('existing-donor')
+17:22:30 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  step: STEP: Read the review versions of row 1 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:30 INFO  step: STEP: Decide row 2 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f ('existing-donor')
+17:22:30 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  step: STEP: Read the review versions of row 2 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:30 INFO  step: STEP: Create a ready preview of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  step: STEP: Prepare a preview of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  step: STEP: Read the review versions of row 1 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:30 INFO  step: STEP: Request a preview of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f at batch version 4
+17:22:31 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/preview "HTTP/1.1 201 Created"
+17:22:31 INFO  step: STEP: Open the confirmation of preview c0cb13b2-dfe0-49ea-a889-733112ba7a57 of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:31 INFO  step: STEP: Request the test backup receipt, consent and commit
+17:22:31 INFO  step: STEP: Read the outcome of import 143387e6-f7d3-43d5-ab3e-4e391dd5897f
+17:22:31 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/143387e6-f7d3-43d5-ab3e-4e391dd5897f/outcome "HTTP/1.1 200 OK"

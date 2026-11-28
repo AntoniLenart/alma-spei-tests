@@ -1,0 +1,6 @@
+17:21:12 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:12 INFO  step: STEP: Upload 'QA-72adcbd1-nasty-field+embedded-newline.csv' as a bank import
+17:21:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:12 INFO  step: STEP: Read staged rows of import d62f4f11-a4c7-4c28-a42e-c2b17e46b081 {'limit': 100, 'offset': 0}
+17:21:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d62f4f11-a4c7-4c28-a42e-c2b17e46b081/rows?limit=100&offset=0 "HTTP/1.1 200 OK"
+17:21:12 INFO  step: STEP: Count rows in the canonical donor tables

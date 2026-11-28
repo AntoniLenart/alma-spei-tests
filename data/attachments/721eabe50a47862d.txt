@@ -1,0 +1,6 @@
+17:22:02 INFO  step: STEP: List donors {'limit': 100, 'offset': 0}
+17:22:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=0 "HTTP/1.1 200 OK"
+17:22:02 INFO  step: STEP: List donors {'limit': 100, 'offset': 0, 'status': <DonorStatusFilter.ALL: 'all'>}
+17:22:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=0&status=all "HTTP/1.1 200 OK"
+17:22:02 INFO  step: STEP: List donors {'limit': 100, 'offset': 100, 'status': <DonorStatusFilter.ALL: 'all'>}
+17:22:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=100&status=all "HTTP/1.1 200 OK"

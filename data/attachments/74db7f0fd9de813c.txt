@@ -1,0 +1,4 @@
+17:21:20 INFO  step: STEP: Upload 'QA-8d3ab282.csv' as a bank import
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+17:21:20 INFO  step: STEP: Retry failed import 6a7c1710-6f2a-49a3-8d29-01dcc4929256 (version 2) with 'QA-8d3ab282.csv'
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 409 Conflict"

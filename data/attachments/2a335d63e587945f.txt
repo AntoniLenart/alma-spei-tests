@@ -1,0 +1,11 @@
+17:21:01 INFO  step: STEP: Create donor 'Julian Latoszek QA-c1a5601c'
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Stage one row per sender for QA-c1a5601c
+17:21:01 INFO  step: STEP: Upload 'QA-c1a5601c.csv' and expect it to be staged
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Reconcile import 08e4b776-46f3-4924-a750-1c4b24e77e39 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:01 INFO  step: STEP: Read the review versions of row 1 of import 08e4b776-46f3-4924-a750-1c4b24e77e39
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/reconciliation "HTTP/1.1 200 OK"
+17:21:01 INFO  step: STEP: Read the decision of row 1 of import 08e4b776-46f3-4924-a750-1c4b24e77e39
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/rows/1/1/decision "HTTP/1.1 200 OK"

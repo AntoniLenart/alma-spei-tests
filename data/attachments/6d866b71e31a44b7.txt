@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.956f3392755e
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Edit account b4d8f988-ac09-4d4f-b84f-32691c77282e
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b4d8f988-ac09-4d4f-b84f-32691c77282e "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deactivate account b4d8f988-ac09-4d4f-b84f-32691c77282e
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b4d8f988-ac09-4d4f-b84f-32691c77282e "HTTP/1.1 200 OK"

@@ -1,0 +1,3 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-900a43ac.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the import file with hash eb0d9160fab0e81070dfc27f085b83ca09f7bb2bcf92d69e36a7884d95e5d725

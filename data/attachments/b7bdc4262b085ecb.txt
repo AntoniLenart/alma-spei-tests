@@ -1,0 +1,9 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-9239730f.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import 0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-9239730f.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 2 (the card showing 'Dawid Karaśkiewicz')
+INFO     step:_decorator.py:52 STEP: Read the decision of row 2 of import 0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18/rows/1/2/decision "HTTP/1.1 200 OK"

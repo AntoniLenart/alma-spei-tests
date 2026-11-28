@@ -1,0 +1,11 @@
+17:21:37 INFO  step: STEP: Create donor 'Igor Perlik QA-db35715b'
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Stage one row per sender for QA-db35715b
+17:21:37 INFO  step: STEP: Upload 'QA-db35715b.csv' and expect it to be staged
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Reconcile import 3554e6a6-caaa-4c8b-80e2-c54e5205088e under {'currency': 'PLN', 'new-donor-type': None}
+17:21:37 INFO  step: STEP: Read the review versions of row 1 of import 3554e6a6-caaa-4c8b-80e2-c54e5205088e
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3554e6a6-caaa-4c8b-80e2-c54e5205088e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3554e6a6-caaa-4c8b-80e2-c54e5205088e/reconciliation "HTTP/1.1 200 OK"
+17:21:37 INFO  step: STEP: Read the reconciliation report of import 3554e6a6-caaa-4c8b-80e2-c54e5205088e {'queue': <ReconciliationQueue.EXACT: 'exact'>}
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3554e6a6-caaa-4c8b-80e2-c54e5205088e/reconciliation?queue=exact "HTTP/1.1 200 OK"

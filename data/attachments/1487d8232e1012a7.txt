@@ -1,0 +1,17 @@
+17:21:30 INFO  step: STEP: Upload 'QA-fe52390c.csv' and expect it to be staged
+17:21:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:30 INFO  step: STEP: Create donor 'Andrzej Dylong QA-fe52390c'
+17:21:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:30 INFO  step: STEP: Decide every row of import aec36269-8a55-4362-bed8-c9a1e0977de2
+17:21:30 INFO  step: STEP: Decide row 1 of import aec36269-8a55-4362-bed8-c9a1e0977de2 ('existing-donor')
+17:21:30 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import aec36269-8a55-4362-bed8-c9a1e0977de2
+17:21:30 INFO  step: STEP: Read the review versions of row 1 of import aec36269-8a55-4362-bed8-c9a1e0977de2
+17:21:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/aec36269-8a55-4362-bed8-c9a1e0977de2/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/aec36269-8a55-4362-bed8-c9a1e0977de2/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:30 INFO  step: STEP: Decide row 2 of import aec36269-8a55-4362-bed8-c9a1e0977de2 ('existing-donor')
+17:21:30 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import aec36269-8a55-4362-bed8-c9a1e0977de2
+17:21:30 INFO  step: STEP: Read the review versions of row 2 of import aec36269-8a55-4362-bed8-c9a1e0977de2
+17:21:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/aec36269-8a55-4362-bed8-c9a1e0977de2/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:30 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/aec36269-8a55-4362-bed8-c9a1e0977de2/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:30 INFO  step: STEP: Request a preview of import aec36269-8a55-4362-bed8-c9a1e0977de2 at batch version 4
+17:21:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/aec36269-8a55-4362-bed8-c9a1e0977de2/preview "HTTP/1.1 403 Forbidden"

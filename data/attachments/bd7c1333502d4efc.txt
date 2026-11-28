@@ -1,0 +1,6 @@
+17:21:18 INFO  step: STEP: Upload 'QA-44477165.csv' and expect it to be staged
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Create donor 'Jakub Gmurczyk QA-44477165'
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Compare staged row 1/99 of import 2512a36a-4962-4daa-bba9-a472809775ad with donor 4a81cc44-8f0c-47f7-b7d9-82fcd1cc3e1b
+17:21:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/2512a36a-4962-4daa-bba9-a472809775ad/rows/1/99/comparison?donor-id=4a81cc44-8f0c-47f7-b7d9-82fcd1cc3e1b "HTTP/1.1 404 Not Found"

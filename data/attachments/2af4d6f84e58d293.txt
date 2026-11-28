@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-033edf45.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read staged rows of import f672fc2e-bcc1-4566-9249-dbc8d0d5d0fe with raw query [('offset', '-1')]
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/f672fc2e-bcc1-4566-9249-dbc8d0d5d0fe/rows?offset=-1 "HTTP/1.1 400 Bad Request"

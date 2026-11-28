@@ -1,0 +1,7 @@
+17:21:53 INFO  step: STEP: Create donor 'Agnieszka Sypień QA-40114e9c'
+17:21:53 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:53 INFO  step: STEP: Update donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+17:21:53 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/d3a7606e-1fc6-47d7-95f8-c520fda2a8e4 "HTTP/1.1 200 OK"
+17:21:53 INFO  step: STEP: Read donor row d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+17:21:53 INFO  step: STEP: Read audit actions of donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+17:21:53 INFO  step: STEP: Read fields changed by 'update' events of donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4

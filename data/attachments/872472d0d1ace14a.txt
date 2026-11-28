@@ -1,0 +1,1 @@
+17:21:33 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/fb21ef78-a9fe-4d67-94bb-80adce1ee1ab "HTTP/1.1 403 Forbidden"

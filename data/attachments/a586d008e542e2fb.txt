@@ -1,0 +1,9 @@
+17:22:40 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:40 INFO  step: STEP: Upload 'QA-9239730f.csv' and expect it to be staged
+17:22:40 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:40 INFO  step: STEP: Deep-link to the summary of import 0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18
+17:22:40 INFO  step: STEP: Wait for the import summary of 'QA-9239730f.csv'
+17:22:40 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:22:40 INFO  step: STEP: Explain the exception of row 2 (the card showing 'Dawid Karaśkiewicz')
+17:22:41 INFO  step: STEP: Read the decision of row 2 of import 0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18
+17:22:41 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0a26ad55-8a99-498b-b2f7-0e3fc8bf8f18/rows/1/2/decision "HTTP/1.1 200 OK"

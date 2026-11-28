@@ -1,0 +1,30 @@
+17:21:08 INFO  step: STEP: Upload 'QA-ed88288f.csv' and expect it to be staged
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:08 INFO  step: STEP: Create donor 'Aurelia Domka QA-ed88288f'
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:08 INFO  step: STEP: Decide every row of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Decide row 1 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a ('existing-donor')
+17:21:08 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Read the review versions of row 1 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:08 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:08 INFO  step: STEP: Decide row 2 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a ('existing-donor')
+17:21:08 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Read the review versions of row 2 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:08 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:08 INFO  step: STEP: Commit import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Prepare, back up and approve import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Create a ready preview of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Prepare a preview of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  step: STEP: Read the review versions of row 1 of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:08 INFO  step: STEP: Request a preview of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a at batch version 4
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/preview "HTTP/1.1 201 Created"
+17:21:08 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:08 INFO  step: STEP: Request a backup receipt for preview c5be105a-3cf4-4b3d-a8ec-fabbf48165df of import 9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/9a8b6b8e-c5e9-449e-8ebe-2afbc5276d5a/previews/c5be105a-3cf4-4b3d-a8ec-fabbf48165df/backup "HTTP/1.1 200 OK"
+17:21:08 INFO  step: STEP: Submit an import commit
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:08 INFO  step: STEP: Submit an import commit
+17:21:08 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 409 Conflict"

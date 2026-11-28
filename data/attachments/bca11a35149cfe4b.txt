@@ -1,0 +1,1 @@
+INFO     orchestration:stack.py:307 stack: clojure -Srepro -M:create-admin

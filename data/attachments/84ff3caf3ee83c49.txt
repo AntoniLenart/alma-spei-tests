@@ -1,0 +1,2 @@
+17:21:04 INFO  step: STEP: Create donor 'Szymon Kozdra QA-70116b7c'
+17:21:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"

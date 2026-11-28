@@ -1,0 +1,35 @@
+17:21:07 INFO  step: STEP: Upload 'QA-f8d7eea4.csv' and expect it to be staged
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Create donor proposal 'Julianna Stwora QA-f8d7eea4' for import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Propose donor 'Julianna Stwora QA-f8d7eea4' for import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Read the review versions of row 1 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/donor-proposals "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Decide every row of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Decide row 1 of import 740b60c6-9fb0-488a-a605-61c528a7beda ('new-proposal')
+17:21:07 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Read the review versions of row 1 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Decide row 2 of import 740b60c6-9fb0-488a-a605-61c528a7beda ('new-proposal')
+17:21:07 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Read the review versions of row 2 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Commit import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Prepare, back up and approve import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Create a ready preview of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Prepare a preview of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  step: STEP: Read the review versions of row 1 of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Request a preview of import 740b60c6-9fb0-488a-a605-61c528a7beda at batch version 5
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/preview "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:07 INFO  step: STEP: Request a backup receipt for preview e7feeb98-d807-4ecb-a79c-40810cdc28aa of import 740b60c6-9fb0-488a-a605-61c528a7beda
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/740b60c6-9fb0-488a-a605-61c528a7beda/previews/e7feeb98-d807-4ecb-a79c-40810cdc28aa/backup "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Submit an import commit
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: List donors tagged QA-f8d7eea4
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-f8d7eea4 "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Open donor card 61c9265a-e55c-4a75-a1f1-e04f3d733ec0
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/61c9265a-e55c-4a75-a1f1-e04f3d733ec0 "HTTP/1.1 200 OK"

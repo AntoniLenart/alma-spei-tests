@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Cezary Kluczyk QA-571bf9bd'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Update donor c4efc595-f89c-4abe-9a00-6d9dfab98585
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/c4efc595-f89c-4abe-9a00-6d9dfab98585 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Update donor c4efc595-f89c-4abe-9a00-6d9dfab98585
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/c4efc595-f89c-4abe-9a00-6d9dfab98585 "HTTP/1.1 409 Conflict"
+INFO     step:_decorator.py:52 STEP: Open donor card c4efc595-f89c-4abe-9a00-6d9dfab98585
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/c4efc595-f89c-4abe-9a00-6d9dfab98585 "HTTP/1.1 200 OK"

@@ -1,0 +1,34 @@
+17:21:20 INFO  step: STEP: Upload 'QA-9ea0f22d.csv' and expect it to be staged
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Create donor 'Błażej Cygal QA-9ea0f22d'
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Decide every row of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Decide row 1 of import 942d84d9-1083-4714-a018-050663209b90 ('existing-donor')
+17:21:20 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Read the review versions of row 1 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Decide row 2 of import 942d84d9-1083-4714-a018-050663209b90 ('existing-donor')
+17:21:20 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Read the review versions of row 2 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Commit import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Prepare, back up and approve import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Create a ready preview of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Prepare a preview of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  step: STEP: Read the review versions of row 1 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Request a preview of import 942d84d9-1083-4714-a018-050663209b90 at batch version 4
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/preview "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:20 INFO  step: STEP: Request a backup receipt for preview 3d88322c-2698-4554-a93b-1d0eddee2105 of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/previews/3d88322c-2698-4554-a93b-1d0eddee2105/backup "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Submit an import commit
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Read the outcome of import 942d84d9-1083-4714-a018-050663209b90
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/942d84d9-1083-4714-a018-050663209b90/outcome "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Submit an undo of the latest import
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Open donor card ec942411-226c-43db-8796-81f611a82ba0
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/ec942411-226c-43db-8796-81f611a82ba0 "HTTP/1.1 200 OK"

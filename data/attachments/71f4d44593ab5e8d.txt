@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Leonard Tyczka QA-edf5b82f'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-edf5b82f
+INFO     step:_decorator.py:52 STEP: Upload 'QA-edf5b82f.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Reconcile import c6b6ed57-94e2-48e6-819e-8287d529a6c0 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import c6b6ed57-94e2-48e6-819e-8287d529a6c0
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import c6b6ed57-94e2-48e6-819e-8287d529a6c0
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/rows/1/1/decision "HTTP/1.1 200 OK"

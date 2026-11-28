@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-54249845.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Compare staged row 1/1 of import a2ddadc4-1699-4637-bccf-1a733544a0fe with donor ee2cb9f6-788f-4cba-8d54-13e75f65f3fa
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a2ddadc4-1699-4637-bccf-1a733544a0fe/rows/1/1/comparison?donor-id=ee2cb9f6-788f-4cba-8d54-13e75f65f3fa "HTTP/1.1 404 Not Found"

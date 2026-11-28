@@ -1,0 +1,6 @@
+17:21:19 INFO  step: STEP: Upload 'QA-5f300c7f.csv' and expect it to be staged
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Read staged rows of import 761df034-413f-409e-95ba-ca55a41178a5 {'limit': 1, 'offset': 1}
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/761df034-413f-409e-95ba-ca55a41178a5/rows?limit=1&offset=1 "HTTP/1.1 200 OK"
+17:21:19 INFO  step: STEP: Read staged rows of import 761df034-413f-409e-95ba-ca55a41178a5 {'offset': 100}
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/761df034-413f-409e-95ba-ca55a41178a5/rows?offset=100 "HTTP/1.1 200 OK"

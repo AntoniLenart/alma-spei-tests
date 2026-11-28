@@ -1,0 +1,4 @@
+17:21:04 INFO  step: STEP: Open donor card not-a-uuid
+17:21:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/not-a-uuid "HTTP/1.1 404 Not Found"
+17:21:04 INFO  step: STEP: Read the change history of donor not-a-uuid
+17:21:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/not-a-uuid/history "HTTP/1.1 404 Not Found"

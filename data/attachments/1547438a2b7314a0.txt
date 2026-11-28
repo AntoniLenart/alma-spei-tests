@@ -1,0 +1,5 @@
+17:22:47 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:47 INFO  step: STEP: Open the bank upload screen
+17:22:47 INFO  step: STEP: Choose 'QA-85b9e17e.csv' in the upload form
+17:22:47 INFO  step: STEP: Confirm the file's currency PLN and submit it
+17:22:47 INFO  step: STEP: Wait for the import summary of 'QA-85b9e17e.csv'

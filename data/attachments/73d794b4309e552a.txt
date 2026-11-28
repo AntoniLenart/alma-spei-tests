@@ -1,0 +1,5 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Open the bank upload screen
+INFO     step:_decorator.py:52 STEP: Choose 'QA-f244a3fe.csv' in the upload form
+INFO     step:_decorator.py:52 STEP: Confirm the file's currency PLN and submit it
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-f244a3fe.csv'

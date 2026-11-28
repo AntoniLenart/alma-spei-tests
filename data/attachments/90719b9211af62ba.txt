@@ -1,0 +1,11 @@
+17:21:27 INFO  step: STEP: Create donor 'Błażej Gębura QA-6e859f7c'
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Upload 'QA-6e859f7c.csv' and expect it to be staged
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Decide row 1 of import ff9a5327-908a-4424-b8cd-e3964ac31ea7 ('existing-donor')
+17:21:27 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import ff9a5327-908a-4424-b8cd-e3964ac31ea7
+17:21:27 INFO  step: STEP: Read the review versions of row 1 of import ff9a5327-908a-4424-b8cd-e3964ac31ea7
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/ff9a5327-908a-4424-b8cd-e3964ac31ea7/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/ff9a5327-908a-4424-b8cd-e3964ac31ea7/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  step: STEP: Read the readiness blockers of import ff9a5327-908a-4424-b8cd-e3964ac31ea7 {}
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/ff9a5327-908a-4424-b8cd-e3964ac31ea7/review-blockers "HTTP/1.1 200 OK"

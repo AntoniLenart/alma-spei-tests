@@ -1,0 +1,18 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Ewelina Gniewek QA-60d6927f'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Alan Miksza QA-60d6927f'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-60d6927f
+INFO     step:_decorator.py:52 STEP: Upload 'QA-60d6927f.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Reconcile import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3b945f5f-a1f9-4ffb-a2f8-9a72e72e219c/rows/1/1/decision "HTTP/1.1 200 OK"

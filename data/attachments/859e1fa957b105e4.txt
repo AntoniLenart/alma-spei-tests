@@ -1,0 +1,6 @@
+17:21:10 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:10 INFO  step: STEP: Upload 'QA-72adcbd1-embedded-newline+blank-line+quote.csv' as a bank import
+17:21:10 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:10 INFO  step: STEP: Read staged rows of import cc8aeae7-2e44-4fee-9c5c-6d5e8018d6d4 {'limit': 100, 'offset': 0}
+17:21:10 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/cc8aeae7-2e44-4fee-9c5c-6d5e8018d6d4/rows?limit=100&offset=0 "HTTP/1.1 200 OK"
+17:21:10 INFO  step: STEP: Count rows in the canonical donor tables

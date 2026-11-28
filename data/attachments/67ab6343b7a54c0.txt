@@ -1,0 +1,1 @@
+17:21:56 INFO  step: STEP: Read the app role's [<Privilege.SELECT: 'SELECT'>, <Privilege.INSERT: 'INSERT'>, <Privilege.DELETE: 'DELETE'>, <Privilege.TRUNCATE: 'TRUNCATE'>] privileges on import_previews

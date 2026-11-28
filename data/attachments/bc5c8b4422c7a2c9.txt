@@ -1,0 +1,9 @@
+17:21:26 INFO  step: STEP: Upload 'QA-df2f8d50.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Create donor 'Kacper Bogumił QA-df2f8d50'
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Read user qa.admin with its local credential
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import fadc56d3-44da-42eb-a72b-49b6820a9f18
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/fadc56d3-44da-42eb-a72b-49b6820a9f18/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:26 INFO  step: STEP: Submit a decision payload for row 1 of import fadc56d3-44da-42eb-a72b-49b6820a9f18
+17:21:26 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/fadc56d3-44da-42eb-a72b-49b6820a9f18/rows/1/1/decision "HTTP/1.1 400 Bad Request"

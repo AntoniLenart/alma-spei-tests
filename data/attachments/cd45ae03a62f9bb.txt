@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Daniel Klaus QA-465b38b0'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open donor card 95c821b1-ef3e-4aa6-928c-8a7a8d9e303f
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/95c821b1-ef3e-4aa6-928c-8a7a8d9e303f "HTTP/1.1 200 OK"

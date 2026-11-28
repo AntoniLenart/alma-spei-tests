@@ -1,0 +1,26 @@
+17:21:29 INFO  step: STEP: Upload 'QA-343b378c.csv' and expect it to be staged
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Create donor proposal 'Jan Hermann QA-343b378c' for import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Propose donor 'Jan Hermann QA-343b378c' for import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/donor-proposals "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Decide every row of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Decide row 1 of import c0960083-6835-4e35-ada8-fc853bb46fcc ('new-proposal')
+17:21:29 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Decide row 2 of import c0960083-6835-4e35-ada8-fc853bb46fcc ('new-proposal')
+17:21:29 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Read the review versions of row 2 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Create a ready preview of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Prepare a preview of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import c0960083-6835-4e35-ada8-fc853bb46fcc
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Request a preview of import c0960083-6835-4e35-ada8-fc853bb46fcc at batch version 5
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/preview "HTTP/1.1 201 Created"
+17:21:30 INFO  step: STEP: Read the review history of import c0960083-6835-4e35-ada8-fc853bb46fcc {}
+17:21:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c0960083-6835-4e35-ada8-fc853bb46fcc/review-events "HTTP/1.1 200 OK"

@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-d96277f2.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal '  Borys Downar QA-d96277f2  ' for import 7001bd10-4373-4879-89c2-8113b1f237ca
+INFO     step:_decorator.py:52 STEP: Propose donor '  Borys Downar QA-d96277f2  ' for import 7001bd10-4373-4879-89c2-8113b1f237ca
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 7001bd10-4373-4879-89c2-8113b1f237ca
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/7001bd10-4373-4879-89c2-8113b1f237ca/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/7001bd10-4373-4879-89c2-8113b1f237ca/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the stored profile of donor proposal 23dd9a43-f2b3-43e3-acf9-76230805b280

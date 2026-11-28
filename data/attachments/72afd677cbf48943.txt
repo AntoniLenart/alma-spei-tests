@@ -1,0 +1,1 @@
+17:21:53 INFO  step: STEP: Read the foundation version from application_metadata

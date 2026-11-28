@@ -1,0 +1,16 @@
+17:23:01 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:01 INFO  step: STEP: Upload 'QA-0380bd84.csv' and expect it to be staged
+17:23:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:01 INFO  step: STEP: Create donor 'Natan Siewert QA-0380bd84'
+17:23:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:01 INFO  step: STEP: Deep-link to the summary of import 3d7aa16f-d6de-4b4f-948e-c81e4a880168
+17:23:01 INFO  step: STEP: Wait for the import summary of 'QA-0380bd84.csv'
+17:23:01 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:23:01 INFO  step: STEP: Explain the exception of row 1 (the card showing 'pan Olgierd Chaber')
+17:23:01 INFO  step: STEP: Look up active donors in the catalogue
+17:23:01 INFO  step: STEP: Search for 'QA-0380bd84' and compare with 'Natan Siewert QA-0380bd84'
+17:23:02 INFO  step: STEP: Assign the transfer to the compared donor
+17:23:02 INFO  step: STEP: Answer the payment question (PLN, new)
+17:23:02 INFO  step: STEP: Wait for the import summary of 'QA-0380bd84.csv'
+17:23:02 INFO  step: STEP: Read the decision of row 1 of import 3d7aa16f-d6de-4b4f-948e-c81e4a880168
+17:23:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3d7aa16f-d6de-4b4f-948e-c81e4a880168/rows/1/1/decision "HTTP/1.1 200 OK"

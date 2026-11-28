@@ -1,0 +1,6 @@
+17:21:34 INFO  step: STEP: Create donor '@SUM(A1:A9) QA-52ff7a3e'
+17:21:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:34 INFO  step: STEP: Open donor card 0df4d7a5-8813-4c9b-9db3-6d15d44709b0
+17:21:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/0df4d7a5-8813-4c9b-9db3-6d15d44709b0 "HTTP/1.1 200 OK"
+17:21:34 INFO  step: STEP: List donors tagged QA-52ff7a3e
+17:21:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-52ff7a3e "HTTP/1.1 200 OK"

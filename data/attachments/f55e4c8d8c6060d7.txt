@@ -1,0 +1,7 @@
+17:20:57 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:57 INFO  step: STEP: Create account qa.574a361448b7
+17:20:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:57 INFO  step: STEP: Log in as qa.574a361448b7
+17:20:57 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 401 Unauthorized"
+17:20:57 INFO  step: STEP: Deactivate account 3581fe35-599f-4735-9391-49feddd8f4c7
+17:20:57 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/3581fe35-599f-4735-9391-49feddd8f4c7 "HTTP/1.1 200 OK"

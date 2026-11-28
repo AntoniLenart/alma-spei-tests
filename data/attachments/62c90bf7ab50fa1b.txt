@@ -1,0 +1,4 @@
+17:21:15 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:15 INFO  step: STEP: Upload 'QA-13722c8d.csv' as a bank import
+17:21:16 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:16 INFO  step: STEP: Count rows in the canonical donor tables

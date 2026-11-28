@@ -1,0 +1,2 @@
+17:22:43 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:43 INFO  step: STEP: Open the bank upload screen

@@ -1,0 +1,6 @@
+17:21:18 INFO  step: STEP: Create donor 'Adam Smoter QA-7e213579'
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Upload 'QA-7e213579.csv' and expect it to be staged
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Compare staged row 1/1 of import 59edcf20-5760-4d21-afaa-7cc790047654 with donor 30a853cc-7d2e-4910-89a8-8c68f1a4a175
+17:21:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/59edcf20-5760-4d21-afaa-7cc790047654/rows/1/1/comparison?donor-id=30a853cc-7d2e-4910-89a8-8c68f1a4a175 "HTTP/1.1 200 OK"

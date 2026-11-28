@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-a8acb83a.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Mariusz Mały QA-a8acb83a'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Look up existing payments for import debc031c-70f9-4412-a954-dba0a91f731f with [('donor-id', '0b6cfcbb-38b3-4963-9a07-fb69edeeecc2')]
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/debc031c-70f9-4412-a954-dba0a91f731f/payments?donor-id=0b6cfcbb-38b3-4963-9a07-fb69edeeecc2 "HTTP/1.1 200 OK"

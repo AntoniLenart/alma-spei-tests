@@ -1,0 +1,6 @@
+17:22:50 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:50 INFO  step: STEP: Open the bank upload screen
+17:22:50 INFO  step: STEP: Choose 'QA-e98cf2f0.csv' in the upload form
+17:22:50 INFO  step: STEP: Confirm the file's currency PLN and submit it
+17:22:50 INFO  step: STEP: Wait for the analysis status 'Analiza zakończona błędem'
+17:22:50 INFO  step: STEP: Confirm and retry the analysis of 'QA-e98cf2f0.csv' in PLN

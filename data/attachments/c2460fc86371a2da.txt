@@ -1,0 +1,40 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-ae5de197.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Stefan Kozdra QA-ae5de197' for import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Propose donor 'Stefan Kozdra QA-ae5de197' for import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Commit import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview de671887-5c9e-4588-9405-802b34d57cfb of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/previews/de671887-5c9e-4588-9405-802b34d57cfb/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-ae5de197
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-ae5de197 "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/bc2b5cc8-c47e-4d46-802b-a23301f3ba9b "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the outcome of import e0d347f6-ef44-4ae1-b954-cdfb8b002c45
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e0d347f6-ef44-4ae1-b954-cdfb8b002c45/outcome "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an undo of the latest import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 409 Conflict"
+INFO     step:_decorator.py:52 STEP: Open donor card bc2b5cc8-c47e-4d46-802b-a23301f3ba9b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/bc2b5cc8-c47e-4d46-802b-a23301f3ba9b "HTTP/1.1 200 OK"

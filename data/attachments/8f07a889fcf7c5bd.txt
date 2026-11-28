@@ -1,0 +1,30 @@
+17:22:32 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:32 INFO  step: STEP: Upload 'QA-e1ee6a9a.csv' and expect it to be staged
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:32 INFO  step: STEP: Create donor 'Lidia Halik QA-e1ee6a9a'
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:32 INFO  step: STEP: Decide every row of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Decide row 1 of import 51ab9084-6e0f-4835-949d-263e35086f88 ('existing-donor')
+17:22:32 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Read the review versions of row 1 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Decide row 2 of import 51ab9084-6e0f-4835-949d-263e35086f88 ('existing-donor')
+17:22:32 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Read the review versions of row 2 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Commit import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Prepare, back up and approve import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Create a ready preview of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Prepare a preview of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  step: STEP: Read the review versions of row 1 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Request a preview of import 51ab9084-6e0f-4835-949d-263e35086f88 at batch version 4
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/preview "HTTP/1.1 201 Created"
+17:22:32 INFO  step: STEP: Confirm a backup of the ready preview
+17:22:32 INFO  step: STEP: Request a backup receipt for preview f1cfb231-962b-429d-b6a2-ac2d2c91b535 of import 51ab9084-6e0f-4835-949d-263e35086f88
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/51ab9084-6e0f-4835-949d-263e35086f88/previews/f1cfb231-962b-429d-b6a2-ac2d2c91b535/backup "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Submit an import commit
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Open the import history from the navigation

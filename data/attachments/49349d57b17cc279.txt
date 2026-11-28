@@ -1,0 +1,8 @@
+17:21:36 INFO  step: STEP: Upload 'QA-aa740765.csv' and expect it to be staged
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Create donor 'Michał Warwas QA-aa740765'
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 739c6a90-4aba-4e9e-9d89-9fddebe597ab
+17:21:36 INFO  step: STEP: Read the review versions of row 1 of import 739c6a90-4aba-4e9e-9d89-9fddebe597ab
+17:21:36 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/739c6a90-4aba-4e9e-9d89-9fddebe597ab/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:36 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/739c6a90-4aba-4e9e-9d89-9fddebe597ab/rows/1/1/decision "HTTP/1.1 200 OK"

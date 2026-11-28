@@ -1,0 +1,7 @@
+17:22:15 INFO  step: STEP: Create account qa.c113ea21a567
+17:22:15 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:22:15 INFO  step: STEP: Open the login form
+17:22:16 INFO  step: STEP: Log in through the form as qa.c113ea21a567
+17:22:16 INFO  step: STEP: Change the temporary password through the form
+17:22:16 INFO  step: STEP: Deactivate account f9c09ee9-7995-4a51-96c5-8f2bad652070
+17:22:16 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/f9c09ee9-7995-4a51-96c5-8f2bad652070 "HTTP/1.1 200 OK"

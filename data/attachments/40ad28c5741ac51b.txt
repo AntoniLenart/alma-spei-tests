@@ -1,0 +1,4 @@
+17:21:04 INFO  step: STEP: Submit a new donor
+17:21:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 400 Bad Request"
+17:21:04 INFO  step: STEP: List donors tagged QA-a5df86cf
+17:21:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-a5df86cf&status=all "HTTP/1.1 200 OK"

@@ -1,0 +1,34 @@
+17:21:37 INFO  step: STEP: Upload 'QA-33b28915.csv' and expect it to be staged
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Create donor 'Mieszko Wojtarowicz QA-33b28915'
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Decide every row of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Decide row 1 of import db1b2502-2b98-424b-91d9-a184b365e564 ('existing-donor')
+17:21:37 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Read the review versions of row 1 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  step: STEP: Decide row 2 of import db1b2502-2b98-424b-91d9-a184b365e564 ('existing-donor')
+17:21:37 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Read the review versions of row 2 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  step: STEP: Commit import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Prepare, back up and approve import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Create a ready preview of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Prepare a preview of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  step: STEP: Read the review versions of row 1 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  step: STEP: Request a preview of import db1b2502-2b98-424b-91d9-a184b365e564 at batch version 4
+17:21:38 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/preview "HTTP/1.1 201 Created"
+17:21:38 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:38 INFO  step: STEP: Request a backup receipt for preview c1da8a87-ea8a-4e50-bc67-a8c4e718c805 of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:38 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/previews/c1da8a87-ea8a-4e50-bc67-a8c4e718c805/backup "HTTP/1.1 200 OK"
+17:21:38 INFO  step: STEP: Submit an import commit
+17:21:38 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:38 INFO  step: STEP: Read the import history {}
+17:21:38 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports "HTTP/1.1 200 OK"
+17:21:38 INFO  step: STEP: Read the applied effects of import db1b2502-2b98-424b-91d9-a184b365e564 {}
+17:21:38 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/commit-items "HTTP/1.1 200 OK"
+17:21:38 INFO  step: STEP: Read the undo eligibility of import db1b2502-2b98-424b-91d9-a184b365e564
+17:21:38 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/db1b2502-2b98-424b-91d9-a184b365e564/undo-eligibility "HTTP/1.1 200 OK"

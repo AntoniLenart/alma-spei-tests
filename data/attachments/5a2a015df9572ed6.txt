@@ -1,0 +1,2 @@
+17:21:34 INFO  step: STEP: List donors with raw query [('limit', 'name; DROP TABLE donors; --')]
+17:21:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=name%3B+DROP+TABLE+donors%3B+-- "HTTP/1.1 400 Bad Request"

@@ -1,0 +1,7 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Create donor '<img src=x onerror=window.__almaXss=1> QA-1b5f315b'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open the donor list
+INFO     step:_decorator.py:52 STEP: Search donors for 'QA-1b5f315b'
+INFO     step:_decorator.py:52 STEP: Wait until the list shows 1 donor(s)
+INFO     step:_decorator.py:52 STEP: Open the card of donor '<img src=x onerror=window.__almaXss=1> QA-1b5f315b'

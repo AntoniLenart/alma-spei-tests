@@ -1,0 +1,23 @@
+17:21:29 INFO  step: STEP: Upload 'QA-f9930d97.csv' and expect it to be staged
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Create donor 'Cyprian Skomra QA-f9930d97'
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Decide every row of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  step: STEP: Decide row 1 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9 ('existing-donor')
+17:21:29 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Decide row 2 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9 ('existing-donor')
+17:21:29 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  step: STEP: Read the review versions of row 2 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Create a ready preview of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  step: STEP: Prepare a preview of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Request a preview of import 001a3a0d-7d73-44bf-a3a1-fe599bf8cca9 at batch version 4
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/preview "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Read the planned effects of preview 05bb62df-5fe6-4fd1-b0a9-b324dc98694f {'limit': 2, 'offset': 2}
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/001a3a0d-7d73-44bf-a3a1-fe599bf8cca9/previews/05bb62df-5fe6-4fd1-b0a9-b324dc98694f/items?limit=2&offset=2 "HTTP/1.1 200 OK"

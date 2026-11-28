@@ -1,0 +1,18 @@
+17:23:03 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:03 INFO  step: STEP: Upload 'QA-8e02739b.csv' and expect it to be staged
+17:23:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:03 INFO  step: STEP: Create donor 'Klara Pleskot QA-8e02739b'
+17:23:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:03 INFO  step: STEP: Decide every row of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  step: STEP: Decide row 1 of import 51f677af-c35e-468f-b0bc-d751201fe664 ('existing-donor')
+17:23:03 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  step: STEP: Read the review versions of row 1 of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/51f677af-c35e-468f-b0bc-d751201fe664/rows/1/1/decision "HTTP/1.1 200 OK"
+17:23:03 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/51f677af-c35e-468f-b0bc-d751201fe664/rows/1/1/decision "HTTP/1.1 200 OK"
+17:23:03 INFO  step: STEP: Decide row 2 of import 51f677af-c35e-468f-b0bc-d751201fe664 ('existing-donor')
+17:23:03 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  step: STEP: Read the review versions of row 2 of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/51f677af-c35e-468f-b0bc-d751201fe664/rows/1/2/decision "HTTP/1.1 200 OK"
+17:23:03 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/51f677af-c35e-468f-b0bc-d751201fe664/rows/1/2/decision "HTTP/1.1 200 OK"
+17:23:03 INFO  step: STEP: Deep-link to the summary of import 51f677af-c35e-468f-b0bc-d751201fe664
+17:23:03 INFO  step: STEP: Wait for the import summary of 'QA-8e02739b.csv'

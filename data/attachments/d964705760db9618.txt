@@ -1,0 +1,9 @@
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create account qa.7f4e69db5aaf
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Log in as qa.7f4e69db5aaf
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors "HTTP/1.1 403 Forbidden"
+INFO     step:_decorator.py:52 STEP: Deactivate account d704681f-943c-4fe7-aaa6-21f6978c885e
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/d704681f-943c-4fe7-aaa6-21f6978c885e "HTTP/1.1 200 OK"

@@ -1,0 +1,30 @@
+17:21:23 INFO  step: STEP: Upload 'QA-e2bafa5c.csv' and expect it to be staged
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:23 INFO  step: STEP: Create donor 'Borys Biegała QA-e2bafa5c'
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:23 INFO  step: STEP: Decide every row of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Decide row 1 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8 ('existing-donor')
+17:21:23 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Read the review versions of row 1 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Decide row 2 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8 ('existing-donor')
+17:21:23 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Read the review versions of row 2 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Commit import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Prepare, back up and approve import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Create a ready preview of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Prepare a preview of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:23 INFO  step: STEP: Read the review versions of row 1 of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:24 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:24 INFO  step: STEP: Request a preview of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8 at batch version 4
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/preview "HTTP/1.1 201 Created"
+17:21:24 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:24 INFO  step: STEP: Request a backup receipt for preview ba6055a5-da4b-4bed-8d44-6582b18e3b5c of import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8/previews/ba6055a5-da4b-4bed-8d44-6582b18e3b5c/backup "HTTP/1.1 200 OK"
+17:21:24 INFO  step: STEP: Submit an import commit
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:24 INFO  step: STEP: Retry failed import d7e2f51e-e1f6-4a02-a6dc-0faed625b7f8 (version 6) with 'QA-e2bafa5c.csv'
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 409 Conflict"

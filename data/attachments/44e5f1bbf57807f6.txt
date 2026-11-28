@@ -1,0 +1,13 @@
+17:21:02 INFO  step: STEP: Create donor 'Emil Myrcik QA-4b67de51'
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:02 INFO  step: STEP: Stage one row per sender for QA-4b67de51
+17:21:02 INFO  step: STEP: Upload 'QA-4b67de51.csv' and expect it to be staged
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:02 INFO  step: STEP: Reconcile import 3cc6d176-4b16-4c37-8dd4-854b9b52784c under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:02 INFO  step: STEP: Read the review versions of row 1 of import 3cc6d176-4b16-4c37-8dd4-854b9b52784c
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3cc6d176-4b16-4c37-8dd4-854b9b52784c/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3cc6d176-4b16-4c37-8dd4-854b9b52784c/reconciliation "HTTP/1.1 200 OK"
+17:21:02 INFO  step: STEP: Reconcile import 3cc6d176-4b16-4c37-8dd4-854b9b52784c under {'currency': 'EUR', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:02 INFO  step: STEP: Read the review versions of row 1 of import 3cc6d176-4b16-4c37-8dd4-854b9b52784c
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3cc6d176-4b16-4c37-8dd4-854b9b52784c/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3cc6d176-4b16-4c37-8dd4-854b9b52784c/reconciliation "HTTP/1.1 409 Conflict"

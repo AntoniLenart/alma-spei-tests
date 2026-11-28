@@ -1,0 +1,6 @@
+17:21:35 INFO  step: STEP: Create account qa.8baf0946d825
+17:21:35 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:21:35 INFO  step: STEP: Reset the password of account b2035694-a849-487e-a658-bd158c6ff119
+17:21:35 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts/b2035694-a849-487e-a658-bd158c6ff119/reset-password "HTTP/1.1 200 OK"
+17:21:35 INFO  step: STEP: Deactivate account b2035694-a849-487e-a658-bd158c6ff119
+17:21:36 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b2035694-a849-487e-a658-bd158c6ff119 "HTTP/1.1 200 OK"

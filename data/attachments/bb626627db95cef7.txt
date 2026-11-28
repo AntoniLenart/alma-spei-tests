@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-c49ce3aa.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Aleksander Pszczółka QA-c49ce3aa'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 1115b64f-628d-46ed-b162-af67c7bc7518
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/1115b64f-628d-46ed-b162-af67c7bc7518/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit a decision payload for row 1 of import 1115b64f-628d-46ed-b162-af67c7bc7518
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/1115b64f-628d-46ed-b162-af67c7bc7518/rows/1/1/decision "HTTP/1.1 403 Forbidden"

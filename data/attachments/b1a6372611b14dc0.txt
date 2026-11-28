@@ -1,0 +1,4 @@
+17:21:36 INFO  step: STEP: Upload 'QA-8fa63168.csv' and expect it to be staged
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Read the decision of row 1 of import c439dc45-9cc9-4ca8-bf80-ea2b3e37e9b5
+17:21:36 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c439dc45-9cc9-4ca8-bf80-ea2b3e37e9b5/rows/1/1/decision "HTTP/1.1 200 OK"

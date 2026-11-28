@@ -1,0 +1,4 @@
+17:22:25 INFO  step: STEP: Make the readiness probe answer HTTP 503 with {"status": "unavailable"}
+17:22:25 INFO  step: STEP: Open the application shell and wait for its health check
+17:22:25 INFO  step: STEP: Let the readiness probe reach the backend again
+17:22:25 INFO  step: STEP: Re-check the connection from the notice

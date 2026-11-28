@@ -1,0 +1,13 @@
+17:21:01 INFO  step: STEP: Create donor 'Olgierd Szurek QA-40018e22'
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Create donor 'Olgierd Szurek QA-40018e22'
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Stage one row per sender for QA-40018e22
+17:21:01 INFO  step: STEP: Upload 'QA-40018e22.csv' and expect it to be staged
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Reconcile import eec41f8b-374a-4125-b77d-bcf0fa4e9997 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:01 INFO  step: STEP: Read the review versions of row 1 of import eec41f8b-374a-4125-b77d-bcf0fa4e9997
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/eec41f8b-374a-4125-b77d-bcf0fa4e9997/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/eec41f8b-374a-4125-b77d-bcf0fa4e9997/reconciliation "HTTP/1.1 200 OK"
+17:21:01 INFO  step: STEP: Read the decision of row 1 of import eec41f8b-374a-4125-b77d-bcf0fa4e9997
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/eec41f8b-374a-4125-b77d-bcf0fa4e9997/rows/1/1/decision "HTTP/1.1 200 OK"

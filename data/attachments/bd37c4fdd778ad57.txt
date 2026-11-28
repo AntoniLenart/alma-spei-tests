@@ -1,0 +1,14 @@
+17:21:25 INFO  step: STEP: Upload 'QA-a7fe0686.csv' and expect it to be staged
+17:21:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:25 INFO  step: STEP: Create donor 'Jacek Winnik QA-a7fe0686'
+17:21:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:25 INFO  step: STEP: Decide row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d ('existing-donor')
+17:21:25 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+17:21:25 INFO  step: STEP: Read the review versions of row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+17:21:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  step: STEP: Decide row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d ('unresolved')
+17:21:25 INFO  step: STEP: Save a 'unresolved' decision for row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+17:21:25 INFO  step: STEP: Read the review versions of row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+17:21:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"

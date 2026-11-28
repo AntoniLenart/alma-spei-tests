@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Norbert Matwiejczyk QA-03deee66'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Update donor 39fc8087-ac37-492a-a196-ecd1fa157b37
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/39fc8087-ac37-492a-a196-ecd1fa157b37 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the change history of donor 39fc8087-ac37-492a-a196-ecd1fa157b37
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/39fc8087-ac37-492a-a196-ecd1fa157b37/history "HTTP/1.1 200 OK"

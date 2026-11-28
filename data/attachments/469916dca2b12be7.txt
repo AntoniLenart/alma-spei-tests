@@ -1,0 +1,11 @@
+17:20:48 INFO  step: STEP: Create account qa.2bac0bd17e26
+17:20:48 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:48 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:48 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:20:49 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+17:20:49 INFO  step: STEP: Age the sessions of user b3aa524d-dba2-4fdf-89b6-7e0ec278258b (idle 0 min, expired True)
+17:20:49 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:49 INFO  step: STEP: List donors {}
+17:20:49 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors "HTTP/1.1 401 Unauthorized"
+17:20:49 INFO  step: STEP: Deactivate account b3aa524d-dba2-4fdf-89b6-7e0ec278258b
+17:20:49 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/b3aa524d-dba2-4fdf-89b6-7e0ec278258b "HTTP/1.1 200 OK"

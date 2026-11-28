@@ -1,0 +1,1 @@
+17:21:51 INFO  step: STEP: Read the app role's (<Privilege.SELECT: 'SELECT'>, <Privilege.INSERT: 'INSERT'>, <Privilege.UPDATE: 'UPDATE'>, <Privilege.DELETE: 'DELETE'>, <Privilege.TRUNCATE: 'TRUNCATE'>) privileges on security_audit_events

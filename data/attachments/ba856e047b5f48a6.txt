@@ -1,0 +1,10 @@
+17:22:18 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:22:18 INFO  step: STEP: Open the account management panel
+17:22:19 INFO  step: STEP: Create account qa.0f570fc1d01c through the panel
+17:22:19 INFO  step: STEP: Log in as qa.0f570fc1d01c
+17:22:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:22:19 INFO  step: STEP: List accounts
+17:22:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:22:19 INFO  step: STEP: Deactivate account bf5ad737-fc4e-4f33-9dcb-185e962b8af4
+17:22:19 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/bf5ad737-fc4e-4f33-9dcb-185e962b8af4 "HTTP/1.1 200 OK"

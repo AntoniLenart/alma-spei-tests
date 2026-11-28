@@ -1,0 +1,1 @@
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/c7d87210-c4a6-4217-96f7-6e67705fb735 "HTTP/1.1 403 Forbidden"

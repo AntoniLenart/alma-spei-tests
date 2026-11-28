@@ -1,0 +1,6 @@
+17:21:36 INFO  step: STEP: Upload 'QA-a8acb83a.csv' and expect it to be staged
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Create donor 'Mariusz Mały QA-a8acb83a'
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Look up existing payments for import debc031c-70f9-4412-a954-dba0a91f731f with [('donor-id', '0b6cfcbb-38b3-4963-9a07-fb69edeeecc2')]
+17:21:36 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/debc031c-70f9-4412-a954-dba0a91f731f/payments?donor-id=0b6cfcbb-38b3-4963-9a07-fb69edeeecc2 "HTTP/1.1 200 OK"

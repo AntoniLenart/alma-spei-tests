@@ -1,0 +1,13 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-483282ca.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Fryderyk Ochwat QA-483282ca' for import 83248eb2-24a3-4504-8ffc-a09baae57ce8
+INFO     step:_decorator.py:52 STEP: Propose donor 'Fryderyk Ochwat QA-483282ca' for import 83248eb2-24a3-4504-8ffc-a09baae57ce8
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 83248eb2-24a3-4504-8ffc-a09baae57ce8
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/83248eb2-24a3-4504-8ffc-a09baae57ce8/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/83248eb2-24a3-4504-8ffc-a09baae57ce8/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Upload 'QA-483282ca-b.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import 97a79706-53ff-4f00-a050-12c3bb8e6ec5
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 97a79706-53ff-4f00-a050-12c3bb8e6ec5
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/97a79706-53ff-4f00-a050-12c3bb8e6ec5/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/97a79706-53ff-4f00-a050-12c3bb8e6ec5/rows/1/1/decision "HTTP/1.1 404 Not Found"

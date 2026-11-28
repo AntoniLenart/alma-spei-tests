@@ -1,0 +1,7 @@
+17:23:07 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:07 INFO  step: STEP: Create donor '<img src=x onerror=window.__almaXss=1> QA-1b5f315b'
+17:23:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:07 INFO  step: STEP: Open the donor list
+17:23:08 INFO  step: STEP: Search donors for 'QA-1b5f315b'
+17:23:08 INFO  step: STEP: Wait until the list shows 1 donor(s)
+17:23:08 INFO  step: STEP: Open the card of donor '<img src=x onerror=window.__almaXss=1> QA-1b5f315b'

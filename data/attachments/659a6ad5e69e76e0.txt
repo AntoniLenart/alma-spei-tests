@@ -1,0 +1,3 @@
+17:20:50 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:50 INFO  step: STEP: POST /api/register (a route that must not exist)
+17:20:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/register "HTTP/1.1 404 Not Found"

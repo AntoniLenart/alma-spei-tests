@@ -1,0 +1,6 @@
+17:23:05 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:05 INFO  step: STEP: Upload 'QA-39999b67.csv' and expect it to be staged
+17:23:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:05 INFO  step: STEP: Deep-link to the summary of import 0fedab99-1fef-4b78-be2f-1f923bbf8c6a
+17:23:05 INFO  step: STEP: Wait for the import summary of 'QA-39999b67.csv'
+17:23:05 INFO  step: STEP: Confirm the source currency PLN and run the matching

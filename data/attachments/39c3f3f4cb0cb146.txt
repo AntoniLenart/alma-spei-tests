@@ -1,0 +1,12 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Alfa QA-6f121c43'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Beta QA-6f121c43'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Gamma QA-6f121c43'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: List donors {'search': 'QA-6f121c43', 'limit': 2, 'offset': 0}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-6f121c43&limit=2&offset=0 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors {'search': 'QA-6f121c43', 'limit': 2, 'offset': 2}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-6f121c43&limit=2&offset=2 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors {'search': 'QA-6f121c43', 'limit': 2, 'offset': 4}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-6f121c43&limit=2&offset=4 "HTTP/1.1 200 OK"

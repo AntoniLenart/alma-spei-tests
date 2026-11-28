@@ -1,0 +1,6 @@
+17:22:49 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:49 INFO  step: STEP: Upload 'QA-e77ad1f7.csv' and expect it to be staged
+17:22:49 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:49 INFO  step: STEP: Open the bank upload screen
+17:22:50 INFO  step: STEP: Choose 'QA-e77ad1f7-copy.csv' in the upload form
+17:22:50 INFO  step: STEP: Confirm the file's currency PLN and submit it

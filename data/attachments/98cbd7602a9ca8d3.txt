@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Run seed-demo with qa.admin as the audit actor
+INFO     orchestration:stack.py:272 stack: seed-demo -> clojure -Srepro -M:seed-demo qa.admin

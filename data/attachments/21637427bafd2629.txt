@@ -1,0 +1,6 @@
+17:21:05 INFO  step: STEP: Create donor 'Urszula Kiryluk QA-6435eea6'
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Update donor 4181462a-dc66-411b-9793-13e6b53cac27
+17:21:05 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/4181462a-dc66-411b-9793-13e6b53cac27 "HTTP/1.1 200 OK"
+17:21:05 INFO  step: STEP: Read the change history of donor 4181462a-dc66-411b-9793-13e6b53cac27
+17:21:05 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/4181462a-dc66-411b-9793-13e6b53cac27/history?limit=1&offset=1 "HTTP/1.1 200 OK"

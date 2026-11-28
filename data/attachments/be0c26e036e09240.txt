@@ -1,0 +1,9 @@
+17:21:24 INFO  step: STEP: Upload 'QA-12e0083e.csv' and expect it to be staged
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:24 INFO  step: STEP: Create donor 'Kamil Iwanow QA-12e0083e'
+17:21:24 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:24 INFO  step: STEP: Read user qa.admin with its local credential
+17:21:24 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 76300aec-f0a4-43c3-b3fa-79002077296f
+17:21:24 INFO  step: STEP: Read the review versions of row 1 of import 76300aec-f0a4-43c3-b3fa-79002077296f
+17:21:24 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/76300aec-f0a4-43c3-b3fa-79002077296f/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:24 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/76300aec-f0a4-43c3-b3fa-79002077296f/rows/1/1/decision "HTTP/1.1 200 OK"

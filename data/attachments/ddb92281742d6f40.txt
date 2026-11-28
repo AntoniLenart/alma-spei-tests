@@ -1,0 +1,6 @@
+17:21:26 INFO  step: STEP: Upload 'QA-a81d8a44.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import ee184dd3-59bb-46b3-a9f2-3dcb26d57477
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/ee184dd3-59bb-46b3-a9f2-3dcb26d57477/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:26 INFO  step: STEP: Submit a donor proposal for import ee184dd3-59bb-46b3-a9f2-3dcb26d57477
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/ee184dd3-59bb-46b3-a9f2-3dcb26d57477/donor-proposals "HTTP/1.1 400 Bad Request"

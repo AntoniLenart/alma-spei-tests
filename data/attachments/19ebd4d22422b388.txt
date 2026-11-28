@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-54937e9e.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read preview 00000000-0000-4000-8000-000000000000 of import c888a4a2-f9c2-41fb-91f9-5ed073f21660
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/c888a4a2-f9c2-41fb-91f9-5ed073f21660/previews/00000000-0000-4000-8000-000000000000 "HTTP/1.1 404 Not Found"

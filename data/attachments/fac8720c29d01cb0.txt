@@ -1,0 +1,7 @@
+17:21:18 INFO  step: STEP: Upload 'QA-c3b791ce.csv' and expect it to be staged
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Create donor 'Róża Strama QA-c3b791ce'
+17:21:18 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:18 INFO  step: STEP: Archive donor b486d86d-1b63-46df-a141-3fd2c3484077 directly in the database
+17:21:18 INFO  step: STEP: Compare staged row 1/1 of import fd6275d5-6c6b-48cf-a7dc-b1f1edac57f9 with donor b486d86d-1b63-46df-a141-3fd2c3484077
+17:21:18 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/fd6275d5-6c6b-48cf-a7dc-b1f1edac57f9/rows/1/1/comparison?donor-id=b486d86d-1b63-46df-a141-3fd2c3484077 "HTTP/1.1 200 OK"

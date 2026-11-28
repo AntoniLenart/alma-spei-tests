@@ -1,0 +1,22 @@
+17:21:28 INFO  step: STEP: Upload 'QA-f61602cc.csv' and expect it to be staged
+17:21:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:28 INFO  step: STEP: Create donor 'Jakub Zieniewicz QA-f61602cc'
+17:21:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:28 INFO  step: STEP: Decide every row of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  step: STEP: Decide row 1 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5 ('existing-donor')
+17:21:28 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  step: STEP: Read the review versions of row 1 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  step: STEP: Decide row 2 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5 ('existing-donor')
+17:21:28 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  step: STEP: Read the review versions of row 2 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  step: STEP: Prepare a preview of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  step: STEP: Read the review versions of row 1 of import 9991b499-6b27-4dd6-a9ae-90625761f8a5
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  step: STEP: Request a preview of import 9991b499-6b27-4dd6-a9ae-90625761f8a5 at batch version 4
+17:21:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/preview "HTTP/1.1 201 Created"
+17:21:28 INFO  step: STEP: Read staged rows of import 9991b499-6b27-4dd6-a9ae-90625761f8a5 {}
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9991b499-6b27-4dd6-a9ae-90625761f8a5/rows "HTTP/1.1 200 OK"

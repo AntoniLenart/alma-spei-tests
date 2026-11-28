@@ -1,0 +1,5 @@
+17:21:49 INFO  step: STEP: Create account qa.d95b620a001e
+17:21:49 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:21:49 INFO  step: STEP: Read user qa.d95b620a001e with its local credential
+17:21:49 INFO  step: STEP: Deactivate account 5806cee0-b23d-4f90-acb0-1c51c4baadd9
+17:21:49 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/5806cee0-b23d-4f90-acb0-1c51c4baadd9 "HTTP/1.1 200 OK"

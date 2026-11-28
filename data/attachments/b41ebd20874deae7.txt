@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's UPDATE privilege on columns ('profile', 'version', 'updated_by', 'updated_at') of import_donor_proposals
+INFO     step:_decorator.py:52 STEP: Read the app role's UPDATE privilege on columns ('id', 'batch_id', 'created_by', 'created_at') of import_donor_proposals

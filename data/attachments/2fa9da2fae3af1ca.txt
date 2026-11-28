@@ -1,0 +1,9 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-12e0083e.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Kamil Iwanow QA-12e0083e'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 76300aec-f0a4-43c3-b3fa-79002077296f
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 76300aec-f0a4-43c3-b3fa-79002077296f
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/76300aec-f0a4-43c3-b3fa-79002077296f/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/76300aec-f0a4-43c3-b3fa-79002077296f/rows/1/1/decision "HTTP/1.1 200 OK"

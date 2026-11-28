@@ -1,0 +1,24 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-bdd9d279.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Kamila Kalinka QA-bdd9d279' for import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Propose donor 'Kamila Kalinka QA-bdd9d279' for import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import cde0dd34-37c9-440d-b330-251391e887b5 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import cde0dd34-37c9-440d-b330-251391e887b5 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import cde0dd34-37c9-440d-b330-251391e887b5
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import cde0dd34-37c9-440d-b330-251391e887b5 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/cde0dd34-37c9-440d-b330-251391e887b5/preview "HTTP/1.1 201 Created"

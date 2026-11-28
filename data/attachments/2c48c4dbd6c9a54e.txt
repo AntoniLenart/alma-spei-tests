@@ -1,0 +1,4 @@
+17:21:04 INFO  step: STEP: Create donor 'Wiktor Gryciuk QA-7be2bba0'
+17:21:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:04 INFO  step: STEP: Open donor card c5b0d8d3-49d3-4f30-a4fe-bb99c0108ca5
+17:21:04 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/c5b0d8d3-49d3-4f30-a4fe-bb99c0108ca5 "HTTP/1.1 200 OK"

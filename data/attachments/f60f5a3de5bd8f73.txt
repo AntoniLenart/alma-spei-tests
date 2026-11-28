@@ -1,0 +1,13 @@
+17:21:55 INFO  step: STEP: Upload 'QA-1c58af13.csv' and expect it to be staged
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Create donor 'Agnieszka Handke QA-1c58af13'
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Read user qa.admin with its local credential
+17:21:55 INFO  step: STEP: Decide row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607 ('existing-donor')
+17:21:55 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607
+17:21:55 INFO  step: STEP: Read the review versions of row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/26c72ab6-1532-48b3-90d7-a29b80074607/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/26c72ab6-1532-48b3-90d7-a29b80074607/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Read the stored decision of row 1 of import batch 26c72ab6-1532-48b3-90d7-a29b80074607
+17:21:55 INFO  step: STEP: Read the review journal of import batch 26c72ab6-1532-48b3-90d7-a29b80074607
+17:21:55 INFO  step: STEP: Read the events of import batch 26c72ab6-1532-48b3-90d7-a29b80074607

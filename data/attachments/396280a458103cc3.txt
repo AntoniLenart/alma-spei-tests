@@ -1,0 +1,4 @@
+17:21:04 INFO  step: STEP: Create donor 'Iwo Karczmarek QA-7ba588f4'
+17:21:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:04 INFO  step: STEP: Update donor 6d6f58f7-eec0-4f9b-8232-e4e42f1dbbaf
+17:21:04 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/donors/6d6f58f7-eec0-4f9b-8232-e4e42f1dbbaf "HTTP/1.1 200 OK"

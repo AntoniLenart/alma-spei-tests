@@ -1,0 +1,7 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Agnieszka Sypień QA-40114e9c'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Update donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/d3a7606e-1fc6-47d7-95f8-c520fda2a8e4 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read donor row d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+INFO     step:_decorator.py:52 STEP: Read audit actions of donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4
+INFO     step:_decorator.py:52 STEP: Read fields changed by 'update' events of donor d3a7606e-1fc6-47d7-95f8-c520fda2a8e4

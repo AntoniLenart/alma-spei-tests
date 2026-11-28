@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-ba5671ce.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Propose donor 'Sebastian Mateńko QA-ba5671ce' for import 80036339-cff0-4f18-a5a9-2ecde68c75c6
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 80036339-cff0-4f18-a5a9-2ecde68c75c6
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/80036339-cff0-4f18-a5a9-2ecde68c75c6/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/80036339-cff0-4f18-a5a9-2ecde68c75c6/donor-proposals "HTTP/1.1 400 Bad Request"

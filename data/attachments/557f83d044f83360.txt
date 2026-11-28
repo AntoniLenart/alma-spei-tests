@@ -1,0 +1,6 @@
+17:21:19 INFO  step: STEP: Upload 'QA-57b38d90.csv' and expect it to be staged
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Create donor 'Eliza Solarek QA-57b38d90'
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Compare staged row 1/1 of import 7bd353b0-5e64-41ed-a36c-d94683fee1d3 with donor None
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/7bd353b0-5e64-41ed-a36c-d94683fee1d3/rows/1/1/comparison?donor-id=31030580-54c6-4c3d-8ccd-56ffb5131884&extra=x "HTTP/1.1 400 Bad Request"

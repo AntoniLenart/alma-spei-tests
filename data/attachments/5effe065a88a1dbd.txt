@@ -1,0 +1,14 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-a7fe0686.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Jacek Winnik QA-a7fe0686'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d ('unresolved')
+INFO     step:_decorator.py:52 STEP: Save a 'unresolved' decision for row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b80d155a-aa3a-4d56-9199-cd0ed31f698d
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/b80d155a-aa3a-4d56-9199-cd0ed31f698d/rows/1/1/decision "HTTP/1.1 200 OK"

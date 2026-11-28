@@ -1,0 +1,32 @@
+17:21:54 INFO  step: STEP: Upload 'QA-469d3681.csv' and expect it to be staged
+17:21:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:54 INFO  step: STEP: Create donor 'Aleks Chudoba QA-469d3681'
+17:21:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:54 INFO  step: STEP: Decide every row of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Decide row 1 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74 ('existing-donor')
+17:21:54 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Read the review versions of row 1 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:54 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:54 INFO  step: STEP: Decide row 2 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74 ('existing-donor')
+17:21:54 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Read the review versions of row 2 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:54 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:54 INFO  step: STEP: Prepare, back up and approve import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Create a ready preview of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Prepare a preview of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Read the review versions of row 1 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:54 INFO  step: STEP: Request a preview of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74 at batch version 4
+17:21:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/preview "HTTP/1.1 201 Created"
+17:21:54 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:54 INFO  step: STEP: Request a backup receipt for preview 2a889e59-7164-437f-ad8b-f36fb30d6658 of import f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74/previews/2a889e59-7164-437f-ad8b-f36fb30d6658/backup "HTTP/1.1 200 OK"
+17:21:54 INFO  step: STEP: Count the active donors and payments
+17:21:54 INFO  step: STEP: Read the events of import batch f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Submit an import commit
+17:21:54 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 409 Conflict"
+17:21:54 INFO  step: STEP: Count the active donors and payments
+17:21:54 INFO  step: STEP: Read the events of import batch f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74
+17:21:54 INFO  step: STEP: Count the records attributed to import batch f8d315c9-7c7d-4b8f-91ba-cfa0fb903e74

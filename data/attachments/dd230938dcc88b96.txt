@@ -1,0 +1,27 @@
+17:21:55 INFO  step: STEP: Upload 'QA-0b0cb99b.csv' and expect it to be staged
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:55 INFO  step: STEP: Create donor proposal 'Aniela Starościak QA-0b0cb99b' for import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:55 INFO  step: STEP: Propose donor 'Aniela Starościak QA-0b0cb99b' for import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:55 INFO  step: STEP: Read the review versions of row 1 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/donor-proposals "HTTP/1.1 201 Created"
+17:21:56 INFO  step: STEP: Decide every row of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  step: STEP: Decide row 1 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66 ('new-proposal')
+17:21:56 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  step: STEP: Read the review versions of row 1 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  step: STEP: Decide row 2 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66 ('new-proposal')
+17:21:56 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  step: STEP: Read the review versions of row 2 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  step: STEP: Create a ready preview of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  step: STEP: Prepare a preview of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  step: STEP: Read the review versions of row 1 of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66
+17:21:56 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:56 INFO  step: STEP: Request a preview of import c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66 at batch version 5
+17:21:56 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66/preview "HTTP/1.1 201 Created"
+17:21:56 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:56 INFO  step: STEP: Count the previews of import batch c7ba21c5-bc5d-4a86-a2b6-0640c36a4d66

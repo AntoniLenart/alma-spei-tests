@@ -1,0 +1,9 @@
+17:20:51 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:51 INFO  step: STEP: Create account qa.7f4e69db5aaf
+17:20:52 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:52 INFO  step: STEP: Log in as qa.7f4e69db5aaf
+17:20:52 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:20:52 INFO  step: STEP: List donors {}
+17:20:52 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors "HTTP/1.1 403 Forbidden"
+17:20:52 INFO  step: STEP: Deactivate account d704681f-943c-4fe7-aaa6-21f6978c885e
+17:20:52 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/d704681f-943c-4fe7-aaa6-21f6978c885e "HTTP/1.1 200 OK"

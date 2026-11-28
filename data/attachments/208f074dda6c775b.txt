@@ -1,0 +1,1 @@
+17:21:51 INFO  step: STEP: Probe an account row with {'username': 'QA.Upper'} (rolled back)

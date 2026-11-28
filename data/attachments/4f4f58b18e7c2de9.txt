@@ -1,0 +1,16 @@
+17:23:05 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:05 INFO  step: STEP: Create donor 'Marianna Ochał QA-ed9b57f1'
+17:23:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:05 INFO  step: STEP: Stage one row per sender for QA-ed9b57f1
+17:23:05 INFO  step: STEP: Upload 'QA-ed9b57f1.csv' and expect it to be staged
+17:23:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:05 INFO  step: STEP: Deep-link to the summary of import 8df5111f-147c-4e8a-a919-82c7bc62d889
+17:23:06 INFO  step: STEP: Wait for the import summary of 'QA-ed9b57f1.csv'
+17:23:06 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:23:06 INFO  step: STEP: Explain the exception of row 1 (the card showing 'Marianna Ochał QA-ed9b57f1, ul. Odległa 3, 00-950 Innowo')
+17:23:06 INFO  step: STEP: Choose the suggested donor 'Marianna Ochał QA-ed9b57f1'
+17:23:06 INFO  step: STEP: Settle the payment as new and return to the summary
+17:23:06 INFO  step: STEP: Answer the payment question (PLN, new)
+17:23:06 INFO  step: STEP: Wait for the import summary of 'QA-ed9b57f1.csv'
+17:23:06 INFO  step: STEP: Read the decision of row 1 of import 8df5111f-147c-4e8a-a919-82c7bc62d889
+17:23:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/8df5111f-147c-4e8a-a919-82c7bc62d889/rows/1/1/decision "HTTP/1.1 200 OK"

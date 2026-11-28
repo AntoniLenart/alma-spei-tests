@@ -1,0 +1,8 @@
+17:21:26 INFO  step: STEP: Upload 'QA-e8428236.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Create donor 'Sebastian Sprawka QA-e8428236'
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 554e7bd3-6a6a-4acd-aa86-231c9532e156
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import 554e7bd3-6a6a-4acd-aa86-231c9532e156
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/554e7bd3-6a6a-4acd-aa86-231c9532e156/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:26 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/554e7bd3-6a6a-4acd-aa86-231c9532e156/rows/1/1/decision "HTTP/1.1 400 Bad Request"

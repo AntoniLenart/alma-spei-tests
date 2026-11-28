@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: List donors {'limit': 100, 'offset': 0}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=0 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors {'limit': 100, 'offset': 0, 'status': <DonorStatusFilter.ALL: 'all'>}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=0&status=all "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors {'limit': 100, 'offset': 100, 'status': <DonorStatusFilter.ALL: 'all'>}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?limit=100&offset=100&status=all "HTTP/1.1 200 OK"

@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-9af7d5ca
+INFO     step:_decorator.py:52 STEP: Upload 'QA-9af7d5ca.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import f9daa669-17dc-4ef0-b613-fdd2b0f3a128
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-9af7d5ca.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 1 (the card showing 'Marcel Ryszkiewicz QA-9af7d5ca, pl. Kosynierów 67, 91-963 Toruń')

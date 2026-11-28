@@ -1,0 +1,15 @@
+17:21:25 INFO  step: STEP: Upload 'QA-ce9f9b9d.csv' and expect it to be staged
+17:21:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:25 INFO  step: STEP: Create donor 'Stefan Mleczak QA-ce9f9b9d'
+17:21:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:25 INFO  step: STEP: Decide row 1 of import b97753f9-3dde-416c-8932-af2c4080b714 ('existing-donor')
+17:21:25 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import b97753f9-3dde-416c-8932-af2c4080b714
+17:21:25 INFO  step: STEP: Read the review versions of row 1 of import b97753f9-3dde-416c-8932-af2c4080b714
+17:21:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b97753f9-3dde-416c-8932-af2c4080b714/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b97753f9-3dde-416c-8932-af2c4080b714/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  step: STEP: Read the review versions of row 1 of import b97753f9-3dde-416c-8932-af2c4080b714
+17:21:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b97753f9-3dde-416c-8932-af2c4080b714/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:25 INFO  step: STEP: Submit a decision payload for row 1 of import b97753f9-3dde-416c-8932-af2c4080b714
+17:21:25 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/b97753f9-3dde-416c-8932-af2c4080b714/rows/1/1/decision "HTTP/1.1 409 Conflict"
+17:21:25 INFO  step: STEP: Read the decision of row 1 of import b97753f9-3dde-416c-8932-af2c4080b714
+17:21:25 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b97753f9-3dde-416c-8932-af2c4080b714/rows/1/1/decision "HTTP/1.1 200 OK"

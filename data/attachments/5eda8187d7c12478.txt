@@ -1,0 +1,12 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Create account qa.9d9a0d210fb7
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Open the account management panel
+INFO     step:_decorator.py:52 STEP: Reset the password of qa.9d9a0d210fb7 through the panel
+INFO     step:_decorator.py:52 STEP: Accept the next browser confirmation
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deactivate account f51c7db6-f759-4e2e-a1fb-328221b17b4f
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/f51c7db6-f759-4e2e-a1fb-328221b17b4f "HTTP/1.1 200 OK"

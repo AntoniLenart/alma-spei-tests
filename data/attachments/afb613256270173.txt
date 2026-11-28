@@ -1,0 +1,4 @@
+17:21:27 INFO  step: STEP: Upload 'QA-2a30e6d3.csv' and expect it to be staged
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Look up existing payments for import 9926b035-420f-485a-bc55-4ff5526bd569 with []
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9926b035-420f-485a-bc55-4ff5526bd569/payments "HTTP/1.1 400 Bad Request"

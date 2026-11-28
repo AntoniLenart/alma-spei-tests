@@ -1,0 +1,12 @@
+17:22:59 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:59 INFO  step: STEP: Upload 'QA-df5408e0.csv' and expect it to be staged
+17:22:59 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:00 INFO  step: STEP: Create donor 'Malwina Sadłocha QA-df5408e0'
+17:23:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:00 INFO  step: STEP: Archive donor 816f34bd-9a86-4c2f-b647-7d48386bfcbd directly in the database
+17:23:00 INFO  step: STEP: Deep-link to the summary of import 9b8af15e-0a8b-4796-96ad-66ea0ce98922
+17:23:00 INFO  step: STEP: Wait for the import summary of 'QA-df5408e0.csv'
+17:23:00 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:23:00 INFO  step: STEP: Explain the exception of row 1 (the card showing 'Maks Kulma')
+17:23:00 INFO  step: STEP: Look up archived donors in the catalogue
+17:23:00 INFO  step: STEP: Search for 'QA-df5408e0' and compare with 'Malwina Sadłocha QA-df5408e0'

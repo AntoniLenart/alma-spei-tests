@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-8d270fa8.csv' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+INFO     step:_decorator.py:52 STEP: Read the events of import batch e7c86b51-bb12-4b65-907d-3f3ab44a8575
+INFO     step:_decorator.py:52 STEP: Read the staged rows of import batch e7c86b51-bb12-4b65-907d-3f3ab44a8575

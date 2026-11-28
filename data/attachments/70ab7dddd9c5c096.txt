@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor '=HYPERLINK("http://example.invalid","kliknij") QA-2e4065e4'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open donor card 853dfd4d-5f2a-46da-8565-6214df501cc0
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/853dfd4d-5f2a-46da-8565-6214df501cc0 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-2e4065e4
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-2e4065e4 "HTTP/1.1 200 OK"

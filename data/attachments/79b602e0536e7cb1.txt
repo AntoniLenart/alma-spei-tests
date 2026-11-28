@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Probe a donor row with {'created_by': '5660ecff-b9ea-4ca2-b262-66ed6515dd85'} (rolled back)

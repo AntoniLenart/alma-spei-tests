@@ -1,0 +1,32 @@
+17:21:23 INFO  step: STEP: Upload 'QA-71310856.csv' and expect it to be staged
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:23 INFO  step: STEP: Create donor 'Franciszek Ryczko QA-71310856'
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:23 INFO  step: STEP: Decide every row of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Decide row 1 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42 ('existing-donor')
+17:21:23 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Read the review versions of row 1 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Decide row 2 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42 ('existing-donor')
+17:21:23 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Read the review versions of row 2 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Commit import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Prepare, back up and approve import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Create a ready preview of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Prepare a preview of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  step: STEP: Read the review versions of row 1 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Request a preview of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42 at batch version 4
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/preview "HTTP/1.1 201 Created"
+17:21:23 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:23 INFO  step: STEP: Request a backup receipt for preview 342837c4-d7b3-480a-b9e5-39c5178bb195 of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/previews/342837c4-d7b3-480a-b9e5-39c5178bb195/backup "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Submit an import commit
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Read the outcome of import 3ce6fc22-1680-4c15-97a7-9dc7725f6c42
+17:21:23 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/3ce6fc22-1680-4c15-97a7-9dc7725f6c42/outcome "HTTP/1.1 200 OK"
+17:21:23 INFO  step: STEP: Submit an undo of the latest import
+17:21:23 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 409 Conflict"

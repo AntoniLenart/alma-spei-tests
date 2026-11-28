@@ -1,0 +1,30 @@
+17:21:06 INFO  step: STEP: Upload 'QA-f574da5c.csv' and expect it to be staged
+17:21:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:06 INFO  step: STEP: Create donor 'Anna Maria Kusztal QA-f574da5c'
+17:21:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:06 INFO  step: STEP: Decide every row of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Decide row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('existing-donor')
+17:21:06 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  step: STEP: Decide row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('existing-donor')
+17:21:06 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Read the review versions of row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  step: STEP: Create a ready preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Prepare a preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  step: STEP: Request a preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e at batch version 4
+17:21:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/preview "HTTP/1.1 201 Created"
+17:21:06 INFO  step: STEP: Decide row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('unresolved')
+17:21:06 INFO  step: STEP: Save a 'unresolved' decision for row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  step: STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  step: STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:06 INFO  step: STEP: Request a backup receipt for preview 7a73fb0a-53b1-4585-b2cc-b11e03f38312 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+17:21:06 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/previews/7a73fb0a-53b1-4585-b2cc-b11e03f38312/backup "HTTP/1.1 409 Conflict"

@@ -1,0 +1,34 @@
+17:21:55 INFO  step: STEP: Upload 'QA-6d1def1c.csv' and expect it to be staged
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Create donor 'Tola Wszoła QA-6d1def1c'
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Decide every row of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Decide row 1 of import 4f960d79-a416-45c3-9827-42b1bd3119ed ('existing-donor')
+17:21:55 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Read the review versions of row 1 of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Decide row 2 of import 4f960d79-a416-45c3-9827-42b1bd3119ed ('existing-donor')
+17:21:55 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Read the review versions of row 2 of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Commit import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Prepare, back up and approve import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Create a ready preview of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Prepare a preview of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  step: STEP: Read the review versions of row 1 of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Request a preview of import 4f960d79-a416-45c3-9827-42b1bd3119ed at batch version 4
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/preview "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:55 INFO  step: STEP: Request a backup receipt for preview a2257841-7e72-435d-a8af-94bfcf3d9c0e of import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/previews/a2257841-7e72-435d-a8af-94bfcf3d9c0e/backup "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Submit an import commit
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Undo committed import 4f960d79-a416-45c3-9827-42b1bd3119ed
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4f960d79-a416-45c3-9827-42b1bd3119ed/outcome "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Submit an undo of the latest import
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Count import attempts of the file with hash 31fb53fd26cb53921a197d20d808a1abca90261a66471f55518acafccefb0f1f

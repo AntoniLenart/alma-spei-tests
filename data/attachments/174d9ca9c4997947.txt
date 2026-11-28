@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-5d3fe28c.svg' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 415 Unsupported Media Type"

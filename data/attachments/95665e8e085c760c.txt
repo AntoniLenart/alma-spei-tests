@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-87d981ce.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Kamil Hirsch QA-87d981ce'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Compare staged row 2/1 of import abc0e78f-4e6b-4840-9aa6-96aaf2e8f737 with donor e4c452b7-3022-4fe4-b41e-8e36090de44b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/abc0e78f-4e6b-4840-9aa6-96aaf2e8f737/rows/2/1/comparison?donor-id=e4c452b7-3022-4fe4-b41e-8e36090de44b "HTTP/1.1 404 Not Found"

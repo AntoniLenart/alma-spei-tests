@@ -1,0 +1,15 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-31548ebc.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-31548ebc.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 1 (the card showing 'Juliusz Harasimiuk')
+INFO     step:_decorator.py:52 STEP: Prepare new donor 'Mieszko Mizak QA-31548ebc' for the transfer
+INFO     step:_decorator.py:52 STEP: Settle the payment as new and return to the summary
+INFO     step:_decorator.py:52 STEP: Answer the payment question (PLN, new)
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-31548ebc.csv'
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/9a325fd5-b6f7-4bcd-a48f-d34d96114273/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List the donor proposals of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/9a325fd5-b6f7-4bcd-a48f-d34d96114273/donor-proposals "HTTP/1.1 200 OK"

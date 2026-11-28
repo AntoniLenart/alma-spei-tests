@@ -1,0 +1,6 @@
+17:20:50 INFO  step: STEP: Create account qa.37de2f2af64d
+17:20:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:50 INFO  step: STEP: Request account qa.822e25ac9807 with header overrides {<Header.CSRF_TOKEN: 'X-CSRF-Token'>: None}
+17:20:50 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 403 Forbidden"
+17:20:50 INFO  step: STEP: Deactivate account f07f4e49-9507-4d2a-8634-4c6dae7be3d7
+17:20:50 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/f07f4e49-9507-4d2a-8634-4c6dae7be3d7 "HTTP/1.1 200 OK"

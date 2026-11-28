@@ -1,0 +1,4 @@
+17:21:27 INFO  step: STEP: Upload 'QA-9c8ba215.csv' and expect it to be staged
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Read the readiness blockers of import eb7c17e6-e6a2-4bd8-9fe3-e06d03ac04aa {}
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/eb7c17e6-e6a2-4bd8-9fe3-e06d03ac04aa/review-blockers "HTTP/1.1 200 OK"

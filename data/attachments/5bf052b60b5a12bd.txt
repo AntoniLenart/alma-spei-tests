@@ -1,0 +1,39 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-1f33f91f.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Count the active donors and payments
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Liwia Goś QA-1f33f91f' for import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Propose donor 'Liwia Goś QA-1f33f91f' for import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 94205804-a451-457d-ad55-4e82251e3b58 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 1 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 94205804-a451-457d-ad55-4e82251e3b58 ('new-proposal')
+INFO     step:_decorator.py:52 STEP: Save a 'new-proposal' decision for row 2 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Commit import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Prepare, back up and approve import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 94205804-a451-457d-ad55-4e82251e3b58 at batch version 5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Confirm a backup of the ready preview
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview cfb41ce2-c6ca-43e2-a7a2-94520cf07e38 of import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/previews/cfb41ce2-c6ca-43e2-a7a2-94520cf07e38/backup "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an import commit
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Count the active donors and payments
+INFO     step:_decorator.py:52 STEP: Undo committed import 94205804-a451-457d-ad55-4e82251e3b58
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/94205804-a451-457d-ad55-4e82251e3b58/outcome "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Submit an undo of the latest import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Count the active donors and payments
+INFO     step:_decorator.py:52 STEP: Count the records attributed to import batch 94205804-a451-457d-ad55-4e82251e3b58

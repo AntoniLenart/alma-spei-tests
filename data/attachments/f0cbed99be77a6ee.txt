@@ -1,0 +1,7 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.934f991247f5
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Open the login form
+INFO     step:_decorator.py:52 STEP: Log in through the form as qa.934f991247f5
+INFO     step:_decorator.py:52 STEP: Change the temporary password through the form
+INFO     step:_decorator.py:52 STEP: Deactivate account 294db23d-4f71-4d01-9adc-6e0ade0a83d0
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/294db23d-4f71-4d01-9adc-6e0ade0a83d0 "HTTP/1.1 200 OK"

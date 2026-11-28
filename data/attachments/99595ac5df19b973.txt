@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor '+48 600 100 200 QA-f0ff5568'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open donor card b1ed865c-fe4b-4815-b7c2-de79ed21a363
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/b1ed865c-fe4b-4815-b7c2-de79ed21a363 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-f0ff5568
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-f0ff5568 "HTTP/1.1 200 OK"

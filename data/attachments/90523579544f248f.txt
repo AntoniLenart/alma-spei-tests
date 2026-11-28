@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's attributes
+INFO     step:_decorator.py:52 STEP: Check whether the app role may create objects in schema public

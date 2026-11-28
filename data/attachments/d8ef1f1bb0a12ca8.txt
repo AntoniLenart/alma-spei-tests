@@ -1,0 +1,12 @@
+17:21:55 INFO  step: STEP: Create donor 'Emil Matacz QA-ea938ab2'
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Upload 'QA-ea938ab2.csv' and expect it to be staged
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:55 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:55 INFO  step: STEP: Read donor row 91128156-36e0-4717-86aa-07144171d5f9
+17:21:55 INFO  step: STEP: Reconcile import 88ae3ea4-d72c-4522-b49f-8cb12a5a5480 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:55 INFO  step: STEP: Read the review versions of row 1 of import 88ae3ea4-d72c-4522-b49f-8cb12a5a5480
+17:21:55 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/88ae3ea4-d72c-4522-b49f-8cb12a5a5480/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/88ae3ea4-d72c-4522-b49f-8cb12a5a5480/reconciliation "HTTP/1.1 200 OK"
+17:21:55 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:55 INFO  step: STEP: Read donor row 91128156-36e0-4717-86aa-07144171d5f9

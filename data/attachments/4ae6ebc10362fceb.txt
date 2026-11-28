@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-ff9c77e2
+INFO     step:_decorator.py:52 STEP: Upload 'QA-ff9c77e2.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Reconcile import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List the donor proposals of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/donor-proposals "HTTP/1.1 200 OK"

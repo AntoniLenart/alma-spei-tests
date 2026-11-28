@@ -1,0 +1,3 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Open the donor list
+INFO     step:_decorator.py:52 STEP: Search donors for 'QA-79795024'

@@ -1,0 +1,16 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-3dc76af4.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Wojciech Kubów QA-3dc76af4'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Snapshot import batch 36f587d8-5c9d-4a5a-84c2-430138920471 (version, progress, events, rows)
+INFO     step:_decorator.py:52 STEP: Count rows in the canonical donor tables
+INFO     step:_decorator.py:52 STEP: Read the bank review queue {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/review "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read import batch 36f587d8-5c9d-4a5a-84c2-430138920471
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/36f587d8-5c9d-4a5a-84c2-430138920471 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Compare staged row 1/1 of import 36f587d8-5c9d-4a5a-84c2-430138920471 with donor 23c3940f-89a8-4a73-a69e-5ef5af8c6b9b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/36f587d8-5c9d-4a5a-84c2-430138920471/rows/1/1/comparison?donor-id=23c3940f-89a8-4a73-a69e-5ef5af8c6b9b "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Compare staged row 1/2 of import 36f587d8-5c9d-4a5a-84c2-430138920471 with donor 23c3940f-89a8-4a73-a69e-5ef5af8c6b9b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/36f587d8-5c9d-4a5a-84c2-430138920471/rows/1/2/comparison?donor-id=23c3940f-89a8-4a73-a69e-5ef5af8c6b9b "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Snapshot import batch 36f587d8-5c9d-4a5a-84c2-430138920471 (version, progress, events, rows)
+INFO     step:_decorator.py:52 STEP: Count rows in the canonical donor tables

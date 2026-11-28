@@ -1,0 +1,1 @@
+INFO     orchestration:stack.py:307 stack: clojure -Srepro -M /home/runner/work/alma-spei-tests/alma-spei-tests/tests/src/alma_spei_tests/orchestration/provision_admin.clj

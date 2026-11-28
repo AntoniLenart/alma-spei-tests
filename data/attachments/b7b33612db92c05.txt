@@ -1,0 +1,16 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload 'QA-0380bd84.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Natan Siewert QA-0380bd84'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import 3d7aa16f-d6de-4b4f-948e-c81e4a880168
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-0380bd84.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 1 (the card showing 'pan Olgierd Chaber')
+INFO     step:_decorator.py:52 STEP: Look up active donors in the catalogue
+INFO     step:_decorator.py:52 STEP: Search for 'QA-0380bd84' and compare with 'Natan Siewert QA-0380bd84'
+INFO     step:_decorator.py:52 STEP: Assign the transfer to the compared donor
+INFO     step:_decorator.py:52 STEP: Answer the payment question (PLN, new)
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-0380bd84.csv'
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 3d7aa16f-d6de-4b4f-948e-c81e4a880168
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3d7aa16f-d6de-4b4f-948e-c81e4a880168/rows/1/1/decision "HTTP/1.1 200 OK"

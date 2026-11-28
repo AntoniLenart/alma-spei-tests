@@ -1,0 +1,7 @@
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create account qa.f6fb6243889b
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Log in as qa.f6fb6243889b
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 403 Forbidden"
+INFO     step:_decorator.py:52 STEP: Deactivate account d5b17536-9e17-4e36-9ff1-fe22b2adb846
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/d5b17536-9e17-4e36-9ff1-fe22b2adb846 "HTTP/1.1 200 OK"

@@ -1,0 +1,6 @@
+17:21:19 INFO  step: STEP: Upload 'QA-9cad47c0.csv' and expect it to be staged
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Create donor 'Juliusz Komuda QA-9cad47c0'
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Compare staged row 1/1 of import 16d4bf5f-7a90-4252-ab6a-4940bb767edb with donor None
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/16d4bf5f-7a90-4252-ab6a-4940bb767edb/rows/1/1/comparison?donor-id=a1dbf99e-6a54-4dcb-867a-2e8a236a3f6f&donor-id=a1dbf99e-6a54-4dcb-867a-2e8a236a3f6f "HTTP/1.1 400 Bad Request"

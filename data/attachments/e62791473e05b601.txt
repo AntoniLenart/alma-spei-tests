@@ -1,0 +1,30 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-f574da5c.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Anna Maria Kusztal QA-f574da5c'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 65679e89-bb99-4ab4-93e0-7fde207dc55e at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e ('unresolved')
+INFO     step:_decorator.py:52 STEP: Save a 'unresolved' decision for row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a backup receipt for preview 7a73fb0a-53b1-4585-b2cc-b11e03f38312 of import 65679e89-bb99-4ab4-93e0-7fde207dc55e
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/65679e89-bb99-4ab4-93e0-7fde207dc55e/previews/7a73fb0a-53b1-4585-b2cc-b11e03f38312/backup "HTTP/1.1 409 Conflict"

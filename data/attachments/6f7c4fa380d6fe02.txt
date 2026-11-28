@@ -1,0 +1,6 @@
+17:21:13 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:13 INFO  step: STEP: Upload 'QA-fda7a6be.csv' as a bank import
+17:21:13 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:13 INFO  step: STEP: Read staged rows of import 1a48d417-6f1b-48bd-8770-eaa1fdfa9910 {'limit': 100}
+17:21:13 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/1a48d417-6f1b-48bd-8770-eaa1fdfa9910/rows?limit=100 "HTTP/1.1 200 OK"
+17:21:13 INFO  step: STEP: Count rows in the canonical donor tables

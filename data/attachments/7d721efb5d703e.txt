@@ -1,0 +1,4 @@
+17:21:37 INFO  step: STEP: Create donor 'Daniel Klaus QA-465b38b0'
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Open donor card 95c821b1-ef3e-4aa6-928c-8a7a8d9e303f
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/95c821b1-ef3e-4aa6-928c-8a7a8d9e303f "HTTP/1.1 200 OK"

@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Julian Latoszek QA-c1a5601c'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-c1a5601c
+INFO     step:_decorator.py:52 STEP: Upload 'QA-c1a5601c.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Reconcile import 08e4b776-46f3-4924-a750-1c4b24e77e39 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 08e4b776-46f3-4924-a750-1c4b24e77e39
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 08e4b776-46f3-4924-a750-1c4b24e77e39
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/08e4b776-46f3-4924-a750-1c4b24e77e39/rows/1/1/decision "HTTP/1.1 200 OK"

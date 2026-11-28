@@ -1,0 +1,11 @@
+17:21:00 INFO  step: STEP: Create donor 'Leonard Tyczka QA-edf5b82f'
+17:21:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:00 INFO  step: STEP: Stage one row per sender for QA-edf5b82f
+17:21:00 INFO  step: STEP: Upload 'QA-edf5b82f.csv' and expect it to be staged
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Reconcile import c6b6ed57-94e2-48e6-819e-8287d529a6c0 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:01 INFO  step: STEP: Read the review versions of row 1 of import c6b6ed57-94e2-48e6-819e-8287d529a6c0
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/reconciliation "HTTP/1.1 200 OK"
+17:21:01 INFO  step: STEP: Read the decision of row 1 of import c6b6ed57-94e2-48e6-819e-8287d529a6c0
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c6b6ed57-94e2-48e6-819e-8287d529a6c0/rows/1/1/decision "HTTP/1.1 200 OK"

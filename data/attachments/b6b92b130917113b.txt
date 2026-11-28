@@ -1,0 +1,7 @@
+17:22:42 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:42 INFO  step: STEP: Upload 'QA-9fc30a1a.csv' and expect it to be staged
+17:22:42 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:42 INFO  step: STEP: Deep-link to the summary of import 936a6d70-112c-49fa-8786-1988b0d6a440
+17:22:42 INFO  step: STEP: Wait for the import summary of 'QA-9fc30a1a.csv'
+17:22:42 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:22:42 INFO  step: STEP: Explain the exception of row 2 (the card showing 'Błędy w danych źródłowych — popraw plik.')

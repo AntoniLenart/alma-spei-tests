@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-e56d8024.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the reconciliation report of import b511da5d-ea07-4a98-950e-619b3a8e9711 {'queue': ''}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/b511da5d-ea07-4a98-950e-619b3a8e9711/reconciliation?queue= "HTTP/1.1 400 Bad Request"

@@ -1,0 +1,14 @@
+17:21:27 INFO  step: STEP: Upload 'QA-8b3c8e94.csv' and expect it to be staged
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Create donor proposal 'Fundacja Pierwsza QA-8b3c8e94' for import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  step: STEP: Propose donor 'Fundacja Pierwsza QA-8b3c8e94' for import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  step: STEP: Read the review versions of row 1 of import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd981e2b-5505-4ae1-8902-8c4e72efe039/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dd981e2b-5505-4ae1-8902-8c4e72efe039/donor-proposals "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Create donor proposal 'Fundacja Druga QA-8b3c8e94' for import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  step: STEP: Propose donor 'Fundacja Druga QA-8b3c8e94' for import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  step: STEP: Read the review versions of row 1 of import dd981e2b-5505-4ae1-8902-8c4e72efe039
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd981e2b-5505-4ae1-8902-8c4e72efe039/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/dd981e2b-5505-4ae1-8902-8c4e72efe039/donor-proposals "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: List the donor proposals of import dd981e2b-5505-4ae1-8902-8c4e72efe039 {}
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/dd981e2b-5505-4ae1-8902-8c4e72efe039/donor-proposals "HTTP/1.1 200 OK"

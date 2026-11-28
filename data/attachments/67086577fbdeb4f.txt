@@ -1,0 +1,22 @@
+17:21:26 INFO  step: STEP: Upload 'QA-e32e83b5.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Create donor proposal 'Józef Szachniewicz QA-e32e83b5' for import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:26 INFO  step: STEP: Propose donor 'Józef Szachniewicz QA-e32e83b5' for import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/donor-proposals "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Decide every row of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  step: STEP: Decide row 1 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5 ('new-proposal')
+17:21:27 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  step: STEP: Read the review versions of row 1 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  step: STEP: Decide row 2 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5 ('new-proposal')
+17:21:27 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  step: STEP: Read the review versions of row 2 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  step: STEP: Read the decision of row 1 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:27 INFO  step: STEP: Read the decision of row 2 of import c306bddc-8e9c-4b97-a6bd-a379d68e3cc5
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c306bddc-8e9c-4b97-a6bd-a379d68e3cc5/rows/1/2/decision "HTTP/1.1 200 OK"

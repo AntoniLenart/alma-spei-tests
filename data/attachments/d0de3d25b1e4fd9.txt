@@ -1,0 +1,9 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Upload '<img src=x onerror=window.__almaXss=1>QA-08b283c8.csv' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open the import review queue
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import a2c6609f-31cb-49df-bebd-95aaef555a04
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of '<img src=x onerror=window.__almaXss=1>QA-08b283c8.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 1 (the card showing '<svg onload=window.__almaXss=1> QA-08b283c8')
+INFO     step:_decorator.py:52 STEP: Open the import history from the navigation

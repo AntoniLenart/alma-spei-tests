@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Probe a donation with {'currency': 'pln'} (rolled back)

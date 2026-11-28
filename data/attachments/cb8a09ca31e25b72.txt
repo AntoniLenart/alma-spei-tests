@@ -1,0 +1,30 @@
+17:21:07 INFO  step: STEP: Create donor 'Nicole Garncarek QA-ab6c15c3'
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Upload 'QA-ab6c15c3.csv' and expect it to be staged
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Decide every row of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Decide row 1 of import 8df8a8b2-5331-4259-bdce-021aa0a36506 ('existing-donor')
+17:21:07 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Read the review versions of row 1 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Decide row 2 of import 8df8a8b2-5331-4259-bdce-021aa0a36506 ('existing-donor')
+17:21:07 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Read the review versions of row 2 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Commit import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Prepare, back up and approve import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Create a ready preview of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Prepare a preview of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  step: STEP: Read the review versions of row 1 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Request a preview of import 8df8a8b2-5331-4259-bdce-021aa0a36506 at batch version 4
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/preview "HTTP/1.1 201 Created"
+17:21:07 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:07 INFO  step: STEP: Request a backup receipt for preview 18328d80-446e-4106-876e-ba211eddb868 of import 8df8a8b2-5331-4259-bdce-021aa0a36506
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/8df8a8b2-5331-4259-bdce-021aa0a36506/previews/18328d80-446e-4106-876e-ba211eddb868/backup "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Submit an import commit
+17:21:07 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:07 INFO  step: STEP: Open donor card 0f33234b-6b54-4d5c-a82b-54116b258db2
+17:21:07 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/0f33234b-6b54-4d5c-a82b-54116b258db2 "HTTP/1.1 200 OK"

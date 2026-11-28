@@ -1,0 +1,6 @@
+17:21:12 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:12 INFO  step: STEP: Upload 'QA-4a5f25fd.csv' as a bank import
+17:21:12 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:12 INFO  step: STEP: Read staged rows of import 203e5d3f-f4e1-4fb1-bfe4-05da1e86eb64 {'limit': 100}
+17:21:12 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/203e5d3f-f4e1-4fb1-bfe4-05da1e86eb64/rows?limit=100 "HTTP/1.1 200 OK"
+17:21:12 INFO  step: STEP: Count rows in the canonical donor tables

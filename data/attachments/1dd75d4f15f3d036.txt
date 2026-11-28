@@ -1,0 +1,9 @@
+17:23:10 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:10 INFO  step: STEP: Upload '<img src=x onerror=window.__almaXss=1>QA-08b283c8.csv' as a bank import
+17:23:10 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:10 INFO  step: STEP: Open the import review queue
+17:23:10 INFO  step: STEP: Deep-link to the summary of import a2c6609f-31cb-49df-bebd-95aaef555a04
+17:23:10 INFO  step: STEP: Wait for the import summary of '<img src=x onerror=window.__almaXss=1>QA-08b283c8.csv'
+17:23:10 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:23:10 INFO  step: STEP: Explain the exception of row 1 (the card showing '<svg onload=window.__almaXss=1> QA-08b283c8')
+17:23:10 INFO  step: STEP: Open the import history from the navigation

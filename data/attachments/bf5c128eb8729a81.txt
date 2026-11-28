@@ -1,0 +1,33 @@
+17:21:09 INFO  step: STEP: Upload 'QA-eb035739.csv' and expect it to be staged
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:09 INFO  step: STEP: Create donor 'Inga Dubis QA-eb035739'
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:09 INFO  step: STEP: Decide every row of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Decide row 1 of import f80b85b6-44ba-4b04-a91c-a33567218d47 ('existing-donor')
+17:21:09 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Read the review versions of row 1 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:09 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:09 INFO  step: STEP: Decide row 2 of import f80b85b6-44ba-4b04-a91c-a33567218d47 ('existing-donor')
+17:21:09 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Read the review versions of row 2 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:09 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:09 INFO  step: STEP: Prepare, back up and approve import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Create a ready preview of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Prepare a preview of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  step: STEP: Read the review versions of row 1 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:09 INFO  step: STEP: Request a preview of import f80b85b6-44ba-4b04-a91c-a33567218d47 at batch version 4
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/preview "HTTP/1.1 201 Created"
+17:21:09 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:09 INFO  step: STEP: Request a backup receipt for preview 669fdb93-6cf0-45c6-bbe4-4082e4388e14 of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/previews/669fdb93-6cf0-45c6-bbe4-4082e4388e14/backup "HTTP/1.1 200 OK"
+17:21:09 INFO  step: STEP: Create donor 'Karol Łuczyk QA-eb035739'
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:09 INFO  step: STEP: Submit an import commit
+17:21:09 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 409 Conflict"
+17:21:09 INFO  step: STEP: Read the outcome of import f80b85b6-44ba-4b04-a91c-a33567218d47
+17:21:09 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f80b85b6-44ba-4b04-a91c-a33567218d47/outcome "HTTP/1.1 200 OK"
+17:21:09 INFO  step: STEP: Open donor card b4ce1ad6-20b4-4def-bd3f-538aa022341b
+17:21:10 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/b4ce1ad6-20b4-4def-bd3f-538aa022341b "HTTP/1.1 200 OK"

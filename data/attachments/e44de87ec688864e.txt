@@ -1,0 +1,9 @@
+17:21:03 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:21:03 INFO  step: STEP: Create account qa.180d7b1fd88c
+17:21:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:21:03 INFO  step: STEP: Log in as qa.180d7b1fd88c
+17:21:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:21:03 INFO  step: STEP: Upload 'QA-fc2fb242.csv' as a bank import
+17:21:03 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 403 Forbidden"
+17:21:03 INFO  step: STEP: Deactivate account 24875224-3209-47d8-8f94-c839520c15ac
+17:21:03 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/24875224-3209-47d8-8f94-c839520c15ac "HTTP/1.1 200 OK"

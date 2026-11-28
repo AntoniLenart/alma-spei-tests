@@ -1,0 +1,4 @@
+17:21:11 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:11 INFO  step: STEP: Upload 'QA-72adcbd1-quote+flipped-byte.csv' as a bank import
+17:21:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+17:21:11 INFO  step: STEP: Count rows in the canonical donor tables

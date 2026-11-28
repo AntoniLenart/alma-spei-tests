@@ -1,0 +1,30 @@
+17:21:29 INFO  step: STEP: Upload 'QA-8e3ab478.csv' and expect it to be staged
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Create donor 'Ida Sulik QA-8e3ab478'
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Decide every row of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Decide row 1 of import 633c2d46-04be-48ff-bba8-0921d9f63e70 ('existing-donor')
+17:21:29 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Decide row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70 ('existing-donor')
+17:21:29 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Read the review versions of row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Create a ready preview of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Prepare a preview of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Read the review versions of row 1 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Request a preview of import 633c2d46-04be-48ff-bba8-0921d9f63e70 at batch version 4
+17:21:29 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/preview "HTTP/1.1 201 Created"
+17:21:29 INFO  step: STEP: Read preview 88b23f27-e8e9-4d1a-aaa3-5206e43fd888 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/previews/88b23f27-e8e9-4d1a-aaa3-5206e43fd888 "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Decide row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70 ('existing-donor')
+17:21:29 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  step: STEP: Read the review versions of row 2 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:29 INFO  step: STEP: Read preview 88b23f27-e8e9-4d1a-aaa3-5206e43fd888 of import 633c2d46-04be-48ff-bba8-0921d9f63e70
+17:21:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/633c2d46-04be-48ff-bba8-0921d9f63e70/previews/88b23f27-e8e9-4d1a-aaa3-5206e43fd888 "HTTP/1.1 200 OK"

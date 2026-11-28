@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's [<Privilege.SELECT: 'SELECT'>, <Privilege.INSERT: 'INSERT'>, <Privilege.DELETE: 'DELETE'>, <Privilege.TRUNCATE: 'TRUNCATE'>] privileges on import_review_events

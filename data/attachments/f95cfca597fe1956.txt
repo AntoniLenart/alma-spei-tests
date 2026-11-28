@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Read the app role's (<Privilege.SELECT: 'SELECT'>, <Privilege.INSERT: 'INSERT'>, <Privilege.UPDATE: 'UPDATE'>, <Privilege.DELETE: 'DELETE'>, <Privilege.TRUNCATE: 'TRUNCATE'>) privileges on sessions

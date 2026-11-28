@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-943d2cf6.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Propose donor 'Bartek Rudyk QA-943d2cf6' for import a7a679fa-cc5b-4fab-a092-2ce448ac2741
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import a7a679fa-cc5b-4fab-a092-2ce448ac2741
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: List the donor proposals of import a7a679fa-cc5b-4fab-a092-2ce448ac2741 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/donor-proposals "HTTP/1.1 200 OK"

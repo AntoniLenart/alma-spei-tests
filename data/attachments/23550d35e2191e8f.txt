@@ -1,0 +1,8 @@
+17:21:36 INFO  step: STEP: Upload 'QA-943d2cf6.csv' and expect it to be staged
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Propose donor 'Bartek Rudyk QA-943d2cf6' for import a7a679fa-cc5b-4fab-a092-2ce448ac2741
+17:21:36 INFO  step: STEP: Read the review versions of row 1 of import a7a679fa-cc5b-4fab-a092-2ce448ac2741
+17:21:36 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/donor-proposals "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: List the donor proposals of import a7a679fa-cc5b-4fab-a092-2ce448ac2741 {}
+17:21:36 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/a7a679fa-cc5b-4fab-a092-2ce448ac2741/donor-proposals "HTTP/1.1 200 OK"

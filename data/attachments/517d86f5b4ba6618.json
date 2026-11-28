@@ -1,0 +1,2879 @@
+{
+	"@programName": "ZAP",
+	"@version": "2.16.1",
+	"@generated": "Sat, 28 Nov 2026 17:25:57",
+	"created": "2026-11-28T17:25:57.837726863Z",
+	"site":[ 
+		{
+			"@name": "http://127.0.0.1:3100",
+			"@host": "127.0.0.1",
+			"@port": "3100",
+			"@ssl": "false",
+			"alerts": [ 
+				{
+					"pluginid": "10038",
+					"alertRef": "10038-1",
+					"alert": "Content Security Policy (CSP) Header Not Set",
+					"name": "Content Security Policy (CSP) Header Not Set",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "3",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10020",
+					"alertRef": "10020-1",
+					"alert": "Missing Anti-clickjacking Header",
+					"name": "Missing Anti-clickjacking Header",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
+					"instances":[ 
+						{
+							"id": "0",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options</p>",
+					"cweid": "1021",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90004",
+					"alertRef": "90004-1",
+					"alert": "Insufficient Site Isolation Against Spectre Vulnerability",
+					"name": "Insufficient Site Isolation Against Spectre Vulnerability",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
+					"instances":[ 
+						{
+							"id": "17",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "25",
+							"uri": "http://127.0.0.1:3100/css/app.css",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "274",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "18",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "20",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"systemic": false,
+					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy</p>",
+					"cweid": "693",
+					"wascid": "14",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"id": "16",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "273",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10036",
+					"alertRef": "10036-2",
+					"alert": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
+					"name": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "Low (High)",
+					"desc": "<p>The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.</p>",
+					"instances":[ 
+						{
+							"id": "8",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Jetty(12.1.14)",
+							"otherinfo": ""
+						},
+						{
+							"id": "11",
+							"uri": "http://127.0.0.1:3100/css/app.css",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Jetty(12.1.14)",
+							"otherinfo": ""
+						},
+						{
+							"id": "27",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Jetty(12.1.14)",
+							"otherinfo": ""
+						},
+						{
+							"id": "2",
+							"uri": "http://127.0.0.1:3100/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Jetty(12.1.14)",
+							"otherinfo": ""
+						},
+						{
+							"id": "5",
+							"uri": "http://127.0.0.1:3100/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Jetty(12.1.14)",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to suppress the \"Server\" header or provide generic details.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://httpd.apache.org/docs/current/mod/core.html#servertokens</p><p>https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff648552(v=pandp.10)</p><p>https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>",
+					"cweid": "497",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "Timestamp Disclosure - Unix",
+					"name": "Timestamp Disclosure - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
+					"instances":[ 
+						{
+							"id": "74",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1485898093",
+							"otherinfo": "1485898093, which evaluates to: 2017-01-31 21:28:13."
+						},
+						{
+							"id": "49",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1486468136",
+							"otherinfo": "1486468136, which evaluates to: 2017-02-07 11:48:56."
+						},
+						{
+							"id": "130",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1486545937",
+							"otherinfo": "1486545937, which evaluates to: 2017-02-08 09:25:37."
+						},
+						{
+							"id": "154",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1488280125",
+							"otherinfo": "1488280125, which evaluates to: 2017-02-28 11:08:45."
+						},
+						{
+							"id": "84",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1492814963",
+							"otherinfo": "1492814963, which evaluates to: 2017-04-21 22:49:23."
+						},
+						{
+							"id": "183",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1495295826",
+							"otherinfo": "1495295826, which evaluates to: 2017-05-20 15:57:06."
+						},
+						{
+							"id": "209",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1499536964",
+							"otherinfo": "1499536964, which evaluates to: 2017-07-08 18:02:44."
+						},
+						{
+							"id": "51",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1501032986",
+							"otherinfo": "1501032986, which evaluates to: 2017-07-26 01:36:26."
+						},
+						{
+							"id": "106",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1501286995",
+							"otherinfo": "1501286995, which evaluates to: 2017-07-29 00:09:55."
+						},
+						{
+							"id": "78",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1502770121",
+							"otherinfo": "1502770121, which evaluates to: 2017-08-15 04:08:41."
+						},
+						{
+							"id": "79",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1503949229",
+							"otherinfo": "1503949229, which evaluates to: 2017-08-28 19:40:29."
+						},
+						{
+							"id": "219",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1504915552",
+							"otherinfo": "1504915552, which evaluates to: 2017-09-09 00:05:52."
+						},
+						{
+							"id": "246",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1514170131",
+							"otherinfo": "1514170131, which evaluates to: 2017-12-25 02:48:51."
+						},
+						{
+							"id": "142",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1516042587",
+							"otherinfo": "1516042587, which evaluates to: 2018-01-15 18:56:27."
+						},
+						{
+							"id": "85",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1516368461",
+							"otherinfo": "1516368461, which evaluates to: 2018-01-19 13:27:41."
+						},
+						{
+							"id": "94",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1522165759",
+							"otherinfo": "1522165759, which evaluates to: 2018-03-27 15:49:19."
+						},
+						{
+							"id": "172",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1522377573",
+							"otherinfo": "1522377573, which evaluates to: 2018-03-30 02:39:33."
+						},
+						{
+							"id": "92",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1524733548",
+							"otherinfo": "1524733548, which evaluates to: 2018-04-26 09:05:48."
+						},
+						{
+							"id": "198",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1527295613",
+							"otherinfo": "1527295613, which evaluates to: 2018-05-26 00:46:53."
+						},
+						{
+							"id": "119",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1529784218",
+							"otherinfo": "1529784218, which evaluates to: 2018-06-23 20:03:38."
+						},
+						{
+							"id": "244",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1529915531",
+							"otherinfo": "1529915531, which evaluates to: 2018-06-25 08:32:11."
+						},
+						{
+							"id": "205",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1531184865",
+							"otherinfo": "1531184865, which evaluates to: 2018-07-10 01:07:45."
+						},
+						{
+							"id": "161",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1532431356",
+							"otherinfo": "1532431356, which evaluates to: 2018-07-24 11:22:36."
+						},
+						{
+							"id": "187",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1539352230",
+							"otherinfo": "1539352230, which evaluates to: 2018-10-12 13:50:30."
+						},
+						{
+							"id": "270",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1540916150",
+							"otherinfo": "1540916150, which evaluates to: 2018-10-30 16:15:50."
+						},
+						{
+							"id": "221",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1541760916",
+							"otherinfo": "1541760916, which evaluates to: 2018-11-09 10:55:16."
+						},
+						{
+							"id": "129",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1545345025",
+							"otherinfo": "1545345025, which evaluates to: 2018-12-20 22:30:25."
+						},
+						{
+							"id": "105",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1546782951",
+							"otherinfo": "1546782951, which evaluates to: 2019-01-06 13:55:51."
+						},
+						{
+							"id": "180",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1551776129",
+							"otherinfo": "1551776129, which evaluates to: 2019-03-05 08:55:29."
+						},
+						{
+							"id": "39",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1552135593",
+							"otherinfo": "1552135593, which evaluates to: 2019-03-09 12:46:33."
+						},
+						{
+							"id": "201",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1553588366",
+							"otherinfo": "1553588366, which evaluates to: 2019-03-26 08:19:26."
+						},
+						{
+							"id": "224",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1554969103",
+							"otherinfo": "1554969103, which evaluates to: 2019-04-11 07:51:43."
+						},
+						{
+							"id": "245",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1557303285",
+							"otherinfo": "1557303285, which evaluates to: 2019-05-08 08:14:45."
+						},
+						{
+							"id": "44",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1559982131",
+							"otherinfo": "1559982131, which evaluates to: 2019-06-08 08:22:11."
+						},
+						{
+							"id": "120",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1564826950",
+							"otherinfo": "1564826950, which evaluates to: 2019-08-03 10:09:10."
+						},
+						{
+							"id": "109",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1564939822",
+							"otherinfo": "1564939822, which evaluates to: 2019-08-04 17:30:22."
+						},
+						{
+							"id": "122",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1572889185",
+							"otherinfo": "1572889185, which evaluates to: 2019-11-04 17:39:45."
+						},
+						{
+							"id": "99",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1573788814",
+							"otherinfo": "1573788814, which evaluates to: 2019-11-15 03:33:34."
+						},
+						{
+							"id": "98",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1574993850",
+							"otherinfo": "1574993850, which evaluates to: 2019-11-29 02:17:30."
+						},
+						{
+							"id": "199",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1582001791",
+							"otherinfo": "1582001791, which evaluates to: 2020-02-18 04:56:31."
+						},
+						{
+							"id": "31",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1584783876",
+							"otherinfo": "1584783876, which evaluates to: 2020-03-21 09:44:36."
+						},
+						{
+							"id": "216",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1586293142",
+							"otherinfo": "1586293142, which evaluates to: 2020-04-07 20:59:02."
+						},
+						{
+							"id": "37",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1588056370",
+							"otherinfo": "1588056370, which evaluates to: 2020-04-28 06:46:10."
+						},
+						{
+							"id": "232",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1591582832",
+							"otherinfo": "1591582832, which evaluates to: 2020-06-08 02:20:32."
+						},
+						{
+							"id": "137",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1592622336",
+							"otherinfo": "1592622336, which evaluates to: 2020-06-20 03:05:36."
+						},
+						{
+							"id": "238",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1595516004",
+							"otherinfo": "1595516004, which evaluates to: 2020-07-23 14:53:24."
+						},
+						{
+							"id": "254",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1596014200",
+							"otherinfo": "1596014200, which evaluates to: 2020-07-29 09:16:40."
+						},
+						{
+							"id": "132",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1596579598",
+							"otherinfo": "1596579598, which evaluates to: 2020-08-04 22:19:58."
+						},
+						{
+							"id": "217",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1597136552",
+							"otherinfo": "1597136552, which evaluates to: 2020-08-11 09:02:32."
+						},
+						{
+							"id": "43",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1600332395",
+							"otherinfo": "1600332395, which evaluates to: 2020-09-17 08:46:35."
+						},
+						{
+							"id": "96",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1604651272",
+							"otherinfo": "1604651272, which evaluates to: 2020-11-06 08:27:52."
+						},
+						{
+							"id": "128",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1605666410",
+							"otherinfo": "1605666410, which evaluates to: 2020-11-18 02:26:50."
+						},
+						{
+							"id": "204",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1608172596",
+							"otherinfo": "1608172596, which evaluates to: 2020-12-17 02:36:36."
+						},
+						{
+							"id": "71",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1610148039",
+							"otherinfo": "1610148039, which evaluates to: 2021-01-08 23:20:39."
+						},
+						{
+							"id": "140",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1610409390",
+							"otherinfo": "1610409390, which evaluates to: 2021-01-11 23:56:30."
+						},
+						{
+							"id": "54",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1612038930",
+							"otherinfo": "1612038930, which evaluates to: 2021-01-30 20:35:30."
+						},
+						{
+							"id": "230",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1613949297",
+							"otherinfo": "1613949297, which evaluates to: 2021-02-21 23:14:57."
+						},
+						{
+							"id": "248",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1614698981",
+							"otherinfo": "1614698981, which evaluates to: 2021-03-02 15:29:41."
+						},
+						{
+							"id": "90",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1614827865",
+							"otherinfo": "1614827865, which evaluates to: 2021-03-04 03:17:45."
+						},
+						{
+							"id": "196",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1624062471",
+							"otherinfo": "1624062471, which evaluates to: 2021-06-19 00:27:51."
+						},
+						{
+							"id": "192",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1628749125",
+							"otherinfo": "1628749125, which evaluates to: 2021-08-12 06:18:45."
+						},
+						{
+							"id": "197",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1632826543",
+							"otherinfo": "1632826543, which evaluates to: 2021-09-28 10:55:43."
+						},
+						{
+							"id": "255",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1633692388",
+							"otherinfo": "1633692388, which evaluates to: 2021-10-08 11:26:28."
+						},
+						{
+							"id": "146",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1635889628",
+							"otherinfo": "1635889628, which evaluates to: 2021-11-02 21:47:08."
+						},
+						{
+							"id": "64",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1636014792",
+							"otherinfo": "1636014792, which evaluates to: 2021-11-04 08:33:12."
+						},
+						{
+							"id": "112",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1637963845",
+							"otherinfo": "1637963845, which evaluates to: 2021-11-26 21:57:25."
+						},
+						{
+							"id": "210",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1641834166",
+							"otherinfo": "1641834166, which evaluates to: 2022-01-10 17:02:46."
+						},
+						{
+							"id": "256",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1646440800",
+							"otherinfo": "1646440800, which evaluates to: 2022-03-05 00:40:00."
+						},
+						{
+							"id": "250",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1650525531",
+							"otherinfo": "1650525531, which evaluates to: 2022-04-21 07:18:51."
+						},
+						{
+							"id": "58",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1654982210",
+							"otherinfo": "1654982210, which evaluates to: 2022-06-11 21:16:50."
+						},
+						{
+							"id": "139",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1656310533",
+							"otherinfo": "1656310533, which evaluates to: 2022-06-27 06:15:33."
+						},
+						{
+							"id": "188",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1657381622",
+							"otherinfo": "1657381622, which evaluates to: 2022-07-09 15:47:02."
+						},
+						{
+							"id": "191",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1679018432",
+							"otherinfo": "1679018432, which evaluates to: 2023-03-17 02:00:32."
+						},
+						{
+							"id": "213",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1682035288",
+							"otherinfo": "1682035288, which evaluates to: 2023-04-21 00:01:28."
+						},
+						{
+							"id": "67",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1684166326",
+							"otherinfo": "1684166326, which evaluates to: 2023-05-15 15:58:46."
+						},
+						{
+							"id": "260",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1688554209",
+							"otherinfo": "1688554209, which evaluates to: 2023-07-05 10:50:09."
+						},
+						{
+							"id": "83",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1691064337",
+							"otherinfo": "1691064337, which evaluates to: 2023-08-03 12:05:37."
+						},
+						{
+							"id": "234",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1701798027",
+							"otherinfo": "1701798027, which evaluates to: 2023-12-05 17:40:27."
+						},
+						{
+							"id": "223",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1703165233",
+							"otherinfo": "1703165233, which evaluates to: 2023-12-21 13:27:13."
+						},
+						{
+							"id": "42",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1705907423",
+							"otherinfo": "1705907423, which evaluates to: 2024-01-22 07:10:23."
+						},
+						{
+							"id": "231",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1706204176",
+							"otherinfo": "1706204176, which evaluates to: 2024-01-25 17:36:16."
+						},
+						{
+							"id": "266",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1708087417",
+							"otherinfo": "1708087417, which evaluates to: 2024-02-16 12:43:37."
+						},
+						{
+							"id": "176",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1710376127",
+							"otherinfo": "1710376127, which evaluates to: 2024-03-14 00:28:47."
+						},
+						{
+							"id": "153",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1717854417",
+							"otherinfo": "1717854417, which evaluates to: 2024-06-08 13:46:57."
+						},
+						{
+							"id": "110",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1718410804",
+							"otherinfo": "1718410804, which evaluates to: 2024-06-15 00:20:04."
+						},
+						{
+							"id": "243",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1728352126",
+							"otherinfo": "1728352126, which evaluates to: 2024-10-08 01:48:46."
+						},
+						{
+							"id": "72",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1732389368",
+							"otherinfo": "1732389368, which evaluates to: 2024-11-23 19:16:08."
+						},
+						{
+							"id": "97",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1741416922",
+							"otherinfo": "1741416922, which evaluates to: 2025-03-08 06:55:22."
+						},
+						{
+							"id": "148",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1745495528",
+							"otherinfo": "1745495528, which evaluates to: 2025-04-24 11:52:08."
+						},
+						{
+							"id": "102",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1747282210",
+							"otherinfo": "1747282210, which evaluates to: 2025-05-15 04:10:10."
+						},
+						{
+							"id": "126",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1748720818",
+							"otherinfo": "1748720818, which evaluates to: 2025-05-31 19:46:58."
+						},
+						{
+							"id": "253",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1749058631",
+							"otherinfo": "1749058631, which evaluates to: 2025-06-04 17:37:11."
+						},
+						{
+							"id": "177",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1749696547",
+							"otherinfo": "1749696547, which evaluates to: 2025-06-12 02:49:07."
+						},
+						{
+							"id": "48",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1765855722",
+							"otherinfo": "1765855722, which evaluates to: 2025-12-16 03:28:42."
+						},
+						{
+							"id": "186",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1771418977",
+							"otherinfo": "1771418977, which evaluates to: 2026-02-18 12:49:37."
+						},
+						{
+							"id": "258",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1773998268",
+							"otherinfo": "1773998268, which evaluates to: 2026-03-20 09:17:48."
+						},
+						{
+							"id": "135",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1774332137",
+							"otherinfo": "1774332137, which evaluates to: 2026-03-24 06:02:17."
+						},
+						{
+							"id": "181",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1775228727",
+							"otherinfo": "1775228727, which evaluates to: 2026-04-03 15:05:27."
+						},
+						{
+							"id": "252",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1776032066",
+							"otherinfo": "1776032066, which evaluates to: 2026-04-12 22:14:26."
+						},
+						{
+							"id": "194",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1777672230",
+							"otherinfo": "1777672230, which evaluates to: 2026-05-01 21:50:30."
+						},
+						{
+							"id": "160",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1780373863",
+							"otherinfo": "1780373863, which evaluates to: 2026-06-02 04:17:43."
+						},
+						{
+							"id": "108",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1780568534",
+							"otherinfo": "1780568534, which evaluates to: 2026-06-04 10:22:14."
+						},
+						{
+							"id": "218",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1781460666",
+							"otherinfo": "1781460666, which evaluates to: 2026-06-14 18:11:06."
+						},
+						{
+							"id": "214",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1790940868",
+							"otherinfo": "1790940868, which evaluates to: 2026-10-02 11:34:28."
+						},
+						{
+							"id": "61",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1791795477",
+							"otherinfo": "1791795477, which evaluates to: 2026-10-12 08:57:57."
+						},
+						{
+							"id": "241",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1792552201",
+							"otherinfo": "1792552201, which evaluates to: 2026-10-21 03:10:01."
+						},
+						{
+							"id": "100",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1795027947",
+							"otherinfo": "1795027947, which evaluates to: 2026-11-18 18:52:27."
+						},
+						{
+							"id": "167",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1795750960",
+							"otherinfo": "1795750960, which evaluates to: 2026-11-27 03:42:40."
+						},
+						{
+							"id": "113",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1799729645",
+							"otherinfo": "1799729645, which evaluates to: 2027-01-12 04:54:05."
+						},
+						{
+							"id": "50",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1806691042",
+							"otherinfo": "1806691042, which evaluates to: 2027-04-02 18:37:22."
+						},
+						{
+							"id": "164",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1807647006",
+							"otherinfo": "1807647006, which evaluates to: 2027-04-13 20:10:06."
+						},
+						{
+							"id": "220",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1808556135",
+							"otherinfo": "1808556135, which evaluates to: 2027-04-24 08:42:15."
+						},
+						{
+							"id": "264",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1810684229",
+							"otherinfo": "1810684229, which evaluates to: 2027-05-18 23:50:29."
+						},
+						{
+							"id": "136",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1812056977",
+							"otherinfo": "1812056977, which evaluates to: 2027-06-03 21:09:37."
+						},
+						{
+							"id": "265",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1813304729",
+							"otherinfo": "1813304729, which evaluates to: 2027-06-18 07:45:29."
+						},
+						{
+							"id": "185",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1815099954",
+							"otherinfo": "1815099954, which evaluates to: 2027-07-09 02:25:54."
+						},
+						{
+							"id": "257",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1816279556",
+							"otherinfo": "1816279556, which evaluates to: 2027-07-22 18:05:56."
+						},
+						{
+							"id": "133",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1817118667",
+							"otherinfo": "1817118667, which evaluates to: 2027-08-01 11:11:07."
+						},
+						{
+							"id": "175",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1817390416",
+							"otherinfo": "1817390416, which evaluates to: 2027-08-04 14:40:16."
+						},
+						{
+							"id": "75",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1818036302",
+							"otherinfo": "1818036302, which evaluates to: 2027-08-12 02:05:02."
+						},
+						{
+							"id": "88",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1820680511",
+							"otherinfo": "1820680511, which evaluates to: 2027-09-11 16:35:11."
+						},
+						{
+							"id": "156",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1820990818",
+							"otherinfo": "1820990818, which evaluates to: 2027-09-15 06:46:58."
+						},
+						{
+							"id": "127",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1821315581",
+							"otherinfo": "1821315581, which evaluates to: 2027-09-19 00:59:41."
+						},
+						{
+							"id": "269",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1826540471",
+							"otherinfo": "1826540471, which evaluates to: 2027-11-18 12:21:11."
+						},
+						{
+							"id": "93",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1828406858",
+							"otherinfo": "1828406858, which evaluates to: 2027-12-10 02:47:38."
+						},
+						{
+							"id": "169",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1829156625",
+							"otherinfo": "1829156625, which evaluates to: 2027-12-18 19:03:45."
+						},
+						{
+							"id": "249",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1841166128",
+							"otherinfo": "1841166128, which evaluates to: 2028-05-05 19:02:08."
+						},
+						{
+							"id": "240",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1843544772",
+							"otherinfo": "1843544772, which evaluates to: 2028-06-02 07:46:12."
+						},
+						{
+							"id": "107",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1843675177",
+							"otherinfo": "1843675177, which evaluates to: 2028-06-03 19:59:37."
+						},
+						{
+							"id": "233",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1845225130",
+							"otherinfo": "1845225130, which evaluates to: 2028-06-21 18:32:10."
+						},
+						{
+							"id": "87",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1850079149",
+							"otherinfo": "1850079149, which evaluates to: 2028-08-16 22:52:29."
+						},
+						{
+							"id": "206",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1850182530",
+							"otherinfo": "1850182530, which evaluates to: 2028-08-18 03:35:30."
+						},
+						{
+							"id": "267",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1854648214",
+							"otherinfo": "1854648214, which evaluates to: 2028-10-08 20:03:34."
+						},
+						{
+							"id": "247",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1857711512",
+							"otherinfo": "1857711512, which evaluates to: 2028-11-13 06:58:32."
+						},
+						{
+							"id": "40",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1859752048",
+							"otherinfo": "1859752048, which evaluates to: 2028-12-06 21:47:28."
+						},
+						{
+							"id": "162",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1860169957",
+							"otherinfo": "1860169957, which evaluates to: 2028-12-11 17:52:37."
+						},
+						{
+							"id": "239",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1862640853",
+							"otherinfo": "1862640853, which evaluates to: 2029-01-09 08:14:13."
+						},
+						{
+							"id": "207",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1863169617",
+							"otherinfo": "1863169617, which evaluates to: 2029-01-15 11:06:57."
+						},
+						{
+							"id": "123",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1863949200",
+							"otherinfo": "1863949200, which evaluates to: 2029-01-24 11:40:00."
+						},
+						{
+							"id": "46",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1866394207",
+							"otherinfo": "1866394207, which evaluates to: 2029-02-21 18:50:07."
+						},
+						{
+							"id": "151",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1870012303",
+							"otherinfo": "1870012303, which evaluates to: 2029-04-04 15:51:43."
+						},
+						{
+							"id": "45",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1870794445",
+							"otherinfo": "1870794445, which evaluates to: 2029-04-13 17:07:25."
+						},
+						{
+							"id": "138",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1872379154",
+							"otherinfo": "1872379154, which evaluates to: 2029-05-02 01:19:14."
+						},
+						{
+							"id": "63",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1874130431",
+							"otherinfo": "1874130431, which evaluates to: 2029-05-22 07:47:11."
+						},
+						{
+							"id": "184",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1874821441",
+							"otherinfo": "1874821441, which evaluates to: 2029-05-30 07:44:01."
+						},
+						{
+							"id": "77",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1879663400",
+							"otherinfo": "1879663400, which evaluates to: 2029-07-25 08:43:20."
+						},
+						{
+							"id": "189",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1882987955",
+							"otherinfo": "1882987955, which evaluates to: 2029-09-01 20:12:35."
+						},
+						{
+							"id": "91",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1883785637",
+							"otherinfo": "1883785637, which evaluates to: 2029-09-11 01:47:17."
+						},
+						{
+							"id": "259",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1889851611",
+							"otherinfo": "1889851611, which evaluates to: 2029-11-20 06:46:51."
+						},
+						{
+							"id": "115",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1895962068",
+							"otherinfo": "1895962068, which evaluates to: 2030-01-30 00:07:48."
+						},
+						{
+							"id": "166",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1896887462",
+							"otherinfo": "1896887462, which evaluates to: 2030-02-09 17:11:02."
+						},
+						{
+							"id": "80",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1898968609",
+							"otherinfo": "1898968609, which evaluates to: 2030-03-05 19:16:49."
+						},
+						{
+							"id": "263",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1900760755",
+							"otherinfo": "1900760755, which evaluates to: 2030-03-26 13:05:55."
+						},
+						{
+							"id": "76",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1902175577",
+							"otherinfo": "1902175577, which evaluates to: 2030-04-11 22:06:17."
+						},
+						{
+							"id": "125",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1902966158",
+							"otherinfo": "1902966158, which evaluates to: 2030-04-21 01:42:38."
+						},
+						{
+							"id": "225",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1904835349",
+							"otherinfo": "1904835349, which evaluates to: 2030-05-12 16:55:49."
+						},
+						{
+							"id": "190",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1912424683",
+							"otherinfo": "1912424683, which evaluates to: 2030-08-08 13:04:43."
+						},
+						{
+							"id": "182",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1913296891",
+							"otherinfo": "1913296891, which evaluates to: 2030-08-18 15:21:31."
+						},
+						{
+							"id": "226",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1913524883",
+							"otherinfo": "1913524883, which evaluates to: 2030-08-21 06:41:23."
+						},
+						{
+							"id": "227",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1913895924",
+							"otherinfo": "1913895924, which evaluates to: 2030-08-25 13:45:24."
+						},
+						{
+							"id": "271",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1914571781",
+							"otherinfo": "1914571781, which evaluates to: 2030-09-02 09:29:41."
+						},
+						{
+							"id": "268",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1916810418",
+							"otherinfo": "1916810418, which evaluates to: 2030-09-28 07:20:18."
+						},
+						{
+							"id": "195",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1917797069",
+							"otherinfo": "1917797069, which evaluates to: 2030-10-09 17:24:29."
+						},
+						{
+							"id": "134",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1919418404",
+							"otherinfo": "1919418404, which evaluates to: 2030-10-28 11:46:44."
+						},
+						{
+							"id": "82",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1920033052",
+							"otherinfo": "1920033052, which evaluates to: 2030-11-04 14:30:52."
+						},
+						{
+							"id": "69",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1923990979",
+							"otherinfo": "1923990979, which evaluates to: 2030-12-20 09:56:19."
+						},
+						{
+							"id": "68",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1924983991",
+							"otherinfo": "1924983991, which evaluates to: 2030-12-31 21:46:31."
+						},
+						{
+							"id": "30",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1925587867",
+							"otherinfo": "1925587867, which evaluates to: 2031-01-07 21:31:07."
+						},
+						{
+							"id": "121",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1927423397",
+							"otherinfo": "1927423397, which evaluates to: 2031-01-29 03:23:17."
+						},
+						{
+							"id": "211",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1931866356",
+							"otherinfo": "1931866356, which evaluates to: 2031-03-21 13:32:36."
+						},
+						{
+							"id": "56",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1941495393",
+							"otherinfo": "1941495393, which evaluates to: 2031-07-11 00:16:33."
+						},
+						{
+							"id": "222",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1945897913",
+							"otherinfo": "1945897913, which evaluates to: 2031-08-30 23:11:53."
+						},
+						{
+							"id": "174",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1946604091",
+							"otherinfo": "1946604091, which evaluates to: 2031-09-08 03:21:31."
+						},
+						{
+							"id": "203",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1947720210",
+							"otherinfo": "1947720210, which evaluates to: 2031-09-21 01:23:30."
+						},
+						{
+							"id": "178",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1949228192",
+							"otherinfo": "1949228192, which evaluates to: 2031-10-08 12:16:32."
+						},
+						{
+							"id": "145",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1949770816",
+							"otherinfo": "1949770816, which evaluates to: 2031-10-14 19:00:16."
+						},
+						{
+							"id": "193",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1951079573",
+							"otherinfo": "1951079573, which evaluates to: 2031-10-29 22:32:53."
+						},
+						{
+							"id": "33",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1951934719",
+							"otherinfo": "1951934719, which evaluates to: 2031-11-08 20:05:19."
+						},
+						{
+							"id": "35",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1953928811",
+							"otherinfo": "1953928811, which evaluates to: 2031-12-01 22:00:11."
+						},
+						{
+							"id": "131",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1956795411",
+							"otherinfo": "1956795411, which evaluates to: 2032-01-04 02:16:51."
+						},
+						{
+							"id": "228",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1956839161",
+							"otherinfo": "1956839161, which evaluates to: 2032-01-04 14:26:01."
+						},
+						{
+							"id": "118",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1957300125",
+							"otherinfo": "1957300125, which evaluates to: 2032-01-09 22:28:45."
+						},
+						{
+							"id": "41",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1958400437",
+							"otherinfo": "1958400437, which evaluates to: 2032-01-22 16:07:17."
+						},
+						{
+							"id": "117",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1959944174",
+							"otherinfo": "1959944174, which evaluates to: 2032-02-09 12:56:14."
+						},
+						{
+							"id": "163",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1964038664",
+							"otherinfo": "1964038664, which evaluates to: 2032-03-27 22:17:44."
+						},
+						{
+							"id": "242",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1966190681",
+							"otherinfo": "1966190681, which evaluates to: 2032-04-21 20:04:41."
+						},
+						{
+							"id": "36",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1968616217",
+							"otherinfo": "1968616217, which evaluates to: 2032-05-19 21:50:17."
+						},
+						{
+							"id": "103",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1969487302",
+							"otherinfo": "1969487302, which evaluates to: 2032-05-29 23:48:22."
+						},
+						{
+							"id": "29",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1973572704",
+							"otherinfo": "1973572704, which evaluates to: 2032-07-16 06:38:24."
+						},
+						{
+							"id": "62",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1973595643",
+							"otherinfo": "1973595643, which evaluates to: 2032-07-16 13:00:43."
+						},
+						{
+							"id": "65",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1978625999",
+							"otherinfo": "1978625999, which evaluates to: 2032-09-12 18:19:59."
+						},
+						{
+							"id": "124",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1978796605",
+							"otherinfo": "1978796605, which evaluates to: 2032-09-14 17:43:25."
+						},
+						{
+							"id": "179",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1979448146",
+							"otherinfo": "1979448146, which evaluates to: 2032-09-22 06:42:26."
+						},
+						{
+							"id": "34",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1982057671",
+							"otherinfo": "1982057671, which evaluates to: 2032-10-22 11:34:31."
+						},
+						{
+							"id": "101",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1983287057",
+							"otherinfo": "1983287057, which evaluates to: 2032-11-05 17:04:17."
+						},
+						{
+							"id": "70",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1984520294",
+							"otherinfo": "1984520294, which evaluates to: 2032-11-19 23:38:14."
+						},
+						{
+							"id": "143",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1984951589",
+							"otherinfo": "1984951589, which evaluates to: 2032-11-24 23:26:29."
+						},
+						{
+							"id": "60",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1987822328",
+							"otherinfo": "1987822328, which evaluates to: 2032-12-28 04:52:08."
+						},
+						{
+							"id": "229",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1988618099",
+							"otherinfo": "1988618099, which evaluates to: 2033-01-06 09:54:59."
+						},
+						{
+							"id": "152",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1989541586",
+							"otherinfo": "1989541586, which evaluates to: 2033-01-17 02:26:26."
+						},
+						{
+							"id": "111",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1990059748",
+							"otherinfo": "1990059748, which evaluates to: 2033-01-23 02:22:28."
+						},
+						{
+							"id": "144",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1995759472",
+							"otherinfo": "1995759472, which evaluates to: 2033-03-30 01:37:52."
+						},
+						{
+							"id": "158",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1997798413",
+							"otherinfo": "1997798413, which evaluates to: 2033-04-22 16:00:13."
+						},
+						{
+							"id": "89",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2002221924",
+							"otherinfo": "2002221924, which evaluates to: 2033-06-12 20:45:24."
+						},
+						{
+							"id": "141",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2004000608",
+							"otherinfo": "2004000608, which evaluates to: 2033-07-03 10:50:08."
+						},
+						{
+							"id": "170",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2004862993",
+							"otherinfo": "2004862993, which evaluates to: 2033-07-13 10:23:13."
+						},
+						{
+							"id": "38",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2007156861",
+							"otherinfo": "2007156861, which evaluates to: 2033-08-08 23:34:21."
+						},
+						{
+							"id": "155",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2009631510",
+							"otherinfo": "2009631510, which evaluates to: 2033-09-06 14:58:30."
+						},
+						{
+							"id": "149",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2010394222",
+							"otherinfo": "2010394222, which evaluates to: 2033-09-15 10:50:22."
+						},
+						{
+							"id": "52",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2011099694",
+							"otherinfo": "2011099694, which evaluates to: 2033-09-23 14:48:14."
+						},
+						{
+							"id": "235",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2013202907",
+							"otherinfo": "2013202907, which evaluates to: 2033-10-17 23:01:47."
+						},
+						{
+							"id": "237",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2015467274",
+							"otherinfo": "2015467274, which evaluates to: 2033-11-13 04:01:14."
+						},
+						{
+							"id": "173",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2019625155",
+							"otherinfo": "2019625155, which evaluates to: 2033-12-31 06:59:15."
+						},
+						{
+							"id": "114",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2023853910",
+							"otherinfo": "2023853910, which evaluates to: 2034-02-18 05:38:30."
+						},
+						{
+							"id": "150",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2027750247",
+							"otherinfo": "2027750247, which evaluates to: 2034-04-04 07:57:27."
+						},
+						{
+							"id": "262",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2028298255",
+							"otherinfo": "2028298255, which evaluates to: 2034-04-10 16:10:55."
+						},
+						{
+							"id": "57",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2029475116",
+							"otherinfo": "2029475116, which evaluates to: 2034-04-24 07:05:16."
+						},
+						{
+							"id": "165",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2029628705",
+							"otherinfo": "2029628705, which evaluates to: 2034-04-26 01:45:05."
+						},
+						{
+							"id": "55",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2030961996",
+							"otherinfo": "2030961996, which evaluates to: 2034-05-11 12:06:36."
+						},
+						{
+							"id": "202",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2033315889",
+							"otherinfo": "2033315889, which evaluates to: 2034-06-07 17:58:09."
+						},
+						{
+							"id": "261",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2034810187",
+							"otherinfo": "2034810187, which evaluates to: 2034-06-25 01:03:07."
+						},
+						{
+							"id": "95",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2046612873",
+							"otherinfo": "2046612873, which evaluates to: 2034-11-08 15:34:33."
+						},
+						{
+							"id": "28",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2048144789",
+							"otherinfo": "2048144789, which evaluates to: 2034-11-26 09:06:29."
+						},
+						{
+							"id": "104",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2049205669",
+							"otherinfo": "2049205669, which evaluates to: 2034-12-08 15:47:49."
+						},
+						{
+							"id": "251",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2051169970",
+							"otherinfo": "2051169970, which evaluates to: 2034-12-31 09:26:10."
+						},
+						{
+							"id": "66",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2053951509",
+							"otherinfo": "2053951509, which evaluates to: 2035-02-01 14:05:09."
+						},
+						{
+							"id": "171",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2058314698",
+							"otherinfo": "2058314698, which evaluates to: 2035-03-24 02:04:58."
+						},
+						{
+							"id": "212",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2060295878",
+							"otherinfo": "2060295878, which evaluates to: 2035-04-16 00:24:38."
+						},
+						{
+							"id": "32",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2061359468",
+							"otherinfo": "2061359468, which evaluates to: 2035-04-28 07:51:08."
+						},
+						{
+							"id": "168",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2067611163",
+							"otherinfo": "2067611163, which evaluates to: 2035-07-09 16:26:03."
+						},
+						{
+							"id": "116",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2069906044",
+							"otherinfo": "2069906044, which evaluates to: 2035-08-05 05:54:04."
+						},
+						{
+							"id": "81",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2070751759",
+							"otherinfo": "2070751759, which evaluates to: 2035-08-15 00:49:19."
+						},
+						{
+							"id": "157",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2071892932",
+							"otherinfo": "2071892932, which evaluates to: 2035-08-28 05:48:52."
+						},
+						{
+							"id": "73",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2078095936",
+							"otherinfo": "2078095936, which evaluates to: 2035-11-08 00:52:16."
+						},
+						{
+							"id": "53",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2085437848",
+							"otherinfo": "2085437848, which evaluates to: 2036-02-01 00:17:28."
+						},
+						{
+							"id": "86",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2086400997",
+							"otherinfo": "2086400997, which evaluates to: 2036-02-12 03:49:57."
+						},
+						{
+							"id": "208",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2091315289",
+							"otherinfo": "2091315289, which evaluates to: 2036-04-09 00:54:49."
+						},
+						{
+							"id": "59",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2092854166",
+							"otherinfo": "2092854166, which evaluates to: 2036-04-26 20:22:46."
+						},
+						{
+							"id": "147",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2093760025",
+							"otherinfo": "2093760025, which evaluates to: 2036-05-07 08:00:25."
+						},
+						{
+							"id": "159",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2095325672",
+							"otherinfo": "2095325672, which evaluates to: 2036-05-25 10:54:32."
+						},
+						{
+							"id": "200",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2104861681",
+							"otherinfo": "2104861681, which evaluates to: 2036-09-12 19:48:01."
+						},
+						{
+							"id": "236",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2105306360",
+							"otherinfo": "2105306360, which evaluates to: 2036-09-17 23:19:20."
+						},
+						{
+							"id": "215",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2106279964",
+							"otherinfo": "2106279964, which evaluates to: 2036-09-29 05:46:04."
+						},
+						{
+							"id": "47",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2106461064",
+							"otherinfo": "2106461064, which evaluates to: 2036-10-01 08:04:24."
+						}
+					],
+					"count": "244",
+					"systemic": false,
+					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+					"otherinfo": "<p>1485898093, which evaluates to: 2017-01-31 21:28:13.</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
+					"cweid": "497",
+					"wascid": "13",
+					"sourceid": "13"
+				},
+				{
+					"pluginid": "10116",
+					"alertRef": "10116",
+					"alert": "ZAP is Out of Date",
+					"name": "ZAP is Out of Date",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "Low (High)",
+					"desc": "<p>The version of ZAP you are using to test your app is out of date and is no longer being updated.</p><p>The risk level is set based on how out of date your ZAP version is.</p>",
+					"instances":[ 
+						{
+							"id": "12",
+							"uri": "http://127.0.0.1:3100/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The latest version of ZAP is 2.17.0"
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>Download the latest version of ZAP from https://www.zaproxy.org/download/ and install it.</p>",
+					"otherinfo": "<p>The latest version of ZAP is 2.17.0</p>",
+					"reference": "<p>https://www.zaproxy.org/download/</p>",
+					"cweid": "1104",
+					"wascid": "45",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
+					"instances":[ 
+						{
+							"id": "26",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in likely comment: \"//www.w3.org/2000/svg\",e);break;case 2:f=g.createElementNS(\"http://www.w3.org/1998/Math/MathML\",e);break;default:switch(e){case \", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bSELECT\\b and was detected in likely comment: \"//www.w3.org/2000/svg\",e);break;case 2:f=g.createElementNS(\"http://www.w3.org/1998/Math/MathML\",e);break;default:switch(e){case \", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "615",
+					"wascid": "13",
+					"sourceid": "13"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "Modern Web Application",
+					"name": "Modern Web Application",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
+					"instances":[ 
+						{
+							"id": "6",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"/js/app.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>This is an informational alert and so no changes are required.</p>",
+					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049-1",
+					"alert": "Non-Storable Content",
+					"name": "Non-Storable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are not storable by caching components such as proxy servers. If the response does not contain sensitive, personal or user-specific information, it may benefit from being stored and cached, to improve performance.</p>",
+					"instances":[ 
+						{
+							"id": "14",
+							"uri": "http://127.0.0.1:3100",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "24",
+							"uri": "http://127.0.0.1:3100/css/app.css",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "272",
+							"uri": "http://127.0.0.1:3100/js/app.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "13",
+							"uri": "http://127.0.0.1:3100/robots.txt",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						},
+						{
+							"id": "10",
+							"uri": "http://127.0.0.1:3100/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "no-store",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"systemic": false,
+					"solution": "<p>The content may be marked as storable by ensuring that the following conditions are satisfied:</p><p>The request method must be understood by the cache and defined as being cacheable (\"GET\", \"HEAD\", and \"POST\" are currently defined as cacheable)</p><p>The response status code must be understood by the cache (one of the 1XX, 2XX, 3XX, 4XX, or 5XX response classes are generally understood)</p><p>The \"no-store\" cache directive must not appear in the request or response header fields</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"private\" response directive must not appear in the response</p><p>For caching by \"shared\" caches such as \"proxy\" caches, the \"Authorization\" header field must not appear in the request, unless the response explicitly allows it (using one of the \"must-revalidate\", \"public\", or \"s-maxage\" Cache-Control response directives)</p><p>In addition to the conditions above, at least one of the following conditions must also be satisfied by the response:</p><p>It must contain an \"Expires\" header field</p><p>It must contain a \"max-age\" response directive</p><p>For \"shared\" caches such as \"proxy\" caches, it must contain a \"s-maxage\" response directive</p><p>It must contain a \"Cache Control Extension\" that allows it to be cached</p><p>It must have a status code that is defined as cacheable by default (200, 203, 204, 206, 300, 301, 404, 405, 410, 414, 501).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "1"
+				}
+			]
+		}
+	],
+	"sequences":[
+	]
+
+}

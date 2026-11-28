@@ -1,0 +1,17 @@
+17:21:28 INFO  step: STEP: Upload 'QA-78d2a9c9.csv' and expect it to be staged
+17:21:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:28 INFO  step: STEP: Create donor 'Paweł Hermann QA-78d2a9c9'
+17:21:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:28 INFO  step: STEP: Decide every row of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be
+17:21:28 INFO  step: STEP: Decide row 1 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be ('existing-donor')
+17:21:28 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be
+17:21:28 INFO  step: STEP: Read the review versions of row 1 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/cc5a7ac4-a531-47ef-a9fc-5ccc877316be/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/cc5a7ac4-a531-47ef-a9fc-5ccc877316be/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  step: STEP: Decide row 2 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be ('existing-donor')
+17:21:28 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be
+17:21:28 INFO  step: STEP: Read the review versions of row 2 of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/cc5a7ac4-a531-47ef-a9fc-5ccc877316be/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/cc5a7ac4-a531-47ef-a9fc-5ccc877316be/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:28 INFO  step: STEP: Read the readiness blockers of import cc5a7ac4-a531-47ef-a9fc-5ccc877316be {}
+17:21:28 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/cc5a7ac4-a531-47ef-a9fc-5ccc877316be/review-blockers "HTTP/1.1 200 OK"

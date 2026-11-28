@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create account qa.50a733297cd4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request account QA.50A733297CD4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 409 Conflict"
+INFO     step:_decorator.py:52 STEP: Deactivate account 1654c2ae-cd73-4cb3-b3c1-0a2277efc5ec
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/1654c2ae-cd73-4cb3-b3c1-0a2277efc5ec "HTTP/1.1 200 OK"

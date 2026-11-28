@@ -1,0 +1,2 @@
+17:21:34 INFO  step: STEP: List donors with raw query [('sort-direction', "active' OR '1'='1")]
+17:21:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?sort-direction=active%27+OR+%271%27%3D%271 "HTTP/1.1 400 Bad Request"

@@ -1,0 +1,6 @@
+17:21:27 INFO  step: STEP: Upload 'QA-b0bf96a9.csv' and expect it to be staged
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Create donor 'Marianna Zyzik QA-b0bf96a9'
+17:21:27 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:27 INFO  step: STEP: Look up existing payments for import 25273d54-198d-438e-8619-ad0186568685 with [('donor-id', '4fa51c2d-49c0-4a7b-ba5c-54ad85161110')]
+17:21:27 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/25273d54-198d-438e-8619-ad0186568685/payments?donor-id=4fa51c2d-49c0-4a7b-ba5c-54ad85161110 "HTTP/1.1 200 OK"

@@ -1,0 +1,8 @@
+17:21:25 INFO  step: STEP: Create donor 'Antoni Hankiewicz QA-e4401446'
+17:21:25 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:25 INFO  step: STEP: Upload 'QA-e4401446.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 9adfd1f0-a0f4-46d9-8acc-4027ddf936dd
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import 9adfd1f0-a0f4-46d9-8acc-4027ddf936dd
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9adfd1f0-a0f4-46d9-8acc-4027ddf936dd/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:26 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/9adfd1f0-a0f4-46d9-8acc-4027ddf936dd/rows/1/1/decision "HTTP/1.1 409 Conflict"

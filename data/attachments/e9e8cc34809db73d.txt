@@ -1,0 +1,25 @@
+17:22:31 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:31 INFO  step: STEP: Upload 'QA-6300202d.csv' and expect it to be staged
+17:22:31 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:31 INFO  step: STEP: Create donor 'Kacper Szylar QA-6300202d'
+17:22:31 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:31 INFO  step: STEP: Decide every row of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:31 INFO  step: STEP: Decide row 1 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52 ('existing-donor')
+17:22:31 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:31 INFO  step: STEP: Read the review versions of row 1 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:31 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Decide row 2 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52 ('existing-donor')
+17:22:32 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  step: STEP: Read the review versions of row 2 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Create a ready preview of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  step: STEP: Prepare a preview of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  step: STEP: Read the review versions of row 1 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:32 INFO  step: STEP: Request a preview of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52 at batch version 4
+17:22:32 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/preview "HTTP/1.1 201 Created"
+17:22:32 INFO  step: STEP: Open the confirmation of preview 486793e8-78aa-4375-b84b-355a35df5b95 of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  step: STEP: Read the outcome of import 280f3b3e-4bf2-4f64-a01d-b49f3d52ab52
+17:22:32 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/280f3b3e-4bf2-4f64-a01d-b49f3d52ab52/outcome "HTTP/1.1 200 OK"

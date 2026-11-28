@@ -1,0 +1,7 @@
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create account qa.f2893199039e
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Log in as QA.F2893199039E
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deactivate account faf9e464-79b3-4627-aa5a-2cd9ecc354de
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/faf9e464-79b3-4627-aa5a-2cd9ecc354de "HTTP/1.1 200 OK"

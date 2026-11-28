@@ -1,0 +1,10 @@
+17:22:28 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:28 INFO  step: STEP: Create donor 'Agnieszka Dylik QA-41b59364'
+17:22:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:28 INFO  step: STEP: Open the donor list
+17:22:29 INFO  step: STEP: Search donors for 'QA-41b59364'
+17:22:29 INFO  step: STEP: Open the card of donor 'Agnieszka Dylik QA-41b59364'
+17:22:29 INFO  step: STEP: Edit the donor's name to 'Agnieszka Dylik QA-41b59364 (zmieniony)' and save
+17:22:29 INFO  step: STEP: Wait for the save confirmation
+17:22:29 INFO  step: STEP: Open donor card 8473b1a7-3a09-4efb-8ba0-fae11c3eb307
+17:22:29 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/8473b1a7-3a09-4efb-8ba0-fae11c3eb307 "HTTP/1.1 200 OK"

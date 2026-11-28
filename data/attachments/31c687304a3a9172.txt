@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor '@SUM(A1:A9) QA-52ff7a3e'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open donor card 0df4d7a5-8813-4c9b-9db3-6d15d44709b0
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/0df4d7a5-8813-4c9b-9db3-6d15d44709b0 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List donors tagged QA-52ff7a3e
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-52ff7a3e "HTTP/1.1 200 OK"

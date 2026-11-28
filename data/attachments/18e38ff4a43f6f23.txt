@@ -1,0 +1,6 @@
+17:21:19 INFO  step: STEP: Create donor 'Kalina Jaroch QA-2dc4027b'
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:19 INFO  step: STEP: Upload 'QA-2dc4027b.csv' as a bank import
+17:21:19 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+17:21:19 INFO  step: STEP: Compare staged row 1/1 of import c6b34648-5100-4326-be67-4618d4406e23 with donor 30ed2312-6fd0-45d5-a5e4-97b95374b170
+17:21:19 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/c6b34648-5100-4326-be67-4618d4406e23/rows/1/1/comparison?donor-id=30ed2312-6fd0-45d5-a5e4-97b95374b170 "HTTP/1.1 409 Conflict"

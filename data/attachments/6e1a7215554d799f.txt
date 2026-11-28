@@ -1,0 +1,10 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Create donor 'Agnieszka Dylik QA-41b59364'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Open the donor list
+INFO     step:_decorator.py:52 STEP: Search donors for 'QA-41b59364'
+INFO     step:_decorator.py:52 STEP: Open the card of donor 'Agnieszka Dylik QA-41b59364'
+INFO     step:_decorator.py:52 STEP: Edit the donor's name to 'Agnieszka Dylik QA-41b59364 (zmieniony)' and save
+INFO     step:_decorator.py:52 STEP: Wait for the save confirmation
+INFO     step:_decorator.py:52 STEP: Open donor card 8473b1a7-3a09-4efb-8ba0-fae11c3eb307
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/8473b1a7-3a09-4efb-8ba0-fae11c3eb307 "HTTP/1.1 200 OK"

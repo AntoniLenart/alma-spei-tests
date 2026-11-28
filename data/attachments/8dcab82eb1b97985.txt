@@ -1,0 +1,18 @@
+17:19:30 INFO  orchestration: stack: bb init (secrets) -> bb init
+17:19:32 INFO  orchestration: stack: npm ci (frontend dependencies) -> npm ci --ignore-scripts
+17:19:33 INFO  orchestration: stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans
+17:19:33 INFO  orchestration: stack: compose up db -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml up -d --wait db
+17:19:44 INFO  orchestration: stack: migrate up -> clojure -Srepro -M:migrate up
+17:19:50 INFO  orchestration: stack: provision QA admin -> clojure -Srepro -M /home/runner/work/alma-spei-tests/alma-spei-tests/tests/src/alma_spei_tests/orchestration/provision_admin.clj
+17:19:56 INFO  orchestration: stack: frontend release build -> clojure -Srepro -M:ui -m shadow.cljs.devtools.cli release app
+17:20:30 INFO  orchestration: stack: starting backend -> /home/runner/work/alma-spei-tests/alma-spei-tests/tests/reports/stack/backend.log
+17:20:40 INFO  orchestration: stack: ready at http://127.0.0.1:3100
+17:20:40 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:20:40 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:20:41 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+17:20:41 INFO  step: STEP: Create account qa.123dd8046ec2
+17:20:41 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:41 INFO  step: STEP: List accounts
+17:20:41 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:20:41 INFO  step: STEP: Deactivate account a52b6e10-2541-465e-805f-4818cae474b9
+17:20:41 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/a52b6e10-2541-465e-805f-4818cae474b9 "HTTP/1.1 200 OK"

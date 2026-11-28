@@ -1,0 +1,23 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-8c5cff1c.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Kornelia Nazimek QA-8c5cff1c'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide every row of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Create a ready preview of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 7be65a68-0d52-4b01-9120-3bdfcb931a85
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 7be65a68-0d52-4b01-9120-3bdfcb931a85 at batch version 4
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/preview "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the planned effects of preview 2eb93d1f-b6b5-42c5-be82-7bcf820da303 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/7be65a68-0d52-4b01-9120-3bdfcb931a85/previews/2eb93d1f-b6b5-42c5-be82-7bcf820da303/items "HTTP/1.1 200 OK"

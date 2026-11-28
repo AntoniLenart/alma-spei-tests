@@ -1,0 +1,3 @@
+17:23:15 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:16 INFO  orchestration: stack: tearing down
+17:23:16 INFO  orchestration: stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans

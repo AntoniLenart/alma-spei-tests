@@ -1,0 +1,2 @@
+17:21:34 INFO  step: STEP: Upload '<img src=x onerror=alert(1)>QA-69929343.csv' as a bank import
+17:21:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"

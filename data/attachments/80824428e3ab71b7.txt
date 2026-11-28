@@ -1,0 +1,8 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-e5716153.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Kacper Breguła QA-e5716153'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 0be4c0a7-eab1-4265-871b-be0db4064b97
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 0be4c0a7-eab1-4265-871b-be0db4064b97
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/0be4c0a7-eab1-4265-871b-be0db4064b97/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/0be4c0a7-eab1-4265-871b-be0db4064b97/rows/1/1/decision "HTTP/1.1 409 Conflict"

@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Open donor card a19f7ad9-9912-404d-8a5c-2d56e71bd4d6
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/a19f7ad9-9912-404d-8a5c-2d56e71bd4d6 "HTTP/1.1 404 Not Found"
+INFO     step:_decorator.py:52 STEP: Read the change history of donor a19f7ad9-9912-404d-8a5c-2d56e71bd4d6
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/a19f7ad9-9912-404d-8a5c-2d56e71bd4d6/history "HTTP/1.1 404 Not Found"

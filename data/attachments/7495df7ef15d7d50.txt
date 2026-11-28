@@ -1,0 +1,36 @@
+17:22:34 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:34 INFO  step: STEP: Upload 'QA-f7b002aa.csv' and expect it to be staged
+17:22:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:34 INFO  step: STEP: Create donor proposal 'Norbert Żołądkiewicz QA-f7b002aa' for import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Propose donor 'Norbert Żołądkiewicz QA-f7b002aa' for import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Read the review versions of row 1 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/donor-proposals "HTTP/1.1 201 Created"
+17:22:34 INFO  step: STEP: Decide every row of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Decide row 1 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740 ('new-proposal')
+17:22:34 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Read the review versions of row 1 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  step: STEP: Decide row 2 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740 ('new-proposal')
+17:22:34 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Read the review versions of row 2 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/2/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  step: STEP: Commit import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Prepare, back up and approve import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Create a ready preview of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Prepare a preview of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  step: STEP: Read the review versions of row 1 of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:34 INFO  step: STEP: Request a preview of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740 at batch version 5
+17:22:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/preview "HTTP/1.1 201 Created"
+17:22:34 INFO  step: STEP: Confirm a backup of the ready preview
+17:22:34 INFO  step: STEP: Request a backup receipt for preview 9e56becc-051f-40a4-8b71-7c50acb2bb5f of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/68252fc8-cd91-4531-b1f9-0f03aa6e2740/previews/9e56becc-051f-40a4-8b71-7c50acb2bb5f/backup "HTTP/1.1 200 OK"
+17:22:34 INFO  step: STEP: Submit an import commit
+17:22:34 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:22:34 INFO  step: STEP: Open the outcome of import 68252fc8-cd91-4531-b1f9-0f03aa6e2740
+17:22:35 INFO  step: STEP: Open the undo dialog
+17:22:35 INFO  step: STEP: Open the donor list
+17:22:35 INFO  step: STEP: Search donors for 'QA-f7b002aa'

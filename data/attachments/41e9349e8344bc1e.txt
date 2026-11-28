@@ -1,0 +1,5 @@
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/accounts/eb779a8e-0908-4ad7-a35b-543b8160ab1b/reset-password "HTTP/1.1 403 Forbidden"
+INFO     step:_decorator.py:52 STEP: Deactivate account abf75e01-f85f-41b2-ac41-fd508e719a8f
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/abf75e01-f85f-41b2-ac41-fd508e719a8f "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deactivate account 4222d954-e390-460c-a1ae-6ffb42374ee6
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/4222d954-e390-460c-a1ae-6ffb42374ee6 "HTTP/1.1 200 OK"

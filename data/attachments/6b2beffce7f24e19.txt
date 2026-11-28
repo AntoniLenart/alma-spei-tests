@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Urszula Kiryluk QA-6435eea6'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Update donor 4181462a-dc66-411b-9793-13e6b53cac27
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/donors/4181462a-dc66-411b-9793-13e6b53cac27 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the change history of donor 4181462a-dc66-411b-9793-13e6b53cac27
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/donors/4181462a-dc66-411b-9793-13e6b53cac27/history?limit=1&offset=1 "HTTP/1.1 200 OK"

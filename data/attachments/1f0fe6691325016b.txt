@@ -1,0 +1,11 @@
+17:21:00 INFO  step: STEP: Create donor 'Juliusz Wyroślak QA-f0053ed4'
+17:21:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:00 INFO  step: STEP: Stage one row per sender for QA-f0053ed4
+17:21:00 INFO  step: STEP: Upload 'QA-f0053ed4.csv' and expect it to be staged
+17:21:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:00 INFO  step: STEP: Reconcile import b45ba2fc-98c5-4cbf-8261-cd2511d2feb1 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:00 INFO  step: STEP: Read the review versions of row 1 of import b45ba2fc-98c5-4cbf-8261-cd2511d2feb1
+17:21:00 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b45ba2fc-98c5-4cbf-8261-cd2511d2feb1/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:00 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/b45ba2fc-98c5-4cbf-8261-cd2511d2feb1/reconciliation "HTTP/1.1 200 OK"
+17:21:00 INFO  step: STEP: Read the review history of import b45ba2fc-98c5-4cbf-8261-cd2511d2feb1 {}
+17:21:00 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b45ba2fc-98c5-4cbf-8261-cd2511d2feb1/review-events "HTTP/1.1 200 OK"

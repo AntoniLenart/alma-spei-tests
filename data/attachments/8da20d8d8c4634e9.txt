@@ -1,0 +1,36 @@
+17:21:21 INFO  step: STEP: Upload 'QA-631f0424.csv' and expect it to be staged
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Create donor 'Olaf Mikołajewicz QA-631f0424'
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Decide every row of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Decide row 1 of import 638f7998-4057-45b7-a428-c0dc50fecf23 ('existing-donor')
+17:21:21 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Read the review versions of row 1 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Decide row 2 of import 638f7998-4057-45b7-a428-c0dc50fecf23 ('existing-donor')
+17:21:21 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Read the review versions of row 2 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Commit import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Prepare, back up and approve import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Create a ready preview of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Prepare a preview of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  step: STEP: Read the review versions of row 1 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Request a preview of import 638f7998-4057-45b7-a428-c0dc50fecf23 at batch version 4
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/preview "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:21 INFO  step: STEP: Request a backup receipt for preview 9659349b-a5f9-456d-b001-d33401c262d9 of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/previews/9659349b-a5f9-456d-b001-d33401c262d9/backup "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Submit an import commit
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Read the undo eligibility of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/undo-eligibility "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Undo committed import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/outcome "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Submit an undo of the latest import
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Read the undo eligibility of import 638f7998-4057-45b7-a428-c0dc50fecf23
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/638f7998-4057-45b7-a428-c0dc50fecf23/undo-eligibility "HTTP/1.1 200 OK"

@@ -1,0 +1,2 @@
+17:20:41 INFO  step: STEP: Request account qa invalid
+17:20:41 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 422 Unprocessable Entity"

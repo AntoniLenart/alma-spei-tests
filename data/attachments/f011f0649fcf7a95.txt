@@ -1,0 +1,8 @@
+17:21:26 INFO  step: STEP: Upload 'QA-bb5d9048.csv' and expect it to be staged
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: Propose donor 'Olga Tatarek QA-bb5d9048' for import 0a65d538-c7be-4e77-b8be-eaaa28a41598
+17:21:26 INFO  step: STEP: Read the review versions of row 1 of import 0a65d538-c7be-4e77-b8be-eaaa28a41598
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/0a65d538-c7be-4e77-b8be-eaaa28a41598/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:26 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/0a65d538-c7be-4e77-b8be-eaaa28a41598/donor-proposals "HTTP/1.1 201 Created"
+17:21:26 INFO  step: STEP: List donors tagged QA-bb5d9048
+17:21:26 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-bb5d9048&status=all "HTTP/1.1 200 OK"

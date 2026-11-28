@@ -1,0 +1,4 @@
+17:21:55 INFO  step: STEP: Upload 'QA-8d270fa8.csv' as a bank import
+17:21:55 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"
+17:21:55 INFO  step: STEP: Read the events of import batch e7c86b51-bb12-4b65-907d-3f3ab44a8575
+17:21:55 INFO  step: STEP: Read the staged rows of import batch e7c86b51-bb12-4b65-907d-3f3ab44a8575

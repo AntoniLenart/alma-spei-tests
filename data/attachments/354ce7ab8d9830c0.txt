@@ -1,0 +1,11 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Anna Wiśniewska QA-fbc5fcfa'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-fbc5fcfa
+INFO     step:_decorator.py:52 STEP: Upload 'QA-fbc5fcfa.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Reconcile import 55ec0ac9-2938-4997-a100-47df8675e09c under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 55ec0ac9-2938-4997-a100-47df8675e09c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/55ec0ac9-2938-4997-a100-47df8675e09c/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/55ec0ac9-2938-4997-a100-47df8675e09c/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 55ec0ac9-2938-4997-a100-47df8675e09c
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/55ec0ac9-2938-4997-a100-47df8675e09c/rows/1/1/decision "HTTP/1.1 200 OK"

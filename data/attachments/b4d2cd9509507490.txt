@@ -1,0 +1,2 @@
+17:21:37 INFO  step: STEP: Create donor 'Oskar Jajko QA-6154fd2b'
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"

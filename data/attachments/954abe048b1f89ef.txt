@@ -1,0 +1,62 @@
+17:21:21 INFO  step: STEP: Upload 'QA-a4aa04d5.csv' and expect it to be staged
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Create donor 'Aleks Micał QA-a4aa04d5'
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Decide every row of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Decide row 1 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b ('existing-donor')
+17:21:21 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Read the review versions of row 1 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Decide row 2 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b ('existing-donor')
+17:21:21 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Read the review versions of row 2 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Commit import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Prepare, back up and approve import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Create a ready preview of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Prepare a preview of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  step: STEP: Read the review versions of row 1 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Request a preview of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b at batch version 4
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/preview "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:21 INFO  step: STEP: Request a backup receipt for preview 34c8634d-e6bb-4508-819a-1946b2a44051 of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/previews/34c8634d-e6bb-4508-819a-1946b2a44051/backup "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Submit an import commit
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: Create donor 'Adrian Góraj QA-a4aa04d5'
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:21 INFO  step: STEP: Upload 'QA-a4aa04d5-later.csv' and expect it to be staged
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Decide every row of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Decide row 1 of import 644ebaba-ce72-4715-ab55-93a07b849224 ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Decide row 2 of import 644ebaba-ce72-4715-ab55-93a07b849224 ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Read the review versions of row 2 of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Commit import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Prepare, back up and approve import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Create a ready preview of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Prepare a preview of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Request a preview of import 644ebaba-ce72-4715-ab55-93a07b849224 at batch version 4
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/preview "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:22 INFO  step: STEP: Request a backup receipt for preview ee2a7b58-a9e1-4e66-a925-302c2583a32e of import 644ebaba-ce72-4715-ab55-93a07b849224
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/644ebaba-ce72-4715-ab55-93a07b849224/previews/ee2a7b58-a9e1-4e66-a925-302c2583a32e/backup "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Submit an import commit
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Read the outcome of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/outcome "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Submit an undo of the latest import
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 409 Conflict"
+17:21:22 INFO  step: STEP: Read the outcome of import 4b3631d1-fd2f-4494-acab-a3dd6981a88b
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/4b3631d1-fd2f-4494-acab-a3dd6981a88b/outcome "HTTP/1.1 200 OK"

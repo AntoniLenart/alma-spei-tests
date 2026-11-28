@@ -1,0 +1,1 @@
+17:21:51 INFO  step: STEP: Check which of the tables ('users', 'local_credentials', 'sessions', 'security_audit_events') exist

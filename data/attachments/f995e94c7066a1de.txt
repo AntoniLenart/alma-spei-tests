@@ -1,0 +1,5 @@
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Upload 'QA-b84f3874.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the readiness blockers of import 3b5c72eb-3f50-4d18-9c86-7af8ffc2f9b7 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/3b5c72eb-3f50-4d18-9c86-7af8ffc2f9b7/review-blockers "HTTP/1.1 401 Unauthorized"

@@ -1,0 +1,3 @@
+17:21:02 INFO  step: STEP: Upload 'QA-850810c7.csv' as a bank import
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"

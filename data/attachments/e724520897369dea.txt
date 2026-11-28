@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-fff36a0d.csv' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 400 Bad Request"

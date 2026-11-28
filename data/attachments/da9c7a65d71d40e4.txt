@@ -1,0 +1,2 @@
+17:21:31 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:21:31 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/14f76c7f-8811-41e9-a0a7-8d34fbb12326/preview "HTTP/1.1 401 Unauthorized"

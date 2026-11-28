@@ -1,0 +1,10 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Open the account management panel
+INFO     step:_decorator.py:52 STEP: Create account qa.0f570fc1d01c through the panel
+INFO     step:_decorator.py:52 STEP: Log in as qa.0f570fc1d01c
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: List accounts
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Deactivate account bf5ad737-fc4e-4f33-9dcb-185e962b8af4
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/bf5ad737-fc4e-4f33-9dcb-185e962b8af4 "HTTP/1.1 200 OK"

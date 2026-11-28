@@ -1,0 +1,5 @@
+17:21:53 INFO  step: STEP: Create donor 'Liwia Sass QA-88ab31a5'
+17:21:53 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:53 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:21:53 INFO  step: STEP: Read donor row 4ce51fd3-428c-4baa-bb25-dc955863c14b
+17:21:53 INFO  step: STEP: Read audit actions of donor 4ce51fd3-428c-4baa-bb25-dc955863c14b

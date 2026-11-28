@@ -1,0 +1,7 @@
+17:21:05 INFO  step: STEP: Stage one row per sender for QA-5054aaa0
+17:21:05 INFO  step: STEP: Upload 'QA-5054aaa0.csv' and expect it to be staged
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Reconcile import 1d227b83-02ca-45bf-b4c9-700a7aa10cd6 under {'currency': 'PLN', 'new-donor-type': None}
+17:21:05 INFO  step: STEP: Read the review versions of row 1 of import 1d227b83-02ca-45bf-b4c9-700a7aa10cd6
+17:21:05 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/1d227b83-02ca-45bf-b4c9-700a7aa10cd6/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/1d227b83-02ca-45bf-b4c9-700a7aa10cd6/reconciliation "HTTP/1.1 200 OK"

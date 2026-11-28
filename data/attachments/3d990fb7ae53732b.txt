@@ -1,0 +1,15 @@
+17:21:05 INFO  step: STEP: Create donor 'Lucja Zolkiewska QA-29665ca8'
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Create donor 'Łucja Żółkiewska QA-29665ca8'
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Create donor 'Inna Sąsiadka QA-29665ca8-obok'
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Create donor 'Bogumił Daleki QA-29665ca8'
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Stage one row per sender for QA-29665ca8
+17:21:05 INFO  step: STEP: Upload 'QA-29665ca8.csv' and expect it to be staged
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:05 INFO  step: STEP: Reconcile import 87a4db78-a496-4ddc-908c-22a81501bca5 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:05 INFO  step: STEP: Read the review versions of row 1 of import 87a4db78-a496-4ddc-908c-22a81501bca5
+17:21:05 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/87a4db78-a496-4ddc-908c-22a81501bca5/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:05 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/87a4db78-a496-4ddc-908c-22a81501bca5/reconciliation "HTTP/1.1 200 OK"

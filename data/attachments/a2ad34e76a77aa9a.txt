@@ -1,0 +1,2 @@
+17:21:55 INFO  step: STEP: Read user qa.admin with its local credential
+17:21:55 INFO  step: STEP: Probe import attempts ({'state': 'failed', 'failure_code': 'parse-failed'}, {}) of one file (rolled back)

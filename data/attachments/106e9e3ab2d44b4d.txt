@@ -1,0 +1,3 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     orchestration:stack.py:333 stack: tearing down
+INFO     orchestration:stack.py:108 stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans

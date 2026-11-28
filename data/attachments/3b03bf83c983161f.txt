@@ -1,0 +1,18 @@
+INFO     step:_decorator.py:52 STEP: Create donor 'Maks Mysiak QA-68561cc5'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Olgierd Bekus QA-68561cc5'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-68561cc5
+INFO     step:_decorator.py:52 STEP: Upload 'QA-68561cc5.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide row 2 of import a86d2cd9-328c-477d-828f-5d58ccb391a7 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 2 of import a86d2cd9-328c-477d-828f-5d58ccb391a7
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 2 of import a86d2cd9-328c-477d-828f-5d58ccb391a7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a86d2cd9-328c-477d-828f-5d58ccb391a7/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/a86d2cd9-328c-477d-828f-5d58ccb391a7/rows/1/2/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Reconcile import a86d2cd9-328c-477d-828f-5d58ccb391a7 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import a86d2cd9-328c-477d-828f-5d58ccb391a7
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a86d2cd9-328c-477d-828f-5d58ccb391a7/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/a86d2cd9-328c-477d-828f-5d58ccb391a7/reconciliation "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the reconciliation report of import a86d2cd9-328c-477d-828f-5d58ccb391a7 {'queue': <ReconciliationQueue.EXACT: 'exact'>}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/a86d2cd9-328c-477d-828f-5d58ccb391a7/reconciliation?queue=exact "HTTP/1.1 200 OK"

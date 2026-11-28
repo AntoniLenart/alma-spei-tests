@@ -1,0 +1,14 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-f82635bb.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Daniel Dudziec QA-f82635bb'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 61c6cb1e-62df-49b3-a4ae-0011b975531b ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 61c6cb1e-62df-49b3-a4ae-0011b975531b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 61c6cb1e-62df-49b3-a4ae-0011b975531b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/61c6cb1e-62df-49b3-a4ae-0011b975531b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/61c6cb1e-62df-49b3-a4ae-0011b975531b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Prepare a preview of import 61c6cb1e-62df-49b3-a4ae-0011b975531b
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 61c6cb1e-62df-49b3-a4ae-0011b975531b
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/61c6cb1e-62df-49b3-a4ae-0011b975531b/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Request a preview of import 61c6cb1e-62df-49b3-a4ae-0011b975531b at batch version 3
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/61c6cb1e-62df-49b3-a4ae-0011b975531b/preview "HTTP/1.1 409 Conflict"

@@ -1,0 +1,6 @@
+17:22:28 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:28 INFO  step: STEP: Create donor 'Gabriel Kukawka QA-cb698717'
+17:22:28 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:28 INFO  step: STEP: Open the donor list
+17:22:28 INFO  step: STEP: Search donors for 'QA-cb698717'
+17:22:28 INFO  step: STEP: Open the card of donor 'Gabriel Kukawka QA-cb698717'

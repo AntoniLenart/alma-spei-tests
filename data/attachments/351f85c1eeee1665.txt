@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Count rows in the canonical donor tables
+INFO     step:_decorator.py:52 STEP: Upload 'QA-93733699.csv' as a bank import
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read staged rows of import 80994fb0-e7a4-4ed9-bc43-d2473aa7cabc {'limit': 100}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/80994fb0-e7a4-4ed9-bc43-d2473aa7cabc/rows?limit=100 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Count rows in the canonical donor tables

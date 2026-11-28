@@ -1,0 +1,2 @@
+17:21:34 INFO  step: STEP: List donors with raw query [('sort-by', '1 OR 1=1')]
+17:21:34 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?sort-by=1+OR+1%3D1 "HTTP/1.1 400 Bad Request"

@@ -1,0 +1,16 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Create donor 'Marianna Ochał QA-ed9b57f1'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Stage one row per sender for QA-ed9b57f1
+INFO     step:_decorator.py:52 STEP: Upload 'QA-ed9b57f1.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Deep-link to the summary of import 8df5111f-147c-4e8a-a919-82c7bc62d889
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-ed9b57f1.csv'
+INFO     step:_decorator.py:52 STEP: Confirm the source currency PLN and run the matching
+INFO     step:_decorator.py:52 STEP: Explain the exception of row 1 (the card showing 'Marianna Ochał QA-ed9b57f1, ul. Odległa 3, 00-950 Innowo')
+INFO     step:_decorator.py:52 STEP: Choose the suggested donor 'Marianna Ochał QA-ed9b57f1'
+INFO     step:_decorator.py:52 STEP: Settle the payment as new and return to the summary
+INFO     step:_decorator.py:52 STEP: Answer the payment question (PLN, new)
+INFO     step:_decorator.py:52 STEP: Wait for the import summary of 'QA-ed9b57f1.csv'
+INFO     step:_decorator.py:52 STEP: Read the decision of row 1 of import 8df5111f-147c-4e8a-a919-82c7bc62d889
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/8df5111f-147c-4e8a-a919-82c7bc62d889/rows/1/1/decision "HTTP/1.1 200 OK"

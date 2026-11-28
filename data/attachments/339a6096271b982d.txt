@@ -1,0 +1,6 @@
+INFO     step:_decorator.py:52 STEP: Hand the API session's cookies to the browser
+INFO     step:_decorator.py:52 STEP: Open the bank upload screen
+INFO     step:_decorator.py:52 STEP: Choose 'QA-e98cf2f0.csv' in the upload form
+INFO     step:_decorator.py:52 STEP: Confirm the file's currency PLN and submit it
+INFO     step:_decorator.py:52 STEP: Wait for the analysis status 'Analiza zakończona błędem'
+INFO     step:_decorator.py:52 STEP: Confirm and retry the analysis of 'QA-e98cf2f0.csv' in PLN

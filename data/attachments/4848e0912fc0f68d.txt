@@ -1,0 +1,9 @@
+17:23:04 INFO  step: STEP: Hand the API session's cookies to the browser
+17:23:04 INFO  step: STEP: Create donor 'Nataniel Zdobylak QA-d81c6290'
+17:23:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:23:04 INFO  step: STEP: Stage one row per sender for QA-d81c6290
+17:23:04 INFO  step: STEP: Upload 'QA-d81c6290.csv' and expect it to be staged
+17:23:04 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:23:04 INFO  step: STEP: Deep-link to the summary of import ce3c42ca-b260-48f1-b87f-58b6d8933e55
+17:23:04 INFO  step: STEP: Wait for the import summary of 'QA-d81c6290.csv'
+17:23:04 INFO  step: STEP: Confirm the source currency PLN and run the matching

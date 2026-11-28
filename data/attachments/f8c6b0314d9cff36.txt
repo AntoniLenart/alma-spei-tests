@@ -1,0 +1,2 @@
+17:21:53 INFO  step: STEP: Read user qa.admin with its local credential
+17:21:53 INFO  step: STEP: Probe a donor audit 'delete' event changing 'name' (rolled back)

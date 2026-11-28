@@ -1,0 +1,37 @@
+17:21:20 INFO  step: STEP: Upload 'QA-808b913c.csv' and expect it to be staged
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Create donor proposal 'Cyprian Doroszuk QA-808b913c' for import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Propose donor 'Cyprian Doroszuk QA-808b913c' for import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Read the review versions of row 1 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/donor-proposals "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Decide every row of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Decide row 1 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445 ('new-proposal')
+17:21:20 INFO  step: STEP: Save a 'new-proposal' decision for row 1 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Read the review versions of row 1 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Decide row 2 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445 ('new-proposal')
+17:21:20 INFO  step: STEP: Save a 'new-proposal' decision for row 2 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Read the review versions of row 2 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Commit import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Prepare, back up and approve import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Create a ready preview of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Prepare a preview of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  step: STEP: Read the review versions of row 1 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Request a preview of import f5425856-fa1d-48a0-8b97-f73ca0d3d445 at batch version 5
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/preview "HTTP/1.1 201 Created"
+17:21:20 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:20 INFO  step: STEP: Request a backup receipt for preview f8b85833-aa30-47f4-96ae-39f9068682d0 of import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/previews/f8b85833-aa30-47f4-96ae-39f9068682d0/backup "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Submit an import commit
+17:21:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Undo committed import f5425856-fa1d-48a0-8b97-f73ca0d3d445
+17:21:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f5425856-fa1d-48a0-8b97-f73ca0d3d445/outcome "HTTP/1.1 200 OK"
+17:21:20 INFO  step: STEP: Submit an undo of the latest import
+17:21:21 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+17:21:21 INFO  step: STEP: List donors tagged QA-808b913c
+17:21:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors?search=QA-808b913c "HTTP/1.1 200 OK"

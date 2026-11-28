@@ -1,0 +1,15 @@
+17:22:58 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:58 INFO  step: STEP: Upload 'QA-31548ebc.csv' and expect it to be staged
+17:22:58 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:58 INFO  step: STEP: Deep-link to the summary of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273
+17:22:58 INFO  step: STEP: Wait for the import summary of 'QA-31548ebc.csv'
+17:22:58 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:22:58 INFO  step: STEP: Explain the exception of row 1 (the card showing 'Juliusz Harasimiuk')
+17:22:58 INFO  step: STEP: Prepare new donor 'Mieszko Mizak QA-31548ebc' for the transfer
+17:22:59 INFO  step: STEP: Settle the payment as new and return to the summary
+17:22:59 INFO  step: STEP: Answer the payment question (PLN, new)
+17:22:59 INFO  step: STEP: Wait for the import summary of 'QA-31548ebc.csv'
+17:22:59 INFO  step: STEP: Read the decision of row 1 of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273
+17:22:59 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9a325fd5-b6f7-4bcd-a48f-d34d96114273/rows/1/1/decision "HTTP/1.1 200 OK"
+17:22:59 INFO  step: STEP: List the donor proposals of import 9a325fd5-b6f7-4bcd-a48f-d34d96114273 {}
+17:22:59 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/9a325fd5-b6f7-4bcd-a48f-d34d96114273/donor-proposals "HTTP/1.1 200 OK"

@@ -1,0 +1,13 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-1c58af13.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor 'Agnieszka Handke QA-1c58af13'
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Decide row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607 ('existing-donor')
+INFO     step:_decorator.py:52 STEP: Save a 'existing-donor' decision for row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import 26c72ab6-1532-48b3-90d7-a29b80074607
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/26c72ab6-1532-48b3-90d7-a29b80074607/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/26c72ab6-1532-48b3-90d7-a29b80074607/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the stored decision of row 1 of import batch 26c72ab6-1532-48b3-90d7-a29b80074607
+INFO     step:_decorator.py:52 STEP: Read the review journal of import batch 26c72ab6-1532-48b3-90d7-a29b80074607
+INFO     step:_decorator.py:52 STEP: Read the events of import batch 26c72ab6-1532-48b3-90d7-a29b80074607

@@ -1,0 +1,2 @@
+17:21:30 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:21:30 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts/aa0fb8c4-63d7-4040-9432-f8c184b42439/reset-password "HTTP/1.1 401 Unauthorized"

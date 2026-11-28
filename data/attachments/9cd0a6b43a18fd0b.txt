@@ -1,0 +1,11 @@
+17:22:41 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:41 INFO  step: STEP: Upload 'QA-c7163a32.csv' and expect it to be staged
+17:22:41 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:41 INFO  step: STEP: Create donor 'Paweł Policht QA-c7163a32'
+17:22:41 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:41 INFO  step: STEP: Deep-link to the summary of import c63b67b1-6c7a-4254-9616-3a9312aafe1b
+17:22:41 INFO  step: STEP: Wait for the import summary of 'QA-c7163a32.csv'
+17:22:41 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:22:41 INFO  step: STEP: Explain the exception of row 2 (the card showing 'pan Olgierd Wałęsa')
+17:22:41 INFO  step: STEP: Look up active donors in the catalogue
+17:22:41 INFO  step: STEP: Search for 'QA-c7163a32' and compare with 'Paweł Policht QA-c7163a32'

@@ -1,0 +1,1 @@
+INFO     step:_decorator.py:52 STEP: Check which of the tables ('users', 'local_credentials', 'sessions', 'security_audit_events') exist

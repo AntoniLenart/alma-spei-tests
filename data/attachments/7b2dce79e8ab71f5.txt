@@ -1,0 +1,17 @@
+17:22:56 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:56 INFO  step: STEP: Upload 'QA-4f336818.csv' and expect it to be staged
+17:22:56 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:22:56 INFO  step: STEP: Create donor 'Julianna Kajak QA-4f336818'
+17:22:56 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:22:56 INFO  step: STEP: Deep-link to the summary of import aeac70c6-7a5a-4e77-815e-546bd64ce821
+17:22:56 INFO  step: STEP: Wait for the import summary of 'QA-4f336818.csv'
+17:22:56 INFO  step: STEP: Confirm the source currency PLN and run the matching
+17:22:57 INFO  step: STEP: Explain the exception of row 1 (the card showing 'Oskar Wlaźlak')
+17:22:57 INFO  step: STEP: Look up active donors in the catalogue
+17:22:57 INFO  step: STEP: Search for 'QA-4f336818' and compare with 'Julianna Kajak QA-4f336818'
+17:22:57 INFO  step: STEP: Assign the transfer to the compared donor
+17:22:57 INFO  step: STEP: Settle the payment as new and return to the summary
+17:22:57 INFO  step: STEP: Answer the payment question (PLN, new)
+17:22:57 INFO  step: STEP: Wait for the import summary of 'QA-4f336818.csv'
+17:22:58 INFO  step: STEP: Read the decision of row 1 of import aeac70c6-7a5a-4e77-815e-546bd64ce821
+17:22:58 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/aeac70c6-7a5a-4e77-815e-546bd64ce821/rows/1/1/decision "HTTP/1.1 200 OK"

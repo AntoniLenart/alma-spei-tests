@@ -1,0 +1,13 @@
+17:21:02 INFO  step: STEP: Create donor 'Fryderyk Pajek QA-b0a4a798'
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:02 INFO  step: STEP: Stage one row per sender for QA-b0a4a798
+17:21:02 INFO  step: STEP: Upload 'QA-b0a4a798.csv' and expect it to be staged
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:02 INFO  step: STEP: Reconcile import 64d0f557-1984-4a85-9c0e-4f8c407d1480 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:02 INFO  step: STEP: Read the review versions of row 1 of import 64d0f557-1984-4a85-9c0e-4f8c407d1480
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/64d0f557-1984-4a85-9c0e-4f8c407d1480/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/64d0f557-1984-4a85-9c0e-4f8c407d1480/reconciliation "HTTP/1.1 200 OK"
+17:21:02 INFO  step: STEP: Reconcile import 64d0f557-1984-4a85-9c0e-4f8c407d1480 under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:02 INFO  step: STEP: Read the review versions of row 1 of import 64d0f557-1984-4a85-9c0e-4f8c407d1480
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/64d0f557-1984-4a85-9c0e-4f8c407d1480/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:02 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/64d0f557-1984-4a85-9c0e-4f8c407d1480/reconciliation "HTTP/1.1 200 OK"

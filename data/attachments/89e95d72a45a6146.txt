@@ -1,0 +1,12 @@
+17:22:20 INFO  step: STEP: Hand the API session's cookies to the browser
+17:22:20 INFO  step: STEP: Create account qa.9d9a0d210fb7
+17:22:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/accounts "HTTP/1.1 200 OK"
+17:22:20 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:22:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/login "HTTP/1.1 200 OK"
+17:22:20 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/auth/password "HTTP/1.1 200 OK"
+17:22:20 INFO  step: STEP: Open the account management panel
+17:22:21 INFO  step: STEP: Reset the password of qa.9d9a0d210fb7 through the panel
+17:22:21 INFO  step: STEP: Accept the next browser confirmation
+17:22:21 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/auth/session "HTTP/1.1 200 OK"
+17:22:21 INFO  step: STEP: Deactivate account f51c7db6-f759-4e2e-a1fb-328221b17b4f
+17:22:21 INFO  httpx: HTTP Request: PATCH http://127.0.0.1:3100/api/accounts/f51c7db6-f759-4e2e-a1fb-328221b17b4f "HTTP/1.1 200 OK"

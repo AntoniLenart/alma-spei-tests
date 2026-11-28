@@ -1,0 +1,4 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-3fb89d44.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read staged rows of import e8f00f1f-488a-4da0-bf1a-65a57f56ac44 {}
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/e8f00f1f-488a-4da0-bf1a-65a57f56ac44/rows "HTTP/1.1 200 OK"

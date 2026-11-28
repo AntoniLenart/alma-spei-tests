@@ -1,0 +1,4 @@
+17:21:37 INFO  step: STEP: Create donor 'Jan Grodek QA-2cb43810'
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Read the change history of donor 643c36a2-7e34-4b9e-8daa-2d87e6c35ef2
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/donors/643c36a2-7e34-4b9e-8daa-2d87e6c35ef2/history "HTTP/1.1 200 OK"

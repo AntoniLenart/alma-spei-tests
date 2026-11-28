@@ -1,0 +1,6 @@
+17:21:11 INFO  step: STEP: Count rows in the canonical donor tables
+17:21:11 INFO  step: STEP: Upload 'QA-72adcbd1-drop-column+blank-line.csv' as a bank import
+17:21:11 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:11 INFO  step: STEP: Read staged rows of import d2625b1a-19c1-4e07-b505-d0e4de06217a {'limit': 100, 'offset': 0}
+17:21:11 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/d2625b1a-19c1-4e07-b505-d0e4de06217a/rows?limit=100&offset=0 "HTTP/1.1 200 OK"
+17:21:11 INFO  step: STEP: Count rows in the canonical donor tables

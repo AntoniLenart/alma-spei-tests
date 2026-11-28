@@ -1,0 +1,11 @@
+17:21:01 INFO  step: STEP: Stage one row per sender for QA-ff9c77e2
+17:21:01 INFO  step: STEP: Upload 'QA-ff9c77e2.csv' and expect it to be staged
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Reconcile import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:01 INFO  step: STEP: Read the review versions of row 1 of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/reconciliation "HTTP/1.1 200 OK"
+17:21:02 INFO  step: STEP: Read the decision of row 1 of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:02 INFO  step: STEP: List the donor proposals of import b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b {}
+17:21:02 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/b6c4b9b5-2712-40dc-ab28-8aa8e2f6f22b/donor-proposals "HTTP/1.1 200 OK"

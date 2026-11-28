@@ -1,0 +1,15 @@
+INFO     orchestration:stack.py:108 stack: bb init (secrets) -> bb init
+INFO     orchestration:stack.py:108 stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans
+INFO     orchestration:stack.py:108 stack: compose up db -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml up -d --wait db
+INFO     orchestration:stack.py:108 stack: migrate up -> clojure -Srepro -M:migrate up
+INFO     orchestration:stack.py:108 stack: provision QA admin -> clojure -Srepro -M /home/runner/work/alma-spei-tests/alma-spei-tests/tests/src/alma_spei_tests/orchestration/provision_admin.clj
+INFO     orchestration:stack.py:108 stack: frontend release build -> clojure -Srepro -M:ui -m shadow.cljs.devtools.cli release app
+INFO     orchestration:stack.py:217 stack: starting backend -> /home/runner/work/alma-spei-tests/alma-spei-tests/tests/reports/stack/backend.log
+INFO     orchestration:stack.py:193 stack: ready at http://127.0.0.1:3100
+INFO     step:_decorator.py:52 STEP: Open the application shell and wait for its health check
+INFO     orchestration:stack.py:260 stack: restarting backend
+INFO     orchestration:stack.py:217 stack: starting backend -> /home/runner/work/alma-spei-tests/alma-spei-tests/tests/reports/stack/backend.log
+INFO     step:_decorator.py:52 STEP: Open the application shell and wait for its health check
+INFO     step:_decorator.py:52 STEP: Open the login form
+INFO     orchestration:stack.py:333 stack: tearing down
+INFO     orchestration:stack.py:108 stack: compose down -v -> docker compose -p alma-spei-tests -f /home/runner/work/alma-spei-tests/alma-spei-tests/alma-spei/infra/compose.yaml down -v --remove-orphans

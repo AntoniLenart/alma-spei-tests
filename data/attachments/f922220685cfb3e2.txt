@@ -1,0 +1,62 @@
+17:21:22 INFO  step: STEP: Upload 'QA-27556ad6.csv' and expect it to be staged
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Create donor 'Krzysztof Śliz QA-27556ad6'
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Decide every row of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Decide row 1 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Decide row 2 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Read the review versions of row 2 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Commit import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Prepare, back up and approve import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Create a ready preview of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Prepare a preview of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Request a preview of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde at batch version 4
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/preview "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:22 INFO  step: STEP: Request a backup receipt for preview 2f260327-209e-4118-89a1-b412fce0574f of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/previews/2f260327-209e-4118-89a1-b412fce0574f/backup "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Submit an import commit
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Create donor 'Dorota Zubowicz QA-27556ad6'
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Upload 'QA-27556ad6-later.csv' and expect it to be staged
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Decide every row of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Decide row 1 of import 56b09988-c04a-457b-b28d-258f79aea0c2 ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 1 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Decide row 2 of import 56b09988-c04a-457b-b28d-258f79aea0c2 ('existing-donor')
+17:21:22 INFO  step: STEP: Save a 'existing-donor' decision for row 2 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Read the review versions of row 2 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  httpx: HTTP Request: PUT http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/rows/1/2/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Commit import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Prepare, back up and approve import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Create a ready preview of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Prepare a preview of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  step: STEP: Read the review versions of row 1 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Request a preview of import 56b09988-c04a-457b-b28d-258f79aea0c2 at batch version 4
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/preview "HTTP/1.1 201 Created"
+17:21:22 INFO  step: STEP: Confirm a backup of the ready preview
+17:21:22 INFO  step: STEP: Request a backup receipt for preview 46603982-6756-480c-bc2a-c57e8c559495 of import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/previews/46603982-6756-480c-bc2a-c57e8c559495/backup "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Submit an import commit
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/commit "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Undo committed import 56b09988-c04a-457b-b28d-258f79aea0c2
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/56b09988-c04a-457b-b28d-258f79aea0c2/outcome "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Submit an undo of the latest import
+17:21:22 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/undo-last "HTTP/1.1 200 OK"
+17:21:22 INFO  step: STEP: Read the undo eligibility of import f6c41b4a-3dfc-43d4-840b-7b0c583c8dde
+17:21:22 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/f6c41b4a-3dfc-43d4-840b-7b0c583c8dde/undo-eligibility "HTTP/1.1 200 OK"

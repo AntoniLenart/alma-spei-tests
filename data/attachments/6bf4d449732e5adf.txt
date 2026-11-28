@@ -1,0 +1,15 @@
+INFO     step:_decorator.py:52 STEP: Upload 'QA-e13414f8.csv' and expect it to be staged
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Create donor proposal 'Fabian Bytner QA-e13414f8' for import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     step:_decorator.py:52 STEP: Propose donor 'Fabian Bytner QA-e13414f8' for import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/donor-proposals "HTTP/1.1 201 Created"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Edit donor proposal 12ccd2a1-08e7-4eeb-bb06-be4101fb0675 of import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/donor-proposals/12ccd2a1-08e7-4eeb-bb06-be4101fb0675 "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Read the review versions of row 1 of import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     httpx:_client.py:1025 HTTP Request: GET http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/rows/1/1/decision "HTTP/1.1 200 OK"
+INFO     step:_decorator.py:52 STEP: Edit donor proposal 12ccd2a1-08e7-4eeb-bb06-be4101fb0675 of import dce5edb8-572f-47ec-9712-66b50f2aecde
+INFO     httpx:_client.py:1025 HTTP Request: PUT http://127.0.0.1:3100/api/imports/dce5edb8-572f-47ec-9712-66b50f2aecde/donor-proposals/12ccd2a1-08e7-4eeb-bb06-be4101fb0675 "HTTP/1.1 409 Conflict"

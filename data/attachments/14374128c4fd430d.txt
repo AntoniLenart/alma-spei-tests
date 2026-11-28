@@ -1,0 +1,2 @@
+INFO     step:_decorator.py:52 STEP: Read user qa.admin with its local credential
+INFO     step:_decorator.py:52 STEP: Probe import attempts ({}, {'attempt_number': 2, 'retry_of': 0}) of one file (rolled back)

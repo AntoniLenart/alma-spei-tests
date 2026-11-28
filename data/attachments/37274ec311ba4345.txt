@@ -1,0 +1,12 @@
+17:21:01 INFO  step: STEP: Create donor 'Bartek Andrukiewicz QA-0d2c1fc3'
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Archive donor 98886082-9010-413a-b80c-73b70b7a6433 directly in the database
+17:21:01 INFO  step: STEP: Stage one row per sender for QA-0d2c1fc3
+17:21:01 INFO  step: STEP: Upload 'QA-0d2c1fc3.csv' and expect it to be staged
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:01 INFO  step: STEP: Reconcile import e7898214-6f78-4e1b-b7cd-39384c31a89d under {'currency': 'PLN', 'new-donor-type': <EntityType.INDIVIDUAL: 'individual'>}
+17:21:01 INFO  step: STEP: Read the review versions of row 1 of import e7898214-6f78-4e1b-b7cd-39384c31a89d
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e7898214-6f78-4e1b-b7cd-39384c31a89d/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:01 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/e7898214-6f78-4e1b-b7cd-39384c31a89d/reconciliation "HTTP/1.1 200 OK"
+17:21:01 INFO  step: STEP: Read the decision of row 1 of import e7898214-6f78-4e1b-b7cd-39384c31a89d
+17:21:01 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/e7898214-6f78-4e1b-b7cd-39384c31a89d/rows/1/1/decision "HTTP/1.1 200 OK"

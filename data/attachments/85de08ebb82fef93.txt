@@ -1,0 +1,9 @@
+17:21:36 INFO  step: STEP: Create donor 'Piotr Miodek QA-089f241e'
+17:21:36 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/donors "HTTP/1.1 201 Created"
+17:21:36 INFO  step: STEP: Stage one row per sender for QA-089f241e
+17:21:36 INFO  step: STEP: Upload 'QA-089f241e.csv' and expect it to be staged
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/upload "HTTP/1.1 201 Created"
+17:21:37 INFO  step: STEP: Reconcile import 7c986082-51c0-44d2-bfd1-5a8908e823ce under {'currency': 'PLN', 'new-donor-type': None}
+17:21:37 INFO  step: STEP: Read the review versions of row 1 of import 7c986082-51c0-44d2-bfd1-5a8908e823ce
+17:21:37 INFO  httpx: HTTP Request: GET http://127.0.0.1:3100/api/imports/7c986082-51c0-44d2-bfd1-5a8908e823ce/rows/1/1/decision "HTTP/1.1 200 OK"
+17:21:37 INFO  httpx: HTTP Request: POST http://127.0.0.1:3100/api/imports/7c986082-51c0-44d2-bfd1-5a8908e823ce/reconciliation "HTTP/1.1 200 OK"
