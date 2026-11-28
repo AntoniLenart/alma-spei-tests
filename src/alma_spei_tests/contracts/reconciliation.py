@@ -1,9 +1,11 @@
-"""Automatic reconciliation contracts (tasks 60-61).
+"""Automatic reconciliation contracts (tasks 60-62).
 
 Mirrors ``src/common/alma_spei/common/contracts/reconciliation.cljc``: the
 confirmed ``policy``, the ``counts``, and the report with the rows left for a
 person (``exceptions``), their suggested donors with the reason for each, and
-whether a row is a candidate for a new profile.
+whether a row is a candidate for a new profile. Since task 62 the report is one
+of two views (``queue``): the exceptions, or the automatic exact matches with
+their donors.
 """
 
 from alma_spei_tests.contracts.decisions import CURRENCY
@@ -44,6 +46,8 @@ EXCEPTION_ROW = ClosedMap(
         "candidates": Vector(SUGGESTED_DONOR),
     }
 )
+#: A row the matching linked to a donor automatically (task 62).
+EXACT_MATCH = ClosedMap({"row": STAGED_ROW, "donor": DONOR})
 RECONCILIATION_RESPONSE = ClosedMap(
     {
         "batch": BATCH,
@@ -52,6 +56,9 @@ RECONCILIATION_RESPONSE = ClosedMap(
         "counts": COUNTS,
         "totals": Vector(ClosedMap({"currency": CURRENCY, "amount": STRING})),
         "exceptions": Vector(EXCEPTION_ROW),
+        "queue": Enum("exceptions", "exact"),
+        "exact-match-count": ROW_COUNT,
+        "exact-matches": Vector(EXACT_MATCH),
         "limit": POSITIVE,
         "offset": ROW_COUNT,
         "ready": BOOLEAN,

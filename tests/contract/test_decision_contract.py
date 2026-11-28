@@ -8,6 +8,7 @@ from assertpy import assert_that, soft_assertions
 
 from alma_spei_tests.assertions import assert_matches_contract
 from alma_spei_tests.clients import AlmaSpeiApi
+from alma_spei_tests.constants import ReconciliationQueue
 from alma_spei_tests.contracts import (
     BLOCKERS_RESPONSE,
     DECISION_RESPONSE,
@@ -19,7 +20,7 @@ from alma_spei_tests.contracts import (
     PROPOSALS_RESPONSE,
     RECONCILIATION_RESPONSE,
 )
-from alma_spei_tests.data import existing_donor, new_donor_profile, sender_with_address
+from alma_spei_tests.data import existing_donor, new_donor_profile, sender_of, sender_with_address
 from alma_spei_tests.steps import imports_steps, review_steps
 from alma_spei_tests.testbase import BaseContractTest
 
@@ -121,3 +122,20 @@ class TestReconciliationContract(BaseContractTest):
                 [c["id"] for e in body["exceptions"] for c in e["candidates"]]
             ).described_as("the report should carry the suggested donor").contains(donor["id"])
             assert_matches_contract(body, RECONCILIATION_RESPONSE, "reconciliation (suggestions)")
+
+    def test_the_exact_match_view_matches_contract(
+        self, api: AlmaSpeiApi, donor: dict[str, Any], tag: str
+    ):
+        # 1. Stage and reconcile an exact match for the donor
+        # 2. Read the exact-match view
+        # 3. Verification: the view, with the donor, satisfies the reconciliation response
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
+        review_steps.reconcile(api, batch_id, review_steps.policy())
+        body = review_steps.read_reconciliation(
+            api, batch_id, queue=ReconciliationQueue.EXACT
+        ).json()
+        with soft_assertions():
+            assert_that([m["donor"]["id"] for m in body["exact-matches"]]).described_as(
+                "the view should carry the matched donor"
+            ).is_equal_to([donor["id"]])
+            assert_matches_contract(body, RECONCILIATION_RESPONSE, "reconciliation (exact)")

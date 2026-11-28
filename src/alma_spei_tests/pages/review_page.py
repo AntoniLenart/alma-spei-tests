@@ -54,9 +54,11 @@ class ReviewMessages:
     EXCEPTIONS = "Do wyjaśnienia"
     READY_HEADING = "Wszystko gotowe do zatwierdzenia"
     REVIEW_CHANGES = "Sprawdź zmiany i zatwierdź"
-    EXCEPTIONS_HEADING = "Tylko te pozycje potrzebują Twojej decyzji"
+    #: The transfers view of the summary (task 62): exceptions or exact matches.
+    TRANSFERS_HEADING = "Weryfikacja przelewów"
+    NO_EXACT_MATCHES = "Brak automatycznych dopasowań w 100%."
     EXPLAIN = "Wyjaśnij tę pozycję"
-    NEXT_EXCEPTIONS = "Następne wyjątki"
+    NEXT_PAGE = "Następna strona"
     #: Why a transfer is an exception (automatic_views.cljs ``reasons``).
     REASONS = {
         "sender-format": "Nie można pewnie odczytać nazwy i adresu nadawcy.",
@@ -77,6 +79,8 @@ class ReviewMessages:
     DONOR_STATUS = "Status"
 
     # donor choice of one exception
+    THIS_DONOR = "To ten darczyńca"
+    NEW_PROFILE_HINT = "Brak podobnych aktywnych profili. Sprawdź, czy dodać nowego darczyńcę."
     FROM_CATALOGUE = "Wybierz darczyńcę z bazy"
     NEW_DONOR = "Dodaj nowego darczyńcę"
     ASSIGN = "Przypisz wpłatę temu darczyńcy"
@@ -95,6 +99,11 @@ class ReviewMessages:
         " Identyczna data i kwota nie wystarczają do uznania jej za duplikat."
     )
     SAVE_EXPLANATION = "Zapisz wyjaśnienie i wróć do podsumowania"
+    #: What the editor still needs before saving (decision_views.cljs ``missing-checks``).
+    MISSING_CURRENCY = "Podaj potwierdzoną walutę, np. PLN."
+    MISSING_EVIDENCE = "Opisz, jak sprawdzono walutę i wcześniejsze ujęcie wpłaty."
+    MISSING_DISPOSITION = "Wybierz, czy dodać wpłatę, czy wskazać już zapisaną."
+    MISSING_OVERLAP = "Potwierdź sprawdzenie, czy wpłata nie została już uwzględniona."
 
     @staticmethod
     def progress(reviewed: int, valid: int, invalid: int) -> str:
@@ -127,8 +136,12 @@ class ReviewMessages:
         return f"Do dodania: {amount.replace('.', ',')} {currency}"
 
     @staticmethod
-    def exceptions_count(total: int) -> str:
-        return f"Do wyjaśnienia: {total}"
+    def exceptions_filter(total: int) -> str:
+        return f"Do wyjaśnienia ({total})"
+
+    @staticmethod
+    def exact_filter(total: int) -> str:
+        return f"Dopasowane w 100% ({total})"
 
     @staticmethod
     def source_location(row: int, worksheet: int = 1) -> str:
@@ -254,9 +267,15 @@ class ReviewPage(BasePage):
             for card in self.exception_cards.all()
         ]
 
+    def filter_button(self, name: str) -> Locator:
+        """One view of the transfers ("Do wyjaśnienia (n)" or "Dopasowane w 100% (n)")."""
+        return self.summary.get_by_role("group", name="Filtr przelewów").get_by_role(
+            "button", name=name, exact=True
+        )
+
     @property
-    def exceptions_pager(self) -> Locator:
-        return self.summary.get_by_role("navigation", name="Strony wyjątków")
+    def queue_pager(self) -> Locator:
+        return self.summary.get_by_role("navigation", name="Strony przelewów")
 
     # --- one exception: source row and donor choice ------------------------------
     @property
@@ -292,6 +311,14 @@ class ReviewPage(BasePage):
     @property
     def chosen_donor(self) -> Locator:
         return self.donor_choice.locator("div.chosen-donor")
+
+    @property
+    def candidate_cards(self) -> Locator:
+        """The suggested donors of the exception, strongest first."""
+        return self.donor_choice.locator("div.review-candidates article.review-proposal")
+
+    def candidate_card(self, name: str) -> Locator:
+        return self.candidate_cards.filter(has=self.page.locator("strong", has_text=_exactly(name)))
 
     @property
     def status_filter_select(self) -> Locator:
@@ -353,6 +380,11 @@ class ReviewPage(BasePage):
     @property
     def overlap_checkbox(self) -> Locator:
         return self.editor.get_by_role("checkbox", name=ReviewMessages.OVERLAP_CHECKED)
+
+    @property
+    def missing_checks(self) -> Locator:
+        """What the editor still needs before the explanation can be saved."""
+        return self.editor.locator("div.review-checklist[role='status'] li")
 
 
 def _exactly(text: str) -> re.Pattern[str]:
