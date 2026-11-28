@@ -115,14 +115,17 @@ same invented transfers.
 **Steps**
 
 1. Upload `bank-ambiguities.csv` (";", `PLN`, "Osoby").
-2. Read the exceptions. Explain the non-exact "Jan Kowalski" and choose the right profile after comparing the addresses.
-3. Explain each repeated "Jakub Nowak" payment and decide whether it is a separate payment.
+2. Read the exceptions. Explain the non-exact "Jan Kowalski" and choose the right profile after comparing the addresses ("To ten darczyńca").
+3. In "2. Sprawdź wpłatę", type the confirmed currency, describe how it was checked, choose "Nowa, odrębna wpłata", tick the check for an earlier inclusion and choose "Zapisz wyjaśnienie i wróć do podsumowania".
+4. Explain each repeated "Jakub Nowak" payment the same way and decide whether it is a separate payment.
 
 **Expected result**
 
 - Exactly three exceptions are listed; the remaining transfer is prepared automatically.
-- After the identity choice, the system checks the payment itself and returns to the summary when nothing else is unclear.
+- The candidates show their address and a Polish reason. Choosing one only prepares a draft: the payment is saved only after the currency, the justification, the way to record it and the overlap check are given. The form lists what is still missing.
+- After saving, the summary opens again with one exception fewer.
 - A possible duplicate always needs an explicit decision: the same date and amount alone never count as a duplicate.
+- "Wpłata jest już ujęta w bazie" asks for a payment that is already in the database. A twin row of the same file cannot be chosen there (see the run of 2026-11-28 and its bug card).
 
 ## MAN-I-08: The review queue reopens a batch with its settings
 
