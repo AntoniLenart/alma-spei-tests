@@ -35,10 +35,11 @@ def upload_staged(
     content: bytes,
     *,
     separator: CsvSeparator | None = CsvSeparator.SEMICOLON,
+    source: str = ImportSource.BANK,
 ) -> dict[str, Any]:
     """Setup step: the upload must answer 201; returns the upload report."""
-    response = api.imports.upload(filename, content, separator=separator)
-    return expect_status(response, HTTPStatus.CREATED, "Upload bank file").json()
+    response = api.imports.upload(filename, content, separator=separator, source=source)
+    return expect_status(response, HTTPStatus.CREATED, f"Upload {source} file").json()
 
 
 @step("Stage one row per sender for {tag}")
@@ -50,9 +51,15 @@ def stage_senders(api: AlmaSpeiApi, tag: str, senders: list[str]) -> str:
 
 @step("Retry failed import {batch_id} (version {version}) with '{filename}'")
 def retry(
-    api: AlmaSpeiApi, batch_id: str, version: int, filename: str, content: bytes
+    api: AlmaSpeiApi,
+    batch_id: str,
+    version: int,
+    filename: str,
+    content: bytes,
+    *,
+    source: str = ImportSource.BANK,
 ) -> httpx.Response:
-    return api.imports.retry(batch_id, version, filename, content)
+    return api.imports.retry(batch_id, version, filename, content, source=source)
 
 
 @step("Read staged rows of import {batch_id} {page}")

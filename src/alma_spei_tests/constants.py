@@ -452,9 +452,11 @@ class SortDirection(StrEnum):
 
 
 class ImportSource(StrEnum):
-    """Upload ``source`` values; only ``bank`` is implemented (task 35)."""
+    """Upload ``source`` values: bank statements (task 35), the master donor workbook
+    and the 1.5% tax list (task 67)."""
 
     BANK = "bank"
+    MASTER = "master"
     TAX = "tax"
 
 

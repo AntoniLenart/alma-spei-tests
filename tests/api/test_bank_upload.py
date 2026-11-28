@@ -37,6 +37,9 @@ from alma_spei_tests.testbase import BaseApiTest
 #: A date that does not exist, a blank sender and a zero amount: three row errors.
 INVALID_ROW = BankRow(date="2026-02-30", sender="", description="", amount="0")
 
+#: A source the upload does not know (bank, master and tax are the known ones).
+UNKNOWN_SOURCE = "payroll"
+
 #: An extension the bank adapter does not support.
 UNSUPPORTED_FILENAME_SUFFIX = ".xls"
 
@@ -196,7 +199,7 @@ class TestUploadRejections(BaseApiTest):
         ("source", "separator", "fields"),
         [
             pytest.param(ImportSource.BANK, None, None, id="csv-without-separator"),
-            pytest.param(ImportSource.TAX, CsvSeparator.SEMICOLON, None, id="unsupported-source"),
+            pytest.param(UNKNOWN_SOURCE, CsvSeparator.SEMICOLON, None, id="unknown-source"),
             pytest.param(
                 ImportSource.BANK, CsvSeparator.SEMICOLON, {"extra": "value"}, id="unknown-field"
             ),
