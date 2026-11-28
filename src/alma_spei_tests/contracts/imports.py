@@ -3,6 +3,9 @@
 Mirrors ``src/common/alma_spei/common/contracts/imports.cljc`` (task 35):
 ``batch`` (closed map + the ``counts-valid?`` and failed<->failure-code rules),
 ``row-payload``, ``staged-row``, ``rows-response`` and ``upload-response``.
+Since task 67 the staged rows of a page depend on the batch's source: bank rows,
+master workbook rows (profile fields and source observations, task 65's
+``master-row``) or 1.5% tax rows (taxpayer, spouse, purpose, amount).
 """
 
 from alma_spei_tests.contracts.donors import DONOR
@@ -136,6 +139,50 @@ _PAGE_FIELDS = {
 }
 ROWS_RESPONSE = ClosedMap(_PAGE_FIELDS)
 UPLOAD_RESPONSE = ClosedMap({**_PAGE_FIELDS, "skipped-empty-rows": ROW_COUNT})
+
+# --- master and tax sources (tasks 65-67; contracts/source_rows.cljc) --------
+OBSERVATION = ClosedMap(
+    {
+        "column": Int(7, 24),
+        "source-type": Enum("text", "number", "boolean", "unsupported"),
+        "value": SOURCE_TEXT,
+    },
+    optional={"year": Int(2021, 2025)},
+)
+MASTER_PAYLOAD = ClosedMap(
+    {"observations": Vector(OBSERVATION)},
+    optional={
+        field: SOURCE_TEXT
+        for field in ("name", "street", "postal-code", "city", "province", "gender")
+    },
+)
+TAX_SUBJECT = AllOf(
+    ClosedMap({}, optional={field: SOURCE_TEXT for field in ("first-name", "surname", "address")}),
+    Predicate("a subject with at least one field", lambda v: isinstance(v, dict) and bool(v)),
+)
+TAX_PAYLOAD = ClosedMap(
+    {"amount": Maybe(SOURCE_TEXT)},
+    optional={"taxpayer": TAX_SUBJECT, "spouse": TAX_SUBJECT, "purpose": SOURCE_TEXT},
+)
+
+
+def _source_page(payload: ClosedMap, *, upload: bool) -> ClosedMap:
+    row = ClosedMap({**STAGED_ROW.fields, "payload": payload})
+    fields = {**_PAGE_FIELDS, "rows": Vector(row)}
+    return ClosedMap({**fields, "skipped-empty-rows": ROW_COUNT} if upload else fields)
+
+
+#: The rows and upload responses of each source (the response dispatches on it).
+SOURCE_ROWS_RESPONSE = {
+    "bank": ROWS_RESPONSE,
+    "master": _source_page(MASTER_PAYLOAD, upload=False),
+    "tax": _source_page(TAX_PAYLOAD, upload=False),
+}
+SOURCE_UPLOAD_RESPONSE = {
+    "bank": UPLOAD_RESPONSE,
+    "master": _source_page(MASTER_PAYLOAD, upload=True),
+    "tax": _source_page(TAX_PAYLOAD, upload=True),
+}
 
 
 # --- review (task 37; contracts/review.cljc) ---------------------------------

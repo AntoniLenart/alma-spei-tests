@@ -38,6 +38,8 @@ from alma_spei_tests.contracts.imports import (
     COMPARISON_RESPONSE,
     QUEUE_RESPONSE,
     ROWS_RESPONSE,
+    SOURCE_ROWS_RESPONSE,
+    SOURCE_UPLOAD_RESPONSE,
     UPLOAD_RESPONSE,
 )
 from alma_spei_tests.contracts.reconciliation import RECONCILIATION_RESPONSE
@@ -72,6 +74,8 @@ __all__ = [
     "RECONCILIATION_RESPONSE",
     "QUEUE_RESPONSE",
     "ROWS_RESPONSE",
+    "SOURCE_ROWS_RESPONSE",
+    "SOURCE_UPLOAD_RESPONSE",
     "SESSION_RESPONSE",
     "Schema",
     "TEMPORARY_RESPONSE",

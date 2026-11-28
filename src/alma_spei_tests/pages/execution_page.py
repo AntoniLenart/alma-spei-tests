@@ -56,6 +56,7 @@ class ExecutionMessages:
     STATE = "Stan"
     UPLOADED_BY = "Przesłał(a)"
     STATE_COMMITTED = "Zapisany"
+    STATE_REVIEW = "Oczekuje na weryfikację"
     STATE_UNDONE = "Cofnięty"
 
     @staticmethod

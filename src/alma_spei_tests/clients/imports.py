@@ -54,12 +54,18 @@ class ImportsClient(BaseClient):
         content: bytes,
         *,
         separator: CsvSeparator | None = CsvSeparator.SEMICOLON,
+        source: str = ImportSource.BANK,
         headers: HeaderOverrides | None = None,
     ) -> httpx.Response:
         """Re-upload the original bytes as the next attempt of a failed batch."""
         retry_fields = {"retry-batch-id": batch_id, "version": str(version), "confirmed": "true"}
         return self.upload(
-            filename, content, separator=separator, fields=retry_fields, headers=headers
+            filename,
+            content,
+            separator=separator,
+            source=source,
+            fields=retry_fields,
+            headers=headers,
         )
 
     def rows(self, batch_id: str, **page: int | str) -> httpx.Response:
