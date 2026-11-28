@@ -9,7 +9,6 @@ candidates. Spelling variants the normalization knows (case, spacing, "ulica" /
 "ul.") still match; a missing diacritic is a different identity.
 """
 
-import datetime as dt
 from http import HTTPStatus
 from typing import Any
 
@@ -27,11 +26,10 @@ from alma_spei_tests.constants import (
     ReconciliationErrorPayload,
 )
 from alma_spei_tests.data import (
-    BankRow,
-    BankStatement,
     DonorFactory,
     existing_donor,
     new_donor_profile,
+    sender_of,
     sender_with_address,
 )
 from alma_spei_tests.db import DbQueries
@@ -56,7 +54,7 @@ class TestExactMatches(BaseApiTest):
         # 2. Reconcile it
         # 3. Verification: one match, no exception, the batch ready; the row is a complete
         #    decision for that donor
-        batch_id = stage_senders(api, tag, [sender_of(donor)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
         response = review_steps.reconcile(api, batch_id, INDIVIDUALS)
         body = response.json()
         decision = review_steps.read_decision(api, batch_id, 1).json()["decision"]
@@ -77,7 +75,7 @@ class TestExactMatches(BaseApiTest):
         # 1. Stage and reconcile an exact match
         # 2. Read the review history
         # 3. Verification: the saved decision names the matching rule version
-        batch_id = stage_senders(api, tag, [sender_of(donor)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
         review_steps.reconcile(api, batch_id, INDIVIDUALS)
         events = review_steps.read_review_events(api, batch_id).json()["events"]
         rules = [e["after"].get("automation", {}).get("rule-version") for e in events]
@@ -99,7 +97,7 @@ class TestExactMatches(BaseApiTest):
             donor["postal-code"],
             donor["city"].upper(),
         )
-        batch_id = stage_senders(api, tag, [sender])
+        batch_id = imports_steps.stage_senders(api, tag, [sender])
         review_steps.reconcile(api, batch_id, INDIVIDUALS)
         decision = review_steps.read_decision(api, batch_id, 1).json()["decision"]
         assert_that(decision and decision["donor-id"]).described_as(
@@ -116,7 +114,9 @@ class TestNoGuessing(BaseApiTest):
         # 2. Reconcile it
         # 3. Verification: left for a person as an identity ambiguity, with the donor as a
         #    candidate, and no link saved
-        batch_id = stage_senders(api, tag, [sender_with_address(donor["name"], *ELSEWHERE)])
+        batch_id = imports_steps.stage_senders(
+            api, tag, [sender_with_address(donor["name"], *ELSEWHERE)]
+        )
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_left_for_a_person(api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, [donor])
 
@@ -129,7 +129,7 @@ class TestNoGuessing(BaseApiTest):
         sender = sender_with_address(
             f"Inny Domownik {tag}", donor["street"], donor["postal-code"], donor["city"]
         )
-        batch_id = stage_senders(api, tag, [sender])
+        batch_id = imports_steps.stage_senders(api, tag, [sender])
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_left_for_a_person(api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, [donor])
 
@@ -146,7 +146,7 @@ class TestNoGuessing(BaseApiTest):
         sender = sender_with_address(
             f"Anna Wisniewska {tag}", donor["street"], donor["postal-code"], donor["city"]
         )
-        batch_id = stage_senders(api, tag, [sender])
+        batch_id = imports_steps.stage_senders(api, tag, [sender])
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_left_for_a_person(api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, [donor])
 
@@ -158,7 +158,7 @@ class TestNoGuessing(BaseApiTest):
         # 3. Verification: left for a person, with both donors as candidates
         profile = new_donor_profile(tag=tag)
         twins = [donor_factory(profile), donor_factory(profile)]
-        batch_id = stage_senders(api, tag, [sender_of(twins[0])])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(twins[0])])
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_left_for_a_person(api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, twins)
 
@@ -167,14 +167,13 @@ class TestNoGuessing(BaseApiTest):
     ):
         # 1. Create a donor and archive it
         # 2. Stage a row with exactly its identity and reconcile it
-        # 3. Verification: left for a person, with the archived donor as a candidate
+        # 3. Verification: left for a person; only active profiles are suggested (task 61), so
+        #    the archived donor is not offered
         archived = donor_factory(new_donor_profile(tag=tag))
         db_steps.archive_donor(db, archived["id"])
-        batch_id = stage_senders(api, tag, [sender_of(archived)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(archived)])
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
-        assert_left_for_a_person(
-            api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, [archived]
-        )
+        assert_left_for_a_person(api, batch_id, body, ExceptionReason.IDENTITY_AMBIGUITY, [])
 
     def test_a_sender_without_an_address_is_left_for_a_person(
         self, api: AlmaSpeiApi, donor: dict[str, Any], tag: str
@@ -182,7 +181,7 @@ class TestNoGuessing(BaseApiTest):
         # 1. Stage a row whose sender is only the donor's name
         # 2. Reconcile it
         # 3. Verification: left for a person because the sender layout cannot be read
-        batch_id = stage_senders(api, tag, [donor["name"]])
+        batch_id = imports_steps.stage_senders(api, tag, [donor["name"]])
         body = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_left_for_a_person(api, batch_id, body, ExceptionReason.SENDER_FORMAT, [])
 
@@ -197,7 +196,7 @@ class TestNewDonors(BaseApiTest):
         # 3. Verification: the row is linked to a new proposal with exactly the parsed identity
         profile = new_donor_profile(tag=tag)
         sender = sender_with_address(profile.name, *address_of(profile))
-        batch_id = stage_senders(api, tag, [sender])
+        batch_id = imports_steps.stage_senders(api, tag, [sender])
         review_steps.reconcile(api, batch_id, INDIVIDUALS)
         decision = review_steps.read_decision(api, batch_id, 1).json()["decision"]
         proposals = review_steps.list_proposals(api, batch_id).json()["proposals"]
@@ -214,7 +213,7 @@ class TestNewDonors(BaseApiTest):
         # 2. Reconcile it without a type for new donors
         # 3. Verification: left for a person - the type is never guessed
         profile = new_donor_profile(tag=tag)
-        batch_id = stage_senders(
+        batch_id = imports_steps.stage_senders(
             api, tag, [sender_with_address(profile.name, *address_of(profile))]
         )
         body = review_steps.reconcile(api, batch_id, NO_NEW_DONORS).json()
@@ -230,7 +229,7 @@ class TestReconciliationGuards(BaseApiTest):
         # 2. Reconcile the batch
         # 3. Verification: the manual decision is kept
         other = donor_factory(new_donor_profile(tag=tag))
-        batch_id = stage_senders(api, tag, [sender_of(donor)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
         review_steps.decide(api, batch_id, 1, existing_donor(other))
         review_steps.reconcile(api, batch_id, INDIVIDUALS)
         decision = review_steps.read_decision(api, batch_id, 1).json()["decision"]
@@ -244,7 +243,7 @@ class TestReconciliationGuards(BaseApiTest):
         # 1. Stage and reconcile an exact match
         # 2. Reconcile it again under the same policy
         # 3. Verification: the batch version did not move
-        batch_id = stage_senders(api, tag, [sender_of(donor)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
         first = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         again = review_steps.reconcile(api, batch_id, INDIVIDUALS).json()
         assert_that(again["batch"]["version"]).described_as(
@@ -257,7 +256,7 @@ class TestReconciliationGuards(BaseApiTest):
         # 1. Stage and reconcile a batch in PLN
         # 2. Reconcile it again in another currency
         # 3. Verification: 409 policy-conflict
-        batch_id = stage_senders(api, tag, [sender_of(donor)])
+        batch_id = imports_steps.stage_senders(api, tag, [sender_of(donor)])
         review_steps.reconcile(api, batch_id, INDIVIDUALS)
         response = review_steps.reconcile(
             api, batch_id, review_steps.policy(OTHER_CURRENCY, EntityType.INDIVIDUAL)
@@ -268,29 +267,12 @@ class TestReconciliationGuards(BaseApiTest):
 
 
 # --- file-local helpers -------------------------------------------------------
-def sender_of(donor: dict[str, Any]) -> str:
-    """The donor's identity written as a bank sender."""
-    return sender_with_address(donor["name"], donor["street"], donor["postal-code"], donor["city"])
-
-
 def address_of(profile: Any) -> tuple[str, str, str]:
     return (profile.street, profile.postal_code, profile.city)
 
 
 def identity_of(profile: dict[str, Any]) -> tuple[str, str, str, str]:
     return (profile["name"], profile["street"], profile["postal-code"], profile["city"])
-
-
-def stage_senders(api: AlmaSpeiApi, tag: str, senders: list[str]) -> str:
-    """Stage one row per sender (distinct dates and amounts); returns the batch id."""
-    rows = [
-        BankRow(
-            dt.date(2026, 3, 1) + dt.timedelta(days=i), sender, f"{tag} #{i + 1}", f"{10 + i},00"
-        )
-        for i, sender in enumerate(senders)
-    ]
-    batch = imports_steps.upload_staged(api, f"{tag}.csv", BankStatement(rows).to_csv())["batch"]
-    return batch["id"]
 
 
 def assert_left_for_a_person(

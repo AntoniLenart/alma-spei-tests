@@ -1,8 +1,9 @@
-"""Automatic reconciliation contracts (task 60).
+"""Automatic reconciliation contracts (tasks 60-61).
 
 Mirrors ``src/common/alma_spei/common/contracts/reconciliation.cljc``: the
 confirmed ``policy``, the ``counts``, and the report with the rows left for a
-person (``exceptions``) and their candidate donors.
+person (``exceptions``), their suggested donors with the reason for each, and
+whether a row is a candidate for a new profile.
 """
 
 from alma_spei_tests.contracts.decisions import CURRENCY
@@ -33,7 +34,16 @@ COUNTS = ClosedMap(
         "total": ROW_COUNT,
     }
 )
-EXCEPTION_ROW = ClosedMap({"row": STAGED_ROW, "reason": STRING, "candidates": Vector(DONOR)})
+#: A suggested donor: its public profile and why it is suggested (task 61).
+SUGGESTED_DONOR = ClosedMap({**DONOR.fields, "match-reason": STRING})
+EXCEPTION_ROW = ClosedMap(
+    {
+        "row": STAGED_ROW,
+        "reason": STRING,
+        "new-profile-candidate": BOOLEAN,
+        "candidates": Vector(SUGGESTED_DONOR),
+    }
+)
 RECONCILIATION_RESPONSE = ClosedMap(
     {
         "batch": BATCH,

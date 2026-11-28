@@ -302,6 +302,20 @@ class ExceptionReason(StrEnum):
     MANUAL_REVIEW = "manual-review"
 
 
+class MatchReason:
+    """Why a donor is suggested for a row (``candidates[].match-reason``, task 61), from
+    the strongest evidence to the weakest."""
+
+    EXACT = "Zgodna pełna nazwa i pełny adres."
+    NAME_AND_ADDRESS = "Podobna pełna nazwa i pełny adres."
+    NAME = "Podobna pełna nazwa; adres różni się lub jest niepełny."
+    ADDRESS = "Podobny pełny adres; nazwa się różni."
+    LAST_NAME = "Zgodny ostatni człon nazwy; sprawdź imię i adres."
+
+
+#: At most this many donors are suggested for one row.
+MAX_SUGGESTIONS = 5
+
 #: The matching rules recorded on automatic decisions since task 60.
 MATCHING_RULE_VERSION = "bank-exact-identity-v2"
 
